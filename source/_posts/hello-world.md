@@ -1,5 +1,7 @@
 ---
 title: Hello World
+date: 2017-12-29 10:10:35
+tags: Life
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
@@ -13,7 +15,7 @@ $ hexo new "My New Post"
 
 More info: [Writing](https://hexo.io/docs/writing.html)
 
-### Run server
+### Run server（预览）
 
 ``` bash
 $ hexo server
@@ -24,6 +26,7 @@ More info: [Server](https://hexo.io/docs/server.html)
 ### Generate static files
 
 ``` bash
+$ hexo clean
 $ hexo generate
 ```
 
