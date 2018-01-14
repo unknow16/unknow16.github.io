@@ -54,6 +54,7 @@ public String defaultAction() {
 ```
 
 ### zuul中使用ribbon和hystrix
+* zuul默认采用的隔离级别是信号量。
 * 如果将zuul.ribbonIsolationStrategy更改为THREAD，则Hystrix的线程隔离策略将用于所有路由。
 * 在这种情况下，HystrixThreadPoolKey默认设置为“RibbonCommand”。这意味着所有路由的HystrixCommands将在相同的Hystrix线程池中执行。
 * 此行为可以使用以下配置进行更改,这将导致HystrixCommands在每个路由的Hystrix线程池中执行。
