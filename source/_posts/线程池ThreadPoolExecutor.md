@@ -1,7 +1,7 @@
 ---
 title: 线程池ThreadPoolExecutor
 date: 2018-01-25 15:44:51
-tags: JAVA
+tags: Concurrent
 ---
 
 ## Executor继承图
