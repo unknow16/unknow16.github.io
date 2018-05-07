@@ -60,14 +60,45 @@ public class PropertyConfig {
 }
 ```
 
-
-
 ### random.*属性
 * ${random.long}：随机long值，3882765395915877886
 * ${random.int}：随机int值，1932153008
 * ${random.int(1,200)}：随机值范围1-200，
 * ${random.uuid}：随机uuid，4a423ccb-f31a-4ad1-b11a-2ca52b73999b
 * ${random.value}：随机值，028929d408f09b2e862cc0b8c538a375
+
+### 配置文件的生效顺序，会对值进行覆盖：
+1. @TestPropertySource 注解
+2. 命令行参数
+3. Java系统属性（System.getProperties()）
+4. 操作系统环境变量
+5. 只有在random.*里包含的属性会产生一个RandomValuePropertySource
+6. 在打包的jar外的应用程序配置文件（application.properties，包含YAML和profile变量）
+7. 在打包的jar内的应用程序配置文件（application.properties，包含YAML和profile变量）
+8. 在@Configuration类上的@PropertySource注解
+9. 默认属性（使用SpringApplication.setDefaultProperties指定）
+
+### jar包内配置文件加载顺序
+* SpringApplication默认会加载application.properties/application.yml,按照下列表顺序
+1. 当前目录的 /config子目录下
+2. 当前目录
+3. classpath下/config包中
+4. classpath下
+
+* 更改配置文件名和路径
+```
+spring.config.name:   $ java -jar myproject.jar --spring.config.name=myproject
+spring.config.location:   以逗号分割的列表
+
+$ java -jar myproject.jar --spring.config.location=classpath:/default.properties,classpath:/override.properties
+
+// 由于两者需早期指定，所以只能在OS env, system property, commond line property
+```
+
+### 禁用命令行参数
+默认SpringApplication会将命令行参数（--server.port=9000）添加到Environment中
+如果不想命令行参数被添加到Environment中
+SpringApplication.setAddCommandLineProperties(false).
 
 ### 公共应用属性
 * [spring boot 提供的所有可配置属性](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)

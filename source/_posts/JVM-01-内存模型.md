@@ -1,5 +1,5 @@
 ---
-title: 01-JVM内存模型
+title: JVM-01-内存模型
 date: 2018-01-12 17:12:35
 tags: JVM
 ---
