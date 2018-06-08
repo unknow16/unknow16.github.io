@@ -1,0 +1,60 @@
+---
+title: 检查异常-未检查异常
+date: 2018-02-26 21:14:49
+tags: Java
+---
+
+### 异常体系
+所有异常都是Throwable类的子类，注意Throwable是类不是接口。
+
+Throwable类包含Exception类和Error类。
+
+Exception类又包含检查异常和未检查异常。
+
+---
+异常定义：程序在运行期间发生的不正常事件，它会打断指令的正常流程，在编译期间产生的叫语法错误。
+
+1. 程序在运行时产生异常时，JVM会创建一个异常对象，交给运行时系统。
+2. 运行时系统在抛出异常代码附近寻找处理方式。
+3. 两种处理方式：
+    * catch: 自己捕获处理
+    * throws: 抛给调用者
+
+### 未检查异常/运行时异常（RuntimeException）
+对于该异常，Java编译器不要求你一定要捕获或抛出。
+
+RuntimeException的子类都是未检查异常，不需处理。
+
+如：
+* NullPointerException
+* ClassCastException
+* ArrayIndexsOutOfBoundsException
+* ArithmeticException(算术异常，除0溢出)
+
+如下例：ArithmeticException继承RuntimeException，不需捕获
+```
+//该程序正常编译通过
+
+public class ExceptionTypeTest {  
+    public void doSomething() throws ArithmeticException{  
+        System.out.println();  
+    }  
+    
+    public static void main(){  
+        ExceptionTypeTest ett = new ExceptionTypeTest();  
+        
+        // 虽然该方法抛出了异常，但属于未检查异常，故不需捕获或再次抛出
+        ett.doSomething();  
+    }  
+}  
+```
+
+### 检查异常
+必须要在方法中捕获或抛出。
+
+如：IOException属于检查异常，必须要捕获或再次抛出。
+* Exception
+* FileNotFoundException
+* IOException
+* SQLException
+

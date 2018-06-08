@@ -1,0 +1,181 @@
+---
+title: 设计模式-结构型
+date: 2018-02-26 22:10:14
+tags: Java
+---
+
+### 代理模式
+
+### 适配器模式
+
+### 桥梁模式
+
+### 装饰器模式
+
+---
+### 门面模式
+
+### 组合模式
+
+### 享元模式
+
+---
+
+### 简单适配器
+* 对接口或抽象类的空实现，继承该适配器，根据需求重写相应方法
+
+### 对象适配器
+* 将鸡适配成鸭，能把鸡当鸭用，因为我们对鸭没有合适的实现类，所以需要适配器。
+
+```
+public interface Duck {
+    public void quack(); // 鸭的呱呱叫
+      public void fly(); // 飞
+}
+
+public interface Cock {
+    public void gobble(); // 鸡的咕咕叫
+      public void fly(); // 飞
+}
+
+//鸡的实现
+public class WildCock implements Cock {
+    public void gobble() {
+        System.out.println("咕咕叫");
+    }
+      public void fly() {
+        System.out.println("鸡也会飞哦");
+    }
+}
+```
+* 鸡的适配器
+```
+// 毫无疑问，首先，这个适配器肯定需要 implements Duck，这样才能当做鸭来用
+public class CockAdapter implements Duck {
+
+    Cock cock;
+    // 构造方法中需要一个鸡的实例，此类就是将这只鸡适配成鸭来用
+      public CockAdapter(Cock cock) {
+        this.cock = cock;
+    }
+
+    // 实现鸭的呱呱叫方法
+      @Override
+      public void quack() {
+        // 内部其实是一只鸡的咕咕叫
+        cock.gobble();
+    }
+
+      @Override
+      public void fly() {
+        cock.fly();
+    }
+}
+```
+* 客户端调用
+
+```
+public static void main(String[] args) {
+    // 有一只野鸡
+      Cock wildCock = new WildCock();
+      // 成功将野鸡适配成鸭
+      Duck duck = new CockAdapter(wildCock);
+      ...
+}
+```
+
+### 装饰器模式实现
+* 饮料基类
+
+```
+public abstract class Beverage {
+      // 返回描述
+      public abstract String getDescription();
+      // 返回价格
+      public abstract double cost();
+}
+```
+* 三个基础实现类，红茶，绿茶，咖啡
+
+```
+public class BlackTea extends Beverage {
+      public String getDescription() {
+        return "红茶";
+    }
+      public double cost() {
+        return 10;
+    }
+}
+public class GreenTea extends Beverage {
+    public String getDescription() {
+        return "绿茶";
+    }
+      public double cost() {
+        return 11;
+    }
+}
+// 咖啡省略
+```
+* 定义调料，即装饰者的基类，需继承饮料基类
+
+```
+// 调料
+public abstract class Condiment extends Beverage {
+
+}
+```
+* 定义芒果，柠檬等调料，即装饰者
+
+```
+public class Lemon extends Condiment {
+    private Beverage bevarage;
+      // 这里很关键，需要传入具体的饮料，如需要传入没有被装饰的红茶或绿茶，
+      // 当然也可以传入已经装饰好的芒果绿茶，这样可以做芒果柠檬绿茶
+      public Lemon(Beverage bevarage) {
+        this.bevarage = bevarage;
+    }
+      public String getDescription() {
+        // 装饰
+        return bevarage.getDescription() + ", 加柠檬";
+    }
+      public double cost() {
+          // 装饰
+        return beverage.cost() + 2; // 加柠檬需要 2 元
+    }
+}
+public class Mango extends Condiment {
+    private Beverage bevarage;
+      public Mango(Beverage bevarage) {
+        this.bevarage = bevarage;
+    }
+      public String getDescription() {
+        return bevarage.getDescription() + ", 加芒果";
+    }
+      public double cost() {
+        return beverage.cost() + 3; // 加芒果需要 3 元
+    }
+}
+// 给每一种调料都加一个类
+```
+* 客户端调用
+
+```
+public static void main(String[] args) {
+      // 首先，我们需要一个基础饮料，红茶、绿茶或咖啡
+    Beverage beverage = new GreenTea();
+      // 开始装饰
+      beverage = new Lemon(beverage); // 先加一份柠檬
+      beverage = new Mongo(beverage); // 再加一份芒果
+
+      System.out.println(beverage.getDescription() + " 价格：￥" + beverage.cost());
+      //"绿茶, 加柠檬, 加芒果 价格：￥16"
+}
+
+//如果我们需要芒果珍珠双份柠檬红茶：
+
+Beverage beverage = new Mongo(new Pearl(new Lemon(new Lemon(new BlackTea()))));
+```
+
+
+
+
