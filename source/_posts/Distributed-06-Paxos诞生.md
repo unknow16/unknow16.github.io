@@ -4,13 +4,9 @@ date: 2018-06-13 15:03:02
 tags: Distributed
 ---
 
-Google Chubby的作者Mike Burrows说过这个世界上只有一种一致性算法，那就是Paxos，其它的算法都是残次品。
+Google Chubby(Zookeeper是其开源版本)的作者Mike Burrows说过这个世界上只有一种一致性算法，那就是Paxos，其它的算法都是残次品。
 
-Leslie Lamport 本尊 from 他的博客:
-[Leslie Lamport](https://lamport.azurewebsites.net/)
-
-![image](https://note.youdao.com/yws/api/personal/file/7B38405379744350B0BC0E855801DE38?method=download&shareKey=98d548a772026b3c91ea2c2692486de4)
-
+![Leslie Lamport 本尊 from 他的博客 https://lamport.azurewebsites.net/ ](https://note.youdao.com/yws/api/personal/file/7B38405379744350B0BC0E855801DE38?method=download&shareKey=98d548a772026b3c91ea2c2692486de4)
 
 
 larmport的paxos相关的三篇论文：
