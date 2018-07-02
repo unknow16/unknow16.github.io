@@ -1,7 +1,7 @@
 ---
-title: Java-Pattern-命令模式
+title: 命令模式
 date: 2018-06-13 17:07:24
-tags: Java
+tags: Pattern
 ---
 
 ### 角色分类

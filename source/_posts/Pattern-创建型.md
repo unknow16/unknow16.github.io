@@ -1,7 +1,7 @@
 ---
 title: 设计模式-创建型
 date: 2018-02-26 21:26:03
-tags: Java
+tags: Pattern
 ---
 
 #### 简单工厂模式
