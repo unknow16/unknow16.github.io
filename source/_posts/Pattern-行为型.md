@@ -1,7 +1,7 @@
 ---
 title: 设计模式-行为型
 date: 2018-02-26 23:04:47
-tags: Java
+tags: Pattern
 ---
 
 ### 策略模式

@@ -1,7 +1,7 @@
 ---
 title: 设计模式-结构型
 date: 2018-02-26 22:10:14
-tags: Java
+tags: Pattern
 ---
 
 ### 代理模式

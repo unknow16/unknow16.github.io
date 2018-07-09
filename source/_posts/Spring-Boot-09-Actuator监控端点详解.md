@@ -1,6 +1,6 @@
 ---
-title: Spring Boot Actuator 监控端点详解
-date: 2018-01-24 18:39:21
+title: Spring Boot-09-Actuator监控端点详解
+date: 2018-07-09 18:39:21
 tags: Spring Boot
 ---
 
@@ -23,13 +23,23 @@ tags: Spring Boot
   - reource：class文件的具体路径
   - dependencies：依赖的Bean名称
 
-- /configprops：该端点用来获取应用中配置的属性信息报告。在返回的配置信息中，`prefix`属性代表了属性的配置前缀，`properties`代表了各个属性的名称和值。
+- /configprops：该端点用来获取应用中配置的属性信息报告。在返回的配置信息中，`prefix`属性代表了属性的配置前缀，`properties`代表了各个属性的名称和值。比如我们要关闭该端点，就可以通过使用endpoints.configprops.enabled=false来完成设置。
 
 - /env：该端点与`/configprops`不同，它用来获取应用所有可用的环境属性报告。包括：环境变量、JVM属性、应用的配置配置、命令行中的参数。它可以帮助我们方便地看到当前应用可以加载的配置信息，并配合`@ConfigurationProperties`注解将它们引入到我们的应用程序中来进行使用。另外，为了配置属性的安全，对于一些类似密码等敏感信息，该端点都会进行隐私保护，但是我们需要让属性名中包含：password、secret、key这些关键词，这样该端点在返回它们的时候会使用`*`来替代实际的属性值。
 
 - /mappings：该端点用来返回所有Spring MVC的控制器映射关系报告。该报告的信息与我们在启用Spring MVC的Web应用时输出的日志信息类似，其中`bean`属性标识了该映射关系的请求处理器，`method`属性标识了该映射关系的具体处理类和处理函数。
 
 - /info：该端点用来返回一些应用自定义的信息。默认情况下，它只会返回一个空的json内容。我们可以在`application.properties`配置文件中通过`info`前缀来设置一些属性。
+
+```
+info:
+  appName: actuator
+  appVersion: 1.0.0
+  author: fuyi
+  date: 2018-07-09
+```
+
+- /loggers:	显示当前应用程序所有包和类的日志级别
 
 ### 度量指标类
 上面我们所介绍的应用配置类端点所提供的信息报告在应用启动的时候都已经基本确定了其返回内容，可以说是一个静态报告。而度量指标类端点提供的报告内容则是动态变化的，这些端点提供了应用程序在运行过程中的一些快照信息，比如：内存使用情况、HTTP请求统计、外部资源指标等。这些端点对于我们构建微服务架构中的监控系统非常有帮助，由于Spring Boot应用自身实现了这些端点，所以我们可以很方便地利用它们来收集我们想要的信息，以制定出各种自动化策略。下面，我们就来分别看看这些强大的端点功能。
@@ -46,11 +56,15 @@ tags: Spring Boot
   - `gauge.*`：HTTP请求的性能指标之一，它主要用来反映一个绝对数值。比如`gauge.response.hello: 5`，它表示上一次`hello`请求的延迟时间为5毫秒。
   - `counter.*`：HTTP请求的性能指标之一，它主要作为计数器来使用，记录了增加量和减少量。比如：`counter.status.200.hello: 11`，它代表了`hello`请求返回`200`状态的次数为11。
 
-- /health：该端点在一开始的示例中我们已经使用过了，它用来获取应用的各类健康指标信息。在`spring-boot-starter-actuator`模块中自带实现了一些常用资源的健康指标检测器。这些检测器都通过`HealthIndicator`接口实现，并且会根据依赖关系的引入实现自动化装配，比如用于检测磁盘的`DiskSpaceHealthIndicator`、检测DataSource连接是否可用的`DataSourceHealthIndicator`等。
+- /health：该端点在一开始的示例中我们已经使用过了，它用来获取应用的各类健康指标信息。在`spring-boot-starter-actuator`模块中自带实现了一些常用资源的健康指标检测器。这些检测器都通过`HealthIndicator`接口实现，并且会根据依赖关系的引入实现自动化装配，比如用于检测磁盘的`DiskSpaceHealthIndicator`、检测DataSource连接是否可用的`DataSourceHealthIndicator`等。有时候，我们可能还会用到一些Spring Boot的Starter POMs中还没有封装的产品来进行开发，比如：当使用RocketMQ作为消息代理时，由于没有自动化配置的检测器，所以我们需要自己来实现一个用来采集健康信息的检测器。比如，我们可以在Spring Boot的应用中，为org.springframework.boot.actuate.health.HealthIndicator接口实现一个对RocketMQ的检测器类.
 
 - /dump：该端点用来暴露程序运行中的线程信息。它使用`java.lang.management.ThreadMXBean`的`dumpAllThreads`方法来返回所有含有同步信息的活动线程详情。
 
+- /heapdump: 返回一个gzip压缩 hprof 堆转储文件.
+
 - /trace：该端点用来返回基本的HTTP跟踪信息。默认情况下，跟踪信息的存储采用`org.springframework.boot.actuate.trace.InMemoryTraceRepository`实现的内存方式，始终保留最近的100条请求记录.
+
+- /auditevents:	显示当前应用程序授权时间的统计信息
 
 ### 操作控制类
 实际上，由于之前介绍的所有端点都是用来反映应用自身的属性或是运行中的状态，相对于操作控制类端点没有那么敏感，所以他们默认都是启用的。而操作控制类端点拥有更强大的控制能力，如果要使用它们的话，需要通过属性来配置开启。

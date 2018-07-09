@@ -189,6 +189,8 @@ public @interface Repeatable {
 
 被注解的注解，可以在一个属性上重复使用。
 
+value属性指示可重复的注解类型	
+
 #### @Native：
 
 
