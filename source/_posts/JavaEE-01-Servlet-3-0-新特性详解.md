@@ -118,6 +118,8 @@ Servlet 3.0 的部署描述文件 web.xml 的顶层标签 <web-app> 有一个 me
 @WebServlet 用于将一个类声明为 Servlet，该注解将会在部署时被容器处理，容器将根据具体的属性配置将相应的类部署为 Servlet。该注解具有下表给出的一些常用属性（以下所有属性均为可选属性，但是 vlaue 或者 urlPatterns 通常是必需的，且二者不能共存，如果同时指定，通常是忽略 value 的取值）：
 
 @WebServlet 主要属性列表
+
+
 属性名 | 类型 | 描述
 ---|---|---
 name |	String  | 指定 Servlet 的 name 属性，等价于 <servlet-name>。如果没有显式指定，则该 Servlet 的取值即为类的全限定名。
@@ -171,6 +173,7 @@ description|	String|	是|	关于参数的描述，等价于 <description>。
 @WebFilter 用于将一个类声明为过滤器，该注解将会在部署时被容器处理，容器将根据具体的属性配置将相应的类部署为过滤器。该注解具有下表给出的一些常用属性 ( 以下所有属性均为可选属性，但是 value、urlPatterns、servletNames 三者必需至少包含一个，且 value 和 urlPatterns 不能共存，如果同时指定，通常忽略 value 的取值 )：
 
 @WebFilter 的常用属性
+
 属性名|	类型|	描述
 ---|---|---
 filterName|	String|	指定过滤器的 name 属性，等价于 <filter-name>
@@ -216,6 +219,7 @@ public class LessThanSixFilter implements Filter{...}
 - HttpSessionAttributeListener
 
 该注解使用非常简单，其属性如下：
+
 属性名|	类型|	是否可选|	描述
 ---|---|---|---
 value|	String|	是|	该监听器的描述信息。
@@ -240,6 +244,7 @@ public class SimpleListener implements ServletContextListener{...}
 该注解主要是为了辅助 Servlet 3.0 中 HttpServletRequest 提供的对上传文件的支持。该注解标注在 Servlet 上面，以表示该 Servlet 希望处理的请求的 MIME 类型是 multipart/form-data。另外，它还提供了若干属性用于简化对上传文件的处理。具体如下：
 
  @MultipartConfig 的常用属性
+ 
 属性名|	类型|	是否可选|	描述
 ---|---|---|---
 fileSizeThreshold|	int	|是|	当数据量大于该值时，内容将被写入文件。
