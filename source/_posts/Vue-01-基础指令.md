@@ -1,0 +1,188 @@
+---
+title: Vue-01-基础指令
+date: 2018-08-05 19:21:21
+tags: Web
+---
+
+## v-bind
+作用：将这个元素节点的 title 属性和 Vue 实例的 tip 属性保持一致
+```
+<div id = "app">
+    <span v-bind:title="tip">鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+</div>
+
+<script type="text/javascript">
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			tip: '页面加载于' + new Date().toLocaleString()
+		}
+	});
+</script>
+```
+
+## v-model
+它能轻松实现表单输入和应用状态之间的双向绑定.
+```
+<div id="app-6">
+  <p>{{ message }}</p>
+  <input v-model="message">
+</div>
+
+
+var app6 = new Vue({
+  el: '#app-6',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+```
+
+
+## v-if
+
+```
+<div id="app-3">
+  <p v-if="seen">现在你看到我了</p>
+</div>
+
+
+var app3 = new Vue({
+  el: '#app-3',
+  data: {
+    seen: true
+  }
+})
+```
+继续在控制台输入如下，你会发现之前显示的消息消失了。
+```
+app3.seen = false
+```
+
+
+## v-for
+
+```
+<div id="app-4">
+  <ol>
+    <li v-for="todo in todos">
+      {{ todo.text }}
+    </li>
+  </ol>
+</div>
+var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    todos: [
+      { text: '学习 JavaScript' },
+      { text: '学习 Vue' },
+      { text: '整个牛项目' }
+    ]
+  }
+})
+```
+在控制台里，输入如下，你会发现列表最后添加了一个新项目。
+```
+app4.todos.push({ text: '新项目' })
+```
+
+## v-on
+添加一个事件监听器，通过它调用在 Vue 实例中定义的方法
+```
+<div id="app-5">
+  <p>{{ message }}</p>
+  <button v-on:click="reverseMessage">逆转消息</button>
+</div>
+
+
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+    message: 'Hello Vue.js!'
+  },
+  methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
+  }
+})
+```
+
+## v-html
+双大括号会将数据解释为普通文本，而非 HTML 代码。
+
+为了输出真正的 HTML，你需要使用 v-html 指令。
+```
+<div id = "app">
+	<p>{{rawHtml}}</p>
+	<p><span v-html="rawHtml"></span></p>
+</div>
+
+<script type="text/javascript">
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			rawHtml: '<span style="color: red">hello red</span>'
+		}
+	});
+</script>
+```
+output:
+
+```
+<span style="color: red">hello red</span>
+
+hello red
+```
+
+## v-if / v-else-if / v-else
+v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+
+v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+
+## v-show:
+用于根据条件展示元素。
+
+```
+<h1 id="app" v-show="ok">Hello!</h1>
+
+var vm = new Vue({
+	el: '#app',
+	data: {
+		ok: true
+	}
+});
+```
+
+不同的是带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS 属性 display。
+
+一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+
+## v-bind:class
+```
+<div class="static"
+     v-bind:class="{ active: isActive, 'text-danger': hasError }">
+</div>
+
+
+data: {
+  isActive: true,
+  hasError: false
+}
+
+结果渲染为：
+
+<div class="static active"></div>
+```
+
+
+## v-bind:style
+
+```
+<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+
+data: {
+  activeColor: 'red',
+  fontSize: 30
+}
+```
