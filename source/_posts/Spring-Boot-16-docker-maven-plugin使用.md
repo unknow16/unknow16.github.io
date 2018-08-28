@@ -52,3 +52,5 @@ mvn docker:removeImage -DimageName=foobar
 - 绑定docker命令到maven phases
 - 使用私有镜像中心
 - 推送到镜像中心需要认证，支持三种认证方式
+
+https://www.jianshu.com/p/3b91b8958c3e

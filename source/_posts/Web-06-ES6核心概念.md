@@ -1,0 +1,49 @@
+---
+title: Web-06-ES6核心概念
+date: 2018-08-05 19:24:54
+tags: Web
+---
+
+- Arrows,箭头函数，
+- 
+- Classes，类
+- 
+- Enhanced object literals，增强的对象字面值
+- 
+- Template strings：模板字符串
+- 
+- Destructuring：解构
+- 
+- Default + rest + spread：参数默认值，rest参数,扩展运算符
+- 
+- Let + const:命名声明的新方式
+- 
+- Iterators + for..of：遍历器
+- 
+- Generators：生成器
+- 
+- Unicode：更广泛的编码支持
+- 
+- Modules：语言层面上支持的模块机制
+- 
+- Module loaders：模块加载器
+- 
+- Map + set + weakmap + weakset：新的数据结构
+- 
+- Proxies：代理器
+- 
+- Symbols：新的基本类型，独一无二的值
+- 
+- Subclassable built-ins：类的继承
+- 
+- Promises：异步回调
+- 
+- Math + number + string + array + object apis：拓展了一些内置对象的方法
+- 
+- Binary and octal literals：二进制八进制字面量
+- 
+- Reflect api：操作对象的新api
+- 
+- Tail calls:尾调用
+
+基本用法：https://segmentfault.com/a/1190000009885614
