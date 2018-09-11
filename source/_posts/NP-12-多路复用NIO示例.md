@@ -1,7 +1,7 @@
 ---
-title: NIO-多路复用Socket
-date: 2018-02-27 14:14:16
-tags: NIO
+title: NP-12-多路复用NIO示例
+date: 2018-09-11 15:23:25
+tags: NetworkProgramming
 ---
 
 
@@ -203,4 +203,3 @@ public class Client {
 }
 
 ```
-

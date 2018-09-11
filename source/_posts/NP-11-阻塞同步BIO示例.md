@@ -1,7 +1,7 @@
 ---
-title: BIO-阻塞同步Socket
-date: 2018-02-27 14:13:35
-tags: NIO
+title: NP-11-阻塞同步BIO示例
+date: 2018-09-11 15:23:16
+tags: NetworkProgramming
 ---
 
 ### Server
@@ -167,4 +167,3 @@ public class Client {
 }
 
 ```
-

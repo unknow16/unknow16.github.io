@@ -118,8 +118,6 @@ public String TestResponseStatusExceptionResolver(@RequestParam("i") int i){
 1. 第一次我们抛出RuntimeErrorException，由于没有注解@ResponseStatus，所以返回的为500 
 1. 第二次我们修改我们抛出的异常为自定义的异常，并且利用注解@ResponseStatus，所以返回我们特定的状态码和信息。 
 
-![image](http://img.blog.csdn.net/20170326184807718?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMjg5Nzg2ODk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
-
 
 ### DefaultHandlerExceptionResolver
 DefaultHandlerExceptionResolver这个主要是处理Spring一些特定的异常并且把他们转化为状态码。在源码中我们可以看到。
@@ -168,7 +166,6 @@ public class DefaultHandlerExceptionResolver extends AbstractHandlerExceptionRes
     } 
 ```
 
-![image](http://img.blog.csdn.net/20170326190425385?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMjg5Nzg2ODk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 注意： 显然，从这里我们可以看出以前再出现错误页面时，都是经过框架给我们处理过的。
 

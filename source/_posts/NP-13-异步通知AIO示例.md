@@ -1,7 +1,7 @@
 ---
-title: AIO-异步通知Socket
-date: 2018-02-27 14:14:33
-tags: NIO
+title: NP-13-异步通知AIO示例
+date: 2018-09-11 15:23:35
+tags: NetworkProgramming
 ---
 
 ### Server
