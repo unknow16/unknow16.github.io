@@ -1,0 +1,15 @@
+---
+title: NP-20-AttributeMap附件
+date: 2018-09-19 17:45:11
+tags: NetworkProgramming
+---
+
+- 一个连接对应一个Channel
+- 一个Channel对应一个ChannelPipe
+- 一个ChannelPipe中有多个ChannelHandler
+- 一个ChannelHandler有一个ChannelHandlerContext
+
+我们知道每一个ChannelHandlerContext都是ChannelHandler和ChannelPipeline之间连接的桥梁，每一个ChannelHandlerContext都有属于自己的上下文，也就说每一个ChannelHandlerContext上如果有AttributeMap都是绑定上下文的，也就是说，如果A的ChannelHandlerContext中的AttributeMap，B的ChannelHandlerContext是无法读取到的。但是Channel上的AttributeMap就是大家共享的，每一个ChannelHandler都能获取到。
+
+上面说的情况是Netty4及之前，在Netty5中，底层改写了实现，由于ConcurrentHashMap的高内存消耗，改用了AtomicReferenceArray来做存储，但没有做和ChannelHandlerContext的关联，完全靠Key来区分，在一个ChannelPipe中，通过Key来获取AttributeMap绑定的数据。
+

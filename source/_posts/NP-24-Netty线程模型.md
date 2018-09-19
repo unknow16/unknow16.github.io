@@ -1,0 +1,42 @@
+---
+title: NP-24-Netty线程模型
+date: 2018-09-19 17:46:37
+tags: NetworkProgramming
+---
+
+Netty是一款高效的NIO框架和工具，基于JAVA NIO提供的API实现。在JAVA NIO方面Selector给Reactor模式提供了基础，Netty结合Selector和Reactor模式设计了高效的线程模型。
+
+Netty的线程模型不是一层不变的，它取决于用户的启动参数配置。通过设置不同的启动参数，Netty可以同时支持Reactor单线程模型、多线程模型、主从Reactor线程模型。
+
+## EventLoopGroup/EventLoop
+- 一个EventLoop是一个单线程的，实现了ScheduledExecutorService接口
+- 一个EventLoop对应一个Java NIO的Selector
+- 一个Channel只能注册到一个EventLoop的Selector上
+- 一个EventLoopGroup包含多个EventLoop
+
+
+EventLoopGroup是一组EventLoop的抽象，每个EventLoop维护着一个Java NIO 的 Selector实例，类似单线程Reactor模式地工作着。EventLoopGroup提供next接口，可以从一组EventLoop里面按照一定规则获取其中一个EventLoop来处理任务。
+
+
+一般Server端需要Boss和Worker两个EventLoopGroup来进行工作。通常Boss只包含一个EventLoop，该EventLoop维护着一个注册了ServerSocketChannel的Selector实例，并且不断轮询Selector将连接事件分离出来，通常是OP_ACCEPT事件，然后将accept得到的SocketChannel交给WorkerEventLoopGroup，它会通过next选择其中一个EventLoop来将这个SocketChannel注册到其维护的Selector并对其后续的IO事件进行处理。
+
+
+BossEventLoopGroup用于接收客户端请求的线程池职责如下：
+1. 接收客户端tcp请求，初始化Channel参数。
+2. 将链路状态变更事件通知给ChannelPipeline。
+
+WorkerEventLoopGroup用于处理io操作的线程池职责如下：
+1. 异步读取通信端的数据，发送读事件到ChannelPipeline;
+2. 异步发送消息到通信对端，调用ChannelPipeline的消息发送接口；
+3. 执行系统调用Task；
+4. 执行定时任务Task，例如链路空闲状态监测定时任务；
+
+
+## ChannelPipeline
+- 一个Channel对应一个ChannelPipe
+- 一个ChannelPipeline中包含多个ChannelHandler
+- 一个ChannelHandler对应一个ChannelHandlerContext
+
+在Netty中每个SocketChannel都有一个维护着一个ChannelPipeline实例，ChannelPipeline维护着一个ChannelHandler的链表队列，由于SocketChannel是和SelectionKey关联的，也就是Reactor模式中的资源，当Boss中的EventLoop将SelectionKey分离出来的时候会将SelectionKey关联的Channel交给Channel关联的ChannelPipe来处理。
+
+ChannelPipeline的默认实现是DefaultChannelPipeline，DefaultChannelPipeline本身维护着一个用户不可见的tail和head的ChannelHandler，他们分别位于链表队列的头部和尾部。tail在更上层的部分，而head在靠近网络层的方向。在Netty中关于ChannelHandler有两个重要的接口，ChannelInBoundHandler和ChannelOutBoundHandler。inbound可以理解为网络数据从外部流向系统内部，而outbound可以理解为网络数据从系统内部流向系统外部。用户实现的ChannelHandler可以根据需要实现其中一个或多个接口，将其放入Pipeline中的链表队列中，ChannelPipeline会根据不同的IO事件类型来找到相应的Handler来处理，同时链表队列是责任链模式的一种变种，自上而下或自下而上所有满足事件关联的Handler都会对事件进行处理。
