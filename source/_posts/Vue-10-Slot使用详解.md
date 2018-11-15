@@ -1,7 +1,7 @@
 ---
-title: Vue-04-slot使用详解
-date: 2018-08-27 18:58:23
-tags: Web
+title: Vue-10-Slot使用详解
+date: 2018-11-15 18:37:07
+tags: Vue
 ---
 
 ## 入门示例

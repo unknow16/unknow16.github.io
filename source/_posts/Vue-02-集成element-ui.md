@@ -1,10 +1,10 @@
 ---
-title: Vue-06-集成element-ui
-date: 2018-08-28 12:52:22
-tags: Web
+title: Vue-02-集成element-ui
+date: 2018-11-15 14:51:58
+tags: Vue
 ---
 
-## 常用组件
+## 安装常用组件
 
 安装axios，用于调用http请求
 

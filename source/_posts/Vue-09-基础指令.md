@@ -1,7 +1,7 @@
 ---
-title: Vue-01-基础指令
-date: 2018-08-05 19:21:21
-tags: Web
+title: Vue-09-基础指令
+date: 2018-11-15 18:34:49
+tags: Vue
 ---
 
 ## v-bind
@@ -20,6 +20,7 @@ tags: Web
 	});
 </script>
 ```
+v-bind:title="tip"   可简写成   :title="tip"
 
 ## v-model
 它能轻松实现表单输入和应用状态之间的双向绑定.
@@ -108,6 +109,8 @@ var app5 = new Vue({
 })
 ```
 
+v-on:click="reverseMsg" 可简写成 @click="reverseMsg"
+
 ## v-html
 双大括号会将数据解释为普通文本，而非 HTML 代码。
 
@@ -185,4 +188,13 @@ data: {
   activeColor: 'red',
   fontSize: 30
 }
+```
+
+## 修饰符
+修饰符 (Modifiers) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。
+
+例如  .prevent 修饰符告诉 v-on 指令对于触发的事件调用 event.preventDefault()：
+
+```
+<form v-on:submit.prevent="onSubmit">...</form>
 ```
