@@ -5,9 +5,9 @@ tags: Spring
 ---
 
 ### 简介
-接下来看另外一个PostProcessor----BeanFactoryPostProcessor。
+注意区分BeanFactoryPostProcessor和BeanPostProcessor，两者都就单独接口，并无继承等联系。
 
-Spring允许在Bean创建之前，读取Bean的元属性，并根据自己的需求对元属性进行改变，比如将Bean的scope从singleton改变为prototype，最典型的应用应当是PropertyPlaceholderConfigurer，替换xml文件中的占位符，替换为properties文件中相应的key对应的value，这将会在下篇文章中专门讲解PropertyPlaceholderConfigurer的作用及其原理。
+Spring允许在Bean创建之前，读取Bean的元属性，并根据自己的需求对元属性进行改变，比如将Bean的scope从singleton改变为prototype，最典型的应用应当是PropertyPlaceholderConfigurer，替换xml文件中的占位符，替换为properties文件中相应的key对应的value
 
 BeanFactoryPostProcessor就可以帮助我们实现上述的功能，下面来看一下BeanFactoryPostProcessor的使用，定义一个BeanFactoryPostProcessor的实现类：
 
@@ -23,7 +23,7 @@ public interface BeanFactoryPostProcessor {
 
 ### 自定义bean
 
-测试的PostProcessorBean增加实现了BeanFactoryPostProcessor接口如下，其他和BeanFactoryProcessor中测试用例一样。
+测试的PostProcessorBean增加实现了BeanFactoryPostProcessor和BeanPostProcessor接口如下，验证两者执行顺序，其他和BeanProcessor中测试用例一样。
 ```
 public class PostProcessorBean implements BeanPostProcessor, BeanFactoryPostProcessor {
 

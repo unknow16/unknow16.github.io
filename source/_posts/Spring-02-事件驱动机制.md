@@ -14,8 +14,7 @@ tags: Spring
 
 目标（被观察者）：java.util.Observable，提供了目标需要的关键抽象：addObserver/deleteObserver/notifyObservers()等，具体请参考javadoc。
 
-观察者：java.util.Observer，提供了观察者需要的主要抽象：
-update(Observable o, Object arg)
+观察者：java.util.Observer，提供了观察者需要的主要抽象：update(Observable o, Object arg)
 
 * JDK1.1提供
 

@@ -23,7 +23,7 @@ public interface BeanPostProcessor {
     //见名知意，在初始化Bean之前
     Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException;
     
-    //见名知意，在初始化Bean之前
+    //见名知意，在初始化Bean之后
     Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException;
 }
 ```

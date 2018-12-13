@@ -213,6 +213,8 @@ public interface SpringApplicationRunListener {
 
 其唯一实现类EventPublishingRunListener包含一个SimpleApplicationEventMulticaster，它是ApplicationEventMulticaster接口的实现类，每次回调EventPublishingRunListener的各个方法时，EventPublishingRunListener先构造一个相应的ApplicationEvent的子类，如在回调starting()方法时，会构造ApplicationStartingEvent，然后会通过SimpleApplicationEventMulticaster的multicastEvent()，参数为ApplicationStartingEvent，将该事件广播出去，代码层面即是调用所有ApplicationListener实现类的onApplicationEvent(E event)方法，这些ApplicationListener是在new SpringApplication()时加载实例化的。
 
+关于spring的事件机制，可参考我的另一篇文章--[Spring-02-事件驱动机制](https://unknow16.github.io/2018/03/01/Spring-02-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9C%BA%E5%88%B6/)
+
 从SpringApplicationRunListeners到ApplicationListener的事件传递图如下：
 
 ![image](https://note.youdao.com/yws/api/personal/file/ECF865CC9B614568BC02DF7A2E4E23B1?method=download&shareKey=568e4aa117548ee73bc0ae0d790e9bf9)

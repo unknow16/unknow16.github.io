@@ -197,7 +197,7 @@ Spring 4之前，默认提供了DefaultKeyGenerator生成器，Spring 4之后使
 
 SimpleKeyGenerator的实现中策略为：
 1. 如果只有一个方法参数，就使用其作为key
-2. 如果多个参数，则SimpleKey类用Arrays.deepHashCode()把参数列表生成key。
+2. 如果多个参数，则SimpleKeyGenerator类用Arrays.deepHashCode()把参数列表生成key。
 
 我们也可以自定义自己的key生成器，然后通过xml风格的<cache:annotation-driven key-generator=""/>或注解风格的CachingConfigurer中指定keyGenerator。 
 
