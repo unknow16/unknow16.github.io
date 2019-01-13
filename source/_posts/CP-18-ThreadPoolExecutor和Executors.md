@@ -1,7 +1,7 @@
 ---
-title: 线程池ThreadPoolExecutor
-date: 2018-01-25 15:44:51
-tags: Concurrent
+title: CP-18-ThreadPoolExecutor和Executors
+date: 2018-10-13 20:13:17
+tags: ConcurrentPrograming
 ---
 
 ## Executor继承图
@@ -86,7 +86,6 @@ SynchronousQueue: 不存储元素的阻塞队列
 默认线程池提供了4种拒绝策略，见下文，默认策略是直接抛出异常
 
 ```
-例子
 ThreadPoolExecutor pool = new ThreadPoolExecutor(
 			1, 				//coreSize, 调用prestartAllCoreThreads()方法，提前启动所有核心线程
 			2, 				//MaxSize，当队列满时，新建线程数不能超过该数
@@ -101,8 +100,10 @@ ThreadPoolExecutor pool = new ThreadPoolExecutor(
 
 
 ## Executors工具类
-* Executors扮演线程工厂的角色，通过其可创建特定功能的线程池
-* newFixedThreadPool(int nThreads)
+
+Executors扮演线程工厂的角色，通过其可创建特定功能的线程池
+
+#### newFixedThreadPool(int nThreads)
 
 初始化一个指定线程数的线程池，其中corePoolSize == maximumPoolSize，使用LinkedBlockingQuene作为阻塞队列，不过当线程池没有可执行任务时，也不会释放线程。
 
@@ -113,7 +114,7 @@ public static ExecutorService new FixedThreadPool(int nThreads){
                                     new LinkedBlockingQueue<Runnable());
 }
 ```
-* newCachedThreadPool()
+#### newCachedThreadPool()
 
 初始化一个可以缓存线程的线程池，默认缓存60s, 线程池的线程数可达到Integer.MAX_VALUE，即2147483647，内部使用SynchronousQueue作为阻塞队列，所以使用该线程池要控制并发的任务数，否则创建大量线程会导致严重性能问题
 
@@ -128,7 +129,7 @@ public static ExecutorService newCachedThreadPool() {
 ```
 
 
-* newSingleThreadExecutor()
+#### newSingleThreadExecutor()
 
 初始化的线程池中只有一个线程，如果该线程异常结束，会重新创建一个新的线程继续执行任务，唯一的线程可以保证所提交任务的顺序执行，内部使用LinkedBlockingQueue作为阻塞队列。
 
@@ -142,7 +143,7 @@ public static ExecutorService newCachedThreadPool() {
     }
 ```
 
-* newScheduledThreadPool()
+#### newScheduledThreadPool()
 
 初始化的线程池可以在指定的时间内周期性的执行所提交的任务，在实际的业务场景中可以使用该线程池定期的同步数据。
 
@@ -165,7 +166,7 @@ public ScheduledThreadPoolExecutor(int corePoolSize) {
 
 
 
-## 拒绝策略：
+## 拒绝策略
 * AbortPolicy:直接抛出异常组织系统正常工作，默认策略
 * CallerRunsPolicy:只要线程池未关闭，该策略直接在调用者线程中，运行当前被丢弃的任务
 * DiscardOldestPolicy:丢弃最老的一个请求，尝试再次提交当前任务
@@ -211,14 +212,14 @@ public interface Executor {
 该方式可以通过Future的get()获取任务执行完成的返回值,该方法会阻塞知道任务返回结果
 
 ## ThreadFactory
-* 可以对线程属性进行一些定制
+可以对线程属性进行一些定制
 ```
-接口
+// 接口
 public interface ThreadFactory {
   Thread newThread(Runnable r);
 }
 
-默认实现类
+// 默认实现类
 static class DefaultThreadFactory implements ThreadFactory {
   private static final AtomicInteger poolNumber = new AtomicInteger(1);
   private final ThreadGroup group;

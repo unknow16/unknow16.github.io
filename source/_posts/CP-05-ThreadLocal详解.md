@@ -1,7 +1,7 @@
 ---
-title: 理解ThreadLocal
-date: 2018-01-28 20:54:05
-tags: Concurrent
+title: CP-05-ThreadLocal详解
+date: 2018-01-17 20:01:19
+tags: ConcurrentPrograming
 ---
 
 ### 理解
@@ -184,7 +184,6 @@ private T setInitialValue() {
 ```
 
 首先我们通过Thread.currentThread得到当前线程，然后获取当前线程的threadLocals变量，这个变量就是ThreadLocalMap类型的,如果这个变量map不为空，再获取ThreadLocalMap.Entry e,如果e不为空，则获取value值返回，否则在Map中初始化Entry，并返回初始值null。如果map为空，则创建并初始化map，并返回初始值null。
-
 
 
 

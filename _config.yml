@@ -79,6 +79,8 @@ theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
+## https://github.com/unknow16/unknow16.github.io.git
+## ssh://git@github.com/unknow16/unknow16.github.io.git
 deploy:
   type: git
   repository: https://github.com/unknow16/unknow16.github.io.git

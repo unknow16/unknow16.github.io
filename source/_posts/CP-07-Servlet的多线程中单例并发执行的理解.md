@@ -1,7 +1,7 @@
 ---
-title: Servlet的多线程中单例并发执行的理解
-date: 2018-01-28 21:04:37
-tags: Concurrent
+title: CP-07-Servlet的多线程中单例并发执行的理解
+date: 2018-01-19 20:01:48
+tags: ConcurrentPrograming
 ---
 
 ### 每个请求创建一个线程
