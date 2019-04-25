@@ -2,6 +2,7 @@
 title: Web-01-JavaScript版本及历史
 date: 2018-05-24 22:15:30
 tags: Web
+toc: true
 ---
 
 ## ECMAScript主要版本
@@ -16,11 +17,6 @@ tags: Web
 此版本增加了非常重要的东西：let、const、class、modules、 arrow functions,、template string, destructuring, default, rest argument、binary data、promises等等。
 
 规范地址：http://www.ecma-international.org/ecma-262/6.0/
-
-
-
-
----
 
 ## ECMA
 ECMA是一个组织，前身是欧洲计算机制造商协会

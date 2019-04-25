@@ -1,0 +1,32 @@
+---
+title: Java生态技术选型
+toc: true
+date: 2019-04-25 15:27:34
+tags:
+categories:
+---
+
+## 通用技术选型
+用途 | 选型 |  |  |
+---|---|---|---
+前端框架| Vue | React | Angular
+消息中间件 | RabbitMQ | RocketMQ | ActiveMQ
+缓存服务器 | Redis | | 
+数据库连接池 | Druid | HiKariCP | 
+数据库中间件 | Sharding Sphere | MyCAT
+搜索引擎 | ElasticSearch | Solr | Lucene
+服务器| Tomcat | Jetty | Netty | Nginx
+Web框架| Spring Boot
+ORM框架| Mybatis | Spring Data JPA | Hibernate
+
+## 分布式系统技术选型
+用途 | 选型 |  |  |
+---|---|---|---|---
+API网关 | Spring Cloud Gateway | Zuul2 | Kong
+作业调度 | XXL-JOB
+链路追踪 | Skywalking | Pinpoint | Zipkin | CAT 
+配置中心 | Apollo | Nacos | Spring Cloud Config | Disconf
+注册中心 | Eureka | Nacos | Zookeeper | Consul Etcd
+RPC框架 | Dubbo | Feign | Ribbon
+熔断降级 | Hystrix | Sentinel
+Web框架 | Spring Cloud

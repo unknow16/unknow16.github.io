@@ -1,5 +1,5 @@
 ---
-title: MQ-06-Kafka基础知识
+title: Kafka基础知识
 date: 2018-10-10 17:40:39
 tags: MQ
 ---
