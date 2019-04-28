@@ -5,7 +5,13 @@ date: 2019-04-25 12:59:02
 top: 10
 ---
 
-<!-- ![](index/banner.jpg) -->
+> 人们之所以不愿改变，是因为害怕未知。但历史唯一不变的事实，就是一切都会改变。
+>                                               —— 尤娃尔·赫拉利《未来简史》
+
+
+<!-- 
+
+![](index/banner.jpg)
 
 推荐博客 | 推荐书籍 
 ---|---|---|---
@@ -13,7 +19,7 @@ top: 10
 [翟永超](http://blog.didispace.com/) | 枪炮、病菌与钢铁([美]贾雷德.戴蒙德) 
 [JavaDoop](https://javadoop.com) | 
 
-
+ -->
 
 <!-- 
 推荐博客 | 推荐书籍 | 推荐技术 | 推荐Github
@@ -56,4 +62,4 @@ webpack | aa | https://webpack.js.org/
 Node.js | aa | https://nodejs.org/en/ -->
 
 
-> ### See you again
+> ### See you again	
