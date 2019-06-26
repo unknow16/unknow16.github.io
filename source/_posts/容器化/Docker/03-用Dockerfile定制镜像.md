@@ -9,6 +9,7 @@ categories:
 
 
 
+
 ## 定制镜像
 定制镜像有两种方法：
 1. 使用docker commit命令（不推荐）
@@ -29,21 +30,23 @@ FROM nginx
 RUN echo '<h1>Hello world!!!</h1>' > /usr/share/nginx/html/index.html
 ```
 
-#### FORM: 指定基础镜像
+- FORM: 指定基础镜像
+
 该指令是Dockerfile必备的，且是第一条指令，指定以什么镜像为基础镜像进行定制。
 
-* 如服务类镜像：nginx、redis、mongo、mysql、php、tomcat等
-* 如语言环境类镜像：node、openjdk、python、ruby、golang等。
-* 如果没有合适的可以从操作系统定制，如操作系统镜像：ubuntu、debian、centos、fedora、alpine等。
-* Docker提供了一个特殊镜像，名为scratch。其实这是空白的镜像，不以任何系统为基础，直接将可执行文件复制进镜像执行，如：swarm、coreos/etcd,用这个镜像会让镜像体积更加小。使用Go语言开发的应用很多会使用这种方式来制作镜像，这也是为什么有人认为Go是特别适合容器微服务架构的语言的原因之一。
+1. 如服务类镜像：nginx、redis、mongo、mysql、php、tomcat等
+1. 如语言环境类镜像：node、openjdk、python、ruby、golang等。
+1. 如果没有合适的可以从操作系统定制，如操作系统镜像：ubuntu、debian、centos、fedora、alpine等。
+1. Docker提供了一个特殊镜像，名为scratch。其实这是空白的镜像，不以任何系统为基础，直接将可执行文件复制进镜像执行，如：swarm、coreos/etcd,用这个镜像会让镜像体积更加小。使用Go语言开发的应用很多会使用这种方式来制作镜像，这也是为什么有人认为Go是特别适合容器微服务架构的语言的原因之一。
 
-#### RUN: 执行命令
+- RUN: 执行命令
+
 该指令是用来执行命令行命令的。其有两种格式：
 1. shell格式：RUN <命令>，就像直接在命令行中输入的命令一样。如上例中一样就是。
 2. exec格式：RUN ["可执行文件", "参数1", "参数2"]，这更像是函数调用中的格式。 
 
 
-#### 执行构建
+- 执行构建
 
 ```
 //构建镜像格式
@@ -83,4 +86,17 @@ docker build 构建镜像其实也不是在本地构建，而是在Docker服务�
 
 这不是复制执行docker build命令所在目录下的package.json,也不是复制dockerfile所在目录下的package.json，而是复制上下文目录下的package.json.
 
+## 多阶段构建
+在 Docker 17.05 版本之前，我们构建 Docker 镜像时，通常会采用两种方式：
 
+1. 全部放入一个 Dockerfile
+
+一种方式是将所有的构建过程编包含在一个 Dockerfile 中，包括项目及其依赖库的编译、测试、打包等流程，这里可能会带来的一些问题：
+- 镜像层次多，镜像体积较大，部署时间变长
+- 源代码存在泄露的风险
+
+2. 分散到多个 Dockerfile
+
+另一种方式，就是我们事先在一个 Dockerfile 将项目及其依赖库编译测试打包好后，再将其拷贝到运行环境中，这种方式需要我们编写两个 Dockerfile 和一些编译脚本才能将其两个阶段自动整合起来，这种方式虽然可以很好地规避第一种方式存在的风险，但明显部署过程较复杂。
+
+为解决以上问题，Docker v17.05 开始支持多阶段构建 ( multistage builds )。使用多阶段构建我们就可以很容易解决前面提到的问题，并且只需要编写一个Dockerfile ，可以使用 as 来为某一阶段命名，构建时也可以从其他镜像复制文件等。

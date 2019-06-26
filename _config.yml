@@ -113,3 +113,10 @@ jsonContent:
     categories: true
   ignore:
     - 404.html
+
+# hexo-admin authentification
+admin:
+  username: fuyi
+  password_hash: $2a$10$5IbJnranHiYEy5M/69neX.l2e93YXrfHld3e43tYskiITjdWjXtRa
+  secret: 1qaz2WSX
+  deployCommand: ./admin_script/hexo-d.sh
