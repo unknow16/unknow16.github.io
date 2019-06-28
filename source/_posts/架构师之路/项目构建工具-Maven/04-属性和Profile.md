@@ -20,7 +20,6 @@ categories:
 - ${project.groupId}
 - ${project.artifactId}
 - ${project.version}
-- 
 - ${project.build.finalName} 项目打包输出文件的名称，默认为${project.artifactId}-${project.version}
 - ${project.build.sourceDirectory} 项目的主源码目录，默认为src/main/java
 - ${project.build.testSourceDirectory} 项目的测试源码目录，默认为src/test/java
