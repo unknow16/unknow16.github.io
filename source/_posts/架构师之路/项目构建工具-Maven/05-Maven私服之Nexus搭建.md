@@ -1,5 +1,5 @@
 ---
-title: 03-Maven私服之Nexus搭建
+title: 05-Maven私服之Nexus搭建
 toc: true
 date: 2019-06-28 22:18:57
 tags:
@@ -45,13 +45,20 @@ docker run -d --name nexus3 --restart=always -p 8081:8081 --mount src=nexus-data
 
 
 
-2. repository
+2. Nexus的仓库类型
 
-group：是一个仓库组，可包含hosted和proxy两种库，下载时按配置顺序从中依次查找
+- group(仓库组类型)：又叫组仓库，用于方便开发人员自己设定的仓库
+- hosted(宿主类型)：内部项目的发布仓库（内部开发人员，发布上去存放的仓库）
+- proxy(代理类型)：从远程中央仓库中寻找数据的仓库（可以点击对应的仓库的Configuration页签下Remote Storage Location属性的值即被代理的远程仓库的路径
 
-hosted：一般部署我们自己项目打包的jar，供内部人员下载
+3. 默认存在的仓库
 
-proxy：代理远程仓库，maven-central是默认maven中央仓库代理，maven-aliyun是后加的阿里远程库代理，通过代理从远程库中下载的依赖都会被缓存到nexus的proxy库中
+- maven-central：maven中央库，默认从https://repo1.maven.org/maven2/拉取jar 
+- maven-releases：私库发行版jar 
+- maven-snapshots：私库快照（调试版本）jar 
+- maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml中mirror配置使用
+
+4. 注意点
 
 创建hosted类型仓库时，需要将Deployment policy设为Allow redeploy，否则无法部署jar
 

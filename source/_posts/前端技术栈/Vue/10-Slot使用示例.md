@@ -1,8 +1,11 @@
 ---
-title: Vue-10-Slot使用详解
+title: 10-Slot使用示例
+doc: true
 date: 2018-11-15 18:37:07
 tags: Vue
 ---
+
+简单来说，Slot是对组件的扩展，通过slot插槽向组件内部指定位置传递内容
 
 ## 入门示例
 

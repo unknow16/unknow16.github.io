@@ -1,5 +1,6 @@
 ---
-title: Vue-01-通过vue-cli构建项目
+title: 01-通过vue-cli构建项目
+toc: true
 date: 2018-11-15 14:49:09
 tags: Vue
 ---
@@ -31,7 +32,7 @@ npm run build ：以生产模式生成静态页面文件。
 ```
 #### 6. 安装依赖
 ```
-cd admin
+cd fuyi-ui
 cnpm install
 ```
 
