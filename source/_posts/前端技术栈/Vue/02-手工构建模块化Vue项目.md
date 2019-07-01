@@ -1,20 +1,74 @@
 ---
-title: Vue-07-手工构建Vue项目2-组件化
+title: 02-手工构建模块化Vue项目
+doc: true
 date: 2018-11-15 15:07:57
 tags: Vue
 ---
 
+
+
 ## 目标
-实际开发中我们不可能把整个网站的js和html全写到一个页面上。所以这次目标在于改造这个例子的文件结构。
+最近在学习vue的过程中发现网上的vue教程总有些不同的问题，有的教程上来只说语法，有的教程上来就用vue-cli来建项目，但是vue-cli是整合了webpack等多个插件的工具，不利于我们学习原理。我觉得一个好的教程应该具备以下几点：
+
+- 浅显易懂，说人话
+- 每节课都是一个完整的可以运行的例子
+- 由浅入深的介绍知识点，中间不能有断层
+- 所以我打算写一个我自己的vue入门教程。我们先从一个土得掉渣的例子开始吧
+
+## 分模块前
+
+1. 新建一个空文件夹learn-vue，在该空文件夹中新建index.html，其完整的页面代码如下
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+    <!-- 1. 引入vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>learn-vue</title>
+  </head>
+  <body>
+  	
+  	<!-- 3. 取值，注意此处的id为app，要和第2步中的el属性值匹配 -->
+    <div id="app"> 
+      <p>{{ message }}</p>
+    </div>
+    
+    <!-- 2. 创建一个Vue实例 -->
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue.js!'
+        }
+      })
+      </script>
+  </body>
+</html>
+```
+
+保存后刷新页面，你将会看到Hello Vue.js!  
+
+
+
+实际开发中我们不可能把整个网站的js和html全写到一个页面上在下一个例子中我们将会对这个例子进行改造。
+
+
 
 ## vue和webpack的关系
 很多教程上来把webpack跟vue绑在一起教，让很多原本不懂webpack的人以为webpack是vue的组成部分，或者是必不可少的部分。在这里我要声明一句：
 
 > webpack不是vue的必须组成，只是webpack可以让你的js文件看起来更结构化。
 
-webpack是一个js打包工具，使用webpack你可以在一个js文件中使用 import 或者 require 来引用另外一个js文件中定义的组件。不消说，这样你就可以把js组件分文件存放了。
+webpack是一个js打包工具，使用webpack你可以在一个js文件中使用 import 或者 require 来引用另外一个js文件中定义的组件。这样你就可以把js组件分文件存放了。
 
-虽然vue的基础例子提供了vue-cli-service，使用这个工具会自动调用webpack来帮你打包js并自动插入js到html。但是这不利于我们学习技术。我们现在从最基本的webpack使用开始了解webpack如何跟vue一起工作。
+虽然vue的基础例子提供了vue-cli，使用这个工具会自动调用webpack来帮你打包js并自动插入js到html。但是这不利于我们学习技术。我们现在从最基本的webpack使用开始了解webpack如何跟vue一起工作。
+
+
 
 ## 安装webpack
 1. 新建package.json
@@ -113,7 +167,7 @@ module.exports = {
 ```
 
 简单的讲解一下这个webpack.config.js
- 
+
 - mode: 主要用到的模式有production和development。开发时使用development，所以我们现在用development，其实你就算用production对我们的例子也没什么影响。
 - entry: 入口js，之前不是说过使用了webpack之后就可以引用import来导入别的js文件么？那么你可以想象一下，你项目中的js可以构成一个引用树。这个引用树总要有一个树根的，这个树根是不会被任何js所引用的，所有引用最后都可以回溯到它。这里的entry就是webpack的js引用树树根文件
 - output：定义了打包后文件要存放的路径和文件名
@@ -284,7 +338,7 @@ export default {
 <div id="app"></div>
 ```
 
-#### name属性
+- name属性
 
 有没有看到现在我们的组件有了一个name属性，这个属性很重要。以至于我单独开来一个小节来说它。
 
@@ -294,14 +348,18 @@ vue在启动时会注册各个组件，每个组件的注册名就是name属性�
 ```
 <template>
    <h2>Welcome!</h2>
+   
+   <!-- 3. 使用 -->
    <HelloVue/>
 </template>
  
 <script>
+<!-- 1.引入组件 -->
 import HelloVue from './components/HelloVue.vue'
  
 export default {
    name: 'Welcome',
+   // 2. 定义
    component: {
       HelloVue
    }
@@ -311,7 +369,7 @@ export default {
 
 我们在别的组件中可以直接写上<HelloVue />标签，并使用component组件来对HelloVue标签进行解释，告诉Vue使用HelloVue组件来渲染<HelloVue/>标签，这个标签的名字必须跟HelloVue.vue中的name属性一模一样。请大家记住这个知识点，因为接下来我们马上就会用到。
 
-#### template属性
+-  template属性
 
 实际上template节点也不是必须的，你可以通过template属性来定义html模板。如果我们使用template属性来定义模板，上面的例子就可以变为
 
@@ -479,10 +537,11 @@ new Vue({
 
 这看起来跟我们写的完全不一样嘛。我第一次看到的时候不知道有多迷茫。现在我们来解释一下其中的语法
 
-#### $mount
-$mount是一个vue的全局函数，表示将构建出来的组件挂载到dom对象上。所以 .$mount('#app') 其实就相当于 el: '#app'。关于$mount的其他知识点在此不会详细的介绍。
+- $mount
 
-#### render: h => h(App)
+  $mount是一个vue的全局函数，表示将构建出来的组件挂载到dom对象上。所以 .$mount('#app') 其实就相当于 el: '#app'。关于$mount的其他知识点在此不会详细的介绍。
+
+- render: h => h(App)
 这是个什么鬼？！
 
 Vue是建议大家使用template来定义模板的，Vue会帮你进行渲染。但是你也可以不使用template，使用render属性直接渲染页面。
