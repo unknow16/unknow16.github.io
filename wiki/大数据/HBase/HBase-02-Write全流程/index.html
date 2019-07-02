@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>HBase-02-Write全流程 | Stay Hungry | Stay Foolish | mingfy</title>
+    
+    
+        <meta name="keywords" content="HBase">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="如果将上篇内容理解为一个冗长的”铺垫”，那么，从本文开始，”剧情”才开始正式展开。本文基于所给出的样例数据，介绍了将数据从Client写到RegionServer的全流程。 Write全流程 构建Put对象(含RowKey定义以及列定义) 数据路由: 根据RowKey定位到Region Client侧分组打包: 先按Region分组，再按RegionServer分组发送（因为一个RegionSer">
+<meta name="keywords" content="HBase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HBase-02-Write全流程">
+<meta property="og:url" content="http://yoursite.com/wiki/大数据/HBase/HBase-02-Write全流程/index.html">
+<meta property="og:site_name" content="Stay Hungry | Stay Foolish | mingfy">
+<meta property="og:description" content="如果将上篇内容理解为一个冗长的”铺垫”，那么，从本文开始，”剧情”才开始正式展开。本文基于所给出的样例数据，介绍了将数据从Client写到RegionServer的全流程。 Write全流程 构建Put对象(含RowKey定义以及列定义) 数据路由: 根据RowKey定位到Region Client侧分组打包: 先按Region分组，再按RegionServer分组发送（因为一个RegionSer">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/39885F9B2E7F43CF858C728CFFAC7D66?method=download&shareKey=17aa37c6996de6598b643e6f255353d7">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/785BA32B2D71433C95EFA4A7AD4C846A?method=download&shareKey=adb255f479140914eece33199023883e">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/2BBD129EF53F48F2983776761908D434?method=download&shareKey=868b7b874fd2918e57f780415969e3d9">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/3129E6ADC1F64741B2C4077EAB8236AD?method=download&shareKey=33e66fa04aa38b1b7d87e7e1f576957c">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/3E7EA53CE6FF44FEB0AE0F405978C174?method=download&shareKey=e82b49b5012d633a9f9d52eb9bb31b56">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/644D44DE03D84FA59B9D030EB8409FEF?method=download&shareKey=25aed6c94ba05beb2949c71034805306">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/C76B3C8B02FA4F48AAF11D8EE4D43681?method=download&shareKey=72325b0de41230b5e5eabfb929a239b6">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/C8A27F6CD2224395B5C0AB0F614D4FA4?method=download&shareKey=45b97473a85e8ef68c0213dee8787c15">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/B085CCA005D94B5BB5BF614708FC66F0?method=download&shareKey=883c732cecb3b14db143e10b5151280b">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/62AD67398D5F49B9AED6325709779F33?method=download&shareKey=363bb328885372297ea8f9840a20d9a8">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/0FCCF38D22F1441DBB9816B2D071DB4E?method=download&shareKey=7509faa3bfb9c74002617f567c8966f1">
+<meta property="og:updated_time" content="2019-06-29T17:38:47.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HBase-02-Write全流程">
+<meta name="twitter:description" content="如果将上篇内容理解为一个冗长的”铺垫”，那么，从本文开始，”剧情”才开始正式展开。本文基于所给出的样例数据，介绍了将数据从Client写到RegionServer的全流程。 Write全流程 构建Put对象(含RowKey定义以及列定义) 数据路由: 根据RowKey定位到Region Client侧分组打包: 先按Region分组，再按RegionServer分组发送（因为一个RegionSer">
+<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/39885F9B2E7F43CF858C728CFFAC7D66?method=download&shareKey=17aa37c6996de6598b643e6f255353d7">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Stay Hungry | Stay Foolish | mingfy</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-9009841192314468",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142763903-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-142763903-1');
+    </script>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端技术栈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaScript
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/JavaScript/01-JavaScript版本及历史/">01-JavaScript版本及历史</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/02-ES6的let和const/">02-ES6的let和const</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/03-ES6核心概念/">03-ES6核心概念</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Node.js
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Ubuntu16-04-安装nodejs和npm/">01-Ubuntu16.04-安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/02-node和npm常用命令/">02-node和npm常用命令</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/03-前端模块规范/">03-前端模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Vue
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Vue/01-通过vue-cli构建项目/">01-通过vue-cli构建项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/02-手工构建模块化Vue项目/">02-手工构建模块化Vue项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/03-常用指令示例汇总/">03-常用指令示例汇总</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/04-手写一个组件/">04-手写一个组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/05-使用方通过Prop向子组件传递数据/">05-使用方通过Prop向子组件传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/06-子组件通过事件向使用方传递数据/">06-子组件通过事件向使用方传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/07-Slot使用示例/">07-Slot使用示例</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/08-动态组件/">08-动态组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/09-vue-router入门/">09-vue-router入门</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/10-vue-router高级用法/">10-vue-router高级用法</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/11-vue-router的导航守卫/">11-vue-router的导航守卫</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/12-vuex详解/">12-vuex详解</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/前端技术栈/前端模块化生态概览/">前端模块化生态概览</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            后端技术栈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Dubbo
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-01-简易RPC实现原理/">Dubbo-01-简易RPC实现原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-02-架构设计详解/">Dubbo-02-架构设计详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-03-SPI-原理机制/">Dubbo-03-SPI-原理机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-04-SPI-源码解析/">Dubbo-04-SPI-源码解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-05-SPI-Adaptive注解/">Dubbo-05-SPI-@Adaptive注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-06-SPI-Activate注解/">Dubbo-06-SPI-@Activate注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-07-Spring集成点/">Dubbo-07-Spring集成点</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-08-主要接口概念简介/">Dubbo-08-主要接口概念简介</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-09-服务发布解析/">Dubbo-09-服务发布解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-10-服务发布解析2/">Dubbo-10-服务发布解析2</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-11-服务引用解析/">Dubbo-11-服务引用解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-12-服务引用解析2/">Dubbo-12-服务引用解析2</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-13-通信层1-封装框架/">Dubbo-13-通信层1-封装框架</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-14-通信层2-异步请求实现/">Dubbo-14-通信层2-异步请求实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-15-通信层3-上层调用/">Dubbo-15-通信层3-上层调用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hystrix
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-01-应用场景/">Hystrix-01-应用场景</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-02-执行命令方式/">Hystrix-02-执行命令方式</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-03-服务降级/">Hystrix-03-服务降级</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-04-常用配置/">Hystrix-04-常用配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-05-请求缓存/">Hystrix-05-请求缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-06-信号量隔离/">Hystrix-06-信号量隔离</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-07-降级逻辑命令嵌套/">Hystrix-07-降级逻辑命令嵌套</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-08-命令调用合并/">Hystrix-08-命令调用合并</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-09-Dashboard监控平台搭建/">Hystrix-09-Dashboard监控平台搭建</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-10-SpringMVC整合Hystrix及监控/">Hystrix-10-SpringMVC整合Hystrix及监控</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-11-使用Turbine监控集群/">Hystrix-11-使用Turbine监控集群</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-12-参数配置与分析/">Hystrix-12-参数配置与分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-13-HystrixCommand执行流程分析/">Hystrix-13-HystrixCommand执行流程分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-14-CircuitBreaker执行流程及源码分析/">Hystrix-14-CircuitBreaker执行流程及源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-15-HystrixCommand注解使用/">Hystrix-15-@HystrixCommand注解使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-16-缓存相关注解使用/">Hystrix-16-缓存相关注解使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JVM
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-01-内存模型/">JVM-01-内存模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-02-类加载机制/">JVM-02-类加载机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-03-垃圾收集器/">JVM-03-垃圾收集器</a></li>  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-04-GC流程/">JVM-04-GC流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Java/Java-01-transient浅析/">transient浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-02-检查异常-未检查异常/">检查异常-未检查异常</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-03-对注解的思考/">对注解的思考</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-04-PostConstruct和-PreDestroy/">Java的@PostConstruct和@PreDestroy</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaEE
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/JavaEE/JavaEE-01-Servlet-3-0-新特性详解/">Servlet-3.0 新特性详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/JavaEE/JavaEE-02-JPA简介/">JPA简介</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Mybatis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-01-拦截器使用/">Mybatis拦截器使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-02-拦截器实现源码解析/">Mybatis拦截器实现源码解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-03-一级缓存/">Mybatis一级缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-04-二级缓存/">Mybatis二级缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-05-返回生成主键/">Mybatis返回生成主键</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Netty
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-14-Netty简介/">NP-14-Netty简介</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-15-Netty入门示例/">NP-15-Netty入门示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-16-Netty基础/">NP-16-Netty基础</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-17-TCP粘包拆包/">NP-17-TCP粘包拆包</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-18-自定义协议/">NP-18-自定义协议</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-19-实现心跳检测/">NP-19-实现心跳检测</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-20-AttributeMap附件/">NP-20-AttributeMap附件</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-21-ChannelOption选项配置/">NP-21-ChannelOption选项配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-24-Netty线程模型/">NP-24-Netty线程模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            RabbitMQ
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-01-消息中间件选型/">MQ-01-消息中间件选型</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-02-RabbitMQ消息模型/">MQ-02-RabbitMQ消息模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-03-RabbitMQ生产者角度特性/">MQ-03-RabbitMQ生产者角度特性</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-04-RabbitMQ消费者角度特性/">MQ-04-RabbitMQ消费者角度特性</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-05-RabbitMQ过期时间应用/">MQ-05-RabbitMQ过期时间应用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Redis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-01-单机安装/">Redis-01-单机安装</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-02-集群模式演变/">Redis-02-集群模式演变</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-03-集群模式安装/">Redis-03-集群模式安装</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-04-持久化存储/">Redis-04-持久化存储</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-05-事务支持/">Redis-05-事务支持</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-06-LRU算法支持/">Redis-06-LRU算法支持</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-07-5种数据类型命令操作/">Redis-07-5种数据类型命令操作</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-01-Eureka/">Spring Cloud-01-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-10-jwt与session优缺点对比/">Spring Security-10-jwt与session优缺点对比</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-01-配置文件/">Spring Boot-01-配置文件</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-02-日志系统/">Spring Boot-02-日志系统</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-01-认证架构流程/">Spring Security-01-认证架构流程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-02-核心配置类解读/">Spring Security-02-核心配置类解读</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-03-核心过滤器源码分析/">Spring Security-03-核心过滤器源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-04-跨站请求伪造配置-CSRF/">Spring Security-04-跨站请求伪造配置-CSRF</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-05-跨站请求伪造原理/">Spring Security-05-跨站请求伪造原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-06-跨域资源共享-CORS/">Spring Security-06-跨域资源共享-CORS</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-07-jwt简介/">Spring Security-07-jwt原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-08-jjwt使用/">Spring Security-08-jjwt使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-09-OAuth2原理/">Spring Security-09-OAuth2原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-01-各版本新特性/">Spring MVC-01-各版本新特性</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-02-核心架构流程/">Spring MVC-02-核心架构流程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-03-DispatcherServlet源码分析/">Spring MVC-03-DispatcherServlet源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-04-拦截器处理器-HandlerInterceptor/">Spring MVC-04-拦截器处理器-HandlerInterceptor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-05-处理器异常解析器-HandlerExceptionResolver/">Spring MVC-05-处理器异常解析器-HandlerExceptionResolver</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-06-控制器增强-ControllerAdvice/">Spring MVC-06-控制器增强-@ControllerAdvice</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-01-PropertySource-Environment-Profile/">Spring-01-PropertySource-Environment-Profile</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-02-事件驱动机制/">Spring-02-事件驱动机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-03-Bean的作用域/">Spring-03-Bean的作用域</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-04-Resource体系/">Spring-04-Resource体系</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-05-InitialingBean-DisposableBean/">Spring-05-InitialingBean-DisposableBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware/">Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-07-FactoryBean/">Spring-07-FactoryBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-08-BeanPostProcessor/">Spring-08-BeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-09-BeanFactoryPostProcessor/">Spring-09-BeanFactoryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-10-InstantiationAwareBeanPostProcessor/">Spring-10-InstantiationAwareBeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-03-日志系统-源码实现解析/">Spring Boot-03-日志系统-源码实现解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-04-启动过程解析/">Spring Boot-04-启动过程解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-05-项目源码结构/">Spring Boot-05-项目源码结构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-06-单元测试/">Spring Boot-06-单元测试</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-07-自定义一个Starter/">Spring Boot-07-自定义一个Starter</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-08-自动配置实现浅析/">Spring Boot-08-自动配置实现浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-09-Actuator监控端点详解/">Spring Boot-09-Actuator监控端点详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-10-端点配置/">Spring Boot-10-端点配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-11-自定义健康监控/">Spring Boot-11-自定义健康监控</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-12-自定义监控端点/">Spring Boot-12-自定义监控端点</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-13-开发热部署/">Spring Boot-13-开发热部署</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-11-缓存抽象/">Spring-11-缓存抽象</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-12-缓存注解/">Spring-12-缓存注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-14-缓存集成/">Spring Boot-14-缓存集成</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-15-注入自定义Servlet等组件的二种方式/">Spring Boot-15-注入自定义Servlet等组件的二种方式</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-16-docker-maven-plugin使用/">Spring Boot-16-docker-maven-plugin使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-17-Win下打包镜像到远程Docker服务器/">Spring Boot-17-Win下打包镜像到远程Docker服务器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-18-AOP编程/">Spring Boot-18-AOP编程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-19-自动化配置的注解开关原理/">Spring Boot-19-自动化配置的注解开关原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-20-条件注解-源码实现/">Spring Boot-20-条件注解-源码实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-21-条件注解一览/">Spring Boot-21-条件注解一览</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-13-BeanDefinitionRegistry/">Spring-13-BeanDefinitionRegistry</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-14-BeanDefinitionRegistryPostProcessor/">Spring-14-BeanDefinitionRegistryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-15-BeanDefinitionReader/">Spring-15-BeanDefinitionReader</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-16-自定义类扫描器/">Spring-16-自定义类扫描器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-17-BeanPostProcessor接口总结/">Spring-17-BeanPostProcessor接口总结</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-18-内置的BeanPostProcessor总结/">Spring-18-内置的BeanPostProcessor总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-01-造成类的线程不安全的原因/">CP-01-造成类的线程不安全的原因</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-02-线程类自己/">CP-02-线程类自己</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-03-volatile的前生今世/">CP-03-volatile的前生今世</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-04-CAS浅析/">CP-04-CAS浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-05-ThreadLocal详解/">CP-05-ThreadLocal详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-06-线程未捕获异常处理器/">CP-06-线程未捕获异常处理器</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-07-Servlet的多线程中单例并发执行的理解/">CP-07-Servlet的多线程中单例并发执行的理解</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-08-单例模式与双重检测/">CP-08-单例模式与双重检测</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-09-线程-挂起-阻塞-中断/">CP-09-线程-挂起-阻塞-中断</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-10-并发模型/">CP-10-并发模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-11-synchronized基础/">CP-11-synchronized基础</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-12-synchronized通知等待机制/">CP-12-synchronized通知等待机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-13-synchronized原理/">CP-13-synchronized原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-14-通过ReentrantLock来窥探AQS实现/">CP-14-通过ReentrantLock来窥探AQS实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-15-AQS的Condition使用场景/">CP-15-AQS的Condition使用场景</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-16-用AQS实现的常用并发工具类/">CP-16-用AQS实现的常用并发工具类</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-17-锁优化机制/">CP-17-锁优化机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-18-ThreadPoolExecutor和Executors/">CP-18-ThreadPoolExecutor和Executors</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-19-并发集合和阻塞队列概览/">CP-19-并发集合和阻塞队列概览</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-20-ConcurrentHashMap-78实现/">CP-20-ConcurrentHashMap-78实现</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            网络编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-01-网络IO模型/">NP-01-网络IO模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-02-对Socket的理解/">NP-02-对Socket的理解</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-03-TCP握手/">NP-03-TCP三次握手</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-04-Actor模型/">NP-04-Actor模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-05-CSP模型/">NP-05-CSP模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-06-Actor模型和CSP模型的区别/">NP-06-Actor模型和CSP模型的区别</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-07-select-poll-epoll浅析/">NP-07-select-poll-epoll浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-08-Buffer操作/">NP-08-Buffer操作</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-09-NIO入门/">NP-09-NIO入门</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-10-Selector入门/">NP-10-Selector入门</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-11-阻塞同步BIO示例/">NP-11-阻塞同步BIO示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-12-多路复用NIO示例/">NP-12-多路复用NIO示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-13-异步通知AIO示例/">NP-13-异步通知AIO示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-22-Reactor模型/">NP-22-Reactor模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-创建型/">设计模式-创建型</a></li>  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-结构型/">设计模式-结构型</a></li>  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-行为型/">设计模式-行为型</a></li>  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-命令模式/">命令模式</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            大数据
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            HBase
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/HBase/HBase-01-简明入门/">HBase-01-简明入门</a></li>  <li class="file active"><a href="/wiki/大数据/HBase/HBase-02-Write全流程/">HBase-02-Write全流程</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-03-Flush与Compaction/">HBase-03-Flush与Compaction</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-04-Read全流程/">HBase-04-Read全流程</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-05-HFile文件结构/">HBase-05-HFile文件结构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/Kafka/01-Kafka基础知识/">Kafka基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Zookeeper
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-01-单机和集群搭建/">Zookeeper-01-单机和集群搭建</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-02-主要概念/">Zookeeper-02-主要概念</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-03-原生API基本使用/">Zookeeper-03-原生API基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-04-ZkClient基本使用/">Zookeeper-04-ZkClient基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-05-Curator基本使用/">Zookeeper-05-Curator基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-06-图形监控工具/">Zookeeper-06-图形监控工具</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-07-事务日志和快照文件/">Zookeeper-07-事务日志和快照文件</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-08-自动清理日志配置/">Zookeeper-08-自动清理日志配置</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/大数据/大数据生态系统/">大数据生态系统</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            容器化
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Docker
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/容器化/Docker/01-CentOS-7下安装Docker/">01-CentOS-7下安装Docker</a></li>  <li class="file"><a href="/wiki/容器化/Docker/02-操作镜像/">02-操作镜像</a></li>  <li class="file"><a href="/wiki/容器化/Docker/03-用Dockerfile定制镜像/">03-用Dockerfile定制镜像</a></li>  <li class="file"><a href="/wiki/容器化/Docker/04-操作容器/">04-操作容器</a></li>  <li class="file"><a href="/wiki/容器化/Docker/05-数据管理/">05-数据管理</a></li>  <li class="file"><a href="/wiki/容器化/Docker/06-网络配置/">06-网络配置</a></li>  <li class="file"><a href="/wiki/容器化/Docker/07-Docker三剑客/">07-Docker三剑客</a></li>  <li class="file"><a href="/wiki/容器化/Docker/08-Dockerfile指令详解/">08-Dockerfile指令详解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kubernetes
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-01-架构/">k8s-01-架构</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-02-安全机制流程/">k8s-02-安全机制流程</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-03-认证方式/">k8s-03-认证方式</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-04-授权方式/">k8s-04-授权方式</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-05-准入控制/">k8s-05-准入控制</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-06-RBAC授权/">k8s-06-RBAC授权</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-07-token认证/">k8s-07-token认证</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            技术杂谈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            区块链
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-密码学-公私钥和比特币地址/">密码学--公私钥和比特币地址</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-交易结构/">比特币--交易结构</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-区块结构/">比特币--区块结构</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-网络架构/">比特币--网络架构</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-Bloom过滤器/">比特币--Bloom过滤器</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-警告消息/">比特币--警告消息</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-交易脚本和脚本语言/">比特币--交易脚本和脚本语言</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-Merkle树/">比特币--Merkle树</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-挖矿与共识/">比特币--挖矿与共识</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-交易块龄和优先级/">比特币--交易块龄和优先级</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-挖矿难度表示和难度调整/">比特币--挖矿难度表示和难度调整</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊-历史/">以太坊--历史</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发01-入门/">以太坊开发01--入门</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发02-HelloWorld/">以太坊开发02--HelloWorld</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发03-宠物商店Dapp/">以太坊开发03--宠物商店Dapp</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发04-Geth搭建私有链/">以太坊开发04--Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发05-Geth的Console内置对象/">以太坊开发05--Geth的Console内置对象</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/Ubuntu16-04-安装Geth/">Ubuntu16.04-安装Geth</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/Ubuntu16-04-安装Ganache/">Ubuntu16.04-安装Ganache</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/Ubuntu16-04-安装Chrome和MetaMask/">Ubuntu16.04-安装Chrome和MetaMask</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            支付风控
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-场景分析/">支付风控-场景分析</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-数据仓库建设/">支付风控-数据仓库建设</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-模型分析/">支付风控-模型分析</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-架构设计/">支付风控-架构设计</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-反洗钱/">支付风控-反洗钱</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据库
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/数据库/MySQL/DB-09-MySQL存储引擎/">DB-09-MySQL存储引擎</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-10-MySQL索引/">DB-10-MySQL索引</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-11-MySQL-SQL优化/">DB-11-MySQL-SQL优化</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-12-大表优化/">DB-12-大表优化</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-05-MySQL字段类型/">DB-05-MySQL字段类型</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-06-MySQL存储过程/">DB-06-MySQL存储过程</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-07-MySQL存储过程-游标使用/">DB-07-MySQL存储过程-游标使用</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-08-MySQL存储过程-错误处理/">DB-08-MySQL存储过程-错误处理</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/数据库/Oracle/01-Oracle数据库字段类型/">DB-03-Oracle数据库字段类型</a></li>  <li class="file"><a href="/wiki/数据库/Oracle/02-Oracle行转列/">DB-04-Oracle行转列</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ShardingSphere
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/数据库/ShardingSphere/DB-01-分库分表应用场景/">DB-01-分库分表应用场景</a></li>  <li class="file"><a href="/wiki/数据库/ShardingSphere/DB-02-Sharding-JDBC简介/">DB-02-Sharding-JDBC简介</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            架构师之路
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-01-FLP不可能性原理/">Distributed-01-FLP不可能性原理</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-02-CAP原理/">Distributed-02-CAP原理</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-03-Base理论/">Distributed-03-Base理论</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-04-分布式一致性/">Distributed-04-分布式一致性</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-05-2PC-and-3PC/">Distributed-05-2PC and 3PC</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-06-Paxos诞生/">Distributed-06-Paxos诞生</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-07-Paxos协议运行过程/">Distributed-07-Paxos协议运行过程</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-08-Paxos协议推演/">Distributed-08-Paxos协议推演</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-09-Raft算法/">Distributed-09-Raft算法</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-10-Zab协议/">Distributed-10-Zab协议</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            构建基础服务平台
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构师之路/构建基础服务平台/01-基础服务选型/">01-基础服务选型</a></li>  <li class="file"><a href="/wiki/架构师之路/构建基础服务平台/02-生态技术选型/">02-生态技术选型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            项目构建工具-Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/01-基础知识/">01-基础知识</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/02-生命周期/">02-生命周期</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/03-插件机制/">03-插件机制</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/04-属性和Profile/">04-属性和Profile</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/05-Maven私服之Nexus搭建/">05-Maven私服之Nexus搭建</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/06-项目中的pom.xml文件详解/">06-项目中的pom.xml文件详解</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/07-Maven配置文件setting-xml详解/">07-Maven配置文件setting.xml详解</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            计算机基础
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-01-SystemV引导启动流程/">Linux-01-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-02-SystemV体系/">Linux-02-SystemV体系</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-03-Systemd体系/">Linux-03-Systemd体系</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-04-Systemd下配置tomcat服务/">Linux-04-Systemd下配置tomcat服务</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-05-国内开源镜像/">Linux-05-国内开源镜像</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Ubuntu-PPA软件源/">Ubuntu-PPA软件源</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            计算机网络
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/计算机基础/计算机网络/Http常用请求方式/"></a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            鸣说
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/鸣说/hello-world/">Hello World</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-Github/">Hello Github</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-LIZHUO/">Hello LIZHUO</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-Java/">Hello Java</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-img/">你和你们</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-You/">You</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-星际穿越全剧情解析-转豆瓣/">星际穿越全剧情解析-转豆瓣</a></li>  <li class="file"><a href="/wiki/鸣说/index/">See you again</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><span>links</span></h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.ruanyifeng.com/" rel="external nofollow noopener noreferrer" target="_blank">阮一峰</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://jinnianshilongnian.iteye.com/" rel="external nofollow noopener noreferrer" target="_blank">张开涛</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://blog.didispace.com/" rel="external nofollow noopener noreferrer" target="_blank">翟永超</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://javadoop.com" rel="external nofollow noopener noreferrer" target="_blank">JavaDoop</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.iocoder.cn/" rel="external nofollow noopener noreferrer" target="_blank">芋道源码</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://fangjian0423.github.io/" rel="external nofollow noopener noreferrer" target="_blank">Format</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.cnkirito.moe/" rel="external nofollow noopener noreferrer" target="_blank">徐靖峰</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://learnblockchain.cn/" rel="external nofollow noopener noreferrer" target="_blank">Tiny熊</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.54tianzhisheng.cn/" rel="external nofollow noopener noreferrer" target="_blank">zhisheng</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-大数据/HBase/HBase-02-Write全流程" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/大数据/">大数据</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/大数据/HBase/">HBase</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/HBase/">HBase</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/大数据/HBase/HBase-02-Write全流程/">
+            <time datetime="2018-11-03T09:31:08.000Z" itemprop="datePublished">2018-11-03</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/大数据/HBase/HBase-02-Write全流程.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/大数据/HBase/HBase-02-Write全流程.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/大数据/HBase/HBase-02-Write全流程.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            HBase-02-Write全流程
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>如果将上篇内容理解为一个冗长的”铺垫”，那么，从本文开始，”剧情”才开始正式展开。本文基于所给出的样例数据，介绍了将数据从Client写到RegionServer的全流程。</p>
+<h4 id="Write全流程"><a href="#Write全流程" class="headerlink" title="Write全流程"></a>Write全流程</h4><ol>
+<li>构建Put对象(含RowKey定义以及列定义)</li>
+<li>数据路由: 根据RowKey定位到Region</li>
+<li>Client侧分组打包: 先按Region分组，再按RegionServer分组发送（因为一个RegionServer中可能有多个Region）</li>
+<li>Client侧发RPC请求到RegionServer</li>
+<li>RegionServer侧处理：Region拆包分发</li>
+<li>Region内部处理：先写WAL文件</li>
+<li>Region内部处理：再写MemStore内存</li>
+</ol>
+<h2 id="HBase中提供的接口"><a href="#HBase中提供的接口" class="headerlink" title="HBase中提供的接口"></a>HBase中提供的接口</h2><ul>
+<li>Java Client API：HBase的基础API，应用最为广泛。</li>
+<li>HBase Shell：基于Shell的命令行操作接口，基于Java Client API实现。</li>
+<li>Restful API：Rest Server侧基于Java Client API实现。</li>
+<li>Thrift API：Thrift Server侧基于Java Client API实现。</li>
+<li>MapReduce Based Batch Manipulation API：基于MapReduce的批量数据读写API。</li>
+</ul>
+<p>除了上述主要的API，HBase还提供了基于Spark的批量操作接口以及C++ Client接口，但这两个特性都被规划在了3.0版本中，当前尚在开发中。</p>
+<p>无论是HBase Shell/Restful API还是Thrift API，都是基于Java Client API实现的。因此，接下来关于流程的介绍，都是基于Java Client API的调用流程展开的。</p>
+<h2 id="表服务接口"><a href="#表服务接口" class="headerlink" title="表服务接口"></a>表服务接口</h2><p>同步连接与异步连接，分别提供了不同的表服务接口抽象：</p>
+<ol>
+<li>Table 同步连接中的表服务接口定义</li>
+<li>AsyncTable 异步连接中的表服务接口定义</li>
+</ol>
+<h2 id="写数据方式"><a href="#写数据方式" class="headerlink" title="写数据方式"></a>写数据方式</h2><ol>
+<li><p>Single Put：单条记录单条记录的随机put操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在AsyncTable接口中的定义</span><br><span class="line">CompletableFuture&lt;Void&gt; put(Put put);</span><br><span class="line"></span><br><span class="line"># 在Table接口中的定义</span><br><span class="line">void put(Put put) throws IOException;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Batch Put：汇聚了几十条甚至是几百上千条记录之后的小批次随机put操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;CompletableFuture&lt;Void&gt;&gt; put(List&lt;Put&gt; puts);</span><br><span class="line">void put(List&lt;Put&gt; puts) throws IOException;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Bulkload：基于MapReduce API提供的数据批量导入能力，导入数据量通常在GB级别以上，Bulkload能够绕过Java Client API直接生成HBase的底层数据文件(HFile)，因此性能非常高。</p>
+</li>
+</ol>
+<h2 id="设计合理的RowKey"><a href="#设计合理的RowKey" class="headerlink" title="设计合理的RowKey"></a>设计合理的RowKey</h2><p>RowKey通常是一个或若干个字段的直接组合或经一定处理后的信息，因为一个表中所有的数据都是基于RowKey排序的，RowKey的设计对读写都会有直接的性能影响。</p>
+<p>我们基于本文的样例数据，先给出两种RowKey的设计，并简单讨论各自的优缺点：</p>
+<p>示例数据</p>
+<table>
+<thead>
+<tr>
+<th>MSISDN1</th>
+<th>MSISDN2</th>
+<th>StartTime</th>
+<th>Duration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13400001111</td>
+<td>13500001111</td>
+<td>20180101</td>
+<td>111</td>
+</tr>
+<tr>
+<td>13400002222</td>
+<td>13500002222</td>
+<td>20180201</td>
+<td>222</td>
+</tr>
+<tr>
+<td>13400003333</td>
+<td>13500003333</td>
+<td>20180301</td>
+<td>333</td>
+</tr>
+<tr>
+<td>13400004444</td>
+<td>13500004444</td>
+<td>20180401</td>
+<td>444</td>
+</tr>
+<tr>
+<td>13400005555</td>
+<td>13500005555</td>
+<td>20180501</td>
+<td>555</td>
+</tr>
+<tr>
+<td>13400006666</td>
+<td>13500006666</td>
+<td>20181101</td>
+<td>666</td>
+</tr>
+</tbody>
+</table>
+<p>各字段含义<br>字段中文名 | 字段定义<br>—|—<br>主叫号码 | MSISDN1<br>被叫号码 | MSISDN2<br>通话开始时间 | StartTime<br>通话时长(秒) | Duration</p>
+<ul>
+<li>RowKey Format 1： Mobile1 + StartTime</li>
+<li>RowKey Format 2： StartTime + Mobile1</li>
+</ul>
+<p>为了方便读者理解，我们在两个字段之间添加了连接符”^”。</p>
+<p>不同的字段组合顺序设计，带来截然不同的排序结果，我们将RowKey中的第一个字段称之为”先导字段”。第一种设计，有利于查询”手机号码XXX的在某时间范围内的数据记录”，但不利于查询”某段时间范围内有哪些手机号码拨出了电话？”，而第二种设计却恰好相反。</p>
+<p>上面是两种设计都是两个字段的直接组合，这种设计在实际应用中，会带来读写热点问题，难以保障数据读写请求在所有Regions之间的负载均衡。避免热点的常见方法有如下几种：</p>
+<h4 id="1-Reversing"><a href="#1-Reversing" class="headerlink" title="1. Reversing"></a>1. Reversing</h4><p>如果先导字段本身会带来热点问题，但该字段尾部的信息却具备良好的随机性，此时，可以考虑将先导字段做反转处理，将尾部几位直接提前到前面，或者直接将整个字段完全反转。</p>
+<p>将先导字段Mobile1翻转后，就具备非常好的随机性。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13400001111^201803010800</span><br></pre></td></tr></table></figure>
+<p>将先导字段Mobile1反转后的RowKey变为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11110000431^201803010800</span><br></pre></td></tr></table></figure>
+<h4 id="2-Salting"><a href="#2-Salting" class="headerlink" title="2. Salting"></a>2. Salting</h4><p>Salting的原理是在RowKey的前面添加固定长度的随机Bytes，随机Bytes能保障数据在所有Regions间的负载均衡。</p>
+<p>Salting能很好的保障写入时将数据均匀分散到各个Region中，但对于读取却是不友好的，例如，如果读取Mobile1为”13400001111”在20180301这一天的数据记录时，因为Salting Bytes信息是随机选择添加的，查询时并不知道前面添加的Salting Bytes是”A”，因此{“A”, “B”, “C”}所关联的Regions都得去查看一下是否有所需的数据。</p>
+<h4 id="3-Hashing"><a href="#3-Hashing" class="headerlink" title="3. Hashing"></a>3. Hashing</h4><p>Hashing是将一个RowKey通过一个Hash函数生成一组固定长度的bytes，Hash函数能保障所生成的随机bytes具备良好的离散度，从而也能够均匀打散到各个Region中。Hashing既有利于随机写入，又利于基于知道RowKey各字段的确切信息之后的随机读取操作，但如果是基于RowKey范围的Scan或者是RowKey的模糊信息进行查询的话，就会带来显著的性能问题，因为原来在字典顺序相邻的RowKey列表，通过Hashing打散后导致这些数据被分散到了多个Region中。</p>
+<p>因此，RowKey的设计，需要充分考虑业务的读写特点。</p>
+<p>本文内容假设RowKey设计：reversing(Mobile1) +StartTime</p>
+<h2 id="Region划分"><a href="#Region划分" class="headerlink" title="Region划分"></a>Region划分</h2><p>因为创建表时预设的Region与RowKey强相关，我们现在才可以给出本文样例所需要创建的表的”Region分割点”信息：</p>
+<p>假设，Region分割点为”1,2,3,4,5,6,7,8,9”，基于这9个分割点，可以预先创建10个Region，这10个Region的StartKey和StopKey如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>Region序号</th>
+<th>start Key</th>
+<th>stop key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>region-1</td>
+<td></td>
+<td>1</td>
+</tr>
+<tr>
+<td>region-2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>region-3</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>region-4</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>region-5</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>region-6</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>region-7</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>region-8</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<td>region-9</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr>
+<td>region-10</td>
+<td>9</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第一个Region的StartKey为空，最后一个Region的StopKey为空</li>
+<li>每一个Region区间，都包含StartKey本身，但不包含StopKey</li>
+<li>由于Mobile1字段的最后一位是0~9之间的随机数字，因此，可以均匀打散到这10个Region中</li>
+</ul>
+<h2 id="定义列"><a href="#定义列" class="headerlink" title="定义列"></a>定义列</h2><p>每一个列在HBase中体现为一个KeyValue，而每一个KeyValue拥有特定的组成结构，这一点在上一篇文章中的数据模型章节部分已经提到过。</p>
+<p>所谓的定义列，就是需要定义出每一个列要存放的列族(Column Family)以及列标识(Qualifier)信息。</p>
+<p>我们假设，存放样例数据的这个表名称为”TelRecords”，为了简单起见，仅仅设置了1个名为”I”的列族。</p>
+<table>
+<thead>
+<tr>
+<th>原始列名</th>
+<th>列族(Column Family)</th>
+<th>列标识Qualifier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mobile2</td>
+<td>I</td>
+<td>M</td>
+</tr>
+<tr>
+<td>Duration</td>
+<td>I</td>
+<td>D</td>
+</tr>
+</tbody>
+</table>
+<p>因为Mobile1与StartTime都已经被包含在RowKey中，所以，不需要再在列中存储一份。关于列族名称与列标识名称，建议应该简短一些，因为这些信息都会被包含在KeyValue里面，过长的名称会导致数据膨胀。</p>
+<h2 id="构建Put"><a href="#构建Put" class="headerlink" title="构建Put"></a>构建Put</h2><p>基于RowKey和列定义信息，就可以组建HBase的Put对象，一个Put对象用来描述待写入的一行数据，一个Put可以理解成与某个RowKey关联的1个或多个KeyValue的集合。</p>
+<p>至此，这条数据已经转变成了Put对象，如下图所示：</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/39885F9B2E7F43CF858C728CFFAC7D66?method=download&amp;shareKey=17aa37c6996de6598b643e6f255353d7" alt="image"></p>
+<h2 id="数据路由"><a href="#数据路由" class="headerlink" title="数据路由"></a>数据路由</h2><p>即要根据RowKey定位到要读写的RegionServer中的Region。</p>
+<ul>
+<li>初始化ZooKeeper Session</li>
+</ul>
+<p>因为meta Region的路由信息存放于ZooKeeper中，在第一次从ZooKeeper中读取META Region的地址时，需要先初始化一个ZooKeeper Session。ZooKeeper Session是ZooKeeper Client与ZooKeeper Server端所建立的一个会话，通过心跳机制保持长连接。</p>
+<ul>
+<li>获取Region路由信息</li>
+</ul>
+<p>通过前面建立的连接，从ZooKeeper中读取meta Region所在的RegionServer，这个读取流程，当前已经是异步的。获取了meta Region的路由信息以后，再从meta Region中定位要读写的RowKey所关联的Region信息。如下图所示：</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/785BA32B2D71433C95EFA4A7AD4C846A?method=download&amp;shareKey=adb255f479140914eece33199023883e" alt="image"></p>
+<p>因为每一个用户表Region都是一个RowKey Range，meta Region中记录了每一个用户表Region的路由以及状态信息，以RegionName(包含表名，Region StartKey，Region ID，副本ID等信息)作为RowKey。基于一条用户数据RowKey，快速查询该RowKey所属的Region的方法其实很简单：只需要基于表名以及该用户数据RowKey，构建一个虚拟的Region Key，然后通过Reverse Scan的方式，读到的第一条Region记录就是该数据所关联的Region。如下图所示：</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/2BBD129EF53F48F2983776761908D434?method=download&amp;shareKey=868b7b874fd2918e57f780415969e3d9" alt="image"></p>
+<p>Region只要不被迁移，那么获取的该Region的路由信息就是一直有效的，因此，HBase Client有一个Cache机制来缓存Region的路由信息，避免每次读写都要去访问ZooKeeper或者meta Region。</p>
+<h2 id="Client数据分组”打包”"><a href="#Client数据分组”打包”" class="headerlink" title="Client数据分组”打包”"></a>Client数据分组”打包”</h2><p>如果这条待写入的数据采用的是Single Put的方式，那么，该步骤可以略过（事实上，单条Put操作的流程相对简单，就是先定位该RowKey所对应的Region以及RegionServer信息后，Client直接发送写请求到RegionServer侧即可）。</p>
+<p>但如果这条数据被混杂在其它的数据列表中，采用Batch Put的方式，那么，客户端在将所有的数据写到对应的RegionServer之前，会先分组”打包”，流程如下：</p>
+<ol>
+<li>按Region分组：遍历每一条数据的RowKey，然后，依据meta表中记录的Region信息，确定每一条数据所属的Region。此步骤可以获取到Region到RowKey列表的映射关系。</li>
+<li>按RegionServer”打包”：因为Region一定归属于某一个RegionServer（注：本文内容中如无特殊说明，都未考虑Region Replica特性），那属于同一个RegionServer的多个Regions的写入请求，被打包成一个MultiAction对象，这样可以一并发送到每一个RegionServer中。</li>
+</ol>
+<p><img src="https://note.youdao.com/yws/api/personal/file/3129E6ADC1F64741B2C4077EAB8236AD?method=download&amp;shareKey=33e66fa04aa38b1b7d87e7e1f576957c" alt="image"></p>
+<h2 id="Client发RPC请求到RegionServer"><a href="#Client发RPC请求到RegionServer" class="headerlink" title="Client发RPC请求到RegionServer"></a>Client发RPC请求到RegionServer</h2><p>类似于Client发送建表到Master的流程，Client发送写数据请求到RegionServer，也是通过RPC的方式。只是，Client到Master以及Client到RegionServer，采用了不同的RPC服务接口。single put请求与batch put请求，两者所调用的RPC服务接口方法是不同的。</p>
+<h2 id="安全访问控制"><a href="#安全访问控制" class="headerlink" title="安全访问控制"></a>安全访问控制</h2><p>如何保障UserA只能写数据到UserA的表中，以及禁止UserA改写其它User的表的数据，HBase提供了ACL机制。ACL通常需要与Kerberos认证配合一起使用，Kerberos能够确保一个用户的合法性，而ACL确保该用户仅能执行权限范围内的操作。</p>
+<p>HBase将权限分为如下几类：</p>
+<ul>
+<li>READ(‘R’)</li>
+<li>WRITE(‘W’)</li>
+<li>EXEC(‘X’)</li>
+<li>CREATE(‘C’)</li>
+<li>ADMIN(‘A’)</li>
+</ul>
+<p>可以为一个用户/用户组定义整库级别的权限集合，也可以定义Namespace、表、列族甚至是列级别的权限集合。</p>
+<h2 id="RegionServer分发到Region"><a href="#RegionServer分发到Region" class="headerlink" title="RegionServer分发到Region"></a>RegionServer分发到Region</h2><p>RegionServer的RPC Server侧，接收到来自Client端的RPC请求以后，将该请求交给Handler线程处理。</p>
+<p>如果是single put，则该步骤比较简单，因为在发送过来的请求参数MutateRequest中，已经携带了这条记录所关联的Region，那么直接将该请求转发给对应的Region即可。</p>
+<p>如果是batch puts，则接收到的请求参数为MultiRequest，在MultiRequest中，混合了这个RegionServer所持有的多个Region的写入请求，每一个Region的写入请求都被包装成了一个RegionAction对象。RegionServer接收到MultiRequest请求以后，遍历所有的RegionAction，而后写入到每一个Region中，此过程是串行的，从这里可以看出来，并不是一个batch越大越好，大的batch size甚至可能导致吞吐量下降。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/3E7EA53CE6FF44FEB0AE0F405978C174?method=download&amp;shareKey=e82b49b5012d633a9f9d52eb9bb31b56" alt="image"></p>
+<h2 id="Region内部处理：先写WAL"><a href="#Region内部处理：先写WAL" class="headerlink" title="Region内部处理：先写WAL"></a>Region内部处理：先写WAL</h2><p>HBase也采用了LSM-Tree的架构设计：LSM-Tree利用了传统机械硬盘的“顺序读写速度远高于随机读写速度”的特点。随机写入的数据，如果直接去改写每一个Region上的数据文件，那么吞吐量是非常差的。因此，每一个Region中随机写入的数据，都暂时先缓存在内存中(HBase中存放这部分内存数据的模块称之为MemStore，这里仅仅引出概念，下一章节详细介绍)，为了保障数据可靠性，将这些随机写入的数据顺序写入到一个称之为WAL(Write-Ahead-Log)的日志文件中，WAL中的数据按时间顺序组织，如果位于内存中的数据尚未持久化，而且突然遇到了机器断电，只需要将WAL中的数据回放到Region中即可。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/644D44DE03D84FA59B9D030EB8409FEF?method=download&amp;shareKey=25aed6c94ba05beb2949c71034805306" alt="image"></p>
+<p>在HBase中，默认一个RegionServer只有一个可写的WAL文件。WAL中写入的记录，以Entry为基本单元，而一个Entry中，包含：</p>
+<ol>
+<li>WALKey 包含{Encoded Region Name，Table Name，Sequence ID，Timestamp}等关键信息，其中，Sequence ID在维持数据一致性方面起到了关键作用，可以理解为一个事务ID。</li>
+<li>WALEdit WALEdit中直接保存待写入数据的所有的KeyValues，而这些KeyValues可能来自一个Region中的多行数据。</li>
+</ol>
+<p>也就是说，通常，一个Region中的一个batch put请求，会被组装成一个Entry，写入到WAL中，将Entry写到文件中时是支持压缩的，但该特性默认未开启。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/C76B3C8B02FA4F48AAF11D8EE4D43681?method=download&amp;shareKey=72325b0de41230b5e5eabfb929a239b6" alt="image"></p>
+<h2 id="WAL-Roll-and-Archive"><a href="#WAL-Roll-and-Archive" class="headerlink" title="WAL Roll and Archive"></a>WAL Roll and Archive</h2><p>当正在写的WAL文件达到一定大小以后，会创建一个新的WAL文件，上一个WAL文件依然需要被保留，因为这个WAL文件中所关联的Region中的数据，尚未被持久化存储，因此，该WAL可能会被用来回放数据。</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/C8A27F6CD2224395B5C0AB0F614D4FA4?method=download&amp;shareKey=45b97473a85e8ef68c0213dee8787c15" alt="image"></p>
+<p>如果一个WAL中所关联的所有的Region中的数据，都已经被持久化存储了，那么，这个WAL文件会被暂时归档到另外一个目录中：</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/B085CCA005D94B5BB5BF614708FC66F0?method=download&amp;shareKey=883c732cecb3b14db143e10b5151280b" alt="image"></p>
+<p>注意，这里不是直接将WAL文件删除掉，这是一种稳妥且合理的做法，原因如下：</p>
+<ul>
+<li>避免因为逻辑实现上的问题导致WAL被误删，暂时归档到另外一个目录，为错误发现预留了一定的时间窗口</li>
+<li>按时间维度组织的WAL数据文件还可以被用于其它用途，如增量备份，跨集群容灾等等，因此，这些WAL文件通常不允许直接被删除，至于何时可以被清理，还需要额外的控制逻辑</li>
+</ul>
+<p>另外，如果对写入HBase中的数据的可靠性要求不高，那么，HBase允许通过配置跳过写WAL操作。</p>
+<ol>
+<li>思考：put与batch put的性能为何差别巨大？</li>
+</ol>
+<p>在网络分发上，batch put已经具备一定的优势，因为batch put是打包分发的。</p>
+<p>而从写WAL这块，看的出来，batch put写入的一小批次Put对象，可以通过一次sync就持久化到WAL文件中了，有效减少了IOPS。</p>
+<p>但前面也提到了，batch size并不是越大越好，因为每一个batch在RegionServer端是被串行处理的。</p>
+<ol start="2">
+<li>利用Disruptor提升写并发性能</li>
+</ol>
+<p>在高并发随机写入场景下，会带来大量的WAL Sync操作，HBase中采用了Disruptor的RingBuffer来减少竞争，思路是这样：如果将瞬间并发写入WAL中的数据，合并执行Sync操作，可以有效降低Sync操作的次数，来提升写吞吐量。</p>
+<ol start="3">
+<li>Multi-WAL</li>
+</ol>
+<p>默认情形下，一个RegionServer只有一个被写入的WAL Writer，尽管WAL Writer依靠顺序写提升写吞吐量，在基于普通机械硬盘的配置下，此时只能有单块盘发挥作用，其它盘的IOPS能力并没有被充分利用起来，这是Multi-WAL设计的初衷。Multi-WAL可以在一个RegionServer中同时启动几个WAL Writer，可按照一定的策略，将一个Region与其中某一个WAL Writer绑定，这样可以充分发挥多块盘的性能优势。</p>
+<ol start="4">
+<li>关于WAL的未来</li>
+</ol>
+<p>WAL是基于机械硬盘的IO模型设计的，而对于新兴的非易失性介质，如3D XPoint，WAL未来可能会失去存在的意义，关于这部分内容，请参考文章《从HBase中移除WAL？3D XPoint技术带来的变革》。</p>
+<h2 id="Region内部处理：再写MemStore"><a href="#Region内部处理：再写MemStore" class="headerlink" title="Region内部处理：再写MemStore"></a>Region内部处理：再写MemStore</h2><p>每一个Column Family，在Region内部被抽象为了一个HStore对象，而每一个HStore拥有自身的MemStore，用来缓存一批最近被随机写入的数据，这是LSM-Tree核心设计的一部分。</p>
+<p>MemStore中用来存放所有的KeyValue的数据结构，称之为CellSet，而CellSet的核心是一个ConcurrentSkipListMap，我们知道，ConcurrentSkipListMap是Java的跳表实现，数据按照Key值有序存放，而且在高并发写入时，性能远高于ConcurrentHashMap。</p>
+<p>因此，写MemStore的过程，事实上是将batch put提交过来的所有的KeyValue列表，写入到MemStore的以ConcurrentSkipListMap为组成核心的CellSet中：</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/62AD67398D5F49B9AED6325709779F33?method=download&amp;shareKey=363bb328885372297ea8f9840a20d9a8" alt="image"></p>
+<p>MemStore因为涉及到大量的随机写入操作，会带来大量Java小对象的创建与消亡，会导致大量的内存碎片，给GC带来比较重的压力，HBase为了优化这里的机制，借鉴了操作系统的内存分页的技术，增加了一个名为MSLab的特性，通过分配一些固定大小的Chunk，来存储MemStore中的数据，这样可以有效减少内存碎片问题，降低GC的压力。当然，ConcurrentSkipListMap本身也会创建大量的对象，这里也有很大的优化空间，去年阿里的一篇文章透露了阿里如何通过优化ConcurrentSkipListMap的结构来有效降低GC时间。</p>
+<ol>
+<li>先写WAL还是先写MemStore?</li>
+</ol>
+<p>在0.94版本之前，Region中的写入顺序是先写WAL再写MemStore，这与WAL的定义也相符。</p>
+<p>但在0.94版本中，将这两者的顺序颠倒了，当时颠倒的初衷，是为了使得行锁能够在WAL sync之前先释放，从而可以提升针对单行数据的更新性能。详细问题单，请参考HBASE-4528。</p>
+<p>在2.0版本中，这一行为又被改回去了，原因在于修改了行锁机制以后(下面章节将讲到)，发现了一些性能下降，而HBASE-4528中的优化却无法再发挥作用，详情请参考HBASE-15158。改动之后的逻辑也更简洁了。</p>
+<ol start="2">
+<li>关于行级别的ACID</li>
+</ol>
+<p>在之前的版本中，行级别的任何并发写入/更新都是互斥的，由一个行锁控制。但在2.0版本中，这一点行为发生了变化，多个线程可以同时更新一行数据，这里的考虑点为：</p>
+<p>如果多个线程写入同一行的不同列族，是不需要互斥的</p>
+<p>多个线程写同一行的相同列族，也不需要互斥，即使是写相同的列，也完全可以通过HBase的MVCC机制来控制数据的一致性</p>
+<p>当然，CAS操作(如checkAndPut)或increment操作，依然需要独占的行锁</p>
+<p>更多详细信息，可以参考HBASE-12751。</p>
+<p>至此，这条数据已经被同时成功写到了WAL以及MemStore中：</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/0FCCF38D22F1441DBB9816B2D071DB4E?method=download&amp;shareKey=7509faa3bfb9c74002617f567c8966f1" alt="image"></p>
+<h2 id="生成HFile文件"><a href="#生成HFile文件" class="headerlink" title="生成HFile文件"></a>生成HFile文件</h2><p>MemStore中的数据，达到一定的阈值，被Flush成HDFS中的HFile文件。</p>
+<p>这是1.X系列版本以及更早版本中的Flush&amp;Compaction行为。</p>
+<p>下篇将具体阐述相关机制。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/大数据/HBase/HBase-03-Flush与Compaction/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    HBase-03-Flush与Compaction
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/大数据/HBase/HBase-01-简明入门/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">HBase-01-简明入门</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            mingfy &copy; 2019 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>

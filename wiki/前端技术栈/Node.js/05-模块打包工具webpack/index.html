@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>05-模块打包工具webpack | Stay Hungry | Stay Foolish | mingfy</title>
+    
+    
+        <meta name="keywords" content="Web">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="什么是WebPack，为什么要使用它？为什要使用WebPack现今的很多网页其实可以看做是功能丰富的应用，它们拥有着复杂的JavaScript代码和一大堆依赖包。为了简化开发的复杂度，前端社区涌现出了很多好的实践方法  模块化，让我们可以把复杂的程序细化为小的文件; 类似于TypeScript这种在JavaScript基础上拓展的开发语言：使我们能够实现目前版本的JavaScript不能直接使用的">
+<meta name="keywords" content="Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="05-模块打包工具webpack">
+<meta property="og:url" content="http://yoursite.com/wiki/前端技术栈/Node.js/05-模块打包工具webpack/index.html">
+<meta property="og:site_name" content="Stay Hungry | Stay Foolish | mingfy">
+<meta property="og:description" content="什么是WebPack，为什么要使用它？为什要使用WebPack现今的很多网页其实可以看做是功能丰富的应用，它们拥有着复杂的JavaScript代码和一大堆依赖包。为了简化开发的复杂度，前端社区涌现出了很多好的实践方法  模块化，让我们可以把复杂的程序细化为小的文件; 类似于TypeScript这种在JavaScript基础上拓展的开发语言：使我们能够实现目前版本的JavaScript不能直接使用的">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-02T11:44:00.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="05-模块打包工具webpack">
+<meta name="twitter:description" content="什么是WebPack，为什么要使用它？为什要使用WebPack现今的很多网页其实可以看做是功能丰富的应用，它们拥有着复杂的JavaScript代码和一大堆依赖包。为了简化开发的复杂度，前端社区涌现出了很多好的实践方法  模块化，让我们可以把复杂的程序细化为小的文件; 类似于TypeScript这种在JavaScript基础上拓展的开发语言：使我们能够实现目前版本的JavaScript不能直接使用的">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Stay Hungry | Stay Foolish | mingfy</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-9009841192314468",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142763903-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-142763903-1');
+    </script>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            前端技术栈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaScript
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/JavaScript/01-JavaScript版本及历史/">01-JavaScript版本及历史</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/02-ES6的let和const/">02-ES6的let和const</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/03-ES6核心概念/">03-ES6核心概念</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Node.js
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Ubuntu16-04-安装nodejs和npm/">01-Ubuntu16.04-安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/02-node和npm常用命令/">02-node和npm常用命令</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/03-前端模块规范/">03-前端模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file active"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Vue
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Vue/01-通过vue-cli构建项目/">01-通过vue-cli构建项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/02-手工构建模块化Vue项目/">02-手工构建模块化Vue项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/03-常用指令示例汇总/">03-常用指令示例汇总</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/04-手写一个组件/">04-手写一个组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/05-使用方通过Prop向子组件传递数据/">05-使用方通过Prop向子组件传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/06-子组件通过事件向使用方传递数据/">06-子组件通过事件向使用方传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/07-Slot使用示例/">07-Slot使用示例</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/08-动态组件/">08-动态组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/09-vue-router入门/">09-vue-router入门</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/10-vue-router高级用法/">10-vue-router高级用法</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/11-vue-router的导航守卫/">11-vue-router的导航守卫</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/12-vuex详解/">12-vuex详解</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/前端技术栈/前端模块化生态概览/">前端模块化生态概览</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            后端技术栈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Dubbo
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-01-简易RPC实现原理/">Dubbo-01-简易RPC实现原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-02-架构设计详解/">Dubbo-02-架构设计详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-03-SPI-原理机制/">Dubbo-03-SPI-原理机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-04-SPI-源码解析/">Dubbo-04-SPI-源码解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-05-SPI-Adaptive注解/">Dubbo-05-SPI-@Adaptive注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-06-SPI-Activate注解/">Dubbo-06-SPI-@Activate注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-07-Spring集成点/">Dubbo-07-Spring集成点</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-08-主要接口概念简介/">Dubbo-08-主要接口概念简介</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-09-服务发布解析/">Dubbo-09-服务发布解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-10-服务发布解析2/">Dubbo-10-服务发布解析2</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-11-服务引用解析/">Dubbo-11-服务引用解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-12-服务引用解析2/">Dubbo-12-服务引用解析2</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-13-通信层1-封装框架/">Dubbo-13-通信层1-封装框架</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-14-通信层2-异步请求实现/">Dubbo-14-通信层2-异步请求实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-15-通信层3-上层调用/">Dubbo-15-通信层3-上层调用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hystrix
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-01-应用场景/">Hystrix-01-应用场景</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-02-执行命令方式/">Hystrix-02-执行命令方式</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-03-服务降级/">Hystrix-03-服务降级</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-04-常用配置/">Hystrix-04-常用配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-05-请求缓存/">Hystrix-05-请求缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-06-信号量隔离/">Hystrix-06-信号量隔离</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-07-降级逻辑命令嵌套/">Hystrix-07-降级逻辑命令嵌套</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-08-命令调用合并/">Hystrix-08-命令调用合并</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-09-Dashboard监控平台搭建/">Hystrix-09-Dashboard监控平台搭建</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-10-SpringMVC整合Hystrix及监控/">Hystrix-10-SpringMVC整合Hystrix及监控</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-11-使用Turbine监控集群/">Hystrix-11-使用Turbine监控集群</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-12-参数配置与分析/">Hystrix-12-参数配置与分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-13-HystrixCommand执行流程分析/">Hystrix-13-HystrixCommand执行流程分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-14-CircuitBreaker执行流程及源码分析/">Hystrix-14-CircuitBreaker执行流程及源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-15-HystrixCommand注解使用/">Hystrix-15-@HystrixCommand注解使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-16-缓存相关注解使用/">Hystrix-16-缓存相关注解使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JVM
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-01-内存模型/">JVM-01-内存模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-02-类加载机制/">JVM-02-类加载机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-03-垃圾收集器/">JVM-03-垃圾收集器</a></li>  <li class="file"><a href="/wiki/后端技术栈/JVM/JVM-04-GC流程/">JVM-04-GC流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Java/Java-01-transient浅析/">transient浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-02-检查异常-未检查异常/">检查异常-未检查异常</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-03-对注解的思考/">对注解的思考</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-04-PostConstruct和-PreDestroy/">Java的@PostConstruct和@PreDestroy</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaEE
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/JavaEE/JavaEE-01-Servlet-3-0-新特性详解/">Servlet-3.0 新特性详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/JavaEE/JavaEE-02-JPA简介/">JPA简介</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Mybatis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-01-拦截器使用/">Mybatis拦截器使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-02-拦截器实现源码解析/">Mybatis拦截器实现源码解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-03-一级缓存/">Mybatis一级缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-04-二级缓存/">Mybatis二级缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-05-返回生成主键/">Mybatis返回生成主键</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Netty
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-14-Netty简介/">NP-14-Netty简介</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-15-Netty入门示例/">NP-15-Netty入门示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-16-Netty基础/">NP-16-Netty基础</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-17-TCP粘包拆包/">NP-17-TCP粘包拆包</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-18-自定义协议/">NP-18-自定义协议</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-19-实现心跳检测/">NP-19-实现心跳检测</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-20-AttributeMap附件/">NP-20-AttributeMap附件</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-21-ChannelOption选项配置/">NP-21-ChannelOption选项配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-24-Netty线程模型/">NP-24-Netty线程模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            RabbitMQ
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-01-消息中间件选型/">MQ-01-消息中间件选型</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-02-RabbitMQ消息模型/">MQ-02-RabbitMQ消息模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-03-RabbitMQ生产者角度特性/">MQ-03-RabbitMQ生产者角度特性</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-04-RabbitMQ消费者角度特性/">MQ-04-RabbitMQ消费者角度特性</a></li>  <li class="file"><a href="/wiki/后端技术栈/RabbitMQ/MQ-05-RabbitMQ过期时间应用/">MQ-05-RabbitMQ过期时间应用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Redis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-01-单机安装/">Redis-01-单机安装</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-02-集群模式演变/">Redis-02-集群模式演变</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-03-集群模式安装/">Redis-03-集群模式安装</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-04-持久化存储/">Redis-04-持久化存储</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-05-事务支持/">Redis-05-事务支持</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-06-LRU算法支持/">Redis-06-LRU算法支持</a></li>  <li class="file"><a href="/wiki/后端技术栈/Redis/Redis-07-5种数据类型命令操作/">Redis-07-5种数据类型命令操作</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-01-Eureka/">Spring Cloud-01-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-10-jwt与session优缺点对比/">Spring Security-10-jwt与session优缺点对比</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-01-配置文件/">Spring Boot-01-配置文件</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-02-日志系统/">Spring Boot-02-日志系统</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-01-认证架构流程/">Spring Security-01-认证架构流程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-02-核心配置类解读/">Spring Security-02-核心配置类解读</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-03-核心过滤器源码分析/">Spring Security-03-核心过滤器源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-04-跨站请求伪造配置-CSRF/">Spring Security-04-跨站请求伪造配置-CSRF</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-05-跨站请求伪造原理/">Spring Security-05-跨站请求伪造原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-06-跨域资源共享-CORS/">Spring Security-06-跨域资源共享-CORS</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-07-jwt简介/">Spring Security-07-jwt原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-08-jjwt使用/">Spring Security-08-jjwt使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Security-09-OAuth2原理/">Spring Security-09-OAuth2原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-01-各版本新特性/">Spring MVC-01-各版本新特性</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-02-核心架构流程/">Spring MVC-02-核心架构流程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-03-DispatcherServlet源码分析/">Spring MVC-03-DispatcherServlet源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-04-拦截器处理器-HandlerInterceptor/">Spring MVC-04-拦截器处理器-HandlerInterceptor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-05-处理器异常解析器-HandlerExceptionResolver/">Spring MVC-05-处理器异常解析器-HandlerExceptionResolver</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-MVC-06-控制器增强-ControllerAdvice/">Spring MVC-06-控制器增强-@ControllerAdvice</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-01-PropertySource-Environment-Profile/">Spring-01-PropertySource-Environment-Profile</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-02-事件驱动机制/">Spring-02-事件驱动机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-03-Bean的作用域/">Spring-03-Bean的作用域</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-04-Resource体系/">Spring-04-Resource体系</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-05-InitialingBean-DisposableBean/">Spring-05-InitialingBean-DisposableBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware/">Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-07-FactoryBean/">Spring-07-FactoryBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-08-BeanPostProcessor/">Spring-08-BeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-09-BeanFactoryPostProcessor/">Spring-09-BeanFactoryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-10-InstantiationAwareBeanPostProcessor/">Spring-10-InstantiationAwareBeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-03-日志系统-源码实现解析/">Spring Boot-03-日志系统-源码实现解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-04-启动过程解析/">Spring Boot-04-启动过程解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-05-项目源码结构/">Spring Boot-05-项目源码结构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-06-单元测试/">Spring Boot-06-单元测试</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-07-自定义一个Starter/">Spring Boot-07-自定义一个Starter</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-08-自动配置实现浅析/">Spring Boot-08-自动配置实现浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-09-Actuator监控端点详解/">Spring Boot-09-Actuator监控端点详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-10-端点配置/">Spring Boot-10-端点配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-11-自定义健康监控/">Spring Boot-11-自定义健康监控</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-12-自定义监控端点/">Spring Boot-12-自定义监控端点</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-13-开发热部署/">Spring Boot-13-开发热部署</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-11-缓存抽象/">Spring-11-缓存抽象</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-12-缓存注解/">Spring-12-缓存注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-14-缓存集成/">Spring Boot-14-缓存集成</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-15-注入自定义Servlet等组件的二种方式/">Spring Boot-15-注入自定义Servlet等组件的二种方式</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-16-docker-maven-plugin使用/">Spring Boot-16-docker-maven-plugin使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-17-Win下打包镜像到远程Docker服务器/">Spring Boot-17-Win下打包镜像到远程Docker服务器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-18-AOP编程/">Spring Boot-18-AOP编程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-19-自动化配置的注解开关原理/">Spring Boot-19-自动化配置的注解开关原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-20-条件注解-源码实现/">Spring Boot-20-条件注解-源码实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-Boot-21-条件注解一览/">Spring Boot-21-条件注解一览</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-13-BeanDefinitionRegistry/">Spring-13-BeanDefinitionRegistry</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-14-BeanDefinitionRegistryPostProcessor/">Spring-14-BeanDefinitionRegistryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-15-BeanDefinitionReader/">Spring-15-BeanDefinitionReader</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-16-自定义类扫描器/">Spring-16-自定义类扫描器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-17-BeanPostProcessor接口总结/">Spring-17-BeanPostProcessor接口总结</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-18-内置的BeanPostProcessor总结/">Spring-18-内置的BeanPostProcessor总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-01-造成类的线程不安全的原因/">CP-01-造成类的线程不安全的原因</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-02-线程类自己/">CP-02-线程类自己</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-03-volatile的前生今世/">CP-03-volatile的前生今世</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-04-CAS浅析/">CP-04-CAS浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-05-ThreadLocal详解/">CP-05-ThreadLocal详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-06-线程未捕获异常处理器/">CP-06-线程未捕获异常处理器</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-07-Servlet的多线程中单例并发执行的理解/">CP-07-Servlet的多线程中单例并发执行的理解</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-08-单例模式与双重检测/">CP-08-单例模式与双重检测</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-09-线程-挂起-阻塞-中断/">CP-09-线程-挂起-阻塞-中断</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-10-并发模型/">CP-10-并发模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-11-synchronized基础/">CP-11-synchronized基础</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-12-synchronized通知等待机制/">CP-12-synchronized通知等待机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-13-synchronized原理/">CP-13-synchronized原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-14-通过ReentrantLock来窥探AQS实现/">CP-14-通过ReentrantLock来窥探AQS实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-15-AQS的Condition使用场景/">CP-15-AQS的Condition使用场景</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-16-用AQS实现的常用并发工具类/">CP-16-用AQS实现的常用并发工具类</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-17-锁优化机制/">CP-17-锁优化机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-18-ThreadPoolExecutor和Executors/">CP-18-ThreadPoolExecutor和Executors</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-19-并发集合和阻塞队列概览/">CP-19-并发集合和阻塞队列概览</a></li>  <li class="file"><a href="/wiki/后端技术栈/并发编程/CP-20-ConcurrentHashMap-78实现/">CP-20-ConcurrentHashMap-78实现</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            网络编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-01-网络IO模型/">NP-01-网络IO模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-02-对Socket的理解/">NP-02-对Socket的理解</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-03-TCP握手/">NP-03-TCP三次握手</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-04-Actor模型/">NP-04-Actor模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-05-CSP模型/">NP-05-CSP模型</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-06-Actor模型和CSP模型的区别/">NP-06-Actor模型和CSP模型的区别</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-07-select-poll-epoll浅析/">NP-07-select-poll-epoll浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-08-Buffer操作/">NP-08-Buffer操作</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-09-NIO入门/">NP-09-NIO入门</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-10-Selector入门/">NP-10-Selector入门</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-11-阻塞同步BIO示例/">NP-11-阻塞同步BIO示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-12-多路复用NIO示例/">NP-12-多路复用NIO示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-13-异步通知AIO示例/">NP-13-异步通知AIO示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/网络编程/NP-22-Reactor模型/">NP-22-Reactor模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-创建型/">设计模式-创建型</a></li>  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-结构型/">设计模式-结构型</a></li>  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-行为型/">设计模式-行为型</a></li>  <li class="file"><a href="/wiki/后端技术栈/设计模式/Pattern-命令模式/">命令模式</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            大数据
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            HBase
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/HBase/HBase-01-简明入门/">HBase-01-简明入门</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-02-Write全流程/">HBase-02-Write全流程</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-03-Flush与Compaction/">HBase-03-Flush与Compaction</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-04-Read全流程/">HBase-04-Read全流程</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-05-HFile文件结构/">HBase-05-HFile文件结构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/Kafka/01-Kafka基础知识/">Kafka基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Zookeeper
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-01-单机和集群搭建/">Zookeeper-01-单机和集群搭建</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-02-主要概念/">Zookeeper-02-主要概念</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-03-原生API基本使用/">Zookeeper-03-原生API基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-04-ZkClient基本使用/">Zookeeper-04-ZkClient基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-05-Curator基本使用/">Zookeeper-05-Curator基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-06-图形监控工具/">Zookeeper-06-图形监控工具</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-07-事务日志和快照文件/">Zookeeper-07-事务日志和快照文件</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-08-自动清理日志配置/">Zookeeper-08-自动清理日志配置</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/大数据/大数据生态系统/">大数据生态系统</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            容器化
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Docker
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/容器化/Docker/01-CentOS-7下安装Docker/">01-CentOS-7下安装Docker</a></li>  <li class="file"><a href="/wiki/容器化/Docker/02-操作镜像/">02-操作镜像</a></li>  <li class="file"><a href="/wiki/容器化/Docker/03-用Dockerfile定制镜像/">03-用Dockerfile定制镜像</a></li>  <li class="file"><a href="/wiki/容器化/Docker/04-操作容器/">04-操作容器</a></li>  <li class="file"><a href="/wiki/容器化/Docker/05-数据管理/">05-数据管理</a></li>  <li class="file"><a href="/wiki/容器化/Docker/06-网络配置/">06-网络配置</a></li>  <li class="file"><a href="/wiki/容器化/Docker/07-Docker三剑客/">07-Docker三剑客</a></li>  <li class="file"><a href="/wiki/容器化/Docker/08-Dockerfile指令详解/">08-Dockerfile指令详解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kubernetes
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-01-架构/">k8s-01-架构</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-02-安全机制流程/">k8s-02-安全机制流程</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-03-认证方式/">k8s-03-认证方式</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-04-授权方式/">k8s-04-授权方式</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-05-准入控制/">k8s-05-准入控制</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-06-RBAC授权/">k8s-06-RBAC授权</a></li>  <li class="file"><a href="/wiki/容器化/Kubernetes/k8s-07-token认证/">k8s-07-token认证</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            技术杂谈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            区块链
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-密码学-公私钥和比特币地址/">密码学--公私钥和比特币地址</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-交易结构/">比特币--交易结构</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-区块结构/">比特币--区块结构</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-网络架构/">比特币--网络架构</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-Bloom过滤器/">比特币--Bloom过滤器</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-警告消息/">比特币--警告消息</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-交易脚本和脚本语言/">比特币--交易脚本和脚本语言</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-Merkle树/">比特币--Merkle树</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-挖矿与共识/">比特币--挖矿与共识</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-交易块龄和优先级/">比特币--交易块龄和优先级</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/比特币-挖矿难度表示和难度调整/">比特币--挖矿难度表示和难度调整</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊-历史/">以太坊--历史</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发01-入门/">以太坊开发01--入门</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发02-HelloWorld/">以太坊开发02--HelloWorld</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发03-宠物商店Dapp/">以太坊开发03--宠物商店Dapp</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发04-Geth搭建私有链/">以太坊开发04--Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/以太坊开发05-Geth的Console内置对象/">以太坊开发05--Geth的Console内置对象</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/Ubuntu16-04-安装Geth/">Ubuntu16.04-安装Geth</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/Ubuntu16-04-安装Ganache/">Ubuntu16.04-安装Ganache</a></li>  <li class="file"><a href="/wiki/技术杂谈/区块链/Ubuntu16-04-安装Chrome和MetaMask/">Ubuntu16.04-安装Chrome和MetaMask</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            支付风控
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-场景分析/">支付风控-场景分析</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-数据仓库建设/">支付风控-数据仓库建设</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-模型分析/">支付风控-模型分析</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-架构设计/">支付风控-架构设计</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-反洗钱/">支付风控-反洗钱</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据库
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/数据库/MySQL/DB-09-MySQL存储引擎/">DB-09-MySQL存储引擎</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-10-MySQL索引/">DB-10-MySQL索引</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-11-MySQL-SQL优化/">DB-11-MySQL-SQL优化</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-12-大表优化/">DB-12-大表优化</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-05-MySQL字段类型/">DB-05-MySQL字段类型</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-06-MySQL存储过程/">DB-06-MySQL存储过程</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-07-MySQL存储过程-游标使用/">DB-07-MySQL存储过程-游标使用</a></li>  <li class="file"><a href="/wiki/数据库/MySQL/DB-08-MySQL存储过程-错误处理/">DB-08-MySQL存储过程-错误处理</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/数据库/Oracle/01-Oracle数据库字段类型/">DB-03-Oracle数据库字段类型</a></li>  <li class="file"><a href="/wiki/数据库/Oracle/02-Oracle行转列/">DB-04-Oracle行转列</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ShardingSphere
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/数据库/ShardingSphere/DB-01-分库分表应用场景/">DB-01-分库分表应用场景</a></li>  <li class="file"><a href="/wiki/数据库/ShardingSphere/DB-02-Sharding-JDBC简介/">DB-02-Sharding-JDBC简介</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            架构师之路
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-01-FLP不可能性原理/">Distributed-01-FLP不可能性原理</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-02-CAP原理/">Distributed-02-CAP原理</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-03-Base理论/">Distributed-03-Base理论</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-04-分布式一致性/">Distributed-04-分布式一致性</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-05-2PC-and-3PC/">Distributed-05-2PC and 3PC</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-06-Paxos诞生/">Distributed-06-Paxos诞生</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-07-Paxos协议运行过程/">Distributed-07-Paxos协议运行过程</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-08-Paxos协议推演/">Distributed-08-Paxos协议推演</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-09-Raft算法/">Distributed-09-Raft算法</a></li>  <li class="file"><a href="/wiki/架构师之路/分布式基础/Distributed-10-Zab协议/">Distributed-10-Zab协议</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            构建基础服务平台
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构师之路/构建基础服务平台/01-基础服务选型/">01-基础服务选型</a></li>  <li class="file"><a href="/wiki/架构师之路/构建基础服务平台/02-生态技术选型/">02-生态技术选型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            项目构建工具-Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/01-基础知识/">01-基础知识</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/02-生命周期/">02-生命周期</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/03-插件机制/">03-插件机制</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/04-属性和Profile/">04-属性和Profile</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/05-Maven私服之Nexus搭建/">05-Maven私服之Nexus搭建</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/06-项目中的pom.xml文件详解/">06-项目中的pom.xml文件详解</a></li>  <li class="file"><a href="/wiki/架构师之路/项目构建工具-Maven/07-Maven配置文件setting-xml详解/">07-Maven配置文件setting.xml详解</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            计算机基础
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-01-SystemV引导启动流程/">Linux-01-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-02-SystemV体系/">Linux-02-SystemV体系</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-03-Systemd体系/">Linux-03-Systemd体系</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-04-Systemd下配置tomcat服务/">Linux-04-Systemd下配置tomcat服务</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Linux-05-国内开源镜像/">Linux-05-国内开源镜像</a></li>  <li class="file"><a href="/wiki/计算机基础/Linux/Ubuntu-PPA软件源/">Ubuntu-PPA软件源</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            计算机网络
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/计算机基础/计算机网络/Http常用请求方式/"></a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            鸣说
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/鸣说/hello-world/">Hello World</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-Github/">Hello Github</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-LIZHUO/">Hello LIZHUO</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-Java/">Hello Java</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-img/">你和你们</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-You/">You</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/鸣说/Hello-星际穿越全剧情解析-转豆瓣/">星际穿越全剧情解析-转豆瓣</a></li>  <li class="file"><a href="/wiki/鸣说/index/">See you again</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><span>links</span></h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.ruanyifeng.com/" rel="external nofollow noopener noreferrer" target="_blank">阮一峰</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://jinnianshilongnian.iteye.com/" rel="external nofollow noopener noreferrer" target="_blank">张开涛</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://blog.didispace.com/" rel="external nofollow noopener noreferrer" target="_blank">翟永超</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://javadoop.com" rel="external nofollow noopener noreferrer" target="_blank">JavaDoop</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.iocoder.cn/" rel="external nofollow noopener noreferrer" target="_blank">芋道源码</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://fangjian0423.github.io/" rel="external nofollow noopener noreferrer" target="_blank">Format</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.cnkirito.moe/" rel="external nofollow noopener noreferrer" target="_blank">徐靖峰</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://learnblockchain.cn/" rel="external nofollow noopener noreferrer" target="_blank">Tiny熊</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.54tianzhisheng.cn/" rel="external nofollow noopener noreferrer" target="_blank">zhisheng</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-前端技术栈/Node.js/05-模块打包工具webpack" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端技术栈/">前端技术栈</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/前端技术栈/Node-js/">Node.js</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Web/">Web</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">
+            <time datetime="2018-08-05T11:23:54.000Z" itemprop="datePublished">2018-08-05</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/前端技术栈/Node.js/05-模块打包工具webpack.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/前端技术栈/Node.js/05-模块打包工具webpack.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/前端技术栈/Node.js/05-模块打包工具webpack.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            05-模块打包工具webpack
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是WebPack，为什么要使用它？"><span class="toc-number">1.</span> <span class="toc-text">什么是WebPack，为什么要使用它？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什要使用WebPack"><span class="toc-number">1.0.1.</span> <span class="toc-text">为什要使用WebPack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是Webpack"><span class="toc-number">1.0.2.</span> <span class="toc-text">什么是Webpack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WebPack和Grunt以及Gulp相比有什么特性"><span class="toc-number">1.0.3.</span> <span class="toc-text">WebPack和Grunt以及Gulp相比有什么特性</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#开始使用Webpack"><span class="toc-number">2.</span> <span class="toc-text">开始使用Webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#全局安装"><span class="toc-number">2.0.1.</span> <span class="toc-text">全局安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正式使用Webpack前的准备"><span class="toc-number">2.0.2.</span> <span class="toc-text">正式使用Webpack前的准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正式使用Webpack"><span class="toc-number">2.0.3.</span> <span class="toc-text">正式使用Webpack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过配置文件来使用Webpack"><span class="toc-number">2.0.4.</span> <span class="toc-text">通过配置文件来使用Webpack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更快捷的执行打包任务"><span class="toc-number">2.0.5.</span> <span class="toc-text">更快捷的执行打包任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Webpack的强大功能"><span class="toc-number">3.</span> <span class="toc-text">Webpack的强大功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#生成Source-Maps（使调试更容易）"><span class="toc-number">3.0.1.</span> <span class="toc-text">生成Source Maps（使调试更容易）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用webpack构建本地服务器"><span class="toc-number">3.0.2.</span> <span class="toc-text">使用webpack构建本地服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Loaders"><span class="toc-number">3.0.3.</span> <span class="toc-text">Loaders</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Babel"><span class="toc-number">4.</span> <span class="toc-text">Babel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Babel的安装与配置"><span class="toc-number">4.0.1.</span> <span class="toc-text">Babel的安装与配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Babel的使用例子"><span class="toc-number">4.0.2.</span> <span class="toc-text">Babel的使用例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#babelrc单独配置"><span class="toc-number">4.0.3.</span> <span class="toc-text">.babelrc单独配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一切皆模块"><span class="toc-number">5.</span> <span class="toc-text">一切皆模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS"><span class="toc-number">5.0.1.</span> <span class="toc-text">CSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS-module"><span class="toc-number">5.0.2.</span> <span class="toc-text">CSS module</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CSS预处理器"><span class="toc-number">5.0.3.</span> <span class="toc-text">CSS预处理器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件（Plugins）"><span class="toc-number">6.</span> <span class="toc-text">插件（Plugins）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用插件的方法"><span class="toc-number">6.0.1.</span> <span class="toc-text">使用插件的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BannerPlugin"><span class="toc-number">6.0.2.</span> <span class="toc-text">BannerPlugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HtmlWebpackPlugin"><span class="toc-number">6.0.3.</span> <span class="toc-text">HtmlWebpackPlugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hot-Module-Replacement"><span class="toc-number">6.0.4.</span> <span class="toc-text">Hot Module Replacement</span></a></li></ol></li>
+                </div>
+            
+        
+        
+            <h2 id="什么是WebPack，为什么要使用它？"><a href="#什么是WebPack，为什么要使用它？" class="headerlink" title="什么是WebPack，为什么要使用它？"></a>什么是WebPack，为什么要使用它？</h2><h4 id="为什要使用WebPack"><a href="#为什要使用WebPack" class="headerlink" title="为什要使用WebPack"></a>为什要使用WebPack</h4><p>现今的很多网页其实可以看做是功能丰富的应用，它们拥有着复杂的JavaScript代码和一大堆依赖包。为了简化开发的复杂度，前端社区涌现出了很多好的实践方法</p>
+<ul>
+<li>模块化，让我们可以把复杂的程序细化为小的文件;</li>
+<li>类似于TypeScript这种在JavaScript基础上拓展的开发语言：使我们能够实现目前版本的JavaScript不能直接使用的特性，并且之后还能转换为JavaScript文件使浏览器可以识别；</li>
+<li>Scss，less等CSS预处理器</li>
+<li>…</li>
+</ul>
+<p>这些改进确实大大的提高了我们的开发效率，但是利用它们开发的文件往往需要进行额外的处理才能让浏览器识别,而手动处理又是非常繁琐的，这就为WebPack类的工具的出现提供了需求。</p>
+<h4 id="什么是Webpack"><a href="#什么是Webpack" class="headerlink" title="什么是Webpack"></a>什么是Webpack</h4><p>WebPack可以看做是模块打包机：它做的事情是，分析你的项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。</p>
+<h4 id="WebPack和Grunt以及Gulp相比有什么特性"><a href="#WebPack和Grunt以及Gulp相比有什么特性" class="headerlink" title="WebPack和Grunt以及Gulp相比有什么特性"></a>WebPack和Grunt以及Gulp相比有什么特性</h4><p>其实Webpack和另外两个并没有太多的可比性，Gulp/Grunt是一种能够优化前端的开发流程的工具，而WebPack是一种模块化的解决方案，不过Webpack的优点使得Webpack在很多场景下可以替代Gulp/Grunt类的工具。</p>
+<ul>
+<li>Grunt和Gulp的工作方式</li>
+</ul>
+<p>在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。</p>
+<ul>
+<li>Webpack的工作方式</li>
+</ul>
+<p>把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件。</p>
+<p>如果实在要把二者进行比较，Webpack的处理速度更快更直接，能打包更多不同类型的文件。</p>
+<h2 id="开始使用Webpack"><a href="#开始使用Webpack" class="headerlink" title="开始使用Webpack"></a>开始使用Webpack</h2><p>初步了解了Webpack工作方式后，我们一步步的开始学习使用Webpack。</p>
+<h4 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h4><p>Webpack可以使用npm安装，新建一个空的练习文件夹（此处命名为webpack sample project），在终端中转到该文件夹后执行下述指令就可以完成安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//全局安装</span><br><span class="line">npm install -g webpack</span><br></pre></td></tr></table></figure></p>
+<h4 id="正式使用Webpack前的准备"><a href="#正式使用Webpack前的准备" class="headerlink" title="正式使用Webpack前的准备"></a>正式使用Webpack前的准备</h4><ol>
+<li>在上述练习文件夹中创建一个package.json文件，这是一个标准的npm说明文件，里面蕴含了丰富的信息，包括当前项目的依赖模块，自定义的脚本任务等等。在终端中使用npm init命令可以自动创建这个package.json文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<p>输入这个命令后，终端会问你一系列诸如项目名称，项目描述，作者等信息，不过不用担心，如果你不准备在npm中发布你的模块，这些问题的答案都不重要，回车默认即可。</p>
+<ol start="2">
+<li><p>package.json文件已经就绪，我们在本项目中安装Webpack作为依赖包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//安装到你的项目目录</span><br><span class="line">npm install --save-dev webpack</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回到之前的空文件夹，并在里面创建两个文件夹,app文件夹和public文件夹，app文件夹用来存放原始数据和我们将写的JavaScript模块，public文件夹用来存放之后供浏览器读取的文件（包括使用webpack打包生成的js文件以及一个index.html文件）。</p>
+</li>
+</ol>
+<p>接下来我们再创建三个文件:</p>
+<ul>
+<li>index.html –放在public文件夹中;</li>
+<li>Greeter.js– 放在app文件夹中;</li>
+<li>main.js– 放在app文件夹中;</li>
+</ul>
+<p>我们在index.html文件中写入最基础的html代码，它在这里目的在于引入打包后的js文件（这里我们先把之后打包后的js文件命名为bundle.js，之后我们还会详细讲述）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- index.html --&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Webpack Sample Project&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;div id=&apos;root&apos;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>我们在Greeter.js中定义一个返回包含问候信息的html元素的函数,并依据CommonJS规范导出这个函数为一个模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Greeter.js</span><br><span class="line">module.exports = function() &#123;</span><br><span class="line">  var greet = document.createElement(&apos;div&apos;);</span><br><span class="line">  greet.textContent = &quot;Hi there and greetings!&quot;;</span><br><span class="line">  return greet;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>main.js文件中我们写入下述代码，用以把Greeter模块返回的节点插入页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//main.js </span><br><span class="line">const greeter = require(&apos;./Greeter.js&apos;);</span><br><span class="line">document.querySelector(&quot;#root&quot;).appendChild(greeter());</span><br></pre></td></tr></table></figure>
+<h4 id="正式使用Webpack"><a href="#正式使用Webpack" class="headerlink" title="正式使用Webpack"></a>正式使用Webpack</h4><p>webpack可以在终端中使用，在基本的使用方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># &#123;extry file&#125;处填写入口文件的路径，本文中就是上述main.js的路径，</span><br><span class="line"># &#123;destination for bundled file&#125;处填写打包文件的存放路径</span><br><span class="line"># 填写路径的时候不用添加&#123;&#125;</span><br><span class="line">webpack &#123;entry file&#125; &#123;destination for bundled file&#125;</span><br></pre></td></tr></table></figure>
+<p>指定入口文件后，webpack将自动识别项目所依赖的其它文件，不过需要注意的是如果你的webpack不是全局安装的，那么当你在终端中使用此命令时，需要额外指定其在node_modules中的地址，继续上面的例子，在终端中输入如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># webpack非全局安装的情况</span><br><span class="line">node_modules/.bin/webpack app/main.js public/bundle.js</span><br></pre></td></tr></table></figure>
+<p>现在打开index.html,可以看到结果。</p>
+<p>有没有很激动，已经成功的使用Webpack打包了一个文件了。不过在终端中进行复杂的操作，其实是不太方便且容易出错的，接下来看看Webpack的另一种更常见的使用方法。</p>
+<h4 id="通过配置文件来使用Webpack"><a href="#通过配置文件来使用Webpack" class="headerlink" title="通过配置文件来使用Webpack"></a>通过配置文件来使用Webpack</h4><p>Webpack拥有很多其它的比较高级的功能（比如说本文后面会介绍的loaders和plugins），这些功能其实都可以通过命令行模式实现，但是正如前面提到的，这样不太方便且容易出错的，更好的办法是定义一个配置文件，这个配置文件其实也是一个简单的JavaScript模块，我们可以把所有的与打包相关的信息放在里面。</p>
+<p>继续上面的例子来说明如何写这个配置文件，在当前练习文件夹的根目录下新建一个名为webpack.config.js的文件，我们在其中写入如下所示的简单配置代码，目前的配置主要涉及到的内容是入口文件路径和打包后文件的存放路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry:  __dirname + &quot;/app/main.js&quot;,//已多次提及的唯一入口文件</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname + &quot;/public&quot;,//打包后的文件存放的地方</span><br><span class="line">    filename: &quot;bundle.js&quot;//打包后输出文件的文件名</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：“__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录。</p>
+</blockquote>
+<p>有了这个配置之后，再打包文件，只需在终端里运行webpack(非全局安装需使用node_modules/.bin/webpack)命令就可以了，这条命令会自动引用webpack.config.js文件中的配置选项。</p>
+<p>又学会了一种使用Webpack的方法，这种方法不用管那烦人的命令行参数，有没有感觉很爽。如果我们可以连webpack(非全局安装需使用node_modules/.bin/webpack)这条命令都可以不用，那种感觉会不会更爽~，继续看下文。</p>
+<h4 id="更快捷的执行打包任务"><a href="#更快捷的执行打包任务" class="headerlink" title="更快捷的执行打包任务"></a>更快捷的执行打包任务</h4><p>在命令行中输入命令需要代码类似于node_modules/.bin/webpack这样的路径其实是比较烦人的，不过值得庆幸的是npm可以引导任务执行，对npm进行配置后可以在命令行中使用简单的npm start命令来替代上面略微繁琐的命令。在package.json中对scripts对象进行相关设置即可，设置方法如下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;webpack-sample-project&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;Sample webpack project&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;webpack&quot; // 修改的是这里，JSON文件不支持注释，引用时请清除</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;zhang&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;webpack&quot;: &quot;3.10.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注：package.json中的script会安装一定顺序寻找命令对应位置，本地的node_modules/.bin路径就在这个寻找清单中，所以无论是全局还是局部安装的Webpack，你都不需要写前面那指明详细的路径了。</p>
+</blockquote>
+<p>npm的start命令是一个特殊的脚本名称，其特殊性表现在，在命令行中使用npm start就可以执行其对于的命令，如果对应的此脚本名称不是start，想要在命令行中运行时，需要这样用npm run {script name}如npm run build，我们在命令行中输入npm start试试，也能生成bundle.js。</p>
+<p>现在只需要使用npm start就可以打包文件了，有没有觉得webpack也不过如此嘛，不过不要太小瞧webpack，要充分发挥其强大的功能我们需要修改配置文件的其它选项，一项项来看。</p>
+<h2 id="Webpack的强大功能"><a href="#Webpack的强大功能" class="headerlink" title="Webpack的强大功能"></a>Webpack的强大功能</h2><h4 id="生成Source-Maps（使调试更容易）"><a href="#生成Source-Maps（使调试更容易）" class="headerlink" title="生成Source Maps（使调试更容易）"></a>生成Source Maps（使调试更容易）</h4><p>开发总是离不开调试，方便的调试能极大的提高开发效率，不过有时候通过打包后的文件，你是不容易找到出错了的地方，对应的你写的代码的位置的，Source Maps就是来帮我们解决这个问题的。</p>
+<p>通过简单的配置，webpack就可以在打包时为我们生成的source maps，这为我们提供了一种对应编译文件和源文件的方法，使得编译后的代码可读性更高，也更容易调试。</p>
+<p>在webpack的配置文件中配置source maps，需要配置devtool，它有以下四种不同的配置选项，各具优缺点，描述如下：</p>
+<table>
+<thead>
+<tr>
+<th>devtool选项</th>
+<th>配置结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source-map</td>
+<td>在一个单独的文件中产生一个完整且功能完全的文件。这个文件具有最好的source map，但是它会减慢打包速度；</td>
+</tr>
+<tr>
+<td>cheap-module-source-map</td>
+<td>在一个单独的文件中生成一个不带列映射的map，不带列映射提高了打包速度，但是也使得浏览器开发者工具只能对应到具体的行，不能对应到具体的列（符号），会对调试造成不便；</td>
+</tr>
+<tr>
+<td>eval-source-map</td>
+<td>使用eval打包源文件模块，在同一个文件中生成干净的完整的source map。这个选项可以在不影响构建速度的前提下生成完整的sourcemap，但是对打包后输出的JS文件的执行具有性能和安全的隐患。在开发阶段这是一个非常好的选项，在生产阶段则一定不要启用这个选项；</td>
+</tr>
+<tr>
+<td>cheap-module-eval-source-map</td>
+<td>这是在打包文件时最快的生成source map的方法，生成的Source Map 会和打包后的JavaScript文件同行显示，没有列映射，和eval-source-map选项具有相似的缺点；</td>
+</tr>
+</tbody>
+</table>
+<p>正如上表所述，上述选项由上到下打包速度越来越快，不过同时也具有越来越多的负面作用，较快的打包速度的后果就是对打包后的文件的的执行有一定影响。</p>
+<p>对小到中型的项目中，eval-source-map是一个很好的选项，再次强调你只应该开发阶段使用它，我们继续对上文新建的webpack.config.js，进行如下配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  devtool: &apos;eval-source-map&apos;,</span><br><span class="line">  entry:  __dirname + &quot;/app/main.js&quot;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname + &quot;/public&quot;,</span><br><span class="line">    filename: &quot;bundle.js&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>cheap-module-eval-source-map方法构建速度更快，但是不利于调试，推荐在大型项目考虑时间成本时使用。</p>
+</blockquote>
+<h4 id="使用webpack构建本地服务器"><a href="#使用webpack构建本地服务器" class="headerlink" title="使用webpack构建本地服务器"></a>使用webpack构建本地服务器</h4><p>想不想让你的浏览器监听你的代码的修改，并自动刷新显示修改后的结果，其实Webpack提供一个可选的本地开发服务器，这个本地服务器基于node.js构建，可以实现你想要的这些功能，不过它是一个单独的组件，在webpack中进行配置之前需要单独安装它作为项目依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev webpack-dev-server</span><br></pre></td></tr></table></figure>
+<p>devserver作为webpack配置选项中的一项，以下是它的一些配置选项，更多配置可参考这里: <a href="https://webpack.js.org/configuration/dev-server/" rel="external nofollow noopener noreferrer" target="_blank">https://webpack.js.org/configuration/dev-server/</a></p>
+<table>
+<thead>
+<tr>
+<th>devserver的配置选项</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>contentBase</td>
+<td>默认webpack-dev-server会为根文件夹提供本地服务器，如果想为另外一个目录下的文件提供本地服务器，应该在这里设置其所在目录（本例设置到“public”目录）</td>
+</tr>
+<tr>
+<td>port</td>
+<td>设置默认监听端口，如果省略，默认为”8080“</td>
+</tr>
+<tr>
+<td>inline</td>
+<td>设置为true，当源文件改变时会自动刷新页面</td>
+</tr>
+<tr>
+<td>historyApiFallback</td>
+<td>在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html</td>
+</tr>
+</tbody>
+</table>
+<p>把这些命令加到webpack的配置文件中，现在的配置文件webpack.config.js如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  devtool: &apos;eval-source-map&apos;,</span><br><span class="line"></span><br><span class="line">  entry:  __dirname + &quot;/app/main.js&quot;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname + &quot;/public&quot;,</span><br><span class="line">    filename: &quot;bundle.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: &quot;./public&quot;,//本地服务器所加载的页面所在的目录</span><br><span class="line">    historyApiFallback: true,//不跳转</span><br><span class="line">    inline: true//实时刷新</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在package.json中的scripts对象中添加如下命令，用以开启本地服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;webpack&quot;,</span><br><span class="line">    &quot;server&quot;: &quot;webpack-dev-server --open&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>在终端中输入npm run server即可在本地的8080端口查看结果.</p>
+<h4 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h4><p>Loaders是webpack提供的最激动人心的功能之一了。通过使用不同的loader，webpack有能力调用外部的脚本或工具，实现对不同格式的文件的处理，比如说分析转换scss为css，或者把下一代的JS文件（ES6，ES7)转换为现代浏览器兼容的JS文件，对React的开发而言，合适的Loaders可以把React的中用到的JSX文件转换为JS文件。</p>
+<p>Loaders需要单独安装并且需要在webpack.config.js中的modules关键字下进行配置，Loaders的配置包括以下几方面：</p>
+<ul>
+<li>test：一个用以匹配loaders所处理文件的拓展名的正则表达式（必须）</li>
+<li>loader：loader的名称（必须）</li>
+<li>include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；</li>
+<li>query：为loaders提供额外的设置选项（可选）</li>
+</ul>
+<p>不过在配置loader之前，我们把Greeter.js里的问候消息放在一个单独的JSON文件里,并通过合适的配置使Greeter.js可以读取该JSON文件的值，各文件修改后的代码如下：</p>
+<p>在app文件夹中创建带有问候信息的JSON文件(命名为config.json)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;greetText&quot;: &quot;Hi there and greetings from JSON!&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>更新后的Greeter.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var config = require(&apos;./config.json&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = function() &#123;</span><br><span class="line">  var greet = document.createElement(&apos;div&apos;);</span><br><span class="line">  greet.textContent = config.greetText;</span><br><span class="line">  return greet;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注 由于webpack3.<em>/webpack2.</em>已经内置可处理JSON文件，这里我们无需再添加webpack1.*需要的json-loader。在看如何具体使用loader之前我们先看看Babel是什么？</p>
+</blockquote>
+<h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><p>Babel其实是一个编译JavaScript的平台，它可以编译代码帮你达到以下目的：</p>
+<ul>
+<li>让你能使用最新的JavaScript代码（ES6，ES7…），而不用管新标准是否被当前使用的浏览器完全支持；</li>
+<li>让你能使用基于JavaScript进行了拓展的语言，比如React的JSX；</li>
+</ul>
+<h4 id="Babel的安装与配置"><a href="#Babel的安装与配置" class="headerlink" title="Babel的安装与配置"></a>Babel的安装与配置</h4><p>Babel其实是几个模块化的包，其核心功能位于称为babel-core的npm包中，webpack可以把其不同的包整合在一起使用，对于每一个你需要的功能或拓展，你都需要安装单独的包，用得最多的是解析Es6的babel-preset-env包和解析JSX的babel-preset-react包。</p>
+<p>我们先来一次性安装这些依赖包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// npm一次性安装多个依赖模块，模块之间用空格隔开</span><br><span class="line">npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-react</span><br></pre></td></tr></table></figure>
+<p>在webpack中配置Babel的方法如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    entry: __dirname + &quot;/app/main.js&quot;,//已多次提及的唯一入口文件</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: __dirname + &quot;/public&quot;,//打包后的文件存放的地方</span><br><span class="line">        filename: &quot;bundle.js&quot;//打包后输出文件的文件名</span><br><span class="line">    &#125;,</span><br><span class="line">    devtool: &apos;eval-source-map&apos;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        contentBase: &quot;./public&quot;,//本地服务器所加载的页面所在的目录</span><br><span class="line">        historyApiFallback: true,//不跳转</span><br><span class="line">        inline: true//实时刷新</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /(\.jsx|\.js)$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &quot;babel-loader&quot;,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        presets: [</span><br><span class="line">                            &quot;env&quot;, &quot;react&quot;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Babel的使用例子"><a href="#Babel的使用例子" class="headerlink" title="Babel的使用例子"></a>Babel的使用例子</h4><p>现在你的webpack的配置已经允许你使用ES6以及JSX的语法了。继续用上面的例子进行测试，不过这次我们会使用React，记得先安装 React 和 React-DOM</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react react-dom</span><br></pre></td></tr></table></figure>
+<p>接下来我们使用ES6的语法，更新Greeter.js并返回一个React组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//Greeter,js</span><br><span class="line">import React, &#123;Component&#125; from &apos;react&apos;</span><br><span class="line">import config from &apos;./config.json&apos;;</span><br><span class="line"></span><br><span class="line">class Greeter extends Component&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &#123;config.greetText&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Greeter</span><br></pre></td></tr></table></figure>
+<p>修改main.js如下，使用ES6的模块定义和渲染Greeter模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// main.js</span><br><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &#123;render&#125; from &apos;react-dom&apos;;</span><br><span class="line">import Greeter from &apos;./Greeter&apos;;</span><br><span class="line"></span><br><span class="line">render(&lt;Greeter /&gt;, document.getElementById(&apos;root&apos;));</span><br></pre></td></tr></table></figure>
+<p>重新使用npm start打包,再npm run server启动服务，如果之前打开的本地服务器没有关闭，你应该可以在localhost:8080下看到与之前一样的内容，这说明react和es6被正常打包了。</p>
+<h4 id="babelrc单独配置"><a href="#babelrc单独配置" class="headerlink" title=".babelrc单独配置"></a>.babelrc单独配置</h4><p>Babel其实可以完全在 webpack.config.js 中进行配置，但是考虑到babel具有非常多的配置选项，在单一的webpack.config.js文件中进行配置往往使得这个文件显得太复杂，因此一些开发者支持把babel的配置选项放在一个单独的名为 “.babelrc” 的配置文件中。我们现在的babel的配置并不算复杂，不过之后我们会再加一些东西，因此现在我们就提取出相关部分，分两个配置文件进行配置（webpack会自动调用.babelrc里的babel配置选项），如下：</p>
+<ul>
+<li><p>webpack.config.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    entry: __dirname + &quot;/app/main.js&quot;,//已多次提及的唯一入口文件</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: __dirname + &quot;/public&quot;,//打包后的文件存放的地方</span><br><span class="line">        filename: &quot;bundle.js&quot;//打包后输出文件的文件名</span><br><span class="line">    &#125;,</span><br><span class="line">    devtool: &apos;eval-source-map&apos;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        contentBase: &quot;./public&quot;,//本地服务器所加载的页面所在的目录</span><br><span class="line">        historyApiFallback: true,//不跳转</span><br><span class="line">        inline: true//实时刷新</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /(\.jsx|\.js)$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &quot;babel-loader&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">//.babelrc</span><br><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;react&quot;, &quot;env&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>.babelrc</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//.babelrc</span><br><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;react&quot;, &quot;env&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用.babelrc配置文件配置完成后，运行正常。</p>
+<p>到目前为止，我们已经知道了，对于模块，Webpack能提供非常强大的处理功能，那那些是模块呢。</p>
+<h2 id="一切皆模块"><a href="#一切皆模块" class="headerlink" title="一切皆模块"></a>一切皆模块</h2><p>Webpack有一个不可不说的优点，它把所有的文件都都当做模块处理，JavaScript代码，CSS和fonts以及图片等等通过合适的loader都可以被处理。</p>
+<h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><p>webpack提供两个工具处理样式表，css-loader 和 style-loader，二者处理的任务不同，css-loader使你能够使用类似@import 和 url(…)的方法实现 require()的功能,style-loader将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件中。</p>
+<p>继续上面的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//安装</span><br><span class="line">npm install --save-dev style-loader css-loader</span><br></pre></td></tr></table></figure>
+<ul>
+<li>webpack.config.js中添加css相关loaders</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line"></span><br><span class="line">   ...</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /(\.jsx|\.js)$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &quot;babel-loader&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.css$/,</span><br><span class="line">                use: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: &quot;style-loader&quot;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;css-loader&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 请注意这里对同一个文件引入多个loader的方法。</p>
+</blockquote>
+<p>接下来，在app文件夹里创建一个名字为”main.css”的文件，对一些元素设置样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/* main.css */</span><br><span class="line">html &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  -ms-text-size-adjust: 100%;</span><br><span class="line">  -webkit-text-size-adjust: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">*, *:before, *:after &#123;</span><br><span class="line">  box-sizing: inherit;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">  font-family: &apos;Helvetica Neue&apos;, Helvetica, Arial, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h1, h2, h3, h4, h5, h6, p, ul &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">  padding: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们这里例子中用到的webpack只有单一的入口，其它的模块需要通过 import, require, url等与入口文件建立其关联，为了让webpack能找到”main.css“文件，我们把它导入”main.js “中，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//main.js</span><br><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &#123;render&#125; from &apos;react-dom&apos;;</span><br><span class="line">import Greeter from &apos;./Greeter&apos;;</span><br><span class="line"></span><br><span class="line">import &apos;./main.css&apos;;//使用require导入css文件</span><br><span class="line"></span><br><span class="line">render(&lt;Greeter /&gt;, document.getElementById(&apos;root&apos;));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常情况下，css会和js打包到同一个文件中，并不会打包为一个单独的css文件，不过通过合适的配置webpack也可以把css打包为单独的文件的。</p>
+</blockquote>
+<p>上面的代码说明webpack是怎么把css当做模块看待的，咱们继续看一个更加真实的css模块实践。</p>
+<h4 id="CSS-module"><a href="#CSS-module" class="headerlink" title="CSS module"></a>CSS module</h4><p>在过去的一些年里，JavaScript通过一些新的语言特性，更好的工具以及更好的实践方法（比如说模块化）发展得非常迅速。模块使得开发者把复杂的代码转化为小的，干净的，依赖声明明确的单元，配合优化工具，依赖管理和加载管理可以自动完成。</p>
+<p>不过前端的另外一部分，CSS发展就相对慢一些，大多的样式表却依旧巨大且充满了全局类名，维护和修改都非常困难。</p>
+<p>被称为CSS modules的技术意在把JS的模块化思想带入CSS中来，通过CSS模块，所有的类名，动画名默认都只作用于当前模块。Webpack对CSS模块化提供了非常好的支持，只需要在CSS loader中进行简单配置即可，然后就可以直接把CSS的类名传递到组件的代码中，这样做有效避免了全局污染。具体的代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /(\.jsx|\.js)$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &quot;babel-loader&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.css$/,</span><br><span class="line">                use: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: &quot;style-loader&quot;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;css-loader&quot;,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            modules: true, // 指定启用css modules</span><br><span class="line">                            localIdentName: &apos;[name]__[local]--[hash:base64:5]&apos; // 指定css的类名格式</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>我们在app文件夹下创建一个Greeter.css文件来进行一下测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* Greeter.css */</span><br><span class="line">.root &#123;</span><br><span class="line">  background-color: #eee;</span><br><span class="line">  padding: 10px;</span><br><span class="line">  border: 3px solid #ccc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>导入.root到Greeter.js中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123;Component&#125; from &apos;react&apos;;</span><br><span class="line">import config from &apos;./config.json&apos;;</span><br><span class="line">import styles from &apos;./Greeter.css&apos;;//导入</span><br><span class="line"></span><br><span class="line">class Greeter extends Component&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div className=&#123;styles.root&#125;&gt; //使用cssModule添加类名的方法</span><br><span class="line">        &#123;config.greetText&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Greeter</span><br></pre></td></tr></table></figure>
+<p>放心使用把，相同的类名也不会造成不同组件之间的污染。</p>
+<p>CSS modules 也是一个很大的主题，有兴趣的话可以去其官方文档了解更多。<br><a href="https://github.com/css-modules/css-modules" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/css-modules/css-modules</a></p>
+<h4 id="CSS预处理器"><a href="#CSS预处理器" class="headerlink" title="CSS预处理器"></a>CSS预处理器</h4><p>Sass 和 Less 之类的预处理器是对原生CSS的拓展，它们允许你使用类似于variables, nesting, mixins, inheritance等不存在于CSS中的特性来写CSS，CSS预处理器可以这些特殊类型的语句转化为浏览器可识别的CSS语句，</p>
+<p>你现在可能都已经熟悉了，在webpack里使用相关loaders进行配置就可以使用了，以下是常用的CSS 处理loaders:</p>
+<ul>
+<li>Less Loader</li>
+<li>Sass Loader</li>
+<li>Stylus Loader</li>
+</ul>
+<p>不过其实也存在一个CSS的处理平台-PostCSS，它可以帮助你的CSS实现更多的功能，在其官方文档可了解更多相关知识。<a href="https://github.com/postcss/postcss" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/postcss/postcss</a></p>
+<ul>
+<li>autoprefixer</li>
+</ul>
+<p>举例来说如何使用PostCSS，我们使用PostCSS来为CSS代码自动添加适应不同浏览器的CSS前缀。</p>
+<p>首先安装postcss-loader 和 autoprefixer（自动添加前缀的插件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev postcss-loader autoprefixer</span><br></pre></td></tr></table></figure>
+<p>接下来，在webpack配置文件中添加postcss-loader，在根目录新建postcss.config.js,并添加如下代码之后，重新使用npm start打包时，你写的css会自动根据Can i use里的数据添加不同前缀了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    ...</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /(\.jsx|\.js)$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &quot;babel-loader&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.css$/,</span><br><span class="line">                use: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: &quot;style-loader&quot;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;css-loader&quot;,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            modules: true</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;postcss-loader&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// postcss.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">        require(&apos;autoprefixer&apos;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，本文已经谈论了处理JS的Babel和处理CSS的PostCSS的基本用法，它们其实也是两个单独的平台，配合webpack可以很好的发挥它们的作用。接下来介绍Webpack中另一个非常重要的功能-Plugins。</p>
+<h2 id="插件（Plugins）"><a href="#插件（Plugins）" class="headerlink" title="插件（Plugins）"></a>插件（Plugins）</h2><p>插件（Plugins）是用来拓展Webpack功能的，它们会在整个构建过程中生效，执行相关的任务。<br>Loaders和Plugins常常被弄混，但是他们其实是完全不同的东西，可以这么来说，loaders是在打包构建过程中用来处理源文件的（JSX，Scss，Less..），一次处理一个，插件并不直接操作单个文件，它直接对整个构建过程其作用。</p>
+<p>Webpack有很多内置插件，同时也有很多第三方插件，可以让我们完成更加丰富的功能。</p>
+<h4 id="使用插件的方法"><a href="#使用插件的方法" class="headerlink" title="使用插件的方法"></a>使用插件的方法</h4><p>要使用某个插件，我们需要通过npm安装它，然后要做的就是在webpack配置中的plugins关键字部分添加该插件的一个实例（plugins是一个数组）。</p>
+<h4 id="BannerPlugin"><a href="#BannerPlugin" class="headerlink" title="BannerPlugin"></a>BannerPlugin</h4><p>继续上面的例子，我们添加了一个给打包后代码添加版权声明的插件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// 1. 新增引入</span><br><span class="line">const webpack = require(&apos;webpack&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">...</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /(\.jsx|\.js)$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &quot;babel-loader&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.css$/,</span><br><span class="line">                use: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: &quot;style-loader&quot;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;css-loader&quot;,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            modules: true</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;postcss-loader&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 2. 新增 new 相应插件</span><br><span class="line">    plugins: [</span><br><span class="line">        new webpack.BannerPlugin(&apos;版权所有，翻版必究&apos;)</span><br><span class="line">    ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>通过这个插件，重新执行npm start打包后的JS文件，第一行会有如下版权声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/*! 版权所有，翻版必究 */!function(n)&#123;...</span><br></pre></td></tr></table></figure></p>
+<p>这就是webpack插件的基础用法了，下面给大家推荐几个常用的插件.</p>
+<h4 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h4><p>这个插件的作用是依据一个简单的index.html模板，生成一个自动引用你打包后的JS文件的新index.html。这在每次生成的js文件名称不同时非常有用（比如添加了hash值）。</p>
+<p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev html-webpack-plugin</span><br></pre></td></tr></table></figure>
+<p>这个插件自动完成了我们之前手动做的一些事情，在正式使用之前需要对一直以来的项目结构做一些更改：</p>
+<ol>
+<li>移除public文件夹，利用此插件，index.html文件会自动生成，此外CSS已经通过前面的操作打包到JS中了。</li>
+<li>在app目录下，创建一个index.tmpl.html文件模板，这个模板包含title等必须元素，在编译过程中，插件会依据此模板生成最终的html页面，会自动添加所依赖的 css, js，favicon等文件，index.tmpl.html中的模板源代码如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Webpack Sample Project&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;div id=&apos;root&apos;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>更新webpack的配置文件，方法同上,新建一个build文件夹用来存放最终的输出文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">const webpack = require(&apos;webpack&apos;);</span><br><span class="line"></span><br><span class="line">// 1. 新增</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: __dirname + &quot;/app/main.js&quot;,//已多次提及的唯一入口文件</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: __dirname + &quot;/build&quot;,</span><br><span class="line">        filename: &quot;bundle.js&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    devtool: &apos;eval-source-map&apos;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        contentBase: &quot;./public&quot;,//本地服务器所加载的页面所在的目录</span><br><span class="line">        historyApiFallback: true,//不跳转</span><br><span class="line">        inline: true//实时刷新</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /(\.jsx|\.js)$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &quot;babel-loader&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.css$/,</span><br><span class="line">                use: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: &quot;style-loader&quot;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;css-loader&quot;,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            modules: true</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;postcss-loader&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new webpack.BannerPlugin(&apos;版权所有，翻版必究&apos;),</span><br><span class="line">        </span><br><span class="line">        // 2. 新增</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: __dirname + &quot;/app/index.tmpl.html&quot;//new 一个这个插件的实例，并传入相关的参数</span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>再次执行npm start你会发现，public文件夹下面生成了bundle.js和index.html。</p>
+<h4 id="Hot-Module-Replacement"><a href="#Hot-Module-Replacement" class="headerlink" title="Hot Module Replacement"></a>Hot Module Replacement</h4><p><a href="https://segmentfault.com/a/1190000006178770#articleHeader6" rel="external nofollow noopener noreferrer" target="_blank">https://segmentfault.com/a/1190000006178770#articleHeader6</a></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/前端技术栈/JavaScript/03-ES6核心概念/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    03-ES6核心概念
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/前端技术栈/Node.js/04-前端工作流/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">04-前端工作流</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            mingfy &copy; 2019 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
