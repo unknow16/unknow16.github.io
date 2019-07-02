@@ -1,7 +1,7 @@
 ---
-title: 10-Slot使用示例
-doc: true
-date: 2018-11-15 18:37:07
+title: 07-Slot使用示例
+toc: true
+date: 2019-07-02 11:41:36
 tags: Vue
 ---
 
@@ -115,7 +115,7 @@ export default {
 ## 具名插槽
 匿名插槽没有name属性，所以是匿名插槽，那么，插槽加了name属性，就变成了具名插槽。具名插槽可以在一个组件中出现N次。出现在不同的位置。下面的例子，就是一个有两个具名插槽和单个插槽的组件，这三个插槽被父组件用同一套css样式显示了出来，不同的是内容上略有区别。
 
-#### childSlotNamed.vue
+- childSlotNamed.vue
 ```
 <template>
   <section class="bg-child">
@@ -149,7 +149,7 @@ export default {
 
 ```
 
-#### parentSlotNamed
+- parentSlotNamed
 
 ```
 <template>
@@ -208,7 +208,7 @@ export default {
 
 下面的例子，你就能看到，父组件提供了三种样式(分别是flex、ul、直接显示)，都没有提供数据，数据使用的都是子组件插槽自己绑定的那个人名数组。
 
-#### childSlotScope.vue
+- childSlotScope.vue
 
 ```
 <template>
@@ -238,7 +238,7 @@ export default {
 
 ```
 
-#### parentSlotScope.vue
+- parentSlotScope.vue
 
 ```
 <template>

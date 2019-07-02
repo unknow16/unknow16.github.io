@@ -1,5 +1,6 @@
 ---
-title: Web-05-模块打包工具webpack
+title: 05-模块打包工具webpack
+toc: true
 date: 2018-08-05 19:23:54
 tags: Web
 ---
@@ -237,7 +238,7 @@ module.exports = {
 
 在package.json中的scripts对象中添加如下命令，用以开启本地服务器：
 
- 
+
 ```
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

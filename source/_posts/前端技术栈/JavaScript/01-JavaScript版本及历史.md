@@ -1,18 +1,18 @@
 ---
-title: Web-01-JavaScript版本及历史
+title: 01-JavaScript版本及历史
 date: 2018-05-24 22:15:30
 tags: Web
 toc: true
 ---
 
 ## ECMAScript主要版本
-#### 1999年12月 ：ECMAScript 3.0
+- 1999年12月 ：ECMAScript 3.0
 
-#### 2011年06月 ：ECMAscript 5.1
+- 2011年06月 ：ECMAscript 5.1
 
 完善了ECMAScript 3版本、增加"strict mode,"（严格模式）、以及新的功能，如getter和setter、JSON库支持和更完整的对象属性。
 
-#### 2015年06月 :  ECMAScript 6 / ES6 / ECMAScript 2015 / ES2015
+- 2015年06月 :  ECMAScript 6 / ES6 / ECMAScript 2015 / ES2015
 
 此版本增加了非常重要的东西：let、const、class、modules、 arrow functions,、template string, destructuring, default, rest argument、binary data、promises等等。
 
@@ -68,7 +68,7 @@ JavaScript是按ECMAScript规范实现的一种脚本语言，其他的还有JSc
 
 - 除了ECMAScript的版本，很长一段时间中，Netscape公司（以及继承它的Mozilla基金会）在内部依然使用自己的版本号。这导致了JavaScript有自己不同于ECMAScript的版本号。1996年3月，Navigator 2.0内置了JavaScript 1.0。JavaScript 1.1版对应ECMAScript 1.0，但是直到JavaScript 1.4版才完全兼容ECMAScript 1.0。JavaScript 1.5版完全兼容ECMAScript 3.0。目前的JavaScript 1.8版完全兼容ECMAScript 5。
 
-##### 参考
+## 参考
 http://javascript.ruanyifeng.com/introduction/history.html
 
 https://www.cnblogs.com/polk6/archive/2017/12/05/js-ECMAScript.html

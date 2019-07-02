@@ -1,7 +1,7 @@
 ---
 title: 02-手工构建模块化Vue项目
-doc: true
-date: 2018-11-15 15:07:57
+toc: true
+date: 2019-07-01 20:00:33
 tags: Vue
 ---
 

@@ -8,41 +8,35 @@ categories:
 
 
 
-## 入门示例
+## 使用示例
 
-如下博文子组件，定义可接收一个title属性
+一个组件默认可以拥有任意数量的 prop，任何值都可以传递给任何 prop。
+
+
+
+1. 静态赋值和动态赋值
+
 ```
+// 组件定义
 Vue.component('blog-post', {
   props: ['title'],
   template: '<h3>{{ title }}</h3>'
 })
-```
-一个组件默认可以拥有任意数量的 prop，任何值都可以传递给任何 prop。
 
-可以像这样把数据作为一个自定义特性传递进来
 
-```
 <!-- 静态赋值 -->
 <blog-post title="My journey with Vue"></blog-post>
 
-<!-- 动态赋予一个变量的值 -->
+<!-- 动态赋值 -->
 <blog-post v-bind:title="post.title"></blog-post>
 
 <!-- 动态赋予一个复杂表达式的值 -->
 <blog-post
   v-bind:title="post.title + ' by ' + post.author.name"
 ></blog-post>
-
-<!-- 将一个对象的所有属性都作为 prop 传入 -->
-<blog-post
-  v-bind:id="post.id"
-  v-bind:title="post.title"
-></blog-post>
-等价于<blog-post v-bind="post"></blog-post>
-
 ```
+2. 数组赋值
 
-当有一个博文的数组， 并想要为每篇博文渲染一个组件时：
 ```
 new Vue({
   el: '#blog-post-demo',
@@ -63,7 +57,44 @@ new Vue({
 ></blog-post>
 ```
 
+3. 将一个对象的所有属性都作为 prop 传入
+
+```
+<!-- 将一个对象的所有属性都作为 prop 传入 -->
+<blog-post
+  v-bind:id="post.id"
+  v-bind:title="post.title"
+></blog-post>
+
+等价于<blog-post v-bind="post"></blog-post>
+
+```
+
+4. 传入对象
+
+```
+   // 现在，不论何时为 post 对象添加一个新的属性，它都会自动地在 <blog-post> 内可用。
+   Vue.component('blog-post', {
+     props: ['post'],
+     template: `
+       <div class="blog-post">
+         <h3>{{ post.title }}</h3>
+         <div v-html="post.content"></div>
+       </div>
+     `
+   })
+   
+   <blog-post
+     v-for="post in posts"
+     v-bind:key="post.id"
+     v-bind:post="post"
+   ></blog-post>
+```
+
+   
+
 ## Prop 的大小写
+
 HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。Vue运行时将组件渲染为HTML时，也会解释为小写字符，所以使用方需要用短横线分隔命名，但如果你使用字符串模板，那么这个限制就不存在了。
 ```
 Vue.component('blog-post', {

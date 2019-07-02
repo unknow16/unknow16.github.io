@@ -1,5 +1,6 @@
 ---
-title: Ubuntu16.04-安装nodejs和npm
+title: 01-Ubuntu16.04-安装nodejs和npm
+toc: true
 date: 2018-04-19 20:02:35
 tags: Linux
 ---

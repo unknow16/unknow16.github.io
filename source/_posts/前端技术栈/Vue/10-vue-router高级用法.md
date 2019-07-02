@@ -1,6 +1,7 @@
 ---
-title: Vue-04-router高级用法
-date: 2018-11-15 14:54:58
+title: 10-vue-router高级用法
+toc: true
+date: 2019-07-02 15:54:58
 tags: Vue
 ---
 

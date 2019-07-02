@@ -1,5 +1,6 @@
 ---
-title: Web-02-ES6的let和const
+title: 02-ES6的let和const
+toc: true
 date: 2018-08-05 19:18:25
 tags: Web
 ---
@@ -144,7 +145,7 @@ const用于定义一个常量变量。
 1. 作用域的范围与let一样，声明前无法使用以const声明的常量。
 
 1. 同一作用域范围内，const不能声明同名常量。
- 
+
 1. const声明的常量不会成为window对象的成员。
 
 1. 当用const声明的常量为值类型(e.g. String、Number)时，修改此常量的值会报错；但当声明的常量为引用类型(e.g. Array、Object)时，只可以修改此常量的成员。

@@ -1,6 +1,7 @@
 ---
-title: Vue-05-集成vuex
-date: 2018-11-15 15:06:07
+title: 12-vuex详解
+toc: true
+date: 2019-07-02 16:01:07
 tags: Vue
 ---
 
