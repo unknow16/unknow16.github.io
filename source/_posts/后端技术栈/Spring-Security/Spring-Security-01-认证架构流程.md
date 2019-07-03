@@ -10,27 +10,30 @@ tags: Spring Security
 - AuthenticationManager: 认证管理器接口，实现类ProviderManager
 - ProviderManager: 类，包含一个AuthenticationProvider的List
 - AuthenticationProvider: 认证提供者接口，提供实际的对Authentication的认证
-- DaoAuthenticationProvider: 认证提供者实现类，从db读用户信息，进行比对认证
-- UserDetails/UserDetailsService: 从db读用户信息的工具类
+- DaoAuthenticationProvider: 认证提供者实现类，从db读用户信息，与Authentication进行比对认证
+- UserDetails: Spring Security对身份信息封装的一个接口
+- UserDetailsService: 从db读用户信息的工具类
 
 ![image](https://note.youdao.com/yws/api/personal/file/404A024831D34310B724EE4EDE452139?method=download&shareKey=959663d7f1825af7d7473303777bb890)
 ![image](https://note.youdao.com/yws/api/personal/file/6CD818A5112949789C49EA242038CCE5?method=download&shareKey=3f25c9af2eace8a5f9acc2a63421cdb5)
 
-### Spring Security是如何完成身份认证的？
+## Spring Security是如何完成身份认证的？
 1. 用户名和密码被过滤器获取到，封装成Authentication,通常情况下是UsernamePasswordAuthenticationToken这个实现类。
 2. AuthenticationManager 身份管理器负责验证这个Authentication
 3. 认证成功后，AuthenticationManager身份管理器返回一个被填充满了信息的（包括上面提到的权限信息，身份信息，细节信息，但密码通常会被移除）Authentication实例。
 4. SecurityContextHolder安全上下文容器将第3步填充了信息的Authentication，通过SecurityContextHolder.getContext().setAuthentication(…)方法，设置到其中。
 
-### SecurityContextHolder/SecurityContext
+## SecurityContextHolder/SecurityContext
 SecurityContextHolder用于存储安全上下文（security context）的信息。当前操作的用户是谁，该用户是否已经被认证，他拥有哪些角色权限…这些都被保存在SecurityContextHolder中。
 
 SecurityContextHolder默认使用ThreadLocal 策略来存储认证信息。看到ThreadLocal 也就意味着，这是一种与线程绑定的策略。Spring Security在用户登录时自动绑定认证信息到当前线程，在用户退出时，自动清除当前线程的认证信息。
 
 但这一切的前提，是你在web场景下使用Spring Security，而如果是Swing界面，Spring也提供了支持，SecurityContextHolder的策略则需要被替换，鉴于我的初衷是基于web来介绍Spring Security，所以这里以及后续，非web的相关的内容都一笔带过。
 
-获取当前用户的信息
+## 获取当前用户的信息
+
 因为身份信息是与线程绑定的，所以可以在程序的任何地方使用静态方法获取用户信息。一个典型的获取当前登录用户的姓名的例子如下所示：
+
 ```
 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 if (principal instanceof UserDetails) {
