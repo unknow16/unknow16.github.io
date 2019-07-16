@@ -1,29 +1,30 @@
 ---
-title: Spring Security-06-跨域资源共享-CORS
+title: 05-跨域资源共享-CORS
 date: 2018-02-28 10:20:09
+toc: true
 tags: Spring Security
 ---
 
-### 前言
+## 前言
 整理完CSRF相关，感觉和CORS有形似，故简单记录
 
-### 简介
+## 简介
 
 CORS是一个W3C标准，全称是"跨域资源共享"（Cross-origin resource sharing）。
 
 它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。
 
-### 内部机制
+## 内部机制
 CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。
 
-整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。
+整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的option请求，但用户不会有感觉。
 
 因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。
 
-### 两种请求
+## 两种请求
 浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。
 
-### 简单请求基本流程
+## 简单请求基本流程
 对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。
 
 下面是一个例子，浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个Origin字段。
@@ -61,10 +62,12 @@ Content-Type: text/html; charset=utf-8
 
 该字段可选。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。上面的例子指定，getResponseHeader('FooBar')可以返回FooBar字段的值。
 
-### 与JSONP的比较
+## 与JSONP的比较
 CORS与JSONP的使用目的相同，但是比JSONP更强大。
 
 JSONP只支持GET请求，CORS支持所有类型的HTTP请求。JSONP的优势在于支持老式浏览器，以及可以向不支持CORS的网站请求数据。
 
-参考阮老师：http://www.ruanyifeng.com/blog/2016/04/cors.html
-结合spring boot配置：https://www.jianshu.com/p/4ef9881090ec
+## 参考资料
+
+> 参考阮老师：http://www.ruanyifeng.com/blog/2016/04/cors.html
+> 结合spring boot配置：https://www.jianshu.com/p/4ef9881090ec
