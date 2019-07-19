@@ -1,5 +1,5 @@
 ---
-title: 04-Nginx常用配置解析
+title: 04-Nginx常用单项配置解析
 toc: true
 date: 2019-07-15 15:31:58
 tags:

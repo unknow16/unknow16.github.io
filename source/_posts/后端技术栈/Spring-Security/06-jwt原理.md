@@ -75,7 +75,7 @@ HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)
 secret是保存在服务器端的，jwt的签发也是在服务器端的，secret就是用来签发和验证jwt的。
 
 ## 具体Http请求
-![image](img/jwt流程.png)
+![image](06-jwt原理/jwt流程.png)
 
 服务器端提供接口：
 - 根据用户名和密码，为用户创建jwt返回
