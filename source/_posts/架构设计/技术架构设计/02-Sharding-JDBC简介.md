@@ -1,5 +1,5 @@
 ---
-title: DB-02-Sharding-JDBC简介
+title: 02-Sharding-JDBC简介
 date: 2018-07-18 18:13:37
 tags: DB
 ---

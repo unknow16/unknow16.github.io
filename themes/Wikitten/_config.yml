@@ -69,6 +69,20 @@ comment:
     disqus: # enter disqus shortname here
     duoshuo: # enter duoshuo shortname here
     youyan: # enter youyan uid here
+  
+gitment:
+  enable: true
+  mint: true
+  count: true
+  lazy: false
+  cleanly: false
+  language:
+  github_user: unknow16
+  github_repo: unknow16.github.io
+  client_id: b880107e59af7816d2f3
+  client_secret: 0a5dcfcb5d2989d95a637a6f4647c4a6b720cc8e
+  proxy_gateway:
+  redirect_protocol:
 
 # Share
 share: default # options: jiathis, bdshare, addtoany, default

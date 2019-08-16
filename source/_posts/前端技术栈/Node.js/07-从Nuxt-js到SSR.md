@@ -1,5 +1,5 @@
 ---
-title: 从Nuxt.js到SSR
+title: 07-从Nuxt.js到SSR
 toc: true
 date: 2019-07-14 18:50:27
 tags:

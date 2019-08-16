@@ -12,9 +12,9 @@ categories:
 
 OAuth 2.0定义了四种授权方式
 
-- 授权码模式（authorization code）: 常用来做单点登录sso或联合登录
-- 密码模式（resource owner password credentials）： 用于自己本身有一套用户体系
-- 客户端模式（client credentials）：常用于接口的对接
+- 授权码模式（authorization code）: 用于第三方系统接入，需获取第三方用户信息
+- 密码模式（resource owner password credentials）： 用于控制用户的登录
+- 客户端模式（client credentials）：用于控制后端服务相互调用
 - 简化模式（implicit）：不常用
 
 ## 授权码模式
@@ -105,7 +105,7 @@ scope：表示权限范围，如果与客户端申请的范围一致，此项可
 它的步骤如下：
 
 1. 用户向客户端提供用户名和密码。
-2. 客户端将用户名和密码发给认证服务器，向后者请求令牌。
+2. 客户端将用户名和密码+自己clientId和秘钥发给认证服务器，向后者请求令牌。
 3. 认证服务器确认无误后，向客户端提供访问令牌。
 
 - 步骤2中，客户端发出的HTTP请求，包含以下参数：
@@ -116,13 +116,15 @@ Host: server.example.com
 Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=password&username=johndoe&password=A3ddj3w
+grant_type=password&username=johndoe&password=A3ddj3w&clientId=test-pwd-client&secret=123
 
 
 grant_type：表示授权类型，此处的值固定为"password"，必选项。
 username：表示用户名，必选项。
 password：表示用户的密码，必选项。
 scope：表示权限范围，可选项。
+clientId: 客户端id
+secret: 客户端秘钥
 ```
 
 - 步骤3中，认证服务器向客户端发送访问令牌，下面是一个例子
