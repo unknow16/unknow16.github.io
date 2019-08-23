@@ -1,5 +1,5 @@
 ---
-title: Spring Cloud-01-Eureka
+title: 注册中心-Eureka
 date: 2018-01-11 22:18:08
 tags: Spring Cloud
 ---
@@ -18,9 +18,6 @@ tags: Spring Cloud
  eureka instance : 一个微服务application的单个启动实例，随着负载增长可启动多个水平缩放。
  eureka service : 当你注册一个微服务application成一个client,你能通过注册的service ID获取一个eureka service。
 ```
-
-> 个人觉的 client与instance像kafka中的customer group 和 单个customer的区别
-[上面四个区别的stackoverflow链接](https://stackoverflow.com/questions/36557646/what-is-eureka-service-eureka-client-eureka-instance-and-eureka-server)
 
 ### Eureka Server Standalone
 

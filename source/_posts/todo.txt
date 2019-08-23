@@ -1,8 +1,25 @@
-1. com.fasterxml.jackson
-2. GSON
-3. FastJSON
+MongoDB
 
+spring data mongoDB
+
+
+tensquare --- Logstash
+rancher 
+influxDB
+cAdvisor
+Grafana
+
+≈¿≥Ê
+
+ldap 
+
+guava
 
 JPA
 
 œÏ”¶ Ω±‡≥Ã
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
+    }
