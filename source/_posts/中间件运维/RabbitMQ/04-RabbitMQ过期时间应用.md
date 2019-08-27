@@ -1,5 +1,6 @@
 ---
-title: MQ-05-RabbitMQ过期时间应用
+title: 04-RabbitMQ过期时间应用
+toc: true
 date: 2018-10-08 19:05:22
 tags: MQ
 ---

@@ -1,5 +1,6 @@
 ---
-title: MQ-04-RabbitMQ消费者角度特性
+title: 03-RabbitMQ消费者角度特性
+toc: true
 date: 2018-10-08 19:04:39
 tags: MQ
 ---

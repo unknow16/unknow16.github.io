@@ -1,5 +1,6 @@
 ---
-title: MQ-02-RabbitMQ消息模型
+title: 01-RabbitMQ消息模型
+toc: true
 date: 2018-10-08 19:03:05
 tags: MQ
 ---

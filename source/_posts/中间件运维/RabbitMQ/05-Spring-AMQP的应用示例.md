@@ -1,5 +1,5 @@
 ---
-title: Spring AMQP的应用示例
+title: 05-Spring AMQP的应用示例
 toc: true
 date: 2019-08-23 11:10:30
 tags:
