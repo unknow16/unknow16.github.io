@@ -1,0 +1,19 @@
+iptables
+
+snat dnat  https://blog.csdn.net/beanewself/article/details/78317626
+
+ipvs  https://www.cnblogs.com/hongdada/p/9758939.html
+ 
+lvs  https://blog.csdn.net/weixin_40470303/article/details/80541639
+
+tcpdump 
+
+vxlan
+
+网桥
+
+Linux网络命名空间    https://www.jianshu.com/p/369e50201bce
+
+
+多个物理机节点要同一个2层网络，即必须在同一网段内，连到一个2层交换机上
+
