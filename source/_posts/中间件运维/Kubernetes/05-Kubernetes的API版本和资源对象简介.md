@@ -236,6 +236,8 @@ Ingress是一组基于虚拟主机或URL路径把请求转发到指定的Service
 
 Ingress 控制器不同于Deployment 控制器的是，Ingress控制器不直接运行为kube-controller-manager的一部分，它仅仅是Kubernetes集群的一个附件，类似于CoreDNS，需要在集群上单独部署。
 
+目前主流的Ingress 控制器的选型是nginx和traefik。
+
 ## 参考资料
 
 > - []()

@@ -103,7 +103,7 @@ spec:
         command:
         - /heapster
         - --source=kubernetes
-        - --sink=influxdb:http://172.17.100.96:31001  # 这里填写刚刚记录下的InfluxDB服务端的地址。
+        - --sink=influxdb:http://192.168.11.129:31001  # 这里填写刚刚记录下的InfluxDB服务端的地址。
 ---
 apiVersion: v1
 kind: Service
@@ -219,10 +219,13 @@ spec:
 
 1. Grafana读不到监控数据，且kubernetes-dashboard没有cpu和内存监控图像
 
+每个节点加如下参数后重启
 ```
 $ vim /etc/sysconfig/kubelet 
 
 KUBELET_EXTRA_ARGS="--fail-swap-on=false --read-only-port=10255"
+
+$ systemctl restart kubelet
 ```
 
 

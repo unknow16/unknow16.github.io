@@ -17,3 +17,7 @@ Linux网络命名空间    https://www.jianshu.com/p/369e50201bce
 
 多个物理机节点要同一个2层网络，即必须在同一网段内，连到一个2层交换机上
 
+dns
+
+ceph RBD
+
