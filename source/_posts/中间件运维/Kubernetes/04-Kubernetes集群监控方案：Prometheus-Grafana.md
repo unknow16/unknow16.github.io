@@ -116,6 +116,12 @@ Prometheus能够直接把KubernetesAPIServer作为服务发现系统使用进而
 
 另外，仅期望Prometheus为后端生成自定义指标时仅部署Prometheus服务器即可，它甚至也不需要数据持久功能。但若要配置完整功能的监控系统，管理员还需要在每个主机上部署node_exporter、按需部署其他特有类型的exporter以及Alertmanager。
 
+
+
+## 部署Prometheus
+
+==========
+
 ## 参考资料
 > - []()
 > - []()

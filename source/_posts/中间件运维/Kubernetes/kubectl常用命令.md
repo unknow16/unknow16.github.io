@@ -11,6 +11,10 @@ categories:
 kubectl get pod myapp-848b5b879b-5f69p -o yaml
 kubectl describe pods nginx-554b9c67f9-f2mwt
 
+# 标签选择查看pod
+kubectl get pods -l app=filebeat -o wide
+kubectl get pods -w　　# 观察更新状态
+
 ## 日志查看
 kubectl logs -f  pod-demo
 kubectl logs pod-demo myapp # 查看pod中myapp容器的日志
