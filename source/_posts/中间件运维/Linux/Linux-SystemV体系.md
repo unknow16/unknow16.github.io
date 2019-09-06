@@ -23,7 +23,8 @@ tags: Linux
 ## System V的基本工具
 system V主要用chkconfig/sevice/update-rc.d命令管理服务，在使用这些命令操作服务前，需要将相应服务脚本放入/etc/init.d目录中。 
 
-#### chkconfig基本命令如下： 
+chkconfig基本命令如下： 
+
 - 添加服务 chkconfig –add servicename 
 - 使服务自动启动 chkconfig –level 2345 servicename on 
 - 使服务自动禁止 chkconfig –level 2345 servicename off 
@@ -31,10 +32,12 @@ system V主要用chkconfig/sevice/update-rc.d命令管理服务，在使用这�
 - 检查服务状态 chkconfig servicename status 
 - 显示所有已启动的服务 chkconfig –list 
 
-#### service基本命令如下： 
+service基本命令如下： 
+
 - 启动某服务 service servicename start 
 - 停止某服务 service servicename stop 
 - 重启某服务 service servicename restart 
 
-#### update-rc.d基本命令如下： 
+update-rc.d基本命令如下： 
+
 - 删除服务 update-rc.d -f servicename remove

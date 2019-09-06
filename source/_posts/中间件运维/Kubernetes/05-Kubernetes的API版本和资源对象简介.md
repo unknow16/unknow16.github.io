@@ -156,8 +156,21 @@ Kubernetes 运行容器（Pod）与访问容器（Pod）这两项任务分别由
 
 ## Pod控制器
 
-通常不会直接创建 Pod，而是通过 Controller 来管理 Pod 的。Controller 中定义了 Pod 
-的部署特性，比如有几个副本，在什么样的 Node 上运行等。为了满足不同的业务场景，Kubernetes 提供了多种 Controller，我们逐一讨论。
+  在K8S的集群设计中，Pod是一个有生命周期的对象。那么用户通过手工创建或者通过Controller直接创建的Pod对象会被调度器（Scheduler）调度到集群中的某个工作节点上运行，等到容器应用进程运行结束之后正常终止，随后就会被删除。而需要注意的是，当节点的资源耗尽或者故障，也会导致Pod对象的回收。
+
+  而K8S在这一设计上，使用了控制器实现对一次性的Pod对象进行管理操作。比如，要确保部署的应用程序的Pod副本数达到用户预期的数目，以及基于Pod模板来重建Pod对象等，从而实现Pod对象的扩容、缩容、滚动更新和自愈能力。例如，在某个节点故障，相关的控制器会将运行在该节点上的Pod对象重新调度到其他节点上进行重建。
+
+  控制器本身也是一种资源类型，其中包括Replication、Controller、Deployment、StatefulSet、DaemonSet、Jobs等等，它们都统称为Pod控制器。
+
+Pod控制器的定义通常由期望的副本数量、Pod模板、标签选择器组成。Pod控制器会根据标签选择器来对Pod对象的标签进行匹配筛选，所有满足选择条件的Pod对象都会被当前控制器进行管理并计入副本总数，确保数目能够达到预期的状态副本数。
+
+  需要注意的是，在实际的应用场景中，在接收到的请求流量负载低于或接近当前已有Pod副本的承载能力时，需要我们手动修改Pod控制器中的期望副本数量以实现应用规模的扩容和缩容。而在集群中部署了HeapSet或者Prometheus的这一类资源监控组件时，用户还可以通过HPA（HorizontalPodAutoscaler）来计算出合适的Pod副本数量，并自动地修改Pod控制器中期望的副本数，从而实现应用规模的动态伸缩，提高集群资源的利用率。
+
+  K8S集群中的每个节点上都运行着cAdvisor，用于收集容器和节点的CPU、内存以及磁盘资源的利用率直播数据，这些统计数据由Heapster聚合之后可以通过API  server访问。而HorizontalPodAutoscaler基于这些统计数据监控容器的健康状态并作出扩展决策。
+
+
+
+为了满足不同的业务场景，Kubernetes 提供了多种 Controller，我们逐一讨论。
 
 - ReplicaSet
 
@@ -195,12 +208,9 @@ Deployment 可以部署多个副本，每个 Pod 都有自己的 IP，外界如�
 
 一个Service可以看作一组提供相同服务的Pod的对外访问接口，Service作用于哪些Pod是通过Label Selector来定义的。
 
-- 拥有一个指定的名字（比如my-mysql-server）；
-- 拥有一个虚拟IP（Cluster IP、Service IP或VIP）和端口号，销毁之前不会改变，只能内网访问；
-- 能够提供某种远程服务能力；
-- 被映射到了提供这种服务能力的一组容器应用上；
+如果K8S存在DNS附件（如coredns）它就会在Service创建时为它自动配置一个DNS名称，用于客户端进行服务发现。
 
-如果Service要提供外网服务，需指定公共IP和NodePort，或外部负载均衡器； 
+通常我们直接请求Service  IP，该请求就会被负载均衡到后端的端点，即各个Pod对象，从这点上，是不是有点像负载均衡器呢，因此Service本质上是一个4层的代理服务，另外Service还可以将集群外部流量引入至集群，这就需要Service的NodePort或外部负载均衡器.
 
 ## NameSpace
 
@@ -237,6 +247,11 @@ Ingress是一组基于虚拟主机或URL路径把请求转发到指定的Service
 Ingress 控制器不同于Deployment 控制器的是，Ingress控制器不直接运行为kube-controller-manager的一部分，它仅仅是Kubernetes集群的一个附件，类似于CoreDNS，需要在集群上单独部署。
 
 目前主流的Ingress 控制器的选型是nginx和traefik。
+
+##  Volume
+在使用容器时，我们知道，当数据存放于容器之中，容器销毁后，数据也会随之丢失。这就是需要一个外部存储，以保证数据的持久化存储。而存储卷就是这样的一个东西。
+
+存储卷（Volume）是独立于容器文件系统之外的存储空间，常用于扩展容器的存储空间并为其提供持久存储能力。存储卷在K8S中的分类为：临时卷、本地卷和网络卷。临时卷和本地卷都位于Node本地，一旦Pod被调度至其他Node节点，此类型的存储卷将无法被访问，因为临时卷和本地卷通常用于数据缓存，持久化的数据通常放置于持久卷（persistent  volume）之中
 
 ## 参考资料
 
