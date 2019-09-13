@@ -189,6 +189,9 @@ Export list for stor01:
 ......
 stor01:/data/volumes on /mnt type nfs4 (rw,relatime,vers=4.1,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,clientaddr=192.168.56.13,local_lock=none,addr=192.168.56.14)
 [root@k8s-node02 ~]# umount /mnt/
+
+## 修改了/etc/exports后，用下面命令，全部共享目录重新挂载并显示，不用重启nfs服务，配置文件就会生效
+exportfs -arv
 ```
 
 2. 清单定义
