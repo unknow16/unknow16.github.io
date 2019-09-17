@@ -1,7 +1,7 @@
 ---
-title: 08-Pod控制器：DaemonSet
+title: 09-Pod控制器：DaemonSet
 toc: true
-date: 2019-09-02 23:31:57
+date: 2019-08-31 01:04:51
 tags:
 categories:
 ---

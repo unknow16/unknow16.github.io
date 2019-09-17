@@ -1,5 +1,5 @@
 ---
-title: 15-程序包管理器：Helm
+title: 19-程序包管理器-Helm
 toc: true
 date: 2019-09-02 23:53:51
 tags:
@@ -442,102 +442,19 @@ mysql
 
 
 
-## chart模板
+## 	 chart模板
 
 Helm 通过模板创建 Kubernetes 能够理解的 YAML 格式的资源配置文件，我们将通过例子来学习如何使用模板。
 
-以 `templates/secrets.yaml` 为例：
+以 `templates/secrets.yaml` 为例，自行查看其内容
 
-```
-{{- if not .Values.existingSecret }}
-apiVersion: v1
-kind: Secret
-metadata:
-  name: {{ template "mysql.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  labels:
-    app: {{ template "mysql.fullname" . }}
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    release: "{{ .Release.Name }}"
-    heritage: "{{ .Release.Service }}"
-type: Opaque
-data:
-  {{ if .Values.mysqlRootPassword }}
-  mysql-root-password:  {{ .Values.mysqlRootPassword | b64enc | quote }}
-  {{ else }}
-  mysql-root-password: {{ randAlphaNum 10 | b64enc | quote }}
-  {{ end }}
-  {{ if .Values.mysqlPassword }}
-  mysql-password:  {{ .Values.mysqlPassword | b64enc | quote }}
-  {{ else }}
-  mysql-password: {{ randAlphaNum 10 | b64enc | quote }}
-  {{ end }}
-{{- if .Values.ssl.enabled }}
-{{ if .Values.ssl.certificates }}
-{{- range .Values.ssl.certificates }}
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: {{ .name }}
-  labels:
-    app: {{ template "mysql.fullname" $ }}
-    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version }}"
-    release: "{{ $.Release.Name }}"
-    heritage: "{{ $.Release.Service }}"
-type: Opaque
-data:
-  ca.pem: {{ .ca | b64enc }}
-  server-cert.pem: {{ .cert | b64enc }}
-  server-key.pem: {{ .key | b64enc }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- end }}
-```
+从结构上看，文件的内容和我们在定义Secret的配置上大致相似，只是大部分的属性值变成了用双中括号包起来的xxx。这些实际上是模板的语法。Helm采用了Go语言的模板来编写chart。
 
-从结构上看，文件的内容和我们在定义Secret的配置上大致相似，只是大部分的属性值变成了{{ xxx }}。这些{{ xx }}实际上是模板的语法。Helm采用了Go语言的模板来编写chart。
-
-- ① `{{ template "mysql.fullname" . }}` 定义 Secret 的 `name`。
+- ①template "mysql.fullname" . 定义 Secret 的 name。
 
 关键字 `template` 的作用是引用一个子模板 `mysql.fullname`。这个子模板是在 `templates/_helpers.tpl` 文件中定义的。
 
-```
-{{/* vim: set filetype=mustache: */}}
-{{/*
-Expand the name of the chart.
-*/}}
-{{- define "mysql.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
-Create a default fully qualified app name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
-*/}}
-{{- define "mysql.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- printf .Release.Name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Generate chart secret name
-*/}}
-{{- define "mysql.secretName" -}}
-{{ default (include "mysql.fullname" .) .Values.existingSecret }}
-{{- end -}}
-```
-
-这个定义还是很复杂的，因为它用到了模板语言中的对象、函数、流控制等概念。现在看不懂没关系，这里我们学习的重点是：如果存在一些信息多个模板都会用到，则可在 `templates/_helpers.tpl` 中将其定义为子模板，然后通过 `templates` 函数引用。
+`templates/_helpers.tpl`定义还是很复杂的，因为它用到了模板语言中的对象、函数、流控制等概念。现在看不懂没关系，这里我们学习的重点是：如果存在一些信息多个模板都会用到，则可在 `templates/_helpers.tpl` 中将其定义为子模板，然后通过 `templates` 函数引用。
 
 这里 `mysql.fullname` 是由 release 与 chart 二者名字拼接组成。
 
@@ -554,17 +471,15 @@ stable/mysql    0.3.5                       Fast, reliable, scalable, and easy t
 
 那么：
 
-`{{ .Chart.Name }}` 的值为 `mysql`。
-
 ```
-{{ .Chart.Version }}` 的值为 `0.3.5。
+.Chart.Name 的值为 mysql
+.Chart.Version  的值为 0.3.5
+.Release.Name }} 的值为 my
+.Release.Service }} 始终取值为 Tiller
+template "mysql.fullname" . }} 计算结果为 `my-mysql
 ```
 
-`{{ .Release.Name }}` 的值为 `my`。
 
-`{{ .Release.Service }}` 始终取值为 `Tiller`。
-
-`{{ template "mysql.fullname" . }}` 计算结果为 `my-mysql`。
 
 - ③ 这里指定 `mysql-root-password` 的值，不过使用了 `if-else` 的流控制，其逻辑为：
 
@@ -595,7 +510,7 @@ testFramework:
 
 因为 `mysqlRootPassword` 被注释掉了，没有赋值，所以逻辑判断会走 `else`，即随机生成密码。
 
-`randAlphaNum`、`b64enc`、`quote` 都是 Go 模板语言支持的函数，函数之间可以通过管道 `|` 连接。`{{ randAlphaNum 10 | b64enc | quote }}` 的作用是首先随机产生一个长度为 10 的字符串，然后将其 base64 编码，最后两边加上双引号。
+`randAlphaNum`、`b64enc`、`quote` 都是 Go 模板语言支持的函数，函数之间可以通过管道 `|` 连接。` randAlphaNum 10 | b64enc | quote ` 的作用是首先随机产生一个长度为 10 的字符串，然后将其 base64 编码，最后两边加上双引号。
 
 `templates/secrets.yaml` 这个例子展示了 chart 模板主要的功能，我们最大的收获应该是：模板将 chart 参数化了，通过 `values.yaml` 可以灵活定制应用。
 

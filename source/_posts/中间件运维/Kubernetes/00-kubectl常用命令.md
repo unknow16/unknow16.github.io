@@ -1,7 +1,7 @@
 ---
-title: kubectl常用命令
+title: 00-kubectl常用命令
 toc: true
-date: 2019-08-30 22:30:30
+date: 2018-08-05 19:20:58
 tags:
 categories:
 ---

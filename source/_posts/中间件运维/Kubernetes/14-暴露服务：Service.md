@@ -1,5 +1,5 @@
 ---
-title: 09-暴露服务：Service
+title: 14-暴露服务：Service
 toc: true
 date: 2019-08-31 02:32:18
 tags:
@@ -12,7 +12,7 @@ Pod存在生命周期，有销毁，有重建，无法提供一个固定的访�
 
 Service资源基于标签选择器将一组Pod定义成一个逻辑组合，并通过自己的IP地址和端口调度代理请求到组内的Pod对象，如下图所示，它向客户端隐藏了真实的，处理用户请求的Pod资源，使得从客户端上看，就像是由Service直接处理并响应一样，是不是很像负载均衡器呢！
 
-![](09-暴露服务：Service/service-arch.png)
+![](14-暴露服务：Service/service-arch.png)
 
 Service对象的IP地址也称为Cluster IP，它位于为Kubernetes集群配置指定专用的IP地址范围之内，是一种虚拟的IP地址，它在Service对象创建之后保持不变，并且能够被同一集群中的Pod资源所访问。Service端口用于接受客户端请求，并将请求转发至后端的Pod应用的相应端口，这样的代理机制，也称为端口代理，它是基于TCP/IP协议栈的传输层。
 

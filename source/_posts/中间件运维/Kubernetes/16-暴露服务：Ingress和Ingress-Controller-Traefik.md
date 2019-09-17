@@ -1,5 +1,5 @@
 ---
-title: 11-暴露服务：Ingress和Ingress-Controller-Traefik
+title: 16-暴露服务：Ingress和Ingress-Controller-Traefik
 toc: true
 date: 2019-09-01 16:28:53
 tags:

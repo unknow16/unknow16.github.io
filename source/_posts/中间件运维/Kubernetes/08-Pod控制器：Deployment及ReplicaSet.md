@@ -1,5 +1,5 @@
 ---
-title: 08-Pod控制器-Deployment及ReplicaSet
+title: 08-Pod控制器：Deployment及ReplicaSet
 toc: true
 date: 2019-08-31 01:01:51
 tags:

@@ -1,7 +1,7 @@
 ---
-title: 12-存储卷
+title: 10-存储卷：PV和PVC
 toc: true
-date: 2019-09-03 10:08:10
+date: 2019-08-31 01:05:51
 tags:
 categories:
 ---
@@ -253,7 +253,7 @@ StorageClass：虽然PersistentVolumeClaims允许用户使用抽象存储资源�
 
 
 
-![](10-存储卷/pvc-pv.png)
+![](10-存储卷：PV和PVC/pvc-pv.png)
 
 
 
@@ -300,7 +300,7 @@ PersistentVolume的回收策略告诉集群在释放其声明后，该卷应该�
 
 实验图如下：
 
-![](10-存储卷/nfs-pvc.png)
+![](10-存储卷：PV和PVC/nfs-pvc.png)
 
 ```
 [root@k8s-master ~]# kubectl explain pv    #查看pv的定义方式
@@ -522,7 +522,7 @@ welcome to use pv3
 在pv和pvc使用过程中存在的问题，在pvc申请存储空间时，未必就有现成的pv符合pvc申请的需求，上面nfs在做pvc可以成功的因素是因为我们做了指定的需求处理。那么当PVC申请的存储空间不一定有满足PVC要求的PV事，又该如何处理呢？？？为此，Kubernetes为管理员提供了描述存储"class（类）"的方法（StorageClass）。举个例子，在存储系统中划分一个1TB的存储空间提供给Kubernetes使用，当用户需要一个10G的PVC时，会立即通过restful发送请求，从而让存储空间创建一个10G的image，之后在我们的集群中定义成10G的PV供给给当前的PVC作为挂载使用。在此之前我们的存储系统必须支持restful接口，比如ceph分布式存储，而glusterfs则需要借助第三方接口完成这样的请求。如图：
 
 
-![](10-存储卷/storage-class.png)
+![](10-存储卷：PV和PVC/storage-class.png)
 
 
 

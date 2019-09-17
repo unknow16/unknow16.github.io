@@ -1,7 +1,7 @@
 ---
-title: 10-暴露服务：Ingress和Ingress-Controller-Nginx
+title: 15-暴露服务：Ingress和Ingress-Controller-Nginx
 toc: true
-date: 2019-08-30 09:38:38
+date: 2019-09-01 16:20:53
 tags:
 categories:
 ---

@@ -1,7 +1,7 @@
 ---
-title: 08-Pod控制器：StatefulSet
+title: 13-Pod控制器：StatefulSet及Headless Service
 toc: true
-date: 2019-09-03 10:08:59
+date: 2019-08-31 01:08:51
 tags:
 categories:
 ---
@@ -152,7 +152,7 @@ StatefulSet是为了解决有状态服务的问题（对应Deployments和Replica
 
 大部分有状态副本集都会用到持久存储，比如分布式系统来说，由于数据是不一样的，每个节点都需要自己专用的存储节点。而在deployment中pod模板中创建的存储卷是一个共享的存储卷，多个pod使用同一个存储卷，而statefulset定义中的每一个pod都不能使用同一个存储卷，由此基于pod模板创建pod是不适应的，这就需要引入volumeClainTemplate，当在使用statefulset创建pod时，会自动生成一个PVC，从而请求绑定一个PV，从而有自己专用的存储卷。Pod名称、PVC和PV关系图如下：
 
-![](12-Pod控制器：StatefulSet及Headless Service/volumeClainTemplate.png)
+![](13-Pod控制器：StatefulSet及Headless Service/volumeClainTemplate.png)
 
 
 

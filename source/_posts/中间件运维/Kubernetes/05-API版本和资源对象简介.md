@@ -1,5 +1,5 @@
 ---
-title: Kubernetes的API版本和资源对象简介
+title: 05-API版本和资源对象简介
 toc: true
 date: 2019-08-29 15:17:39
 tags:

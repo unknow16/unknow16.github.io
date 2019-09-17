@@ -1,5 +1,5 @@
 ---
-title: kubernetes集群监控方案：InfluxDB+Heapster+Grafana
+title: 03-集群监控方案：InfluxDB-Heapster-Grafana
 toc: true
 date: 2019-08-29 11:00:41
 tags:

@@ -1,7 +1,7 @@
 ---
-title: 14-kubernetes的认证-授权-准入控制
+title: 17-kubernetes的认证-授权-准入控制
 toc: true
-date: 2019-09-03 10:04:27
+date: 2019-09-01 16:29:53
 tags:
 categories:
 ---
@@ -10,7 +10,7 @@ categories:
 
 API Server作为Kubernetes网关，是访问和管理资源对象的唯一入口，其各种集群组件访问资源都需要经过网关才能进行正常访问和管理。每一次的访问请求都需要进行合法性的检验，其中包括身份验证、操作权限验证以及操作规范验证等，需要通过一系列验证通过之后才能访问或者存储数据到etcd当中。如下图：
 
-![](15-kubernetes的认证-授权-准入控制/auth.png)
+![](17-kubernetes的认证-授权-准入控制/auth.png)
 
 
 
@@ -211,7 +211,7 @@ Error from server (Forbidden): pods is forbidden: User "fuyi" cannot list resour
 
 Role、RoleBinding、ClusterRole和ClusterRoleBinding的关系如下图：
 
-![](15-kubernetes的认证-授权-准入控制/role.png)
+![](17-kubernetes的认证-授权-准入控制/role.png)
 
 
 
@@ -461,7 +461,7 @@ RBAC不仅仅可以对user进行访问权限的控制，还可以通过group和s
 
 从前面serviceaccount我们可以了解到，Pod可以通过  spec.serviceAccountName来定义其是以某个serviceaccount的身份进行运行，当我们通过RBAC对serviceaccount进行访问授权时，即可以实现Pod对其他资源的访问权限进行控制。也就是说，当我们对serviceaccount进行rolebinding或clusterrolebinding，会使创建Pod拥有对应角色的权限和apiserver进行通信。如图：
 
-![](15-kubernetes的认证-授权-准入控制/sa-role.png)
+![](17-kubernetes的认证-授权-准入控制/sa-role.png)
 
 ## 参考资料
 

@@ -1,7 +1,7 @@
 ---
-title: Kubernetes集群监控方案：Prometheus+Grafana
+title: 04-集群监控方案：Prometheus-Grafana
 toc: true
-date: 2019-08-30 20:32:45
+date: 2019-08-29 11:01:41
 tags:
 categories:
 ---

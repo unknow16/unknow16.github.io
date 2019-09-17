@@ -1,5 +1,5 @@
 ---
-title: 用kubeadm搭建一个v1.15的Kubernetes集群
+title: 02-用kubeadm搭建一个v1-15的Kubernetes集群
 toc: true
 date: 2019-08-29 10:09:00
 tags:

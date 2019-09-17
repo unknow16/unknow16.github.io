@@ -1,5 +1,5 @@
 ---
-title: k8s-01-架构
+title: 01-kubernetes架构
 date: 2018-08-05 19:24:58
 toc: true
 tags: Kubernetes

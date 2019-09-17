@@ -1,7 +1,7 @@
 ---
-title: kubernetes的网络模型
+title: 20-kubernetes的网络模型和网络策略
 toc: true
-date: 2019-08-30 12:06:42
+date: 2019-09-03 10:10:59
 tags:
 categories:
 ---

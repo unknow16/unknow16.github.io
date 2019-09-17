@@ -1,5 +1,5 @@
 ---
-title: Pod生命周期管理
+title: 07-Pod生命周期管理
 toc: true
 date: 2019-08-30 09:09:40
 tags:
