@@ -12,7 +12,7 @@ tags: BlockChain
 2. 安装Truffle，是一个基于node.js的开发Dapp框架
 
 ```
-npm install -g truffle
+sudo npm install -g truffle
 ```
 
 3. 下载Ganache，是一个图形化以太坊私有链工具
