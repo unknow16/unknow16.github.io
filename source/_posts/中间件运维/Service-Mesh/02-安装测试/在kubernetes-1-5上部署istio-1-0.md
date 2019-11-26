@@ -228,6 +228,86 @@ spec:
 
 
 
+## 配置双向TLS
+
+有两种方式：宽松模式和严格模式
+
+- permissive mutual TLS mode，宽松模式
+
+所有服务均接受纯文本和双向TLS流量。除非配置为双向TLS，否则客户端不进行加密，而发送纯文本流量。有如下两种情况时适用：
+
+1. 集群已存在应用
+2. 使用Istio边车的服务需要能够与其他非Istio Kubernetes服务进行通信的应用程序
+
+```
+## 安装方法:应用istio安装包中install/kubernetes/istio-demo.yaml
+$ kubectl apply -f install/kubernetes/istio-demo.yaml
+```
+
+
+
+- strict mutual TLS mode，严格模式
+
+该模式强制客户端和服务端双方都要使用TLS。仅在所有工作负载均支持Istio的全新Kubernetes集群上使用此模式。所有新部署的工作负载都将安装Istio sidecar。
+
+```
+## 安装方法: 应用istio安装包中install/kubernetes/istio-demo-auth.yaml
+$ kubectl apply -f install/kubernetes/istio-demo-auth.yaml
+```
+
+
+
+## 校验安装
+
+确保已部署以下Kubernetes服务，并确认除了jaeger-agent服务之外，它们都具有适当的CLUSTER-IP。
+
+```
+$  kubectl get svc -n istio-system
+NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                                                                                                     AGE
+grafana                    ClusterIP   10.1.171.102   <none>        3000/TCP                                                                                                    25d
+istio-citadel              ClusterIP   10.1.1.159     <none>        8060/TCP,9093/TCP                                                                                           25d
+istio-egressgateway        ClusterIP   10.1.202.206   <none>        80/TCP,443/TCP                                                                                              25d
+istio-galley               ClusterIP   10.1.39.84     <none>        443/TCP,9093/TCP                                                                                            25d
+istio-ingressgateway       NodePort    10.1.75.185    <none>        80:31380/TCP,443:31390/TCP,31400:31400/TCP,15011:30981/TCP,8060:32240/TCP,15030:30038/TCP,15031:32395/TCP   25d
+istio-pilot                ClusterIP   10.1.169.136   <none>        15010/TCP,15011/TCP,8080/TCP,9093/TCP                                                                       25d
+istio-policy               ClusterIP   10.1.229.111   <none>        9091/TCP,15004/TCP,9093/TCP                                                                                 25d
+istio-sidecar-injector     ClusterIP   10.1.162.58    <none>        443/TCP                                                                                                     25d
+istio-statsd-prom-bridge   ClusterIP   10.1.132.134   <none>        9102/TCP,9125/UDP                                                                                           25d
+istio-telemetry            ClusterIP   10.1.193.85    <none>        9091/TCP,15004/TCP,9093/TCP,42422/TCP                                                                       25d
+jaeger-agent               ClusterIP   None           <none>        5775/UDP,6831/UDP,6832/UDP                                                                                  25d
+jaeger-collector           ClusterIP   10.1.155.149   <none>        14267/TCP,14268/TCP                                                                                         25d
+jaeger-query               ClusterIP   10.1.207.226   <none>        16686/TCP                                                                                                   25d
+prometheus                 ClusterIP   10.1.173.163   <none>        9090/TCP                                                                                                    25d
+servicegraph               ClusterIP   10.1.191.61    <none>        8088/TCP                                                                                                    25d
+tracing                    ClusterIP   10.1.104.173   <none>        80/TCP                                                                                                      25d
+zipkin                     ClusterIP   10.1.21.177    <none>        9411/TCP                                                                                                    25d
+```
+
+确保已部署相应的Kubernetes Pod并具有运行状态：
+
+```
+$  kubectl get pods -n istio-system
+NAME                                       READY   STATUS    RESTARTS   AGE
+grafana-5f5888bf65-nvjbg                   1/1     Running   9          25d
+istio-citadel-86c67595f6-zxxwz             1/1     Running   9          25d
+istio-egressgateway-79b744756d-bchtd       1/1     Running   10         25d
+istio-galley-f79d5df65-hrl2w               1/1     Running   25         24d
+istio-ingressgateway-nmf4k                 1/1     Running   12         25d
+istio-ingressgateway-rxksz                 1/1     Running   10         25d
+istio-pilot-6b47746b85-7x5tw               2/2     Running   18         25d
+istio-policy-95d4b5cf4-wrnm9               2/2     Running   23         25d
+istio-sidecar-injector-66f4dd49bb-qjrf5    1/1     Running   7          25d
+istio-statsd-prom-bridge-f575fdb46-lnrc5   1/1     Running   9          25d
+istio-telemetry-8595d7f88c-qtqxq           2/2     Running   20         25d
+istio-tracing-6c7b5d9498-k4rf9             1/1     Running   16         25d
+prometheus-74f9669cd8-wsd6d                1/1     Running   13         25d
+servicegraph-57b574467c-nghmx              1/1     Running   24         25d
+```
+
+
+
+
+
 ## 启用自动注入sidecar
 
 `istio-1.0.0` 默认已经开启了自动注入功能以及其他日志监控和追踪的相关组件如istio-tracing、istio-telemetry、grafana、prometheus、servicegraph。
