@@ -29,7 +29,7 @@ reviews书评服务有三个版本：
 
 该应用程序是多语言的，即微服务以不同的语言编写，架构图如下：
 
-![](01-部署官方用例bookinfo测试/bookinfo-arch.svg)
+![](部署官方用例bookinfo测试/bookinfo-arch.svg)
 
 
 
@@ -37,7 +37,7 @@ reviews书评服务有三个版本：
 
 要使用istio部署应用，无需对应用进行任何特殊改动，只需要在启用Istio的环境中配置和运行服务，istio会自动为每个服务旁边注入一个Envoy代理，最终部署如下：
 
-![](01-部署官方用例bookinfo测试/bookinfo-arch1.svg)
+![](部署官方用例bookinfo测试/bookinfo-arch1.svg)
 
 该Envoy代理会拦截对相应服务的调用与响应，并通过Istio控制平面去配置路由、调用跟踪等策略实施控制。
 
@@ -107,7 +107,7 @@ echo "http://${GATEWAY_URL}/productpage"
 
 
 
-![](01-部署官方用例bookinfo测试/bookinfo-result.png)
+![](部署官方用例bookinfo测试/bookinfo-result.png)
 
 ## 删除bookinfo
 
