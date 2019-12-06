@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>08-分库分表设计 | Stay Hungry | Stay Foolish | mingfy</title>
+    
+    
+        <meta name="keywords" content="08-分库分表设计">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="是否需要分说到数据库分库分表，不能一味的追求，我们要明白为什么要进行分库分表才是最终目的。现在网上一些人鼓吹分库分表如何应对了多大数据，却不知针对很多人的业务来说，分库分表策略也许并非是银弹，而是令人焦虑的焦油坑。 分库分表是业务发展到一定阶段，数据积累到一定量级而衍生出来的解决方案。当DB的数据量级到达一个阶段，写入和读取的速度会出现瓶颈，即使是有索引，索引也会变的很大，而且数据库的物理文件大的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08-分库分表设计">
+<meta property="og:url" content="http://yoursite.com/wiki/架构设计/技术架构设计/08-分库分表设计/index.html">
+<meta property="og:site_name" content="Stay Hungry | Stay Foolish | mingfy">
+<meta property="og:description" content="是否需要分说到数据库分库分表，不能一味的追求，我们要明白为什么要进行分库分表才是最终目的。现在网上一些人鼓吹分库分表如何应对了多大数据，却不知针对很多人的业务来说，分库分表策略也许并非是银弹，而是令人焦虑的焦油坑。 分库分表是业务发展到一定阶段，数据积累到一定量级而衍生出来的解决方案。当DB的数据量级到达一个阶段，写入和读取的速度会出现瓶颈，即使是有索引，索引也会变的很大，而且数据库的物理文件大的">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/wiki/架构设计/技术架构设计/08-分库分表设计/02-01.jpg">
+<meta property="og:image" content="http://yoursite.com/wiki/架构设计/技术架构设计/08-分库分表设计/02-02.jpg">
+<meta property="og:image" content="http://yoursite.com/wiki/架构设计/技术架构设计/08-分库分表设计/02-03.png">
+<meta property="og:image" content="http://yoursite.com/wiki/架构设计/技术架构设计/08-分库分表设计/02-04.png">
+<meta property="og:updated_time" content="2019-08-24T04:56:09.823Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="08-分库分表设计">
+<meta name="twitter:description" content="是否需要分说到数据库分库分表，不能一味的追求，我们要明白为什么要进行分库分表才是最终目的。现在网上一些人鼓吹分库分表如何应对了多大数据，却不知针对很多人的业务来说，分库分表策略也许并非是银弹，而是令人焦虑的焦油坑。 分库分表是业务发展到一定阶段，数据积累到一定量级而衍生出来的解决方案。当DB的数据量级到达一个阶段，写入和读取的速度会出现瓶颈，即使是有索引，索引也会变的很大，而且数据库的物理文件大的">
+<meta name="twitter:image" content="http://yoursite.com/wiki/架构设计/技术架构设计/08-分库分表设计/02-01.jpg">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <meta name="baidu-site-verification" content="Fe5b8xyrGJ">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Stay Hungry | Stay Foolish | mingfy</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-9009841192314468",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142763903-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-142763903-1');
+    </script>
+
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            中间件运维
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DevOps
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/DevOps/容器生态组件和工具/">容器生态组件和工具</a></li>  <li class="file"><a href="/wiki/中间件运维/DevOps/01-Jenkins-kubernetes实现CI-CD：部署jenkins/">01-Jenkins+kubernetes实现CI/CD：部署jenkins</a></li>  <li class="file"><a href="/wiki/中间件运维/DevOps/02-Jenkins-kubernetes实现CI-CD：Pipeline配置/">02-Jenkins+kubernetes实现CI/CD：Pipeline配置</a></li>  <li class="file"><a href="/wiki/中间件运维/DevOps/03-kubernetes集群中部署Nexus/">03-kubernetes集群中部署Nexus</a></li>  <li class="file"><a href="/wiki/中间件运维/DevOps/04-kubernetes集群中部署Gitlab/">03-kubernetes集群中部署Gitlab</a></li>  <li class="file"><a href="/wiki/中间件运维/DevOps/从DevOps到Serverless/">从DevOps到Serverless</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Docker
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Docker/01-CentOS-7下安装Docker/">01-CentOS-7下安装Docker</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/02-操作镜像/">02-操作镜像</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/03-用Dockerfile定制镜像/">03-用Dockerfile定制镜像</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/04-操作容器/">04-操作容器</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/05-数据管理/">05-数据管理</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/06-网络配置/">06-网络配置</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/07-Docker三剑客/">07-Docker三剑客</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/08-Dockerfile指令详解/">08-Dockerfile指令详解</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/09-Docker下常用服务安装/">09-Docker下常用服务安装</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/10-Docker监控方案：influxDB-cAdvisor-Grafana/">10-Docker监控方案：influxDB+cAdvisor+Grafana</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/12-Prometheus快速入门/">12-Prometheus快速入门</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/11-Prometheus对比Heapster/">Prometheus对比Heapster</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/容器相关规范/">容器相关规范</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/Docker历史及生态圈/">Docker历史及生态圈</a></li>  <li class="file"><a href="/wiki/中间件运维/Docker/Ubuntu-16-04安装Docker/">Ubuntu-16.04安装Docker</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ElasticSearch
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/ElasticSearch/01-ElasticSearch核心概念/">01-ElasticSearch核心概念</a></li>  <li class="file"><a href="/wiki/中间件运维/ElasticSearch/02-数十亿级别数据量如何提高查询效率/">02-数十亿级别数据量如何提高查询效率</a></li>  <li class="file"><a href="/wiki/中间件运维/ElasticSearch/03-常用Restful-Api使用示例/">03-常用Restful Api使用示例</a></li>  <li class="file"><a href="/wiki/中间件运维/ElasticSearch/04-SpringDataElasticsearch操作/">04-SpringDataElasticsearch操作</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Jvm
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Jvm/JVM-01-内存模型/">JVM-01-内存模型</a></li>  <li class="file"><a href="/wiki/中间件运维/Jvm/JVM-02-类加载机制/">JVM-02-类加载机制</a></li>  <li class="file"><a href="/wiki/中间件运维/Jvm/JVM-03-垃圾收集器/">JVM-03-垃圾收集器</a></li>  <li class="file"><a href="/wiki/中间件运维/Jvm/JVM-04-GC流程/">JVM-04-GC流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kubernetes
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Kubernetes/00-kubectl常用命令/">00-kubectl常用命令</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/01-kubernetes架构/">01-kubernetes架构</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/02-用kubeadm搭建一个v1-15的Kubernetes集群/">02-用kubeadm搭建一个v1-15的Kubernetes集群</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/03-集群监控方案：InfluxDB-Heapster-Grafana/">03-集群监控方案：InfluxDB-Heapster-Grafana</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/04-集群监控方案：Prometheus-Grafana/">04-集群监控方案：Prometheus-Grafana</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/05-API版本和资源对象简介/">05-API版本和资源对象简介</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/06-资源清单定义格式解释/">06-资源清单定义格式解释</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/07-Pod生命周期管理/">07-Pod生命周期管理</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/08-Pod控制器：Deployment及ReplicaSet/">08-Pod控制器：Deployment及ReplicaSet</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/09-Pod控制器：DaemonSet/">09-Pod控制器：DaemonSet</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/10-存储卷：PV和PVC/">10-存储卷：PV和PVC</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/11-存储卷：configMap/">11-存储卷：configMap</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/12-存储卷：Secret/">12-存储卷：Secret</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/13-Pod控制器：StatefulSet及Headless Service/">13-Pod控制器：StatefulSet及Headless Service</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/14-暴露服务：Service/">14-暴露服务：Service</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/15-暴露服务：Ingress和Ingress-Controller-Nginx/">15-暴露服务：Ingress和Ingress-Controller-Nginx</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/16-暴露服务：Ingress和Ingress-Controller-Traefik/">16-暴露服务：Ingress和Ingress-Controller-Traefik</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/17-kubernetes的认证-授权-准入控制/">17-kubernetes的认证-授权-准入控制</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/18-Dashboard访问和kubeconfig配置/">18-Dashboard访问和kubeconfig配置</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/19-程序包管理器-Helm/">19-程序包管理器-Helm</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/20-kubernetes的网络模型和网络策略/">20-kubernetes的网络模型和网络策略</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/21-kubernetes集群运行原理和核心附件/">21-kubernetes集群运行原理和核心附件</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/22-Pod的资源调度/">22-Pod的资源调度</a></li>  <li class="file"><a href="/wiki/中间件运维/Kubernetes/kubernetes常见问题/">kubernetes常见问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            LDAP
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/LDAP/01-安装OpenLDAP-phpLDAPadmin/">01-安装OpenLDAP+phpLDAPadmin</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Linux/Linux-SystemV引导启动流程/">Linux-01-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/Linux-SystemV体系/">Linux-02-SystemV体系</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/Linux-Systemd体系/">Linux-03-Systemd体系</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/Linux-Systemd下配置tomcat服务/">Linux-04-Systemd下配置tomcat服务</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/Ubuntu-PPA软件源/">Ubuntu-PPA软件源</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/Linux-常用发行版/">Linux-常用发行版</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/CentOS-rpm和yum简介/">CentOS-rpm和yum简介</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/CentOS-防火墙和IP配置/">CentOS-防火墙和IP配置</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/CentOS-安装Git/">CentOS-安装Git</a></li>  <li class="file"><a href="/wiki/中间件运维/Linux/Linux-常用命令/">Linux-常用命令</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MongoDB
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/MongoDB/03-MongoDB快速入门/">03-MongoDB快速入门</a></li>  <li class="file"><a href="/wiki/中间件运维/MongoDB/02-MongoDB的应用场景/">02-MongoDB的应用场景和案例</a></li>  <li class="file"><a href="/wiki/中间件运维/MongoDB/01-NoSQL简介/">01-NoSQL简介</a></li>  <li class="file"><a href="/wiki/中间件运维/MongoDB/04-谈MongoDB应用实践/">04-谈MongoDB应用实践</a></li>  <li class="file"><a href="/wiki/中间件运维/MongoDB/05-MongoDB的复制集原理/">05-MongoDB的复制集原理</a></li>  <li class="file"><a href="/wiki/中间件运维/MongoDB/06-MongoDB的分片集群架构/">06-MongoDB的分片集群架构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-09-MySQL存储引擎/">DB-09-MySQL存储引擎</a></li>  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-10-MySQL索引/">DB-10-MySQL索引</a></li>  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-11-MySQL-SQL优化/">DB-11-MySQL-SQL优化</a></li>  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-12-大表优化/">DB-12-大表优化</a></li>  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-05-MySQL字段类型/">DB-05-MySQL字段类型</a></li>  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-06-MySQL存储过程/">DB-06-MySQL存储过程</a></li>  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-07-MySQL存储过程-游标使用/">DB-07-MySQL存储过程-游标使用</a></li>  <li class="file"><a href="/wiki/中间件运维/MySQL/DB-08-MySQL存储过程-错误处理/">DB-08-MySQL存储过程-错误处理</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Nginx
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Nginx/01-Nginx自定义模块安装/">01-Nginx自定义模块安装</a></li>  <li class="file"><a href="/wiki/中间件运维/Nginx/02-Nginx的虚拟主机配置/">02-Nginx的虚拟主机配置</a></li>  <li class="file"><a href="/wiki/中间件运维/Nginx/03-Nginx的反向代理配置/">03-Nginx的反向代理配置</a></li>  <li class="file"><a href="/wiki/中间件运维/Nginx/04-Nginx常用单项配置解析/">04-Nginx常用单项配置解析</a></li>  <li class="file"><a href="/wiki/中间件运维/Nginx/05-Nginx日志相关配置/">05-Nginx日志相关配置</a></li>  <li class="file"><a href="/wiki/中间件运维/Nginx/06-Nginx配置文件结构/">06-Nginx配置文件结构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            OpenShift
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/OpenShift/OpenShift简介/">OpenShift简介</a></li>  <li class="file"><a href="/wiki/中间件运维/OpenShift/OKD单机安装/">OKD单机安装</a></li>  <li class="file"><a href="/wiki/中间件运维/OpenShift/OpenShift-v3架构概述/">OpenShift-v3架构概述</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Oracle/01-Oracle数据库字段类型/">DB-03-Oracle数据库字段类型</a></li>  <li class="file"><a href="/wiki/中间件运维/Oracle/02-Oracle行转列/">DB-04-Oracle行转列</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            RabbitMQ
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/RabbitMQ/01-RabbitMQ消息模型/">01-RabbitMQ消息模型</a></li>  <li class="file"><a href="/wiki/中间件运维/RabbitMQ/02-RabbitMQ生产者角度特性/">02-RabbitMQ生产者角度特性</a></li>  <li class="file"><a href="/wiki/中间件运维/RabbitMQ/03-RabbitMQ消费者角度特性/">03-RabbitMQ消费者角度特性</a></li>  <li class="file"><a href="/wiki/中间件运维/RabbitMQ/04-RabbitMQ过期时间应用/">04-RabbitMQ过期时间应用</a></li>  <li class="file"><a href="/wiki/中间件运维/RabbitMQ/05-Spring-AMQP的应用示例/">05-Spring AMQP的应用示例</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Redis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Redis/Redis-01-单机安装/">Redis-01-单机安装</a></li>  <li class="file"><a href="/wiki/中间件运维/Redis/Redis-02-集群模式演变/">Redis-02-集群模式演变</a></li>  <li class="file"><a href="/wiki/中间件运维/Redis/Redis-03-集群模式安装/">Redis-03-集群模式安装</a></li>  <li class="file"><a href="/wiki/中间件运维/Redis/Redis-04-持久化存储/">Redis-04-持久化存储</a></li>  <li class="file"><a href="/wiki/中间件运维/Redis/Redis-05-事务支持/">Redis-05-事务支持</a></li>  <li class="file"><a href="/wiki/中间件运维/Redis/Redis-06-LRU算法支持/">Redis-06-LRU算法支持</a></li>  <li class="file"><a href="/wiki/中间件运维/Redis/Redis-07-5种数据类型命令操作/">Redis-07-5种数据类型命令操作</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Service-Mesh
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            01-概念
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/01-概念/istio特性/">istio特性</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/01-概念/流量管理/">流量管理</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/01-概念/策略与安全/">策略与安全</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/01-概念/可观察性/">可观察性</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/01-概念/性能和可伸缩性/">性能和可伸缩性</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/01-概念/部署模型/">部署模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            02-安装测试
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/02-安装测试/在kubernetes-1-5上部署istio-1-0/">在kubernetes-1.5上部署istio-1.0</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/02-安装测试/部署官方用例bookinfo测试/">01-部署官方用例bookinfo测试</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/02-安装测试/运行Pod和Service的准备/">运行Pod和Service的准备</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            03-任务
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/安全/认证策略/">认证策略</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            流量管理
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/01-入口网关/">01-入口网关</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/02-请求路由/">02-请求路由</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/03-故障注入/">03-故障注入</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/04-流量转移/">04-流量转移</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/05-TCP流量转移/">05-TCP流量转移</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/06-请求超时/">06-请求超时</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/07-断路器/">07-断路器</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/流量管理/08-流量镜像/">08-流量镜像</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            遥测
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/遥测/通过Kiali可视化Mesh/">通过Kiali可视化Mesh</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/遥测/通过Jaeger实现分布式链路追踪/">分布式链路追踪</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/遥测/通过Grafana可视化指标/">通过Grafana可视化指标</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/03-任务/遥测/通过Prometheus查询指标/">通过Prometheus查询指标</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/中间件运维/Service-Mesh/Service-Mesh简介/">Service Mesh简介</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/Istio简介/">Istio简介</a></li>  <li class="file"><a href="/wiki/中间件运维/Service-Mesh/Istio中的Sidecar注入与流量拦截/">Istio中的Sidecar注入与流量拦截</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            fluentd
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/中间件运维/fluentd/fluentd简介/">fluentd简介</a></li>  <li class="file"><a href="/wiki/中间件运维/fluentd/fluentd安装/">fluentd安装</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端技术栈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaScript
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/JavaScript/01-JavaScript版本及历史/">01-JavaScript版本及历史</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/02-ES6的let和const/">02-ES6的let和const</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/03-ES6核心概念/">03-ES6核心概念</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/04-ES5和ES6新特性示例/">04-ES5和ES6新特性示例</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Node.js
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Ubuntu16-04-安装nodejs和npm/">01-Ubuntu16.04-安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/02-node和npm常用命令/">02-node和npm常用命令</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/03-前端模块规范/">03-前端模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/07-从Nuxt-js到SSR/">07-从Nuxt.js到SSR</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Vue
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Vue/01-通过vue-cli构建项目/">01-通过vue-cli构建项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/02-手工构建模块化Vue项目/">02-手工构建模块化Vue项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/03-常用指令示例汇总/">03-常用指令示例汇总</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/04-手写一个组件/">04-手写一个组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/05-使用方通过Prop向子组件传递数据/">05-使用方通过Prop向子组件传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/06-子组件通过事件向使用方传递数据/">06-子组件通过事件向使用方传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/07-Slot使用示例/">07-Slot使用示例</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/08-动态组件/">08-动态组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/09-vue-router入门/">09-vue-router入门</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/10-vue-router高级用法/">10-vue-router高级用法</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/11-vue-router的导航守卫/">11-vue-router的导航守卫</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/12-vuex详解/">12-vuex详解</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/前端技术栈/前端模块化生态概览/">前端模块化生态概览</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            区块链
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            EOS
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/EOS/01-EOS基础知识/">01-EOS基础知识</a></li>  <li class="file"><a href="/wiki/区块链/EOS/02-EOS-IO技术白皮书/">02-EOS.IO技术白皮书</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IPFS
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/IPFS/01-站在Web3-0理解IPFS是什么/">01-站在Web3.0理解IPFS是什么</a></li>  <li class="file"><a href="/wiki/区块链/IPFS/02-IPFS-Filecoin-FIL概念/">02-IPFS-Filecoin-FIL概念</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            以太坊
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/以太坊/以太坊-历史/">以太坊--历史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发01-入门/">以太坊开发01--入门</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发02-HelloWorld/">以太坊开发02--HelloWorld</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发03-宠物商店Dapp/">以太坊开发03--宠物商店Dapp</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发04-Geth搭建私有链/">以太坊开发04--Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发05-Geth的Console内置对象/">以太坊开发05--Geth的Console内置对象</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/Ubuntu16-04-安装Geth/">Ubuntu16.04-安装Geth</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/Ubuntu16-04-安装Ganache/">Ubuntu16.04-安装Ganache</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/Ubuntu16-04-安装Chrome和MetaMask/">Ubuntu16.04-安装Chrome和MetaMask</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            比特币
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/比特币/比特币-密码学-公私钥和比特币地址/">密码学--公私钥和比特币地址</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-交易结构/">比特币--交易结构</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-区块结构/">比特币--区块结构</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-网络架构/">比特币--网络架构</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-Bloom过滤器/">比特币--Bloom过滤器</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-警告消息/">比特币--警告消息</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-交易脚本和脚本语言/">比特币--交易脚本和脚本语言</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-Merkle树/">比特币--Merkle树</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-挖矿与共识/">比特币--挖矿与共识</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-交易块龄和优先级/">比特币--交易块龄和优先级</a></li>  <li class="file"><a href="/wiki/区块链/比特币/比特币-挖矿难度表示和难度调整/">比特币--挖矿难度表示和难度调整</a></li>  <li class="file"><a href="/wiki/区块链/比特币/闪电网络是什么/">用大白话解释：闪电网络是什么？</a></li>  <li class="file"><a href="/wiki/区块链/比特币/闪电网络交易细节流程/">闪电网络交易细节流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            跨链
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/跨链/01-波卡-Polkadot-简介/">01-波卡-Polkadot-简介</a></li>  <li class="file"><a href="/wiki/区块链/跨链/02-Polkadot的测试网络/">02-Polkadot的测试网络</a></li>  <li class="file"><a href="/wiki/区块链/跨链/03-Cosmos简介/">03-Cosmos简介</a></li>  <li class="file"><a href="/wiki/区块链/跨链/04-跨链项目Polkadot与Cosmos对比/">04-跨链项目Polkadot与Cosmos对比</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/区块链/初识零知识与证明/">初识零知识与证明</a></li>  <li class="file"><a href="/wiki/区块链/零知识证明-术语介绍/">零知识证明-基本概念</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            后端技术栈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Dubbo
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-01-简易RPC实现原理/">Dubbo-01-简易RPC实现原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-02-架构设计详解/">Dubbo-02-架构设计详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-03-SPI-原理机制/">Dubbo-03-SPI-原理机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-04-SPI-源码解析/">Dubbo-04-SPI-源码解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-05-SPI-Adaptive注解/">Dubbo-05-SPI-@Adaptive注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-06-SPI-Activate注解/">Dubbo-06-SPI-@Activate注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-07-Spring集成点/">Dubbo-07-Spring集成点</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-08-主要接口概念简介/">Dubbo-08-主要接口概念简介</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-09-服务发布解析/">Dubbo-09-服务发布解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-10-服务发布解析2/">Dubbo-10-服务发布解析2</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-11-服务引用解析/">Dubbo-11-服务引用解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-12-服务引用解析2/">Dubbo-12-服务引用解析2</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-13-通信层1-封装框架/">Dubbo-13-通信层1-封装框架</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-14-通信层2-异步请求实现/">Dubbo-14-通信层2-异步请求实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/Dubbo/Dubbo-15-通信层3-上层调用/">Dubbo-15-通信层3-上层调用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hystrix
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-01-应用场景/">Hystrix-01-应用场景</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-02-执行命令方式/">Hystrix-02-执行命令方式</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-03-服务降级/">Hystrix-03-服务降级</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-04-常用配置/">Hystrix-04-常用配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-05-请求缓存/">Hystrix-05-请求缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-06-信号量隔离/">Hystrix-06-信号量隔离</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-07-降级逻辑命令嵌套/">Hystrix-07-降级逻辑命令嵌套</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-08-命令调用合并/">Hystrix-08-命令调用合并</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-09-Dashboard监控平台搭建/">Hystrix-09-Dashboard监控平台搭建</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-10-SpringMVC整合Hystrix及监控/">Hystrix-10-SpringMVC整合Hystrix及监控</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-11-使用Turbine监控集群/">Hystrix-11-使用Turbine监控集群</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-12-参数配置与分析/">Hystrix-12-参数配置与分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-13-HystrixCommand执行流程分析/">Hystrix-13-HystrixCommand执行流程分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-14-CircuitBreaker执行流程及源码分析/">Hystrix-14-CircuitBreaker执行流程及源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-15-HystrixCommand注解使用/">Hystrix-15-@HystrixCommand注解使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Hystrix/Hystrix-16-缓存相关注解使用/">Hystrix-16-缓存相关注解使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Java/Java-01-transient浅析/">transient浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-02-检查异常-未检查异常/">检查异常-未检查异常</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-03-对注解的思考/">对注解的思考</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Java-04-PostConstruct和-PreDestroy/">Java的@PostConstruct和@PreDestroy</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/主流JSON库使用示例/">主流JSON库使用示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/Java/Hibernate-Validator使用示例/">Hibernate Validator使用示例</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaEE
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/JavaEE/JavaEE-01-Servlet-3-0-新特性详解/">Servlet-3.0 新特性详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/JavaEE/JavaEE-02-JPA简介/">JPA简介</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Maven/01-基础知识/">01-基础知识</a></li>  <li class="file"><a href="/wiki/后端技术栈/Maven/02-生命周期/">02-生命周期</a></li>  <li class="file"><a href="/wiki/后端技术栈/Maven/03-插件机制/">03-插件机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Maven/04-属性和Profile/">04-属性和Profile</a></li>  <li class="file"><a href="/wiki/后端技术栈/Maven/05-Maven私服之Nexus搭建/">05-Maven私服之Nexus搭建</a></li>  <li class="file"><a href="/wiki/后端技术栈/Maven/06-项目中的pom.xml文件详解/">06-项目中的pom.xml文件详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Maven/07-Maven配置文件setting-xml详解/">07-Maven配置文件setting.xml详解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Mybatis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-01-拦截器使用/">Mybatis拦截器使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-02-拦截器实现源码解析/">Mybatis拦截器实现源码解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-03-一级缓存/">Mybatis一级缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-04-二级缓存/">Mybatis二级缓存</a></li>  <li class="file"><a href="/wiki/后端技术栈/Mybatis/Mybatis-05-返回生成主键/">Mybatis返回生成主键</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Netty
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-14-Netty简介/">NP-14-Netty简介</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-15-Netty入门示例/">NP-15-Netty入门示例</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-16-Netty基础/">NP-16-Netty基础</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-17-TCP粘包拆包/">NP-17-TCP粘包拆包</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-18-自定义协议/">NP-18-自定义协议</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-19-实现心跳检测/">NP-19-实现心跳检测</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-20-AttributeMap附件/">NP-20-AttributeMap附件</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-21-ChannelOption选项配置/">NP-21-ChannelOption选项配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Netty/NP-24-Netty线程模型/">NP-24-Netty线程模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-01-PropertySource-Environment-Profile/">Spring-01-PropertySource-Environment-Profile</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-02-事件驱动机制/">Spring-02-事件驱动机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-03-Bean的作用域/">Spring-03-Bean的作用域</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-04-Resource体系/">Spring-04-Resource体系</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-05-InitialingBean-DisposableBean/">Spring-05-InitialingBean-DisposableBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware/">Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-07-FactoryBean/">Spring-07-FactoryBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-08-BeanPostProcessor/">Spring-08-BeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-09-BeanFactoryPostProcessor/">Spring-09-BeanFactoryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-10-InstantiationAwareBeanPostProcessor/">Spring-10-InstantiationAwareBeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-11-缓存抽象/">Spring-11-缓存抽象</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-12-缓存注解/">Spring-12-缓存注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-13-BeanDefinitionRegistry/">Spring-13-BeanDefinitionRegistry</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-14-BeanDefinitionRegistryPostProcessor/">Spring-14-BeanDefinitionRegistryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-15-BeanDefinitionReader/">Spring-15-BeanDefinitionReader</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-16-自定义类扫描器/">Spring-16-自定义类扫描器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-17-BeanPostProcessor接口总结/">Spring-17-BeanPostProcessor接口总结</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-18-内置的BeanPostProcessor总结/">Spring-18-内置的BeanPostProcessor总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-Boot
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-01-配置文件/">Spring Boot-01-配置文件</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-02-日志系统/">Spring Boot-02-日志系统</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-03-日志系统-源码实现解析/">Spring Boot-03-日志系统-源码实现解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-04-启动过程解析/">Spring Boot-04-启动过程解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-05-项目源码结构/">Spring Boot-05-项目源码结构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-06-单元测试/">Spring Boot-06-单元测试</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-07-自定义一个Starter/">Spring Boot-07-自定义一个Starter</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-08-自动配置实现浅析/">Spring Boot-08-自动配置实现浅析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-09-Actuator监控端点详解/">Spring Boot-09-Actuator监控端点详解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-10-端点配置/">Spring Boot-10-端点配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-11-自定义健康监控/">Spring Boot-11-自定义健康监控</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-12-自定义监控端点/">Spring Boot-12-自定义监控端点</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-13-开发热部署/">Spring Boot-13-开发热部署</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-14-缓存集成/">Spring Boot-14-缓存集成</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-15-注入自定义Servlet等组件的二种方式/">Spring Boot-15-注入自定义Servlet等组件的二种方式</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-16-docker-maven-plugin使用/">Spring Boot-16-docker-maven-plugin使用</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-17-Win下打包镜像到远程Docker服务器/">Spring Boot-17-Win下打包镜像到远程Docker服务器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-18-AOP编程/">Spring Boot-18-AOP编程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-19-自动化配置的注解开关原理/">Spring Boot-19-自动化配置的注解开关原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-20-条件注解-源码实现/">Spring Boot-20-条件注解-源码实现</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-21-条件注解一览/">Spring Boot-21-条件注解一览</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-Cloud
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/注册中心-Eureka - 副本/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/01-Spring-Cloud技术生态架构/">01-Spring Cloud技术生态架构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-MVC
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-MVC/Spring-MVC-01-各版本新特性/">Spring MVC-01-各版本新特性</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-MVC/Spring-MVC-02-核心架构流程/">Spring MVC-02-核心架构流程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-MVC/Spring-MVC-03-DispatcherServlet源码分析/">Spring MVC-03-DispatcherServlet源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-MVC/Spring-MVC-04-拦截器处理器-HandlerInterceptor/">Spring MVC-04-拦截器处理器-HandlerInterceptor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-MVC/Spring-MVC-05-处理器异常解析器-HandlerExceptionResolver/">Spring MVC-05-处理器异常解析器-HandlerExceptionResolver</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-MVC/Spring-MVC-06-控制器增强-ControllerAdvice/">Spring MVC-06-控制器增强-@ControllerAdvice</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-Security
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/01-认证架构流程/">01-认证架构流程</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/02-核心配置类解读/">02-核心配置类解读</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/03-核心过滤器源码分析/">03-核心过滤器源码分析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/04-跨站请求伪造配置-CSRF/">04-跨站请求伪造配置-CSRF</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/05-跨域资源共享-CORS/">05-跨域资源共享-CORS</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/06-jwt原理/">06-jwt原理</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/07-jwt与session优缺点对比/">07-jwt与session优缺点对比</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/08-Http常见认证方式/">08-Http常见认证方式</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/09-Oauth2最简向导/">09-Oauth2最简向导</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/10-Oauth2交互流程及协议/">10-Oauth2交互流程及协议</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Security/11-Spring-Security-Oauth2认证流程/">11-Spring Security Oauth2认证流程</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            大数据
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            HBase
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/HBase/HBase-01-简明入门/">HBase-01-简明入门</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-02-Write全流程/">HBase-02-Write全流程</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-03-Flush与Compaction/">HBase-03-Flush与Compaction</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-04-Read全流程/">HBase-04-Read全流程</a></li>  <li class="file"><a href="/wiki/大数据/HBase/HBase-05-HFile文件结构/">HBase-05-HFile文件结构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/Kafka/01-Kafka基础知识/">Kafka基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Zookeeper
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-01-单机和集群搭建/">Zookeeper-01-单机和集群搭建</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-02-主要概念/">Zookeeper-02-主要概念</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-03-原生API基本使用/">Zookeeper-03-原生API基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-04-ZkClient基本使用/">Zookeeper-04-ZkClient基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-05-Curator基本使用/">Zookeeper-05-Curator基本使用</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-06-图形监控工具/">Zookeeper-06-图形监控工具</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-07-事务日志和快照文件/">Zookeeper-07-事务日志和快照文件</a></li>  <li class="file"><a href="/wiki/大数据/Zookeeper/Zookeeper-08-自动清理日志配置/">Zookeeper-08-自动清理日志配置</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/大数据/大数据生态系统/">大数据生态系统</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            技术杂谈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            支付风控
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-场景分析/">支付风控-场景分析</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-数据仓库建设/">支付风控-数据仓库建设</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-模型分析/">支付风控-模型分析</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-架构设计/">支付风控-架构设计</a></li>  <li class="file"><a href="/wiki/技术杂谈/支付风控/Pay-支付风控-反洗钱/">支付风控-反洗钱</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            架构设计
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-01-FLP不可能性原理/">Distributed-01-FLP不可能性原理</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-02-CAP原理/">Distributed-02-CAP原理</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-03-Base理论/">Distributed-03-Base理论</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-04-分布式一致性/">Distributed-04-分布式一致性</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-05-2PC-and-3PC/">Distributed-05-2PC and 3PC</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-06-Paxos诞生/">Distributed-06-Paxos诞生</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-07-Paxos协议运行过程/">Distributed-07-Paxos协议运行过程</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-08-Paxos协议推演/">Distributed-08-Paxos协议推演</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-09-Raft算法/">Distributed-09-Raft算法</a></li>  <li class="file"><a href="/wiki/架构设计/分布式基础/Distributed-10-Zab协议/">Distributed-10-Zab协议</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构设计/并发编程/CP-01-造成类的线程不安全的原因/">CP-01-造成类的线程不安全的原因</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-02-线程类自己/">CP-02-线程类自己</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-03-volatile的前生今世/">CP-03-volatile的前生今世</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-04-CAS浅析/">CP-04-CAS浅析</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-05-ThreadLocal详解/">CP-05-ThreadLocal详解</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-06-线程未捕获异常处理器/">CP-06-线程未捕获异常处理器</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-07-Servlet的多线程中单例并发执行的理解/">CP-07-Servlet的多线程中单例并发执行的理解</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-08-单例模式与双重检测/">CP-08-单例模式与双重检测</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-09-线程-挂起-阻塞-中断/">CP-09-线程-挂起-阻塞-中断</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-10-并发模型/">CP-10-并发模型</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-11-synchronized基础/">CP-11-synchronized基础</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-12-synchronized通知等待机制/">CP-12-synchronized通知等待机制</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-13-synchronized原理/">CP-13-synchronized原理</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-14-通过ReentrantLock来窥探AQS实现/">CP-14-通过ReentrantLock来窥探AQS实现</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-15-AQS的Condition使用场景/">CP-15-AQS的Condition使用场景</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-16-用AQS实现的常用并发工具类/">CP-16-用AQS实现的常用并发工具类</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-17-锁优化机制/">CP-17-锁优化机制</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-18-ThreadPoolExecutor和Executors/">CP-18-ThreadPoolExecutor和Executors</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-19-并发集合和阻塞队列概览/">CP-19-并发集合和阻塞队列概览</a></li>  <li class="file"><a href="/wiki/架构设计/并发编程/CP-20-ConcurrentHashMap-78实现/">CP-20-ConcurrentHashMap-78实现</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            技术架构设计
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构设计/技术架构设计/01-分库分表应用场景/">01-分库分表应用场景</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/02-Sharding-JDBC简介/">02-Sharding-JDBC简介</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/MQ-01-消息中间件选型/">MQ-01-消息中间件选型</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/04-生态技术选型/">04-生态技术选型</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/05-内容分发网络CDN简介/">05-内容分发网络CDN简介</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/06-传统分布式事务解决方案/">06-分布式事务解决方案现状</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/07-高并发下分布式事务解决方案/">07-高并发下分布式事务解决方案</a></li>  <li class="file active"><a href="/wiki/架构设计/技术架构设计/08-分库分表设计/">08-分库分表设计</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/09-缓存方案设计/">09-缓存方案设计</a></li>  <li class="file"><a href="/wiki/架构设计/技术架构设计/常见负载均衡架构/">常见负载均衡架构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            研发平台规划
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构设计/研发平台规划/01-研发平台规划v1/">01-研发平台规划v1</a></li>  <li class="file"><a href="/wiki/架构设计/研发平台规划/02-一些小团队的自动化运维实践经验-转/">02-一些小团队的自动化运维实践经验(转)</a></li>  <li class="file"><a href="/wiki/架构设计/研发平台规划/03-Restful-API设计实战/">03-Restful API设计实战</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            网络编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构设计/网络编程/NP-01-网络IO模型/">NP-01-网络IO模型</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-02-对Socket的理解/">NP-02-对Socket的理解</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-03-TCP握手/">NP-03-TCP三次握手</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-04-Actor模型/">NP-04-Actor模型</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-05-CSP模型/">NP-05-CSP模型</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-06-Actor模型和CSP模型的区别/">NP-06-Actor模型和CSP模型的区别</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-07-select-poll-epoll浅析/">NP-07-select-poll-epoll浅析</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-08-Buffer操作/">NP-08-Buffer操作</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-09-NIO入门/">NP-09-NIO入门</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-10-Selector入门/">NP-10-Selector入门</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-11-阻塞同步BIO示例/">NP-11-阻塞同步BIO示例</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-12-多路复用NIO示例/">NP-12-多路复用NIO示例</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-13-异步通知AIO示例/">NP-13-异步通知AIO示例</a></li>  <li class="file"><a href="/wiki/架构设计/网络编程/NP-22-Reactor模型/">NP-22-Reactor模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/架构设计/设计模式/Pattern-创建型/">设计模式-创建型</a></li>  <li class="file"><a href="/wiki/架构设计/设计模式/Pattern-结构型/">设计模式-结构型</a></li>  <li class="file"><a href="/wiki/架构设计/设计模式/Pattern-行为型/">设计模式-行为型</a></li>  <li class="file"><a href="/wiki/架构设计/设计模式/Pattern-命令模式/">命令模式</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            白酒
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/白酒/中国名酒前世今生/">中国名酒前世今生</a></li>  <li class="file"><a href="/wiki/白酒/中国白酒53优/">中国白酒53优</a></li>  <li class="file"><a href="/wiki/白酒/茅台王子酒系类普及及区别/">茅台王子酒系类普及及区别</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            茶识
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            普洱
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/茶识/普洱/01-什么是普洱茶/">01-什么是普洱茶</a></li>  <li class="file"><a href="/wiki/茶识/普洱/02-普洱生茶的选购/">02-普洱生茶的选购</a></li>  <li class="file"><a href="/wiki/茶识/普洱/03-普洱熟茶的选购/">03-普洱熟茶的选购</a></li>  <li class="file"><a href="/wiki/茶识/普洱/04-普洱茶的冲泡/">04-普洱茶的冲泡</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/茶识/中国六大茶系科普/">中国六大茶系科普</a></li>  <li class="file"><a href="/wiki/茶识/茶类选购指南/">茶类选购指南</a></li>  <li class="file"><a href="/wiki/茶识/安化黑茶浅谈/">安化黑茶浅谈</a></li>  <li class="file"><a href="/wiki/茶识/汝窑茶具开片/">汝窑茶具开片</a></li>  <li class="file"><a href="/wiki/茶识/紫砂壶常见壶型/">紫砂壶常见壶型</a></li>  <li class="file"><a href="/wiki/茶识/初识建盏/">初识建盏</a></li>  <li class="file"><a href="/wiki/茶识/汝窑与仿汝窑/">汝窑与仿汝窑</a></li>  <li class="file"><a href="/wiki/茶识/紫砂壶知识/">紫砂壶知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            鸣说
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/鸣说/2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/鸣说/星际穿越全剧情解析(转豆瓣)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/鸣说/index/">See you again</a></li>  <li class="file"><a href="/wiki/鸣说/谷歌被尘封的过去/">谷歌，被尘封的过去！</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title"><span>links</span></h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.ruanyifeng.com/" rel="external nofollow noopener noreferrer" target="_blank">阮一峰</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://jinnianshilongnian.iteye.com/" rel="external nofollow noopener noreferrer" target="_blank">张开涛</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://blog.didispace.com/" rel="external nofollow noopener noreferrer" target="_blank">翟永超</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://javadoop.com" rel="external nofollow noopener noreferrer" target="_blank">JavaDoop</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.iocoder.cn/" rel="external nofollow noopener noreferrer" target="_blank">芋道源码</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://fangjian0423.github.io/" rel="external nofollow noopener noreferrer" target="_blank">Format</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.cnkirito.moe/" rel="external nofollow noopener noreferrer" target="_blank">徐靖峰</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://learnblockchain.cn/" rel="external nofollow noopener noreferrer" target="_blank">Tiny熊</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://www.54tianzhisheng.cn/" rel="external nofollow noopener noreferrer" target="_blank">zhisheng</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-架构设计/技术架构设计/08-分库分表设计" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/架构设计/">架构设计</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/架构设计/技术架构设计/">技术架构设计</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/架构设计/技术架构设计/08-分库分表设计/">
+            <time datetime="2019-07-22T02:25:43.000Z" itemprop="datePublished">2019-07-22</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/架构设计/技术架构设计/08-分库分表设计.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/架构设计/技术架构设计/08-分库分表设计.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/架构设计/技术架构设计/08-分库分表设计.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            08-分库分表设计
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#是否需要分"><span class="toc-number">1.</span> <span class="toc-text">是否需要分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分库策略"><span class="toc-number">2.</span> <span class="toc-text">分库策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分库引入复杂性"><span class="toc-number">3.</span> <span class="toc-text">分库引入复杂性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分表策略"><span class="toc-number">4.</span> <span class="toc-text">分表策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分表代价"><span class="toc-number">5.</span> <span class="toc-text">分表代价</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            
+        
+        
+            <h2 id="是否需要分"><a href="#是否需要分" class="headerlink" title="是否需要分"></a>是否需要分</h2><p>说到数据库分库分表，不能一味的追求，我们要明白为什么要进行分库分表才是最终目的。现在网上一些人鼓吹分库分表如何应对了多大数据，却不知针对很多人的业务来说，分库分表策略也许并非是银弹，而是令人焦虑的焦油坑。</p>
+<p>分库分表是业务发展到一定阶段，数据积累到一定量级而衍生出来的解决方案。当DB的数据量级到达一个阶段，写入和读取的速度会出现瓶颈，即使是有索引，索引也会变的很大，而且数据库的物理文件大的会使备份和恢复等操作变的很困难。这个时候由于DB的瓶颈已经严重危害到了业务，最有效的解决方案莫过于DB的分库分表了。</p>
+<p>有的leader甚至架构师会在业务初期以自己的主观意愿就进行分库分表，会为以后业务高速发展做铺垫。但是这里我要表达我几个观点：</p>
+<ol>
+<li><p>如果当前这个业务并非公司的核心业务，而且在业务是否能存活的前提下，初级的设计不要这么复杂。如果每个业务我们都按淘宝那样的规模做系统架构设计，将来不但会害死业务，更会让程序员死的更惨，背上黑锅的数量会更多。</p>
+</li>
+<li><p>单台数据库的能力并非想象中那么脆弱。就算是mysql单表数据量大部分场景下也在百万级别（当然这和存储的具体数据格式有关），sqlserver更是不在话下，我司用的sqlserver，单表千万级别数据的大有所在，亿级的也有几个，Oracle更是不用多说。</p>
+</li>
+<li><p>如果业务周期比较短，或者人力物力不足的情况下，盲目的在初期就进行分库分表设计，更是给自己下了绩效背D的套，</p>
+</li>
+<li><p>系统的设计初期和公司的基础数据有直接关系，比如微信这样的数据规模，稍微一个小系统就有可能是千万甚至上亿的数据级别，但是多数初创公司有多少能有这样的级别呢？我这里喷一句：有的创业公司号称从XX大公司重金挖来的CTO，技术总监等等高人，尤其是这些带着金色光环的人在创业初期给开发人员埋雷，一个创业公司搞一套XX分布式，XX设计，殊不知，在当前的公司环境下这些其实没有必要，给公司带来的更多是苦不堪言。</p>
+</li>
+</ol>
+<h2 id="分库策略"><a href="#分库策略" class="headerlink" title="分库策略"></a>分库策略</h2><ul>
+<li>根据业务划分</li>
+</ul>
+<p>说到分库，这里想多啰嗦一句：推荐大家根据业务来进行划分，我一直在过去的文章中强调，一个系统的好坏，业务的边界划分起到举足轻重的作用。业务按照规则划分好边界，每个业务对应的数据库自然而然就诞生了，不要站在数据库的层面上去给业务分库。有的leader会有这样的行为：某个表的数据量太大，分配到单独的一个库，结果导致的结果就是很多SQL语句必须跨库Join。</p>
+<p>具体的业务怎么划分呢？这个规则我不敢说，每个公司的业务形态不同，划分的维度就会不同。举一个简单的例子：一个典型的电商系统根据业务可划分为商品，订单，这也是许多公司的典型业务划分，但是我司根据自己的业务规则，划分为商品，订单，支付。因为支付系统在我司是一个独立的业务，不但包含了订单的支付，还包含了很多其他的支付场景。根据业务上的划分，DB的层面就出现了商品DB，订单DB和支付DB。</p>
+<p><img src="/wiki/架构设计/技术架构设计/08-分库分表设计/02-01.jpg" alt=""></p>
+<ul>
+<li><p>同一业务横向划分</p>
+<p>除了根据业务垂直切分的策略之外，还有另外一种常用的分库方案，如果某个具体业务数据量比较大，可以把这业务的数据库根据某种规则来进行横向切分。比如用户信息的业务，当用户量达到一定量级，有些公司会把用户信息拆分到多个数据库，说到这里，有的同学会问，这和拆分到多个表有什么区别呢？如果把用户信息横切到同一个数据库的多个表，如果这些表位于一个物理磁盘上，对于提高这个业务的写入和读取IO最大值并没有什么用处，但是如果分配到多个服务器上，意味着这个业务整体的最大IO得到了提升，在一定程度上要比拆表效果要好，当然如果用到了表分区，每个分区散落在不同的物理磁盘上，也不一定比分库方式差。</p>
+<p>把某个业务的DB按照规则横向切分之后，当然也会引入新的问题，下边会介绍。切分的规则在很多情况下用的最多的就是哈希取余的方式了，有时间咱们在讨论。</p>
+</li>
+</ul>
+<p><img src="/wiki/架构设计/技术架构设计/08-分库分表设计/02-02.jpg" alt=""></p>
+<h2 id="分库引入复杂性"><a href="#分库引入复杂性" class="headerlink" title="分库引入复杂性"></a>分库引入复杂性</h2><p>我在上文提到过，分库分表并非是银弹，任何一种解决方案能解决一个问题，但是有可能会引入其他问题，世界是公平的，计算机世界亦如此。那分库会引入哪些问题呢？</p>
+<ol>
+<li><p>在执行了分库之后，难以避免会将原本逻辑关联性很强的数据划分到不同的表、不同的库上，这时，表的关联操作将受到限制，我们多数情况下无法join位于不同分库的表（因为多数公司都明令禁止跨库sql），结果原本一次查询能够完成的业务，可能需要多次查询才能完成。</p>
+</li>
+<li><p>原来在单体DB环境下，可以用DB的事务来保证一些操作的原子操作，但是在分散到多个数据库的情况下，统一管理这些操作变的困难。虽然一些大厂提供的也有跨库的事务解决方案，但是性能上实在是差强人意，所以在很多情况下并不实用。比如上边提到的商品库存支付，在单体应用的情况下，三个业务在同一个数据库，当发生支付业务，更改商品库存和更新订单状态这两个操作可以利用数据库提供的事物来完成，而且性能在可接受范围之内，如果这三个业务分布在不同的数据库，有几率会发生只执行其中一个操作的情况发生，其实这也是分布式事物要解决的问题。在很多情况下，分布式事物是无法避免的，根据业务综合情况适当采用分布式事物也是一种有效的解决方案，最坏的情况下，可能需要人工介入了。</p>
+</li>
+<li><p>分库对于DBA来说意味着工作量的成倍增加，原来只需要管理一个DB，现在却要管理N个DB，而且每个DB都需要备份，监控，甚至做高可用，扩展等工作。原来可能只需要一个DBA管理人员，分库之后可能会需要两个甚至三个，导致了公司在人力投入上的加大。</p>
+</li>
+</ol>
+<h2 id="分表策略"><a href="#分表策略" class="headerlink" title="分表策略"></a>分表策略</h2><p>表的拆分和数据库的拆分有相似之处，但是拆分的规则也有不同。以下的拆分规则针对的是拆分一个表。</p>
+<ul>
+<li>横向切分</li>
+</ul>
+<p>横向切分是诸多业务中最常用的切分方式，本质是把一个表中的数据行按照规则分散到多个表中，比如最常见的按照ID范围，按照业务主键的哈希值等。至于表数据到达什么数量级之后进行切分，这和表中存的数据格式有关，比如一个表只有几列的int字段肯定要比几列text类型的表存储的极限要高。姑且认为这个极限是1000万吧。但是作为一个系统的负责人或者架构师来说，当表的数据量级到达千万级别要引起重视，因为这是一个系统性能瓶颈的隐患。</p>
+<p>相对于数据表的横向切分，在符合业务优化的场景下我更倾向于做表分区，按照规则把不同的分区分配到不同的物理磁盘，这样的话，业务里的sql语句几乎可以不用改动。我司的一个sqlserver数据库，某个业务的表做了表分区之后，已经到达几十亿级别的数据量，但是查询和插入速度还是能满足业务的需求（优化一个系统还是要花精力优化业务层面）。</p>
+<p><img src="/wiki/架构设计/技术架构设计/08-分库分表设计/02-03.png" alt=""></p>
+<ul>
+<li>垂直拆分</li>
+</ul>
+<p>说到垂直拆分，表也可以按照业务来拆分，比如一个数据库中有用户的信息，根据业务可以划分为基础信息和扩展信息，如果对业务有利，完全可以拆分为基础信息表和扩展信息表。当然也可以按照别的规则来拆，比如把访问频繁的信息拆分成一个表，其他不频繁的信息拆分成一个表，具体的拆分规则还是要看当时要解决的问题是什么。垂直拆分可能会引入一定复杂性，比如原来查询一个用户的基础信息和扩展信息可以一次性查询出结果，分表之后需要进行Join操作或者查询两次才能查询出结果。</p>
+<p><img src="/wiki/架构设计/技术架构设计/08-分库分表设计/02-04.png" alt=""></p>
+<h2 id="分表代价"><a href="#分表代价" class="headerlink" title="分表代价"></a>分表代价</h2><ol>
+<li><p>数据表垂直切分之后，原来一次查询有可能会变为连表的join查询，在一定程度上会有性能损失。</p>
+</li>
+<li><p>数据表横向切分需要一定的规则，常用的主要有两种规则：范围切分和哈希值切分。范围切分是指按照某个字段的范围来切分，比如用户表按照用户ID来切分，id为1到10万的位于User表1中，100001到200000万的位于User2中，这样切分的优势是，可以无限的扩容下去，不用考虑数据迁移的问题，劣势就是新表和旧表数据分布不均匀，而且分表的范围选取有一定难度，范围太小会导致表太多，太大会导致问题根本上没有解决的困惑。另外一种分表策略就是把某一列按照哈希值来路由到不同的表中，同样以用户ID为例，假如我们一开始就规划了10个数据库表，路由算法可以简单地用 user_id %10的值来表示数据所属的数据库表编号，ID为985的用户放到编号为 5的子表中，ID为10086的用户放到编号为 6 的字表中。这种切分规则的优势是每个表的数据分布比较均匀，但是后期扩容会设计到部分数据的迁移工作。</p>
+</li>
+<li><p>表拆分之后如果遇到有order by 的操作，数据库就无能为力了，只能由业务代码或者数据库中间件来完成了。</p>
+</li>
+<li><p>当有搜索的业务需求的时候，sql语句只能是Join多个表来进行连表查询了，类似的还有统计的需求，例如count的统计操作。</p>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+</ul>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/架构设计/技术架构设计/09-缓存方案设计/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    09-缓存方案设计
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/架构设计/技术架构设计/07-高并发下分布式事务解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">07-高并发下分布式事务解决方案</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            mingfy &copy; 2019 
+            <a rel="external nofollow noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" rel="external nofollow noopener noreferrer" target="_blank">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
