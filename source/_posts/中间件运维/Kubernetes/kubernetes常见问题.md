@@ -1,10 +1,11 @@
 ---
 title: kubernetes常见问题
 toc: true
-date: 2019-11-26 09:48:44
+date: 2019-12-04 15:04:24
 tags:
 categories:
 ---
+
 
 
 
@@ -33,8 +34,6 @@ kubectl proxy --address='0.0.0.0'  --accept-hosts='^*$'
 ```
 curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8001/api/v1/namespaces/test/finalize
 ```
-
-
 
 
 
