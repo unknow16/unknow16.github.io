@@ -1,5 +1,5 @@
 ---
-title: Linux-01-SystemV引导启动流程
+title: Linux-SystemV引导启动流程
 date: 2018-07-24 16:10:41
 tags: Linux
 ---

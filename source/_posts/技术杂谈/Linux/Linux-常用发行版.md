@@ -9,10 +9,9 @@ categories:
 
 
 ## Debian/Ubuntu
-Debian 和 Ubuntu 都是目前较为流行的 Debian 系的服务器操作系统，十分适合研
-发场景。
+Debian 和 Ubuntu 都是目前较为流行的 Debian 系的服务器操作系统，十分适合研发场景。
 
-Debian 是由 GPL 和其他自由软件许可协议授权的自由软件组成的操作系统，由Debian 计划（Debian Project）组织维护。Debian 计划是一个独立的、分散的组织，由 3000 人志愿者组成，接受世界多个非盈利组织的资金支持，Software inthe Public Interest 提供支持并持有商标作为保护机构。Debian 以其坚守 Unix 和自由软件的精神，以及其给予用户的众多选择而闻名。现时 Debian 包括了超过25,000 个软件包并支持 12 个计算机系统结构。
+Debian 是由 GPL 和其他自由软件许可协议授权的自由软件组成的操作系统，由Debian 计划（Debian Project）组织维护。Debian 计划是一个独立的、分散的组织，由 3000 人志愿者组成，接受世界多个非盈利组织的资金支持，Software inthe Public Interest 提供支持并持有商标作为保护机构。Debian 以其坚守 Unix 和自由软件的精神，以及其给予用户的众多选择而闻名。现时Debian 包括了超过25,000 个软件包并支持 12 个计算机系统结构。
 
 Debian 作为一个大的系统组织框架，其下有多种不同操作系统核心的分支计划：
 1. Linux 核心的 Debian GNU/Linux 系统
@@ -41,13 +40,9 @@ CentOS（Community Enterprise Operating System，中文意思是：社区企业�
 Fedora 由 Fedora Project 社区开发，红帽公司赞助的 Linux 发行版。它的目标是创建一套新颖、多功能并且自由和开源的操作系统。Fedora 的功能对于用户而言，它是一套功能完备的，可以更新的免费操作系统，而对赞助商 Red Hat 而言，它是许多新技术的测试平台。被认为可用的技术最终会加入到 Red Hat Enterprise Linux中。
 
 - Redhat 官网：https://www.redhat.com/zh
-
 - Fedora 官网：https://getfedora.org/
-
 - Fedora 官方仓库：https://github.com/fedora-infra
-
 - CentOS 官网：https://www.centos.org
-
 - CentOS 官方仓库：https://github.com/CentOS
 
   

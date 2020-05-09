@@ -1,5 +1,5 @@
 ---
-title: Linux-02-SystemV体系
+title: Linux-SystemV体系
 date: 2018-07-24 16:12:32
 tags: Linux
 ---
