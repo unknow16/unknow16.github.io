@@ -2,8 +2,8 @@
 menu:
   首页: /
   归档: /archives
-  # 分类: /categories
-  标签: /tags
+  #分类: /categories
+  #标签: /tags
   关于: /about
 
 # Customize
@@ -26,13 +26,23 @@ customize:
     category_perExpand: false # enable article categories list per expanding
     thumbnail: true # enable posts thumbnail, options: true, false
     favicon: /favicon.ico # path to favicon
-    default_index_file: index.md # if this, it will display at site index instead of default index page
+    # default_index_file: index.md # if this, it will display at site index instead of default index page
     social_links:
         github: https://github.com/unknow16/
         # stack-overflow: http://stackoverflow.com/users/7277090/zthxxx?tab=profile
         # codepen: http://codepen.io/zthxxx/
         # rss: /atom.xml
     social_link_tooltip: true # enable the social link tooltip, options: true, false
+
+article:
+    # 显示文章字数统计以及预计阅读时间。
+    readtime: true 
+    # 文章许可协议
+    licenses:
+        Creative Commons:
+            icon: fab fa-creative-commons
+            url: 'https://creativecommons.org/'
+        'CC BY-NC-SA 4.0': 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
 
 # Widgets
 widgets: # default use category only
@@ -41,7 +51,7 @@ widgets: # default use category only
     # - archive
     # - tag
     # - tagcloud
-    - links
+    # - links
     
 # Excerpt 
 ## Auto creat excerpt with not <!--more-->
