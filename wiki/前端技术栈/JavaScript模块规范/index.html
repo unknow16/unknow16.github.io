@@ -3,23 +3,24 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>Ubuntu-常用设置 | Stay Hungry | Stay Foolish | mingfy</title>
+    <title>JavaScript模块规范 | Stay Hungry | Stay Foolish | fymingf</title>
     
     
-        <meta name="keywords" content="Ubuntu-常用设置">
+        <meta name="keywords" content="Web">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="java  spring  dubbo  spring boot spring cloud  mysql oracle zookeeper hystrix jvm kubernate linux ubuntu rabbitmq kafka mybatis hbase vue redis">
+    <meta name="description" content="先想一想，为什么模块很重要？因为有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。但是，这样做有一个前提，那就是大家必须以同样的方式编写模块，否则你有你的写法，我有我的写法，岂不是乱了套！目前，通行的Javascript模块规范共有三种：CommonJs, AMD 和 CMD。 服务端用的CommonJS2009年，美国程序员Ryan Dahl创造了node.js项目，将j">
+<meta name="keywords" content="Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu-常用设置">
-<meta property="og:url" content="http://yoursite.com/wiki/技术杂谈/Linux/Ubuntu-安装nodeJS/index.html">
-<meta property="og:site_name" content="Stay Hungry | Stay Foolish | mingfy">
-<meta property="og:description" content="java  spring  dubbo  spring boot spring cloud  mysql oracle zookeeper hystrix jvm kubernate linux ubuntu rabbitmq kafka mybatis hbase vue redis">
+<meta property="og:title" content="JavaScript模块规范">
+<meta property="og:url" content="http://yoursite.com/wiki/前端技术栈/JavaScript模块规范/index.html">
+<meta property="og:site_name" content="Stay Hungry | Stay Foolish | fymingf">
+<meta property="og:description" content="先想一想，为什么模块很重要？因为有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。但是，这样做有一个前提，那就是大家必须以同样的方式编写模块，否则你有你的写法，我有我的写法，岂不是乱了套！目前，通行的Javascript模块规范共有三种：CommonJs, AMD 和 CMD。 服务端用的CommonJS2009年，美国程序员Ryan Dahl创造了node.js项目，将j">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-20T03:22:26.938Z">
+<meta property="og:updated_time" content="2020-12-03T03:24:25.614Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu-常用设置">
-<meta name="twitter:description" content="java  spring  dubbo  spring boot spring cloud  mysql oracle zookeeper hystrix jvm kubernate linux ubuntu rabbitmq kafka mybatis hbase vue redis">
+<meta name="twitter:title" content="JavaScript模块规范">
+<meta name="twitter:description" content="先想一想，为什么模块很重要？因为有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。但是，这样做有一个前提，那就是大家必须以同样的方式编写模块，否则你有你的写法，我有我的写法，岂不是乱了套！目前，通行的Javascript模块规范共有三种：CommonJs, AMD 和 CMD。 服务端用的CommonJS2009年，美国程序员Ryan Dahl创造了node.js项目，将j">
     
 
     
@@ -60,15 +61,13 @@
         <div class="outer">
             <a href="/" id="logo">
                 <i class="logo"></i>
-                <span class="site-title">Stay Hungry | Stay Foolish | mingfy</span>
+                <span class="site-title">Stay Hungry | Stay Foolish | fymingf</span>
             </a>
             <nav id="main-nav">
                 
                     <a class="main-nav-link" href="/">首页</a>
                 
                     <a class="main-nav-link" href="/archives">归档</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
                 
                     <a class="main-nav-link" href="/about">关于</a>
                 
@@ -121,8 +120,6 @@
                 
                     <td><a class="main-nav-link" href="/archives">归档</a></td>
                 
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
                     <td><a class="main-nav-link" href="/about">关于</a></td>
                 
                 <td>
@@ -136,7 +133,7 @@
         </table>
     </div>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
         google_ad_client: "ca-pub-9009841192314468",
@@ -151,9 +148,9 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-142763903-1');
-    </script>
+    </script> -->
 
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    <!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script> -->
 </header>
 
         <div class="outer">
@@ -264,9 +261,9 @@
                      </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             前端技术栈
                         </a>
@@ -286,7 +283,7 @@
                             &nbsp;
                             Node.js
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Linux安装nodejs和npm/">01-Linux安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/02-node和npm常用命令/">02-node和npm常用命令</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/03-前端模块规范/">03-前端模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/07-从Nuxt-js到SSR/">07-从Nuxt.js到SSR</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Linux安装nodejs和npm/">01-Linux安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/07-从Nuxt-js到SSR/">07-从Nuxt.js到SSR</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -297,7 +294,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Vue/01-通过vue-cli构建项目/">01-通过vue-cli构建项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/02-手工构建模块化Vue项目/">02-手工构建模块化Vue项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/03-常用指令示例汇总/">03-常用指令示例汇总</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/04-手写一个组件/">04-手写一个组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/05-使用方通过Prop向子组件传递数据/">05-使用方通过Prop向子组件传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/06-子组件通过事件向使用方传递数据/">06-子组件通过事件向使用方传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/07-Slot使用示例/">07-Slot使用示例</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/08-动态组件/">08-动态组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/09-vue-router入门/">09-vue-router入门</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/10-vue-router高级用法/">10-vue-router高级用法</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/11-vue-router的导航守卫/">11-vue-router的导航守卫</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/12-vuex详解/">12-vuex详解</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/前端技术栈/前端模块化生态概览/">前端模块化生态概览</a></li>  </ul> 
+                     <li class="file active"><a href="/wiki/前端技术栈/JavaScript模块规范/">JavaScript模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js常用模块简介/">Node.js常用模块简介</a></li>  <li class="file"><a href="/wiki/前端技术栈/npm相关知识点/">npm相关知识点</a></li>  <li class="file"><a href="/wiki/前端技术栈/yarn相关知识点/">yarn相关知识点</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -349,7 +346,16 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/以太坊/以太坊虚拟机/EVM-简介入门/">EVM-创建和执行合约流程</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/区块链/以太坊/以太坊-历史/">以太坊--历史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-宠物商店Dapp/">以太坊开发-宠物商店</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth搭建私有链/">以太坊开发-Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth的Console内置对象/">以太坊开发-Geth的Console内置对象</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊1.0发展简史/">以太坊1.0发展简史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊2.0路线图/">以太坊2.0路线图</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-TheDAO/">以太坊攻击-The DAO</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-51%攻击/">以太坊攻击-51%攻击</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊知识点/">以太坊知识点</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/区块链/以太坊/以太坊-历史/">以太坊历史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-宠物商店Dapp/">以太坊开发-宠物商店</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth搭建私有链/">以太坊开发-Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth的Console内置对象/">以太坊开发-Geth的Console内置对象</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊1.0发展简史/">以太坊1.0发展简史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊2.0路线图/">以太坊2.0路线图</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-TheDAO/">以太坊攻击-The DAO</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-51%攻击/">以太坊攻击-51%攻击</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊知识点/">以太坊知识点</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            密码学
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/密码学/初识零知识与证明/">初识零知识与证明</a></li>  <li class="file"><a href="/wiki/区块链/密码学/零知识证明-术语介绍/">零知识证明-基本概念</a></li>  <li class="file"><a href="/wiki/区块链/密码学/密码学与安全技术/">密码学与安全技术</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -367,7 +373,7 @@
                             &nbsp;
                             超级账本
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/超级账本/01-基础架构/">fabric基础概念</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/链码的概念与使用/">链码的概念与使用</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/e2e_cli案例运行/">e2e_cli案例运行</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/fabric各版本特性/">fabric各版本特性</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/密码学与安全技术/">密码学与安全技术</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/超级账本/fabric基础概念/">fabric基础概念</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/e2e_cli案例运行/">e2e_cli案例运行</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/链码的概念与使用/">链码的概念与使用</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/fabric各版本特性/">fabric各版本特性</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/使用fabric-sdk-node操作fabric/">使用fabric-sdk-node操作fabric</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/使用fabric-sdk-go操作fabric/">使用fabric-sdk-go操作fabric网络</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/案例-学历信息征信系统/">案例-学历信息征信系统</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/私有数据特性/">私有数据特性</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/Hyperledger生态概览/">Hyperledger生态概览</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -378,7 +384,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/跨链/01-波卡-Polkadot-简介/">01-波卡-Polkadot-简介</a></li>  <li class="file"><a href="/wiki/区块链/跨链/02-Polkadot的测试网络/">02-Polkadot的测试网络</a></li>  <li class="file"><a href="/wiki/区块链/跨链/03-Cosmos简介/">03-Cosmos简介</a></li>  <li class="file"><a href="/wiki/区块链/跨链/04-跨链项目Polkadot与Cosmos对比/">04-跨链项目Polkadot与Cosmos对比</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/区块链/初识零知识与证明/">初识零知识与证明</a></li>  <li class="file"><a href="/wiki/区块链/零知识证明-术语介绍/">零知识证明-基本概念</a></li>  </ul> 
+                     </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -464,6 +470,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Python/python基础知识/">python基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             Spring
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-01-PropertySource-Environment-Profile/">Spring-01-PropertySource-Environment-Profile</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-02-事件驱动机制/">Spring-02-事件驱动机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-03-Bean的作用域/">Spring-03-Bean的作用域</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-04-Resource体系/">Spring-04-Resource体系</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-05-InitialingBean-DisposableBean/">Spring-05-InitialingBean-DisposableBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware/">Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-07-FactoryBean/">Spring-07-FactoryBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-08-BeanPostProcessor/">Spring-08-BeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-09-BeanFactoryPostProcessor/">Spring-09-BeanFactoryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-10-InstantiationAwareBeanPostProcessor/">Spring-10-InstantiationAwareBeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-11-缓存抽象/">Spring-11-缓存抽象</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-12-缓存注解/">Spring-12-缓存注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-13-BeanDefinitionRegistry/">Spring-13-BeanDefinitionRegistry</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-14-BeanDefinitionRegistryPostProcessor/">Spring-14-BeanDefinitionRegistryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-15-BeanDefinitionReader/">Spring-15-BeanDefinitionReader</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-16-自定义类扫描器/">Spring-16-自定义类扫描器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-17-BeanPostProcessor接口总结/">Spring-17-BeanPostProcessor接口总结</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-18-内置的BeanPostProcessor总结/">Spring-18-内置的BeanPostProcessor总结</a></li>  </ul> 
@@ -484,7 +499,7 @@
                             &nbsp;
                             Spring-Cloud
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/注册中心-Eureka - 副本/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/01-Spring-Cloud技术生态架构/">01-Spring Cloud技术生态架构</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/注册中心-Eureka - 副本/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/01-Spring-Cloud技术生态架构/">01-Spring Cloud技术生态架构</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -543,9 +558,9 @@
                      <li class="file"><a href="/wiki/大数据/大数据生态系统/">大数据生态系统</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             技术杂谈
                         </a>
@@ -568,13 +583,13 @@
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/Java生态/Servlet-3-0-新特性详解/">Servlet-3.0 新特性详解</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/JPA简介/">JPA简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/BeanValidation规范/">Bean Validation 规范</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/从JavaEE到MicroProfile再到JakartaEE/">从Java EE 到 MicroProfile 再到 Jakarta EE</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/函数式编程相关概念/">函数式编程相关概念</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/Java的StreamsAPI详解/">Java的StreamsAPI详解</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             Linux
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV引导启动流程/">Linux-01-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV体系/">Linux-02-SystemV体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd体系/">Linux-03-Systemd体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd下配置tomcat服务/">Linux-04-Systemd下配置tomcat服务</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Ubuntu-PPA软件源/">Ubuntu-PPA软件源</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用发行版/">Linux-常用发行版</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-rpm和yum简介/">CentOS-rpm和yum简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-防火墙和IP配置/">CentOS-防火墙和IP配置</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-安装Git/">CentOS-安装Git</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用命令/">Linux-常用命令</a></li>  <li class="file active"><a href="/wiki/技术杂谈/Linux/Ubuntu-安装nodeJS/">Ubuntu-常用设置</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV引导启动流程/">Linux-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV体系/">Linux-SystemV体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd体系/">Linux-Systemd体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd下配置tomcat服务/">Linux-Systemd下配置tomcat服务</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用发行版/">Linux-常用发行版</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-rpm和yum简介/">CentOS-rpm和yum简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-防火墙和IP配置/">CentOS-防火墙和IP配置</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-安装Git/">CentOS-安装Git</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用命令/">Linux-常用命令</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Ubuntu-常用设置/">Ubuntu-常用设置</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -584,6 +599,24 @@
                             云计算
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/云计算/OpenShift简介/">OpenShift简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/云计算/OKD单机安装/">OKD单机安装</a></li>  <li class="file"><a href="/wiki/技术杂谈/云计算/OpenShift-v3架构概述/">OpenShift-v3架构概述</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            博客框架
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/博客框架/hexo的wikitten主题配置选项/">hexo的wikitten主题配置选项</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全领域
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/安全领域/SSL及相关证书简介/">SSL及相关证书简介</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -817,7 +850,7 @@
                             &nbsp;
                             鸣说
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/生活/鸣说/2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/生活/鸣说/星际穿越全剧情解析(转豆瓣)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/生活/鸣说/index/">See you again</a></li>  <li class="file"><a href="/wiki/生活/鸣说/谷歌被尘封的过去/">谷歌，被尘封的过去！</a></li>  <li class="file"><a href="/wiki/生活/鸣说/读完“100年金融战争”简史，这个世界真是细思恐极(转)/">读完“100年金融战争”简史，这个世界真是细思恐极！(转)</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/生活/鸣说/2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/生活/鸣说/星际穿越全剧情解析(转豆瓣)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/生活/鸣说/index/">fymingf 的个人 Wiki 站点</a></li>  <li class="file"><a href="/wiki/生活/鸣说/谷歌被尘封的过去/">谷歌，被尘封的过去！</a></li>  <li class="file"><a href="/wiki/生活/鸣说/读完“100年金融战争”简史，这个世界真是细思恐极(转)/">读完“100年金融战争”简史，这个世界真是细思恐极！(转)</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -889,58 +922,10 @@
     </script>
 
     
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title"><span>links</span></h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://www.ruanyifeng.com/" rel="external nofollow noopener noreferrer" target="_blank">阮一峰</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://jinnianshilongnian.iteye.com/" rel="external nofollow noopener noreferrer" target="_blank">张开涛</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://blog.didispace.com/" rel="external nofollow noopener noreferrer" target="_blank">翟永超</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://javadoop.com" rel="external nofollow noopener noreferrer" target="_blank">JavaDoop</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://www.iocoder.cn/" rel="external nofollow noopener noreferrer" target="_blank">芋道源码</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://fangjian0423.github.io/" rel="external nofollow noopener noreferrer" target="_blank">Format</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://www.cnkirito.moe/" rel="external nofollow noopener noreferrer" target="_blank">徐靖峰</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://learnblockchain.cn/" rel="external nofollow noopener noreferrer" target="_blank">Tiny熊</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://www.54tianzhisheng.cn/" rel="external nofollow noopener noreferrer" target="_blank">zhisheng</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-技术杂谈/Linux/Ubuntu-安装nodeJS" class="article article-type-post" itemscope="" itemprop="blogPost">
+            <section id="main"><article id="post-前端技术栈/JavaScript模块规范" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -950,15 +935,20 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术杂谈/Linux/">Linux</a>
+        <a class="article-category-link" href="/categories/前端技术栈/">前端技术栈</a>
     </div>
 
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Web/">Web</a>
+    </div>
+
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/技术杂谈/Linux/Ubuntu-安装nodeJS/">
-            <time datetime="2020-01-07T05:55:06.000Z" itemprop="datePublished">2020-01-07</time>
+        <a href="/wiki/前端技术栈/JavaScript模块规范/">
+            <time datetime="2018-08-05T11:20:54.000Z" itemprop="datePublished">2018-08-05</time>
         </a>
     </div>
 
@@ -969,13 +959,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/技术杂谈/Linux/Ubuntu-安装nodeJS.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/前端技术栈/JavaScript模块规范.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/技术杂谈/Linux/Ubuntu-安装nodeJS.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/前端技术栈/JavaScript模块规范.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/技术杂谈/Linux/Ubuntu-安装nodeJS.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/前端技术栈/JavaScript模块规范.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
@@ -983,7 +973,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Ubuntu-常用设置
+            JavaScript模块规范
         </h1>
     
 
@@ -996,12 +986,57 @@
             
                 <div id="toc" class="toc-article">
                 <strong class="toc-title">Catalogue</strong>
-                    
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端用的CommonJS"><span class="toc-number">1.</span> <span class="toc-text">服务端用的CommonJS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器端用的AMD-和-CMD"><span class="toc-number">2.</span> <span class="toc-text">浏览器端用的AMD 和 CMD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6-模块"><span class="toc-number">3.</span> <span class="toc-text">ES6 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
                 </div>
             
         
         
-            
+            <p>先想一想，为什么模块很重要？<br>因为有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。<br>但是，这样做有一个前提，那就是大家必须以同样的方式编写模块，否则你有你的写法，我有我的写法，岂不是乱了套！<br>目前，通行的Javascript模块规范共有三种：CommonJs, AMD 和 CMD。</p>
+<h2 id="服务端用的CommonJS"><a href="#服务端用的CommonJS" class="headerlink" title="服务端用的CommonJS"></a>服务端用的CommonJS</h2><p>2009年，美国程序员Ryan Dahl创造了node.js项目，将javascript语言用于服务器端编程。这标志”Javascript模块化编程”正式诞生。因为老实说，在浏览器环境下，没有模块也不是特别大的问题，毕竟网页程序的复杂性有限；但是在服务器端，一定要有模块，与操作系统和其他应用程序互动，否则根本没法编程。</p>
+<p>CommonJS官网：<a href="http://www.commonjs.org" rel="external nofollow noopener noreferrer" target="_blank">http://www.commonjs.org</a><br>CommonJS愿景说明：JavaScript是一种功能强大的面向对象的语言，周围有一些最快的动态语言解释器。正式的JavaScript规范为一些对象定义了API，这些API对构建基于浏览器的应用程序很有用。但是，该规范未定义对构建更广泛的应用程序有用的标准库。 CommonJS API将通过定义满足许多常见应用程序需求的API来填补这一空白，最终提供与Python，Ruby和Java一样丰富的标准库。目的是使应用程序开发人员能够使用CommonJS API编写应用程序，然后在不同的JavaScript解释器和主机环境中运行该应用程序。在与CommonJS兼容的系统中，您可以使用JavaScript编写：</p>
+<ul>
+<li>服务器端JavaScript应用程序</li>
+<li>命令行工具</li>
+<li>基于桌面GUI的应用程序 </li>
+<li>混合应用程序 (Titanium, Adobe AIR)</li>
+</ul>
+<p>node.js的模块系统，就是参照CommonJS规范实现的。在CommonJS中，有一个全局性方法require()，用于加载模块。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 假定有一个数学模块math.js，就可以像下面这样加载。</span><br><span class="line">var math = require(&apos;math&apos;);</span><br><span class="line"></span><br><span class="line">// 然后，就可以调用模块提供的方法：</span><br><span class="line">var math = require(&apos;math&apos;);</span><br><span class="line">math.add(2,3); // 5</span><br></pre></td></tr></table></figure></p>
+<p>所以总结来说，CommonJS是服务器端模块的规范，由Node推广使用:</p>
+<ol>
+<li>一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，在该模块内部定义的变量，无法被其他模块读取，除非定义为global对象的属性。</li>
+<li>输出模块变量的最好方法是使用module.exports对象。</li>
+<li>加载模块使用require方法，该方法读取一个文件并执行，返回文件内部的module.exports对象</li>
+</ol>
+<h2 id="浏览器端用的AMD-和-CMD"><a href="#浏览器端用的AMD-和-CMD" class="headerlink" title="浏览器端用的AMD 和 CMD"></a>浏览器端用的AMD 和 CMD</h2><p>有了服务器端模块以后，很自然地，大家就想要客户端模块。而且最好两者能够兼容，一个模块不用修改，在服务器和浏览器都可以运行。但是，由于一个重大的局限，使得CommonJS规范不适用于浏览器环境。还是上一节的代码，如果在浏览器中运行，会有一个很大的问题，你能看出来吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var math = require(&apos;math&apos;);</span><br><span class="line"></span><br><span class="line">math.add(2, 3);</span><br></pre></td></tr></table></figure>
+<p>第二行math.add(2, 3)，在第一行require(‘math’)之后运行，因此必须等math.js加载完成。也就是说，如果加载时间很长，整个应用就会停在那里等。这对服务器端不是一个问题，因为所有的模块都存放在本地硬盘，可以同步加载完成，等待时间就是硬盘的读取时间。但是，对于浏览器，这却是一个大问题，因为模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于”假死”状态。因此，浏览器端的模块，不能采用”同步加载”（synchronous），只能采用”异步加载”（asynchronous）。这就是AMD规范诞生的背景。</p>
+<p>AMD是”Asynchronous Module Definition”的缩写，意思就是”异步模块定义”。它采用异步方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等到加载完成之后，这个回调函数才会运行。</p>
+<p>AMD也采用require()语句加载模块，但是不同于CommonJS，它要求两个参数：require([module], callback);</p>
+<p>第一个参数[module]，是一个数组，里面的成员就是要加载的模块；第二个参数callback，则是加载成功之后的回调函数。如果将前面的代码改写成AMD形式，就是下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　　require([&apos;math&apos;], function (math) &#123;</span><br><span class="line"></span><br><span class="line">　　　　math.add(2, 3);</span><br><span class="line"></span><br><span class="line">　　&#125;);</span><br></pre></td></tr></table></figure>
+<p>math.add()与math模块加载不是同步的，浏览器不会发生假死。所以很显然，AMD比较适合浏览器环境。</p>
+<p>由于不是JavaScript原生支持，使用AMD规范进行页面开发需要用到对应的库函数，也就是大名鼎鼎require.js，实际上AMD 是 require.js 在推广过程中对模块定义的规范化的产出。另外还有curl.js也实现了AMD规范。</p>
+<p>所以总结来说，AMD主要解决两个问题:</p>
+<ol>
+<li>多个js文件可能有依赖关系，被依赖的文件需要早于依赖它的文件加载到浏览器</li>
+<li>js加载的时候浏览器会停止页面渲染，加载文件越多，页面失去响应时间越长</li>
+</ol>
+<p>CMD 即Common Module Definition通用模块定义，CMD规范是国内发展出来的，就像AMD有个require.js，CMD有个浏览器的实现sea.js，它要解决的问题和require.js一样，只不过在模块定义方式和模块加载（可以说运行、解析）时机上有所不同。</p>
+<h2 id="ES6-模块"><a href="#ES6-模块" class="headerlink" title="ES6 模块"></a>ES6 模块</h2><p>目前 JavaScript 语言，你会发现它有两种格式的模块。一种是 ES6 模块，简称 ESM；另一种是 Node.js 专用的 CommonJS 模块，简称 CJS。这两种模块不兼容。</p>
+<ul>
+<li>语法上面，CommonJS 模块使用require()加载和module.exports输出，ES6 模块使用import和export。</li>
+<li>用法上面，require()是同步加载，后面的代码必须等待这个命令执行完，才会执行。import命令则是异步加载，或者更准确地说，ES6 模块有一个独立的静态解析阶段，依赖关系的分析是在那个阶段完成的，最底层的模块第一个执行。</li>
+<li>Node.js 要求 ES6 模块采用.mjs后缀文件名。也就是说，只要脚本文件里面使用import或者export命令，那么就必须采用.mjs后缀名。Node.js 遇到.mjs文件，就认为它是 ES6 模块，默认启用严格模式，不必在每个模块文件顶部指定”use strict”。如果不希望将后缀名改成.mjs，可以在项目的package.json文件中，指定type字段为module。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;type&quot;: &quot;module&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>一旦设置了以后，该目录里面的 JS 脚本，就被解释用 ES6 模块。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 解释成 ES6 模块</span><br><span class="line">$ node my-app.js</span><br></pre></td></tr></table></figure></p>
+<p>如果这时还要使用 CommonJS 模块，那么需要将 CommonJS 脚本的后缀名都改成.cjs。如果没有type字段，或者type字段为commonjs，则.js脚本会被解释成 CommonJS 模块。<br>总结为一句话：.mjs文件总是以 ES6 模块加载，.cjs文件总是以 CommonJS 模块加载，.js文件的加载取决于package.json里面type字段的设置。<br>注意，ES6 模块与 CommonJS 模块尽量不要混用。require命令不能加载.mjs文件，会报错，只有import命令才可以加载.mjs文件。反过来，.mjs文件里面也不能使用require命令，必须使用import。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2020/08/how-nodejs-use-es6-module.html" rel="external nofollow noopener noreferrer" target="_blank">http://www.ruanyifeng.com/blog/2020/08/how-nodejs-use-es6-module.html</a></li>
+</ul>
+</blockquote>
+
             </div>
         
         <footer class="article-footer">
@@ -1013,19 +1048,19 @@
     
 <nav id="article-nav">
     
-        <a href="/wiki/生活/篆刻/篆刻书籍推荐/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/wiki/前端技术栈/Node.js/04-前端工作流/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Newer</strong>
             <div class="article-nav-title">
                 
-                    篆刻书籍推荐
+                    04-前端工作流
                 
             </div>
         </a>
     
     
-        <a href="/wiki/区块链/超级账本/01-基础架构/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/wiki/前端技术栈/JavaScript/02-ES6的let和const/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">fabric基础概念</div>
+            <div class="article-nav-title">02-ES6的let和const</div>
         </a>
     
 </nav>

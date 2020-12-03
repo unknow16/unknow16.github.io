@@ -3,23 +3,22 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>02-node和npm常用命令 | Stay Hungry | Stay Foolish | mingfy</title>
+    <title>Stay Hungry | Stay Foolish | fymingf</title>
     
     
-        <meta name="keywords" content="02-node和npm常用命令">
+        <meta name="keywords" content="Stay Hungry | Stay Foolish | fymingf">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="node init 交互式创建一个package.json文件  npm install X -g 全局安装xxx 会安装到node安装目录下的node_modules  npm install X 会把X包安装到node_modules目录中 不会修改package.json 之后运行npm install命令时，不会自动安装X 之后运行npm install –production或者注明NO">
-<meta property="og:type" content="article">
-<meta property="og:title" content="02-node和npm常用命令">
-<meta property="og:url" content="http://yoursite.com/wiki/前端技术栈/Node.js/02-node和npm常用命令/index.html">
-<meta property="og:site_name" content="Stay Hungry | Stay Foolish | mingfy">
-<meta property="og:description" content="node init 交互式创建一个package.json文件  npm install X -g 全局安装xxx 会安装到node安装目录下的node_modules  npm install X 会把X包安装到node_modules目录中 不会修改package.json 之后运行npm install命令时，不会自动安装X 之后运行npm install –production或者注明NO">
+    <meta name="description" content="java  spring  dubbo  spring boot spring cloud  mysql oracle zookeeper hystrix jvm kubernate linux ubuntu rabbitmq kafka mybatis hbase vue redis">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stay Hungry | Stay Foolish | fymingf">
+<meta property="og:url" content="http://yoursite.com/page/460/index.html">
+<meta property="og:site_name" content="Stay Hungry | Stay Foolish | fymingf">
+<meta property="og:description" content="java  spring  dubbo  spring boot spring cloud  mysql oracle zookeeper hystrix jvm kubernate linux ubuntu rabbitmq kafka mybatis hbase vue redis">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-02T11:44:00.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="02-node和npm常用命令">
-<meta name="twitter:description" content="node init 交互式创建一个package.json文件  npm install X -g 全局安装xxx 会安装到node安装目录下的node_modules  npm install X 会把X包安装到node_modules目录中 不会修改package.json 之后运行npm install命令时，不会自动安装X 之后运行npm install –production或者注明NO">
+<meta name="twitter:title" content="Stay Hungry | Stay Foolish | fymingf">
+<meta name="twitter:description" content="java  spring  dubbo  spring boot spring cloud  mysql oracle zookeeper hystrix jvm kubernate linux ubuntu rabbitmq kafka mybatis hbase vue redis">
     
 
     
@@ -60,15 +59,13 @@
         <div class="outer">
             <a href="/" id="logo">
                 <i class="logo"></i>
-                <span class="site-title">Stay Hungry | Stay Foolish | mingfy</span>
+                <span class="site-title">Stay Hungry | Stay Foolish | fymingf</span>
             </a>
             <nav id="main-nav">
                 
                     <a class="main-nav-link" href="/">首页</a>
                 
                     <a class="main-nav-link" href="/archives">归档</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
                 
                     <a class="main-nav-link" href="/about">关于</a>
                 
@@ -121,8 +118,6 @@
                 
                     <td><a class="main-nav-link" href="/archives">归档</a></td>
                 
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
                     <td><a class="main-nav-link" href="/about">关于</a></td>
                 
                 <td>
@@ -136,7 +131,7 @@
         </table>
     </div>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
         google_ad_client: "ca-pub-9009841192314468",
@@ -151,9 +146,9 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-142763903-1');
-    </script>
+    </script> -->
 
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    <!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script> -->
 </header>
 
         <div class="outer">
@@ -264,9 +259,9 @@
                      </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             前端技术栈
                         </a>
@@ -280,13 +275,13 @@
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/JavaScript/01-JavaScript版本及历史/">01-JavaScript版本及历史</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/02-ES6的let和const/">02-ES6的let和const</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/03-ES6核心概念/">03-ES6核心概念</a></li>  <li class="file"><a href="/wiki/前端技术栈/JavaScript/04-ES5和ES6新特性示例/">04-ES5和ES6新特性示例</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             Node.js
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Linux安装nodejs和npm/">01-Linux安装nodejs和npm</a></li>  <li class="file active"><a href="/wiki/前端技术栈/Node.js/02-node和npm常用命令/">02-node和npm常用命令</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/03-前端模块规范/">03-前端模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/07-从Nuxt-js到SSR/">07-从Nuxt.js到SSR</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Linux安装nodejs和npm/">01-Linux安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/07-从Nuxt-js到SSR/">07-从Nuxt.js到SSR</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -297,7 +292,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Vue/01-通过vue-cli构建项目/">01-通过vue-cli构建项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/02-手工构建模块化Vue项目/">02-手工构建模块化Vue项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/03-常用指令示例汇总/">03-常用指令示例汇总</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/04-手写一个组件/">04-手写一个组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/05-使用方通过Prop向子组件传递数据/">05-使用方通过Prop向子组件传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/06-子组件通过事件向使用方传递数据/">06-子组件通过事件向使用方传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/07-Slot使用示例/">07-Slot使用示例</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/08-动态组件/">08-动态组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/09-vue-router入门/">09-vue-router入门</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/10-vue-router高级用法/">10-vue-router高级用法</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/11-vue-router的导航守卫/">11-vue-router的导航守卫</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/12-vuex详解/">12-vuex详解</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/前端技术栈/前端模块化生态概览/">前端模块化生态概览</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/前端技术栈/JavaScript模块规范/">JavaScript模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js常用模块简介/">Node.js常用模块简介</a></li>  <li class="file"><a href="/wiki/前端技术栈/npm相关知识点/">npm相关知识点</a></li>  <li class="file"><a href="/wiki/前端技术栈/yarn相关知识点/">yarn相关知识点</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -502,7 +497,7 @@
                             &nbsp;
                             Spring-Cloud
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/注册中心-Eureka - 副本/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/01-Spring-Cloud技术生态架构/">01-Spring Cloud技术生态架构</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/注册中心-Eureka - 副本/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/01-Spring-Cloud技术生态架构/">01-Spring Cloud技术生态架构</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -602,6 +597,15 @@
                             云计算
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/云计算/OpenShift简介/">OpenShift简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/云计算/OKD单机安装/">OKD单机安装</a></li>  <li class="file"><a href="/wiki/技术杂谈/云计算/OpenShift-v3架构概述/">OpenShift-v3架构概述</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            博客框架
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/博客框架/hexo的wikitten主题配置选项/">hexo的wikitten主题配置选项</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -844,7 +848,7 @@
                             &nbsp;
                             鸣说
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/生活/鸣说/2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/生活/鸣说/星际穿越全剧情解析(转豆瓣)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/生活/鸣说/index/">See you again</a></li>  <li class="file"><a href="/wiki/生活/鸣说/谷歌被尘封的过去/">谷歌，被尘封的过去！</a></li>  <li class="file"><a href="/wiki/生活/鸣说/读完“100年金融战争”简史，这个世界真是细思恐极(转)/">读完“100年金融战争”简史，这个世界真是细思恐极！(转)</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/生活/鸣说/2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/生活/鸣说/星际穿越全剧情解析(转豆瓣)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/生活/鸣说/index/">fymingf 的个人 Wiki 站点</a></li>  <li class="file"><a href="/wiki/生活/鸣说/谷歌被尘封的过去/">谷歌，被尘封的过去！</a></li>  <li class="file"><a href="/wiki/生活/鸣说/读完“100年金融战争”简史，这个世界真是细思恐极(转)/">读完“100年金融战争”简史，这个世界真是细思恐极！(转)</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -916,58 +920,11 @@
     </script>
 
     
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title"><span>links</span></h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://www.ruanyifeng.com/" rel="external nofollow noopener noreferrer" target="_blank">阮一峰</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://jinnianshilongnian.iteye.com/" rel="external nofollow noopener noreferrer" target="_blank">张开涛</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://blog.didispace.com/" rel="external nofollow noopener noreferrer" target="_blank">翟永超</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://javadoop.com" rel="external nofollow noopener noreferrer" target="_blank">JavaDoop</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://www.iocoder.cn/" rel="external nofollow noopener noreferrer" target="_blank">芋道源码</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://fangjian0423.github.io/" rel="external nofollow noopener noreferrer" target="_blank">Format</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://www.cnkirito.moe/" rel="external nofollow noopener noreferrer" target="_blank">徐靖峰</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://learnblockchain.cn/" rel="external nofollow noopener noreferrer" target="_blank">Tiny熊</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://www.54tianzhisheng.cn/" rel="external nofollow noopener noreferrer" target="_blank">zhisheng</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-前端技术栈/Node.js/02-node和npm常用命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+            <section id="main">
+        <article id="post-后端技术栈/Spring-Cloud/02-注册中心-Eureka" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -977,15 +934,20 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端技术栈/">前端技术栈</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/前端技术栈/Node-js/">Node.js</a>
+        <a class="article-category-link" href="/categories/后端技术栈/">后端技术栈</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/后端技术栈/Spring-Cloud/">Spring-Cloud</a>
     </div>
 
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Spring-Cloud/">Spring Cloud</a>
+    </div>
+
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/前端技术栈/Node.js/02-node和npm常用命令/">
-            <time datetime="2018-05-19T12:02:35.000Z" itemprop="datePublished">2018-05-19</time>
+        <a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">
+            <time datetime="2018-01-11T14:18:08.000Z" itemprop="datePublished">2018-01-11</time>
         </a>
     </div>
 
@@ -996,21 +958,21 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/前端技术栈/Node.js/02-node和npm常用命令.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/后端技术栈/Spring-Cloud/02-注册中心-Eureka.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/前端技术栈/Node.js/02-node和npm常用命令.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/后端技术栈/Spring-Cloud/02-注册中心-Eureka.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/前端技术栈/Node.js/02-node和npm常用命令.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/后端技术栈/Spring-Cloud/02-注册中心-Eureka.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
                 
                 
     
-        <h1 class="article-title" itemprop="name">
-            02-node和npm常用命令
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a>
         </h1>
     
 
@@ -1021,37 +983,97 @@
         
         
             
-                <div id="toc" class="toc-article">
-                <strong class="toc-title">Catalogue</strong>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#node-init"><span class="toc-number">1.</span> <span class="toc-text">node init</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-X-g"><span class="toc-number">2.</span> <span class="toc-text">npm install X -g</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-X"><span class="toc-number">3.</span> <span class="toc-text">npm install X</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-X-–save"><span class="toc-number">4.</span> <span class="toc-text">npm install X –save</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-install-X-–save-dev"><span class="toc-number">5.</span> <span class="toc-text">npm install X –save-dev</span></a></li></ol>
-                </div>
-            
         
         
-            <h2 id="node-init"><a href="#node-init" class="headerlink" title="node init"></a>node init</h2><ul>
-<li>交互式创建一个package.json文件</li>
+            <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><table>
+<thead>
+<tr>
+<th>名词</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>register</td>
+<td>动词，注册</td>
+</tr>
+<tr>
+<td>registry</td>
+<td>名词，注册中心，注册表</td>
+</tr>
+<tr>
+<td>spring.application.name</td>
+<td>Service ID 或 virtual host （VIP）</td>
+</tr>
+<tr>
+<td>eureka server</td>
+<td>它包含一个服务注册表和一个REST API，可以用来注册一个服务，注销一个服务，并发现其他服务的位置</td>
+</tr>
+<tr>
+<td>eureka client</td>
+<td>service ID 标识的一个client，可包含多个实例</td>
+</tr>
+<tr>
+<td>eureka instance</td>
+<td>一个微服务application的单个启动实例，随着负载增长可启动多个水平缩放</td>
+</tr>
+<tr>
+<td>eureka service</td>
+<td>当你注册一个微服务application成一个client,你能通过注册的service ID获取一个eureka service</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Eureka架构"><a href="#Eureka架构" class="headerlink" title="Eureka架构"></a>Eureka架构</h2><p>Eureka架构中的三个核心角色：</p>
+<ul>
+<li><p>服务注册中心</p>
+<p>Eureka的服务端应用，提供服务注册和发现功能</p>
+</li>
+<li><p>服务提供者</p>
+<p>提供服务的应用，可以是SpringBoot应用，也可以是其它任意技术实现，只要对外提供的是Rest风格服务即可。</p>
+</li>
+<li><p>服务消费者</p>
+<p>消费应用从注册中心获取服务列表，从而得知每个服务方的信息，知道去哪里调用服务方。</p>
+</li>
 </ul>
-<h2 id="npm-install-X-g"><a href="#npm-install-X-g" class="headerlink" title="npm install X -g"></a>npm install X -g</h2><ul>
-<li>全局安装xxx</li>
-<li>会安装到node安装目录下的node_modules</li>
+<h2 id="高可用的Eureka-Server"><a href="#高可用的Eureka-Server" class="headerlink" title="高可用的Eureka Server"></a>高可用的Eureka Server</h2><h2 id="常用配置"><a href="#常用配置" class="headerlink" title="常用配置"></a>常用配置</h2><ul>
+<li>Eureka Server常用配置</li>
 </ul>
-<h2 id="npm-install-X"><a href="#npm-install-X" class="headerlink" title="npm install X"></a>npm install X</h2><ul>
-<li>会把X包安装到node_modules目录中</li>
-<li>不会修改package.json</li>
-<li>之后运行npm install命令时，不会自动安装X</li>
-<li>之后运行npm install –production或者注明NODE_ENV变量值为production时，会自动安装msbuild到node_modules目录中</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: eureka-server # 应用名称</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address: true # 让client注册时，使用ip替代默认的hostname</span><br><span class="line">    ip-address: 127.0.0.1  # 指定自己的ip信息，不指定的话会自己寻找</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false #单机禁用自己注册自己,默认true</span><br><span class="line">    fetch-registry: false #单机时不从对等点拉取registry</span><br><span class="line">    service-url:  # 服务地址，单机时是自己，集群时需要加上其它Server的地址</span><br><span class="line">      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Eureka Client常用配置</li>
 </ul>
-<h2 id="npm-install-X-–save"><a href="#npm-install-X-–save" class="headerlink" title="npm install X –save"></a>npm install X –save</h2><ul>
-<li>会把X包安装到node_modules目录中</li>
-<li>会在package.json的dependencies属性下添加X</li>
-<li>之后运行npm install命令时，会自动安装X到node_modules目录中</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: eureka-server # 应用名称，会在Eureka中显示</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address: true # 让client注册时，使用ip替代默认的hostname</span><br><span class="line">    ip-address: 127.0.0.1  # 指定自己的ip信息，不指定的话会自己寻找</span><br><span class="line">  client:</span><br><span class="line">    service-url:  # 服务地址，单机时是自己，集群时需要加上其它Server的地址</span><br><span class="line">      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span><br></pre></td></tr></table></figure>
+<p>Eureka Client要指定register-with-eureka和fetch-registry为true，即注册自己到Eureka Server，因为默认是true，所以不用配置</p>
+<h3 id="Eureka-Server-Standalone"><a href="#Eureka-Server-Standalone" class="headerlink" title="Eureka Server Standalone"></a>Eureka Server Standalone</h3><ul>
+<li>spring-cloud-starter-eureka-server</li>
+<li>@EnableEurekaServer</li>
 </ul>
-<h2 id="npm-install-X-–save-dev"><a href="#npm-install-X-–save-dev" class="headerlink" title="npm install X –save-dev"></a>npm install X –save-dev</h2><ul>
-<li>会把X包安装到node_modules目录中</li>
-<li>会在package.json的devDependencies属性下添加X</li>
-<li>之后运行npm install命令时，会自动安装X到node_modules目录中</li>
-<li>之后运行npm install  –production或者注明NODE_ENV变量值为production时，不会自动安装X到node_modules目录中</li>
-<li>安装开发阶段依赖，一般调试工具居多</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">eureka server的application.yml配置</span><br><span class="line"></span><br><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: localhost</span><br><span class="line">    preferIpAddress: true # 让client注册时，使用ip替代默认的hostname</span><br><span class="line">  client:</span><br><span class="line">    registerWithEureka: false #单机禁用自己注册自己</span><br><span class="line">    fetchRegistry: false #单机时不从对等点拉取registry</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>默认服务注册中心也会将自己作为客户端来尝试注册它自己，并且需要（至少一个）服务URL来定位对等方，单机我们需要禁用它的客户端注册行为，不禁用日志中会出现异常提醒。</li>
+<li>eureka server和client会通过心跳机制保持通讯，client每30秒发送一次心跳去续约，如果90秒内server不能收到client的心跳，则会将该client踢出注册表，自我保护模式下不会踢出失效的client</li>
+<li>eureka server没有后端存储，但registry中eureka instance都必须发送检测信号去使其注册保持最新状态（这些在内存中完成），eureka client还拥有一个rigistry的内存缓存，所以不必每次都去请求rigistry。</li>
+</ul>
+<hr>
+<h3 id="Eureka-Server-HA"><a href="#Eureka-Server-HA" class="headerlink" title="Eureka Server HA"></a>Eureka Server HA</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">eureka server的application.yml配置</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  profiles:</span><br><span class="line">    active: peer1</span><br><span class="line">  application:</span><br><span class="line">    name: eureka-server-ha</span><br><span class="line">    </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  profiles: peer1</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: peer1</span><br><span class="line">    preferIpAddress: true # 让client注册时，使用ip替代默认的hostname</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://peer2/eureka/</span><br><span class="line">server:</span><br><span class="line">  port: 1001</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  profiles: peer2</span><br><span class="line">  application:</span><br><span class="line">    name:</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: peer2</span><br><span class="line">    preferIpAddress: true # 让client注册时，使用ip替代默认的hostname</span><br><span class="line">  client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://peer1/eureka/</span><br><span class="line">server:</span><br><span class="line">  port: 1002</span><br></pre></td></tr></table></figure>
+<ul>
+<li>你能多个peer到系统中，只要它们互相至少通过一条边连接，它们之间能同步注册表。如果这些peers中物理上隔离的，系统原则上会存在脑裂类型失败。</li>
+</ul>
+<h3 id="Eureka-Client"><a href="#Eureka-Client" class="headerlink" title="Eureka Client"></a>Eureka Client</h3><ul>
+<li>spring-cloud-starter-eureka</li>
+<li>@EnableEurekaClient/@EnableDiscoveryClient</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">discovery client的application.properties</span><br><span class="line"></span><br><span class="line">spring.application.name=eureka-client-provider</span><br><span class="line">server.port=2001</span><br><span class="line">eureka.client.serviceUrl.defaultZone=http://localhost:1001/eureka/  #服务注册中心的位置</span><br></pre></td></tr></table></figure>
+<ul>
+<li>defaultZone,为任何不表示偏好的客户提供服务URL（即，这是一个有用的默认值）。</li>
+<li>client通过RestTemplate来真正发起REST请求</li>
+</ul>
+<h3 id="授权访问"><a href="#授权访问" class="headerlink" title="授权访问"></a>授权访问</h3><ul>
+<li>spring-boot-starter-security</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">eureka server 新增</span><br><span class="line"></span><br><span class="line">security.basic.enabled=true</span><br><span class="line">security.user.name=user</span><br><span class="line">security.user.password=pwd</span><br><span class="line">defaultZone=http://user:pwd@localhost:8761/eureka</span><br><span class="line"></span><br><span class="line">eureka client 配置curl style like</span><br><span class="line"></span><br><span class="line">http://user:pwd@localhost:8761/eureka</span><br></pre></td></tr></table></figure>
+<h3 id="为什么注册一个服务很慢？"><a href="#为什么注册一个服务很慢？" class="headerlink" title="为什么注册一个服务很慢？"></a>为什么注册一个服务很慢？</h3><ul>
+<li>成为一个instance涉及一个到注册中心的周期性心跳，通过client的serverUrl, 默认间隔30秒，<br>一个服务不可用于被其他clients发现，直到instance，server，client所有的在本地缓存中有相同的metadata,因此会花费3个心跳，你能改变这个周期，通过设置eureka.instance.leaseRenewalIntervalInSeconds=30,这将会加速client连接到其他服务的进度，<br>在生产上，使用默认的可能更好，因为在server上有一些计算间隔使关于续约周期的猜想。</li>
 </ul>
 
             </div>
@@ -1062,40 +1084,15 @@
 </article>
 
 
-    
-<nav id="article-nav">
-    
-        <a href="/wiki/前端技术栈/JavaScript/01-JavaScript版本及历史/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    01-JavaScript版本及历史
-                
-            </div>
-        </a>
-    
-    
-        <a href="/wiki/后端技术栈/Dubbo/Dubbo-15-通信层3-上层调用/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Dubbo-15-通信层3-上层调用</div>
-        </a>
-    
-</nav>
-
 
 
 
 
     
+        <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/459/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/458/">458</a><a class="page-number" href="/page/459/">459</a><span class="page-number current">460</span><a class="page-number" href="/page/461/">461</a><a class="extend next" rel="next" href="/page/461/">Next &raquo;</a>
+        </nav>
     
-
-
-
-
-<!-- baidu url auto push script -->
-<script type="text/javascript">
-    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
-</script>     
 </section>
         </div>
         <footer id="footer">

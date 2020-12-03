@@ -3,24 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>Ubuntu-PPA软件源 | Stay Hungry | Stay Foolish | mingfy</title>
+    <title>npm相关知识点 | Stay Hungry | Stay Foolish | fymingf</title>
     
     
-        <meta name="keywords" content="Linux">
+        <meta name="keywords" content="npm相关知识点">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="PPA简介PPA，英文全称为 Personal Package Archives，即个人软件包档案。是 Ubuntu Launchpad 网站提供的一项源服务，允许个人用户上传软件源代码，通过 Launchpad 进行编译并发布为二进制软件包，作为 apt 安装软件时的源供其他用户下载和更新。  PPA 的一般形式是： ppa:user/ppa-name 添加 PPA 源 添加 PPA 源的命令为">
-<meta name="keywords" content="Linux">
+    <meta name="description" content="npm相关文件.npmrc文件：npm的配置文件, npm config命令能更新和配置这个文件，也可直接编辑，可配置选项可参考npm config命令支持选项，四个相关文件是  per-project config file (/path/to/my/project/.npmrc) per-user config file (~/.npmrc) global config file ($PREF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu-PPA软件源">
-<meta property="og:url" content="http://yoursite.com/wiki/技术杂谈/Linux/Ubuntu-PPA软件源/index.html">
-<meta property="og:site_name" content="Stay Hungry | Stay Foolish | mingfy">
-<meta property="og:description" content="PPA简介PPA，英文全称为 Personal Package Archives，即个人软件包档案。是 Ubuntu Launchpad 网站提供的一项源服务，允许个人用户上传软件源代码，通过 Launchpad 进行编译并发布为二进制软件包，作为 apt 安装软件时的源供其他用户下载和更新。  PPA 的一般形式是： ppa:user/ppa-name 添加 PPA 源 添加 PPA 源的命令为">
+<meta property="og:title" content="npm相关知识点">
+<meta property="og:url" content="http://yoursite.com/wiki/前端技术栈/npm相关知识点/index.html">
+<meta property="og:site_name" content="Stay Hungry | Stay Foolish | fymingf">
+<meta property="og:description" content="npm相关文件.npmrc文件：npm的配置文件, npm config命令能更新和配置这个文件，也可直接编辑，可配置选项可参考npm config命令支持选项，四个相关文件是  per-project config file (/path/to/my/project/.npmrc) per-user config file (~/.npmrc) global config file ($PREF">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-24T04:56:09.185Z">
+<meta property="og:updated_time" content="2020-12-03T10:06:25.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu-PPA软件源">
-<meta name="twitter:description" content="PPA简介PPA，英文全称为 Personal Package Archives，即个人软件包档案。是 Ubuntu Launchpad 网站提供的一项源服务，允许个人用户上传软件源代码，通过 Launchpad 进行编译并发布为二进制软件包，作为 apt 安装软件时的源供其他用户下载和更新。  PPA 的一般形式是： ppa:user/ppa-name 添加 PPA 源 添加 PPA 源的命令为">
+<meta name="twitter:title" content="npm相关知识点">
+<meta name="twitter:description" content="npm相关文件.npmrc文件：npm的配置文件, npm config命令能更新和配置这个文件，也可直接编辑，可配置选项可参考npm config命令支持选项，四个相关文件是  per-project config file (/path/to/my/project/.npmrc) per-user config file (~/.npmrc) global config file ($PREF">
     
 
     
@@ -61,15 +60,13 @@
         <div class="outer">
             <a href="/" id="logo">
                 <i class="logo"></i>
-                <span class="site-title">Stay Hungry | Stay Foolish | mingfy</span>
+                <span class="site-title">Stay Hungry | Stay Foolish | fymingf</span>
             </a>
             <nav id="main-nav">
                 
                     <a class="main-nav-link" href="/">首页</a>
                 
                     <a class="main-nav-link" href="/archives">归档</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
                 
                     <a class="main-nav-link" href="/about">关于</a>
                 
@@ -122,8 +119,6 @@
                 
                     <td><a class="main-nav-link" href="/archives">归档</a></td>
                 
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
                     <td><a class="main-nav-link" href="/about">关于</a></td>
                 
                 <td>
@@ -137,7 +132,7 @@
         </table>
     </div>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
         google_ad_client: "ca-pub-9009841192314468",
@@ -152,9 +147,9 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-142763903-1');
-    </script>
+    </script> -->
 
-    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    <!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script> -->
 </header>
 
         <div class="outer">
@@ -265,9 +260,9 @@
                      </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             前端技术栈
                         </a>
@@ -287,7 +282,7 @@
                             &nbsp;
                             Node.js
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Linux安装nodejs和npm/">01-Linux安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/02-node和npm常用命令/">02-node和npm常用命令</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/03-前端模块规范/">03-前端模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/07-从Nuxt-js到SSR/">07-从Nuxt.js到SSR</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Node.js/01-Linux安装nodejs和npm/">01-Linux安装nodejs和npm</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/04-前端工作流/">04-前端工作流</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/05-模块打包工具webpack/">05-模块打包工具webpack</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/06-单线程模型/">06-单线程模型</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js/07-从Nuxt-js到SSR/">07-从Nuxt.js到SSR</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -298,7 +293,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/前端技术栈/Vue/01-通过vue-cli构建项目/">01-通过vue-cli构建项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/02-手工构建模块化Vue项目/">02-手工构建模块化Vue项目</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/03-常用指令示例汇总/">03-常用指令示例汇总</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/04-手写一个组件/">04-手写一个组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/05-使用方通过Prop向子组件传递数据/">05-使用方通过Prop向子组件传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/06-子组件通过事件向使用方传递数据/">06-子组件通过事件向使用方传递数据</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/07-Slot使用示例/">07-Slot使用示例</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/08-动态组件/">08-动态组件</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/09-vue-router入门/">09-vue-router入门</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/10-vue-router高级用法/">10-vue-router高级用法</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/11-vue-router的导航守卫/">11-vue-router的导航守卫</a></li>  <li class="file"><a href="/wiki/前端技术栈/Vue/12-vuex详解/">12-vuex详解</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/前端技术栈/前端模块化生态概览/">前端模块化生态概览</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/前端技术栈/JavaScript模块规范/">JavaScript模块规范</a></li>  <li class="file"><a href="/wiki/前端技术栈/Node.js常用模块简介/">Node.js常用模块简介</a></li>  <li class="file active"><a href="/wiki/前端技术栈/npm相关知识点/">npm相关知识点</a></li>  <li class="file"><a href="/wiki/前端技术栈/yarn相关知识点/">yarn相关知识点</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -350,7 +345,16 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/以太坊/以太坊虚拟机/EVM-简介入门/">EVM-创建和执行合约流程</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/区块链/以太坊/以太坊-历史/">以太坊--历史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-宠物商店Dapp/">以太坊开发-宠物商店</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth搭建私有链/">以太坊开发-Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth的Console内置对象/">以太坊开发-Geth的Console内置对象</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊1.0发展简史/">以太坊1.0发展简史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊2.0路线图/">以太坊2.0路线图</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-TheDAO/">以太坊攻击-The DAO</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-51%攻击/">以太坊攻击-51%攻击</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊知识点/">以太坊知识点</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/区块链/以太坊/以太坊-历史/">以太坊历史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-宠物商店Dapp/">以太坊开发-宠物商店</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth搭建私有链/">以太坊开发-Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊开发-Geth的Console内置对象/">以太坊开发-Geth的Console内置对象</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊1.0发展简史/">以太坊1.0发展简史</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊2.0路线图/">以太坊2.0路线图</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-TheDAO/">以太坊攻击-The DAO</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊攻击-51%攻击/">以太坊攻击-51%攻击</a></li>  <li class="file"><a href="/wiki/区块链/以太坊/以太坊知识点/">以太坊知识点</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            密码学
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/密码学/初识零知识与证明/">初识零知识与证明</a></li>  <li class="file"><a href="/wiki/区块链/密码学/零知识证明-术语介绍/">零知识证明-基本概念</a></li>  <li class="file"><a href="/wiki/区块链/密码学/密码学与安全技术/">密码学与安全技术</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -368,7 +372,7 @@
                             &nbsp;
                             超级账本
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/超级账本/01-基础架构/">fabric基础概念</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/链码的概念与使用/">链码的概念与使用</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/e2e_cli案例运行/">e2e_cli案例运行</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/fabric各版本特性/">fabric各版本特性</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/密码学与安全技术/">密码学与安全技术</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/超级账本/fabric基础概念/">fabric基础概念</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/e2e_cli案例运行/">e2e_cli案例运行</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/链码的概念与使用/">链码的概念与使用</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/fabric各版本特性/">fabric各版本特性</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/使用fabric-sdk-node操作fabric/">使用fabric-sdk-node操作fabric</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/使用fabric-sdk-go操作fabric/">使用fabric-sdk-go操作fabric网络</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/案例-学历信息征信系统/">案例-学历信息征信系统</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/私有数据特性/">私有数据特性</a></li>  <li class="file"><a href="/wiki/区块链/超级账本/Hyperledger生态概览/">Hyperledger生态概览</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -379,7 +383,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/区块链/跨链/01-波卡-Polkadot-简介/">01-波卡-Polkadot-简介</a></li>  <li class="file"><a href="/wiki/区块链/跨链/02-Polkadot的测试网络/">02-Polkadot的测试网络</a></li>  <li class="file"><a href="/wiki/区块链/跨链/03-Cosmos简介/">03-Cosmos简介</a></li>  <li class="file"><a href="/wiki/区块链/跨链/04-跨链项目Polkadot与Cosmos对比/">04-跨链项目Polkadot与Cosmos对比</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/区块链/初识零知识与证明/">初识零知识与证明</a></li>  <li class="file"><a href="/wiki/区块链/零知识证明-术语介绍/">零知识证明-基本概念</a></li>  </ul> 
+                     </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -465,6 +469,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Python/python基础知识/">python基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             Spring
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-01-PropertySource-Environment-Profile/">Spring-01-PropertySource-Environment-Profile</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-02-事件驱动机制/">Spring-02-事件驱动机制</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-03-Bean的作用域/">Spring-03-Bean的作用域</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-04-Resource体系/">Spring-04-Resource体系</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-05-InitialingBean-DisposableBean/">Spring-05-InitialingBean-DisposableBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware/">Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-07-FactoryBean/">Spring-07-FactoryBean</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-08-BeanPostProcessor/">Spring-08-BeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-09-BeanFactoryPostProcessor/">Spring-09-BeanFactoryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-10-InstantiationAwareBeanPostProcessor/">Spring-10-InstantiationAwareBeanPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-11-缓存抽象/">Spring-11-缓存抽象</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-12-缓存注解/">Spring-12-缓存注解</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-13-BeanDefinitionRegistry/">Spring-13-BeanDefinitionRegistry</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-14-BeanDefinitionRegistryPostProcessor/">Spring-14-BeanDefinitionRegistryPostProcessor</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-15-BeanDefinitionReader/">Spring-15-BeanDefinitionReader</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-16-自定义类扫描器/">Spring-16-自定义类扫描器</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-17-BeanPostProcessor接口总结/">Spring-17-BeanPostProcessor接口总结</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring/Spring-18-内置的BeanPostProcessor总结/">Spring-18-内置的BeanPostProcessor总结</a></li>  </ul> 
@@ -485,7 +498,7 @@
                             &nbsp;
                             Spring-Cloud
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/注册中心-Eureka - 副本/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/01-Spring-Cloud技术生态架构/">01-Spring Cloud技术生态架构</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/02-注册中心-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/注册中心-Eureka - 副本/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config（Dalston-SR5）/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-07-Zuul-熔断回退/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-08-Zuul-路由配置/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-09-Zuul-多纬度限流/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/Spring-Cloud-10-断路器运行解析/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/后端技术栈/Spring-Cloud/01-Spring-Cloud技术生态架构/">01-Spring Cloud技术生态架构</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -544,9 +557,9 @@
                      <li class="file"><a href="/wiki/大数据/大数据生态系统/">大数据生态系统</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             技术杂谈
                         </a>
@@ -569,13 +582,13 @@
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/Java生态/Servlet-3-0-新特性详解/">Servlet-3.0 新特性详解</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/JPA简介/">JPA简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/BeanValidation规范/">Bean Validation 规范</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/从JavaEE到MicroProfile再到JakartaEE/">从Java EE 到 MicroProfile 再到 Jakarta EE</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/函数式编程相关概念/">函数式编程相关概念</a></li>  <li class="file"><a href="/wiki/技术杂谈/Java生态/Java的StreamsAPI详解/">Java的StreamsAPI详解</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             Linux
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV引导启动流程/">Linux-01-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV体系/">Linux-02-SystemV体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd体系/">Linux-03-Systemd体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd下配置tomcat服务/">Linux-04-Systemd下配置tomcat服务</a></li>  <li class="file active"><a href="/wiki/技术杂谈/Linux/Ubuntu-PPA软件源/">Ubuntu-PPA软件源</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用发行版/">Linux-常用发行版</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-rpm和yum简介/">CentOS-rpm和yum简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-防火墙和IP配置/">CentOS-防火墙和IP配置</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-安装Git/">CentOS-安装Git</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用命令/">Linux-常用命令</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Ubuntu-安装nodeJS/">Ubuntu-常用设置</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV引导启动流程/">Linux-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-SystemV体系/">Linux-SystemV体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd体系/">Linux-Systemd体系</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-Systemd下配置tomcat服务/">Linux-Systemd下配置tomcat服务</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用发行版/">Linux-常用发行版</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-rpm和yum简介/">CentOS-rpm和yum简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-防火墙和IP配置/">CentOS-防火墙和IP配置</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/CentOS-安装Git/">CentOS-安装Git</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Linux-常用命令/">Linux-常用命令</a></li>  <li class="file"><a href="/wiki/技术杂谈/Linux/Ubuntu-常用设置/">Ubuntu-常用设置</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -585,6 +598,24 @@
                             云计算
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/云计算/OpenShift简介/">OpenShift简介</a></li>  <li class="file"><a href="/wiki/技术杂谈/云计算/OKD单机安装/">OKD单机安装</a></li>  <li class="file"><a href="/wiki/技术杂谈/云计算/OpenShift-v3架构概述/">OpenShift-v3架构概述</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            博客框架
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/博客框架/hexo的wikitten主题配置选项/">hexo的wikitten主题配置选项</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全领域
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/技术杂谈/安全领域/SSL及相关证书简介/">SSL及相关证书简介</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -818,7 +849,7 @@
                             &nbsp;
                             鸣说
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/生活/鸣说/2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/生活/鸣说/星际穿越全剧情解析(转豆瓣)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/生活/鸣说/index/">See you again</a></li>  <li class="file"><a href="/wiki/生活/鸣说/谷歌被尘封的过去/">谷歌，被尘封的过去！</a></li>  <li class="file"><a href="/wiki/生活/鸣说/读完“100年金融战争”简史，这个世界真是细思恐极(转)/">读完“100年金融战争”简史，这个世界真是细思恐极！(转)</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/生活/鸣说/2018小目标/">2018小目标</a></li>  <li class="file"><a href="/wiki/生活/鸣说/星际穿越全剧情解析(转豆瓣)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/生活/鸣说/index/">fymingf 的个人 Wiki 站点</a></li>  <li class="file"><a href="/wiki/生活/鸣说/谷歌被尘封的过去/">谷歌，被尘封的过去！</a></li>  <li class="file"><a href="/wiki/生活/鸣说/读完“100年金融战争”简史，这个世界真是细思恐极(转)/">读完“100年金融战争”简史，这个世界真是细思恐极！(转)</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -890,58 +921,10 @@
     </script>
 
     
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title"><span>links</span></h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://www.ruanyifeng.com/" rel="external nofollow noopener noreferrer" target="_blank">阮一峰</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://jinnianshilongnian.iteye.com/" rel="external nofollow noopener noreferrer" target="_blank">张开涛</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://blog.didispace.com/" rel="external nofollow noopener noreferrer" target="_blank">翟永超</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://javadoop.com" rel="external nofollow noopener noreferrer" target="_blank">JavaDoop</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://www.iocoder.cn/" rel="external nofollow noopener noreferrer" target="_blank">芋道源码</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://fangjian0423.github.io/" rel="external nofollow noopener noreferrer" target="_blank">Format</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://www.cnkirito.moe/" rel="external nofollow noopener noreferrer" target="_blank">徐靖峰</a>
-                    </li>
-                
-                    <li>
-                        <a href="https://learnblockchain.cn/" rel="external nofollow noopener noreferrer" target="_blank">Tiny熊</a>
-                    </li>
-                
-                    <li>
-                        <a href="http://www.54tianzhisheng.cn/" rel="external nofollow noopener noreferrer" target="_blank">zhisheng</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-技术杂谈/Linux/Ubuntu-PPA软件源" class="article article-type-post" itemscope="" itemprop="blogPost">
+            <section id="main"><article id="post-前端技术栈/npm相关知识点" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -951,20 +934,15 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术杂谈/">技术杂谈</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术杂谈/Linux/">Linux</a>
+        <a class="article-category-link" href="/categories/前端技术栈/">前端技术栈</a>
     </div>
 
                         
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>
-    </div>
-
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/技术杂谈/Linux/Ubuntu-PPA软件源/">
-            <time datetime="2018-07-24T08:13:21.000Z" itemprop="datePublished">2018-07-24</time>
+        <a href="/wiki/前端技术栈/npm相关知识点/">
+            <time datetime="2020-12-03T01:35:34.000Z" itemprop="datePublished">2020-12-03</time>
         </a>
     </div>
 
@@ -975,13 +953,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/技术杂谈/Linux/Ubuntu-PPA软件源.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/前端技术栈/npm相关知识点.md" rel="external nofollow noopener noreferrer" target="_blank"> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/技术杂谈/Linux/Ubuntu-PPA软件源.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/前端技术栈/npm相关知识点.md" rel="external nofollow noopener noreferrer" target="_blank"> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/技术杂谈/Linux/Ubuntu-PPA软件源.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
+                                <a href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/前端技术栈/npm相关知识点.md" rel="external nofollow noopener noreferrer" target="_blank"> History </a>
                             </div>
                         
                     </div>
@@ -989,7 +967,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Ubuntu-PPA软件源
+            npm相关知识点
         </h1>
     
 
@@ -1000,27 +978,73 @@
         
         
             
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm相关文件"><span class="toc-number">1.</span> <span class="toc-text">npm相关文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要文件夹"><span class="toc-number">2.</span> <span class="toc-text">主要文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope"><span class="toc-number">3.</span> <span class="toc-text">Scope</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm安装模块机制"><span class="toc-number">4.</span> <span class="toc-text">npm安装模块机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#registry"><span class="toc-number">4.1.</span> <span class="toc-text">registry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存目录"><span class="toc-number">4.2.</span> <span class="toc-text">缓存目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">5.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#node-init"><span class="toc-number">5.1.</span> <span class="toc-text">node init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-install-X-g"><span class="toc-number">5.2.</span> <span class="toc-text">npm install X -g</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-install-X"><span class="toc-number">5.3.</span> <span class="toc-text">npm install X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-install-X-–save"><span class="toc-number">5.4.</span> <span class="toc-text">npm install X –save</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-install-X-–save-dev"><span class="toc-number">5.5.</span> <span class="toc-text">npm install X –save-dev</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            
         
         
-            <h3 id="PPA简介"><a href="#PPA简介" class="headerlink" title="PPA简介"></a>PPA简介</h3><p>PPA，英文全称为 Personal Package Archives，即个人软件包档案。是 Ubuntu Launchpad 网站提供的一项源服务，允许个人用户上传软件源代码，通过 Launchpad 进行编译并发布为二进制软件包，作为 apt 安装软件时的源供其他用户下载和更新。 </p>
-<p>PPA 的一般形式是： ppa:user/ppa-name</p>
-<h3 id="添加-PPA-源"><a href="#添加-PPA-源" class="headerlink" title="添加 PPA 源"></a>添加 PPA 源</h3><ol>
-<li>添加 PPA 源的命令为：sudo add-apt-repository ppa:user/ppa-name </li>
-<li>添加好记得要更新一下： sudo apt-get update</li>
+            <h2 id="npm相关文件"><a href="#npm相关文件" class="headerlink" title="npm相关文件"></a>npm相关文件</h2><p>.npmrc文件：npm的配置文件, npm config命令能更新和配置这个文件，也可直接编辑，可配置选项可参考npm config命令支持选项，四个相关文件是</p>
+<ol>
+<li>per-project config file (/path/to/my/project/.npmrc)</li>
+<li>per-user config file (~/.npmrc)</li>
+<li>global config file ($PREFIX/etc/npmrc)</li>
+<li>npm builtin config file (/path/to/npm/npmrc)</li>
 </ol>
-<h3 id="删除-PPA-源"><a href="#删除-PPA-源" class="headerlink" title="删除 PPA 源"></a>删除 PPA 源</h3><ol>
-<li>删除 PPA 源的命令格式则为：sudo add-apt-repository -r ppa:user/ppa-name </li>
-<li>然后进入 /etc/apt/sources.list.d 目录，将相应 ppa 源的保存文件删除。 </li>
-<li>最后同样更新一下：sudo apt-get update</li>
+<p>package-lock.json: npm5的新特性，它描述了生成的确切node_modules树，因此无论中间依赖项更新如何，后续安装都可以生成相同的node_modules树。<br>npm-shrinkwrap.json: npm4及之前的lock文件，它是npm rinkwrap命令创建的文件，与package-lock.json类似。</p>
+<h2 id="主要文件夹"><a href="#主要文件夹" class="headerlink" title="主要文件夹"></a>主要文件夹</h2><ul>
+<li>prefix目录，默认是node安装目录，可用npm config list查看</li>
+<li>本地安装模块时，模块会被安装在./node_modules，适用于你将会在项目中require()它使用，如果有可执行文件会安装在./node_modules/.bin下，这些命令可以用npx调用，npx 的原理很简单，就是运行的时候，会到node_modules/.bin路径和环境变量$PATH里面，检查命令是否存在。</li>
+<li>全局安装模块时，即带-g标记，模块会被安装在{prefix}/node_modules目录中，适用于你将会要命令行使用它，其中可执行文件，在win下会被安装到{prefix}/下，而Unix则是在{prefix}/bin下</li>
+</ul>
+<h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><p>所有npm软件包都有一个名称。某些软件包名称也具​​有Scope。Scope遵循包名称的常用规则（不能用URL安全字符，不能点开头或下划线开头）。在软件包名称中使用时，作用域以@符号开头，后跟斜杠，例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@somescope/somepackagename</span><br></pre></td></tr></table></figure></p>
+<p>Scope是将相关软件包组合在一起的一种方式，并且还会影响npm处理软件包的方式。每个npm用户/组织都有自己的Scope，只有您可以在自己的Scope内添加软件包。</p>
+<h2 id="npm安装模块机制"><a href="#npm安装模块机制" class="headerlink" title="npm安装模块机制"></a>npm安装模块机制</h2><p>npm官网：<a href="https://www.npmjs.com/" rel="external nofollow noopener noreferrer" target="_blank">https://www.npmjs.com/</a></p>
+<p>从 npm install 说起，npm install 命令用来安装模块到node_modules目录。<br>安装之前，npm install会先检查，node_modules目录之中是否已经存在指定模块。如果存在，就不再重新安装了，即使远程仓库已经有了一个新版本，也是如此。如果你希望，一个模块不管是否安装过，npm 都要强制重新安装，可以使用-f或–force参数。</p>
+<p>如果想更新已安装模块，就要用到npm update命令。它会先到远程仓库查询最新版本，然后查询本地版本。如果本地版本不存在，或者远程版本较新，就会安装。</p>
+<h3 id="registry"><a href="#registry" class="headerlink" title="registry"></a>registry</h3><p>npm update命令怎么知道每个模块的最新版本呢？</p>
+<p>答案是 npm 模块仓库提供了一个查询服务，叫做 registry。同时也有三方的registry，这里以 npmjs.org 为例，它的查询服务网址是 <a href="https://registry.npmjs.org/" rel="external nofollow noopener noreferrer" target="_blank">https://registry.npmjs.org/</a> 。这个网址后面跟上模块名，就会得到一个 JSON 对象，里面是该模块所有版本的信息。比如，访问 <a href="https://registry.npmjs.org/react，就会看到" rel="external nofollow noopener noreferrer" target="_blank">https://registry.npmjs.org/react，就会看到</a> react 模块所有版本的信息。registry 网址的模块名后面，还可以跟上版本号或者标签，用来查询某个具体版本的信息。比如， 访问 <a href="https://registry.npmjs.org/react/v0.14.6" rel="external nofollow noopener noreferrer" target="_blank">https://registry.npmjs.org/react/v0.14.6</a> ，就可以看到 React 的 0.14.6 版。返回的 JSON 对象里面，有一个dist.tarball属性，是该版本压缩包的网址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dist: &#123;</span><br><span class="line">  shasum: &apos;2a57c2cf8747b483759ad8de0fa47fb0c5cf5c6a&apos;,</span><br><span class="line">  tarball: &apos;http://registry.npmjs.org/react/-/react-0.14.6.tgz&apos; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到这个网址下载压缩包，在本地解压，就得到了模块的源码。npm install和npm update命令，都是通过这种方式安装模块的。</p>
+<h3 id="缓存目录"><a href="#缓存目录" class="headerlink" title="缓存目录"></a>缓存目录</h3><p>npm install或npm update命令，从 registry 下载压缩包之后，都存放在本地的缓存目录。这个缓存目录，在 Linux 或 Mac 默认是用户主目录下的.npm目录，在 Windows 默认是%AppData%/npm-cache。通过配置命令，可以查看这个目录的具体位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config get cache</span><br></pre></td></tr></table></figure></p>
+<p>你会看到里面存放着大量的模块，每个模块的每个版本，都有一个自己的子目录，里面是代码的压缩包package.tgz文件，以及一个描述文件package/package.json。</p>
+<p>总结一下，Node模块的安装过程是这样的：</p>
+<ol>
+<li>发出npm install命令</li>
+<li>npm 向 registry 查询模块压缩包的网址</li>
+<li>下载压缩包，存放在缓存目录</li>
+<li>解压压缩包到当前项目的node_modules目录</li>
 </ol>
-<hr>
-<h3 id="国内更新源"><a href="#国内更新源" class="headerlink" title="国内更新源"></a>国内更新源</h3><p>使用如下命令更改(修改前先备份)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/source.list</span><br></pre></td></tr></table></figure></p>
-<p>常用源: <a href="https://blog.csdn.net/andersonanya/article/details/77964615" rel="external nofollow noopener noreferrer" target="_blank">https://blog.csdn.net/andersonanya/article/details/77964615</a></p>
-<hr>
-<h2 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h2><h4 id="apt-get-update报错"><a href="#apt-get-update报错" class="headerlink" title="apt-get update报错"></a>apt-get update报错</h4><p>Q: apt-get update报如下错误？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Reading package lists... Done</span><br><span class="line">E: Problem executing scripts APT::Update::Post-Invoke-Success</span><br><span class="line">&apos;if /usr/bin/test -w /var/cache/app-info -a -e /usr/bin/appstreamcli;</span><br><span class="line"> then appstreamcli refresh &gt; /dev/null;</span><br><span class="line"> fi&apos;</span><br><span class="line">E: Sub-process returned an error code</span><br></pre></td></tr></table></figure></p>
-<p>A: 解决方法：</p>
-<p>三条命令！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo pkill -KILL appstreamcli</span><br><span class="line"></span><br><span class="line">wget -P /tmp https://launchpad.net/ubuntu/+archive/primary/+files/appstream_0.9.4-1ubuntu1_amd64.deb https://launchpad.net/ubuntu/+archive/primary/+files/libappstream3_0.9.4-1ubuntu1_amd64.deb</span><br><span class="line"></span><br><span class="line">sudo dpkg -i /tmp/appstream_0.9.4-1ubuntu1_amd64.deb /tmp/libappstream3_0.9.4-1ubuntu1_amd64.deb</span><br></pre></td></tr></table></figure></p>
-<p>执行完上述命令之后再次运行sudo apt-get update就不会再出现上面的错误。</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="node-init"><a href="#node-init" class="headerlink" title="node init"></a>node init</h3><ul>
+<li>交互式创建一个package.json文件</li>
+</ul>
+<h3 id="npm-install-X-g"><a href="#npm-install-X-g" class="headerlink" title="npm install X -g"></a>npm install X -g</h3><ul>
+<li>全局安装X</li>
+<li>会安装到node安装目录下的node_modules</li>
+</ul>
+<h3 id="npm-install-X"><a href="#npm-install-X" class="headerlink" title="npm install X"></a>npm install X</h3><ul>
+<li>会把X包安装到当前目录下的node_modules目录中</li>
+<li>不会修改package.json</li>
+<li>之后运行npm install命令时，不会自动安装X</li>
+</ul>
+<h3 id="npm-install-X-–save"><a href="#npm-install-X-–save" class="headerlink" title="npm install X –save"></a>npm install X –save</h3><ul>
+<li>会把X包安装到node_modules目录中</li>
+<li>会在package.json的dependencies属性下添加X</li>
+<li>之后运行npm install命令时，会自动安装X到node_modules目录中</li>
+</ul>
+<h3 id="npm-install-X-–save-dev"><a href="#npm-install-X-–save-dev" class="headerlink" title="npm install X –save-dev"></a>npm install X –save-dev</h3><ul>
+<li>会把X包安装到node_modules目录中</li>
+<li>会在package.json的devDependencies属性下添加X</li>
+<li>之后运行npm install命令时，会自动安装X到node_modules目录中</li>
+<li>安装开发阶段依赖，一般调试工具居多</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+</ul>
+</blockquote>
 
             </div>
         
@@ -1033,19 +1057,19 @@
     
 <nav id="article-nav">
     
-        <a href="/wiki/后端技术栈/Spring-Boot/Spring-Boot-15-注入自定义Servlet等组件的二种方式/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/wiki/前端技术栈/yarn相关知识点/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Newer</strong>
             <div class="article-nav-title">
                 
-                    Spring Boot-15-注入自定义Servlet等组件的二种方式
+                    yarn相关知识点
                 
             </div>
         </a>
     
     
-        <a href="/wiki/技术杂谈/Linux/Linux-Systemd下配置tomcat服务/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/wiki/前端技术栈/Node.js常用模块简介/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Linux-04-Systemd下配置tomcat服务</div>
+            <div class="article-nav-title">Node.js常用模块简介</div>
         </a>
     
 </nav>
