@@ -6,18 +6,17 @@ tags:
 categories:
 ---
 
-## npm相关文件
-.npmrc文件：npm的配置文件, npm config命令能更新和配置这个文件，也可直接编辑，可配置选项可参考npm config命令支持选项，四个相关文件是
+## 相关文件
+- package-lock.json: npm5的新特性，它描述了生成的确切node_modules树，因此无论中间依赖项更新如何，后续安装都可以生成相同的node_modules树。
+- npm-shrinkwrap.json: npm4及之前的lock文件，它是npm rinkwrap命令创建的文件，与package-lock.json类似。
+- .npmrc文件：npm的配置文件, npm config命令能更新和配置这个文件，也可直接编辑，可配置选项可参考npm config命令支持选项，四个相关文件是
 1. per-project config file (/path/to/my/project/.npmrc)
 2. per-user config file (~/.npmrc)
 3. global config file ($PREFIX/etc/npmrc)
 4. npm builtin config file (/path/to/npm/npmrc)
 
-package-lock.json: npm5的新特性，它描述了生成的确切node_modules树，因此无论中间依赖项更新如何，后续安装都可以生成相同的node_modules树。
-npm-shrinkwrap.json: npm4及之前的lock文件，它是npm rinkwrap命令创建的文件，与package-lock.json类似。
-
 ## 主要文件夹
-- prefix目录，默认是node安装目录，可用npm config list查看
+- prefix目录，默认是node安装目录，可用npm config list查看和配置
 - 本地安装模块时，模块会被安装在./node_modules，适用于你将会在项目中require()它使用，如果有可执行文件会安装在./node_modules/.bin下，这些命令可以用npx调用，npx 的原理很简单，就是运行的时候，会到node_modules/.bin路径和环境变量$PATH里面，检查命令是否存在。
 - 全局安装模块时，即带-g标记，模块会被安装在{prefix}/node_modules目录中，适用于你将会要命令行使用它，其中可执行文件，在win下会被安装到{prefix}/下，而Unix则是在{prefix}/bin下
 

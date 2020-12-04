@@ -49,7 +49,6 @@ $ nrm ls
   edunpm - http://registry.enpmjs.org/
   
 //在国内，我们可以使用taobao的源，速度还相对不错。
-
 $ nrm use taobao
 
 Registry has been set to: https://registry.npm.taobao.org/

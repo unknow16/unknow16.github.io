@@ -1,5 +1,5 @@
 ---
-title: 06-单线程模型
+title: JavaScript单线程模型
 toc: true
 date: 2018-09-19 17:46:20
 tags: NetworkProgramming
@@ -14,12 +14,14 @@ setTimeout(function timeout() {
 }, 10);
 
 console.log("C");
+
 ....//biz code
+
 console.log("D");
 ```
 最初的想法是我们设置了一个定时任务，10ms之后执行，如果在biz code处的code需要执行20ms以上，那么timeout怎么能够顺利执行呢，而且单线程是如何做到既执行下面的biz code又执行timeout的呢。事实上如果biz code的部分如果执行时间大于10ms，那么timeout并不会立即准时执行的。要明白其中的原因，我们可以从一张图来理解JavaScript的单线程模型：
 
-![image](https://note.youdao.com/yws/api/personal/file/65C0E074E0914552828DBDB52636A870?method=download&shareKey=a97b6955c1f6d4d9a6d235b233aecfcf)
+![image](JavaScript单线程模型/js-thread-model.png)
 
 首先简单理解下eventloop机制，即一个线程在执行完主线程后会不断轮询callback队列，取出就绪任务执行，每个循环称为一个tick。因为JavaScript只有一个线程执行，因此也只有一个线程堆栈，结合上面的code实例接单说明一下对应堆栈的变动：
 

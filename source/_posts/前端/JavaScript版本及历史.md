@@ -1,5 +1,5 @@
 ---
-title: 01-JavaScript版本及历史
+title: JavaScript版本及历史
 date: 2018-05-24 22:15:30
 tags: Web
 toc: true
