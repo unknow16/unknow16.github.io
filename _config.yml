@@ -86,14 +86,14 @@ nofollow:
 
 ## Markdown
 ## https://github.com/hexojs/hexo-renderer-marked
-marked:
-  gfm: true
-  pedantic: false
-  sanitize: false
-  tables: true
-  breaks: true
-  smartLists: true
-  smartypants: true
+#marked:
+#  gfm: true
+#  pedantic: false
+#  sanitize: false
+#  tables: true
+#  breaks: true
+#  smartLists: true
+#  smartypants: true
 
 ## Plugins: https://hexo.io/plugins/
 ### JsonContent
@@ -114,9 +114,6 @@ jsonContent:
   ignore:
     - 404.html
 
-# hexo-admin authentification
-admin:
-  username: fuyi
-  password_hash: $2a$10$5IbJnranHiYEy5M/69neX.l2e93YXrfHld3e43tYskiITjdWjXtRa
-  secret: 1qaz2WSX
-  deployCommand: ./admin_script/hexo-d.sh
+math:
+  enable: true
+  engine: mathjax
