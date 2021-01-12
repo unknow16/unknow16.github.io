@@ -7,7 +7,7 @@ categories:
 ---
 
 ## conda
-conda是包及其依赖项和环境的管理工具。
+conda是一个软件包及其依赖项和环境的管理工具。
 
 - 适用语言：Python, R, Ruby, Lua, Scala, Java, JavaScript, C/C++, FORTRAN。
 - 适用平台：Windows, macOS, Linux
