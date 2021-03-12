@@ -1,0 +1,303 @@
+---
+title: Java-常量池和相关面试题
+toc: true
+date: 2020-03-21 22:39:12
+tags:
+categories:
+---
+
+Java的String类型和8种基本类型及包装类型中，除了Float和Double都实现了常量池，即将-128到127数值自动添加进常量池中，char是0到127。
+
+```
+// Character缓存实现类
+private static class CharacterCache {
+    private CharacterCache(){}
+
+    static final Character cache[] = new Character[127 + 1];  // 0-127是128个数
+    static {
+        for (int i = 0; i < cache.length; i++)
+            cache[i] = new Character((char)i);
+    }
+}
+
+
+/**
+*  此方法将始终缓存-128 到 127（包括端点）范围内的值，并可以缓存此范围之外的其他值。
+*/
+public static Integer valueOf(int i) {
+    if (i >= IntegerCache.low && i <= IntegerCache.high)
+        return IntegerCache.cache[i + (-IntegerCache.low)];
+    return new Integer(i);
+}
+```
+
+常量池大体可以分为：静态常量池，运行时常量池。
+- 静态常量池：存在于class文件中，如字符串或数字的字面量，还包含类、方法的信息，占用class文件绝大部分空间
+- 运行时常量池：是在class文件被加载进了内存之后，静态常量池数据被加载到方法区中，变成运行时常量池，且具备动态性，即运行期可以放入新的常量。如String的intern()方法会查找在常量池中是否存在一份equal相等的字符串, 如果有则返回该字符串的引用, 如果没有则添加自己的字符串进入常量池。
+
+## 基本类型和包装类型面试题
+基本类型都有对应的包装类型，基本类型与其对应的包装类型之间的赋值使用自动装箱与拆箱完成。
+```
+Integer x = 2; // 装箱
+int y = x; // 拆箱
+```
+
+### 基本类型相等问题1
+```
+Integer x = new Integer(123);
+Integer y = new Integer(123);
+System.out.println(x == y);     // false
+
+Integer z = Integer.valueOf(123);
+Integer k = Integer.valueOf(123);
+System.out.println(z == k);     // true
+```
+new Integer(123)每次都会新建一个对象
+Integer.valueOf(123) 会使用缓存池中的对象，多次调用会取得同一个对象的引用
+
+### 自动装箱,如果值一样,地址也一样
+```
+Integer value3 = 127; // 自动装箱
+Integer value4 = 127;
+System.out.println(value3 == value4);   // true
+System.out.println(value3.equals(value4)); // true
+```
+
+### 基本类型相等问题2
+```
+Integer value5 = 128;
+Integer value6 = 128;
+System.out.println(value5==value6); // false
+System.out.println(value5.equals(value6)); // true
+```
+在 Java 8 中，Integer 缓存池的大小默认为 -128~127。
+
+上面128不在缓存池中，分别返回的是一个新建的 Integer对象，所以不相等
+
+### 基本类型相等问题3
+```
+int i = 100;
+Integer j = new Integer(100);
+ 
+System.out.println(i==j);   // true
+Syste.out.println(j.equals(i)); // true
+```
+当Integer和int进行比较时，Integer会自动拆箱为int。因此就相当于两个int比较。
+
+### 基本类型相等问题4
+```
+Double num = 10d;
+Double num2 = 10d;
+Double num3 = 133d;
+Double num4 = 133d;
+System.out.println((num==num2)+""+(num3==num4));  // false, false
+```
+Double没有高频缓存，所以都是通过new堆内存，值在堆内存空间里。
+
+### 以下程序的执行结果1
+```
+final int iMax = Integer.MAX_VALUE;
+System.out.println(iMax+1);
+ 
+ 
+A:    2147483648
+B:   -2147483648   // ok
+C:    程序报错
+D:    以上都不是
+```
+这是因为在整数在内存中使用的是补码的形式。补码最高位为符号位，0表示整数，1表示负数。当执行+1时，最高位变成了1，结果就是B。
+
+### 以下程序的执行结果2
+```
+Set<Short> set = new HashSet<>();
+for(short i = 0;i<5;i++){
+    set.add(i);
+    set.remove(i-1);
+}
+System.out.println(set.size()); // 5
+```
+short类型-1之后就变成了int类型，remove（）的时候在集合中找不到int类型的数据，所以就没有删除任何元素。
+
+### short s=2;s=s+1;和short s=2;s+=1;
+对于short a=1; a=a+1; 由于a+1运算时会自动提升表达式的类型，也即int类型，再将结果赋值给short类型的a时，类型会不匹配，导致报错
+对于short a=1; a+=1; java编译器会对+=进行特殊处理，进行了类型转换，通过反编译.class源码可以看到a+=1被编译为：a=(short) (a+1)
+
+## String面试题
+在Java中==这个符号是比较运算符，它可以基本数据类型和引用数据类型是否相等，如果是基本数据类型，==比较的是值是否相等，如果是引用数据类型，==比较的是两个对象的内存地址是否相等。
+
+### 字符串相等问题1
+```
+public class Demo2_String {
+  public static void main(String[] args) {
+    String st1 = "abc";
+    String st2 = "abc";
+    System.out.println(st1 == st2);  // true
+    System.out.println(st1.equals(st2)); // true
+  }
+}
+```
+st1、st2在赋值时，均使用的字符串字面量，说白话点，就是直接把字符串写死，在编译期间，这种字面量会直接放入class文件的常量池中，从而实现复用，载入运行时常量池后，st1、st2指向的是同一个内存地址，所以相等。
+
+equals是Object父类的方法，在String类中重写了这个equals方法, 比较的是字符序列，所以相等。
+
+### 下面这句话在内存中创建了几个对象
+```
+String st1 = new String(“abc”);
+```
+答案：在内存中创建两个对象，一个在堆内存，一个在常量池，堆内存对象是常量池对象的一个拷贝副本。
+
+分析：当我们看到了new这个关键字，就要想到，new出来的对象都是存储在堆内存。然后我们来解释堆中对象为什么是常量池的对象的拷贝副本。“abc”属于字符串，字符串属于常量，所以应该在常量池中创建，所以第一个创建的对象就是在常量池里的“abc”。
+第二个对象在堆内存为啥是一个拷贝的副本呢，这个就需要在JDK API找到String(String original)这个构造方法的注释：初始化一个新创建的 String 对象，使其表示一个与参数相同的字符序列；换句话说，新创建的字符串是该参数字符串的副本。
+所以，答案就出来了，两个对象。
+
+### 字符串相等问题2
+```
+public class Demo2_String {
+   public static void main(String[] args) {
+     String st1 = new String("abc");
+     String st2 = "abc";
+     System.out.println(st1 == st2); // false
+     System.out.println(st1.equals(st2)); // true
+   }
+}
+```
+由前面问题可知，st1指向的是堆内存的地址，会创建两个abc分别在堆中和常量池中
+当st2看到abc已经在常量池存在，就不会再新建，所以st2指向了常量池的内存地址，所以==判断结果输出false，两者不相等。
+第二个equals比较，比较是两个字符串序列是否相等，所以相等。
+
+### 字符串相等问题3
+```
+public class Demo2_String {
+ 
+   public static void main(String[] args) {
+     String st1 = "a" + "b" + "c";
+     String st2 = "abc";
+     System.out.println(st1 == st2);    // true
+     System.out.println(st1.equals(st2));   // true
+   }
+}
+```
+a, b, c三个本来就是字符串常量，进行+符号拼接之后变成了abc，它本身就是字符串常量（Java中有常量优化机制），所以常量池立马会创建一个abc的字符串常量对象，在进行st2="abc",这个时候，常量池存在abc，所以不再创建。所以，不管比较内存地址还是比较字符串序列，都相等。 
+
+这个地方有个坑，st1虽然是动态拼接出来的字符串，但是所有参与拼接的部分都是已知的字面量，在编译期间，这种拼接会被优化，编译器直接帮你拼好，因此st1在class文件中被优化成abc。
+
+只有使用引号包含文本的方式创建的String对象之间使用“+”连接产生的新对象才会被加入字符串池中。
+
+### 字符串相等问题4
+```
+String st1 = "ab";
+String st2 = "abc";
+String st3 = st1 + "c";
+System.out.println(st2 == st3);    // false
+```
+为什么是false，我们用String类的注释来说明，我们知道任何数据和字符串进行加号（+）运算，最终得到是一个拼接的新的字符串。
+注释中说明了这个拼接的原理是由StringBuilder或者StringBuffer类和里面的append方法实现拼接，然后调用 toString() 把拼接的对象转换成字符串对象，最后把得到字符串对象的地址赋值给变量。
+
+上面代码的大致内存过程：
+1. 常量池创建“ab”对象，并赋值给st1，所以st1指向了“ab”
+2. 常量池创建“abc”对象，并赋值给st2，所以st2指向了“abc”
+3. 由于这里走的+的拼接方法，所以第三步是使用StringBuffer类的append方法，得到了“abc”，这个时候堆内存中有一个StringBuffer对象，注意不是String对象。
+4. 调用了Object的toString方法把StringBuffer对象装换成了String对象。
+5. 把String对象赋值给st3 
+6. 所以，st3和st2进行==判断结果是不相等，因为两个对象内存地址不同。
+
+### 字符串相等问题5
+```
+String s1 = "Hello";
+
+String s7 = "H";
+String s8 = "ello";
+String s9 = s7 + s8;
+
+System.out.println(s1 == s9);  // false
+```
+道理差不多，虽然s7、s8在赋值的时候使用的字符串字面量，但是拼接成s9的时候，s7、s8作为两个变量，都是不可预料的，编译器毕竟是编译器，不可能当解释器用，不能在编译期被确定，所以不做优化，只能等到运行时，在堆中创建s7、s8拼接成的新字符串，在堆中地址不确定，不可能与方法区常量池中的s1地址相同。
+
+### 字符串相等问题6
+```
+String s1 = "Hello";
+
+String s5 = new String("Hello");
+String s6 = s5.intern();
+
+System.out.println(s1 == s6);  // true
+```
+这两个相等完全归功于intern方法，s5在堆中，内容为Hello ，intern方法会尝试将Hello字符串添加到常量池中，并返回其在常量池中的地址，因为常量池中已经有了Hello字符串，所以intern方法直接返回地址；而s1在编译期就已经指向常量池了，因此s1和s6指向同一地址，相等。
+
+### 字符串初始化问题1
+```
+public static final String A = "ab"; // 常量A
+public static final String B = "cd"; // 常量B
+public static void main(String[] args) {
+     String s = A + B;  // 将两个常量用+连接对s进行初始化 
+     String t = "abcd";   
+    if (s == t) {   
+         System.out.println("s等于t，它们是同一个对象");   
+     } else {   
+         System.out.println("s不等于t，它们不是同一个对象");   
+     }   
+ } 
+```
+输出: s等于t，它们是同一个对象
+分析：A和B都是常量，值是固定的，因此s的值也是固定的，它在类被编译时就已经确定了。也就是说：String s=A+B; 等同于：String s=”ab”+”cd”;
+
+### 字符串初始化问题2
+```
+public static final String A; // 常量A
+public static final String B;    // 常量B
+static {   
+     A = "ab";   
+     B = "cd";   
+ }   
+ public static void main(String[] args) {   
+    // 将两个常量用+连接对s进行初始化   
+     String s = A + B;   
+     String t = "abcd";   
+    if (s == t) {   
+         System.out.println("s等于t，它们是同一个对象");   
+     } else {   
+         System.out.println("s不等于t，它们不是同一个对象");   
+     }   
+ } 
+```
+输出：s不等于t，它们不是同一个对象
+分析：A和B虽然被定义为常量，但是它们都没有马上被赋值。在运算出s的值之前，他们何时被赋值，以及被赋予什么样的值，都是个变数。因此A和B在被赋值之前，性质类似于一个变量。那么s就不能在编译期被确定，而只能在运行时被创建了。
+
+### 
+```
+public static void main(String[] args) {
+    /*
+    (1).str1
+    str1 会有4个对象
+        一个StringBuilder、
+        一个58 ldc、
+        一个tongcheng ldc、
+        String
+        这个时候常量池中没有58tongcheng这个ldc在
+    str1.intern():在jdk7后,会看常量池中是否存在,如果没有,它不会创建一个对象，
+                  如果堆中已经这个字符串，那么会将堆中的引用地址赋给它
+                  所以这个时候str1.intern()是获取的堆中的
+    * */
+    String str1=new StringBuilder("58").append("tongcheng").toString();
+    System.out.println(str1);
+    System.out.println(str1.intern());
+    System.out.println(str1==str1.intern()); //true
+    System.out.println();
+
+    /*
+    sum.misc.Version类会在JDK类库的初始化中被加载并初始化,而在初始化时它需要对静态常量字
+    段根据指定的常量值(ConstantValue)做默认初始化,此时sum.misc.Version.launcher静态常
+    量字段所引用的"java"字符串字面量就被intern到HotSpot VM的字符串常量池 - StringTable里了
+    str2对象是堆中的
+    str.intern()是返回的是JDK出娘胎自带的,在加载sum.misc.version这个类的时候进入常量池
+    */
+    String str2=new StringBuilder("ja").append("va").toString();
+    System.out.println(str2);
+    System.out.println(str2.intern());
+    System.out.println(str2==str2.intern()); //false
+}
+```
+
+## 参考资料
+> - []()
+> - []()

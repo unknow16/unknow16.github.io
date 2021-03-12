@@ -4,6 +4,22 @@ date: 2018-01-12 17:12:35
 tags: JVM
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 参考 
 
 https://www.cnblogs.com/lishun1005/p/6019678.html
@@ -19,20 +35,7 @@ http://www.importnew.com/27454.html
 ### 栈帧图
 ![image](https://note.youdao.com/yws/api/personal/file/7E061D6E7808411CA88435FDBDA98746?method=download&shareKey=6becf3898e6cd1201f8553b7bd4de97d)
 
-### 方法区内存（多线程共享）/非堆内存/永久代
-* 类字节码：运行Java程序时，会加载类的class字节码文件到内存中，会存储在这个区。
-* 常量，如：字符串常量
-* 类的静态成员变量
-* 编译器编译后的类的方法的定义代码
 
-JDK8,改名叫 Native Memory, 即Metaspace空间
-
-### 堆内存（多线程共享）
-* 对象的实例
-
-JVM内存中最大的一块。
-
-进行垃圾收集时，根据垃圾收集器的实现不同，又会细分为，新生代区、老生代区、永久代区。
 
 ## 每个线程都有下列内存区域
 ### 程序计数器内存
