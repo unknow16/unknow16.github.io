@@ -5,3 +5,5 @@ tags: Dubbo
 ---
 
 [【转】Dubbo架构设计详解](http://shiyanjun.cn/archives/325.html)
+
+https://dubbo.apache.org/zh/docs/v2.7/dev/design/

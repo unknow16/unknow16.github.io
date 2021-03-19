@@ -7,6 +7,8 @@ tags: MQ
 
 RabbitMQ 是一个在 AMQP 基础上完整的，可复用的企业消息系统。
 
+确认机制文档：https://www.rabbitmq.com/confirms.html
+
 ## 交换器（Exchanges）
 RabbitMQ 消息模型的核心思想是，生产者不直接发送任何消息给队列。实际上，一般的情况下，生产者甚至不知道消息应该发送到哪些队列。相反的，生产者只能将信息发送到交换器。
 
