@@ -4,6 +4,10 @@ date: 2018-01-15 20:00:40
 tags: ConcurrentPrograming
 ---
 
+总线风暴
+由于volatile的mesi缓存一致性协议需要不断的从主内存嗅探和cas不断循环无效交互导致总线带宽达到峰值
+解决办法：部分volatile和cas使用synchronize
+
 volatile这个关键字可能很多朋友都听说过，或许也都用过。在Java 5之前，它是一个备受争议的关键字，因为在程序中使用它往往会导致出人意料的结果。在Java 5之后，volatile关键字才得以重获生机。
 　　
 

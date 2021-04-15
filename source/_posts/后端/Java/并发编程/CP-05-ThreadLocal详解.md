@@ -4,6 +4,11 @@ date: 2018-01-17 20:01:19
 tags: ConcurrentPrograming
 ---
 
+
+1. Thread中保存了一个ThreadLocal中的一个静态内部类ThreadLocalMap的实例对象threadLocals，默认为null。
+2. 在一个线程中，new出第一个ThreadLocal时，并调用它的set方法会给当前线程中的threadLocals实例对象new出，key是当前ThreadLocal对象引用，值就是set方法的参数
+3. new出第二个ThreadLocal对象时，重用当前线程的threadLocals实例对象，set时，key是此时的第二个ThreadLocal对象引用，值是set方法的值
+
 ### 理解
 首先明确一个概念，ThreadLocal不是一个用来控制并发访问某个共享对象的，而是为每个线程分配一个只属于该线程的变量，顾名思义thread local variable(线程局部变量)。它的作用是会为每个使用该变量的线程提供一个该变量的副本，在每个线程中都可以独立的操作该变量，而不会影响其他线程，实现线程间的数据隔离。从线程的角度看，每个线程都完全拥有该变量。
 
