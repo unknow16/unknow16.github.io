@@ -1,5 +1,5 @@
 ---
-title: Java规范概述
+title: 从Java EE 到 Jakarta EE
 toc: true
 date: 2021-04-16 14:05:23
 tags:
@@ -58,5 +58,5 @@ Jakarta EE 规范将不会在 JCP 下，而是由 Jakarta EE 工作组定义并�
 - 改名公告：https://eclipse-foundation.blog/2018/02/26/and-the-name-is/
 
 ## 参考资料
-> - []()
+> - [http://www.useopen.com/categories/jakartaee/](http://www.useopen.com/categories/jakartaee/)
 > - []()

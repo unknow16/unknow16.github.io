@@ -1,5 +1,5 @@
 ---
-title: Java-StreamsAPI详解
+title: Java8-Streams-API
 toc: true
 date: 2020-04-20 11:30:19
 tags:
