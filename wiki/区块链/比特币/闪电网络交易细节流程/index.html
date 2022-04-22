@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>闪电网络交易细节流程 | Stay Hungry | Stay Foolish | fymingf</title>
+    
+    
+        <meta name="keywords" content="闪电网络交易细节流程">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="作为铺垫，需要讲解以下三个概念 多重签名技术多重签名技术（multisig）是多个用户同时对一个数字资产进行签名。可以简单地理解为，一个账户多个人拥有签名权和支付权。如果一个地址只能由一个私钥签名和支付，表现形式就是 1&#x2F;1；而多重签名的表现形式是 m&#x2F;n，也就是说一共 n 个私钥可以给一个账户签名，而当 m 个地址签名时，就可以支付一笔交易。例如，多重签名 2&#x2F;3，表示 3 个人拥有签名权，而两">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闪电网络交易细节流程">
+<meta property="og:url" content="http://yoursite.com/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%98%93%E7%BB%86%E8%8A%82%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Stay Hungry | Stay Foolish | fymingf">
+<meta property="og:description" content="作为铺垫，需要讲解以下三个概念 多重签名技术多重签名技术（multisig）是多个用户同时对一个数字资产进行签名。可以简单地理解为，一个账户多个人拥有签名权和支付权。如果一个地址只能由一个私钥签名和支付，表现形式就是 1&#x2F;1；而多重签名的表现形式是 m&#x2F;n，也就是说一共 n 个私钥可以给一个账户签名，而当 m 个地址签名时，就可以支付一笔交易。例如，多重签名 2&#x2F;3，表示 3 个人拥有签名权，而两">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-09-23T09:11:07.000Z">
+<meta property="article:modified_time" content="2021-04-16T02:04:47.763Z">
+<meta property="article:author" content="mingfy">
+<meta name="twitter:card" content="summary">
+    
+
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <meta name="baidu-site-verification" content="Fe5b8xyrGJ">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Stay Hungry | Stay Foolish | fymingf</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-9009841192314468",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142763903-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-142763903-1');
+    </script> -->
+
+    <!-- <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1277902035'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1277902035%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script> -->
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            中间件
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Alibaba
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Alibaba/Nacos%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">Nacos注意事项</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ElasticSearch
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/ElasticSearch/01-ElasticSearch%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/">01-ElasticSearch核心概念</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/ElasticSearch/02-%E6%95%B0%E5%8D%81%E4%BA%BF%E7%BA%A7%E5%88%AB%E6%95%B0%E6%8D%AE%E9%87%8F%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/">02-数十亿级别数据量如何提高查询效率</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/ElasticSearch/03-%E5%B8%B8%E7%94%A8Restful-Api%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/">03-常用Restful Api使用示例</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/ElasticSearch/04-SpringDataElasticsearch%E6%93%8D%E4%BD%9C/">04-SpringDataElasticsearch操作</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MongoDB
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MongoDB/03-MongoDB%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">03-MongoDB快速入门</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MongoDB/02-MongoDB%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">02-MongoDB的应用场景和案例</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MongoDB/01-NoSQL%E7%AE%80%E4%BB%8B/">01-NoSQL简介</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MongoDB/04-%E8%B0%88MongoDB%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/">04-谈MongoDB应用实践</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MongoDB/05-MongoDB%E7%9A%84%E5%A4%8D%E5%88%B6%E9%9B%86%E5%8E%9F%E7%90%86/">05-MongoDB的复制集原理</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MongoDB/06-MongoDB%E7%9A%84%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4%E6%9E%B6%E6%9E%84/">06-MongoDB的分片集群架构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96/">索引优化</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E5%A4%A7%E8%A1%A8%E4%BC%98%E5%8C%96/">大表优化</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">存储过程</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B-%E6%B8%B8%E6%A0%87%E4%BD%BF%E7%94%A8/">存储过程-游标使用</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">存储过程-错误处理</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">常用命令</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/SQL%E4%BC%98%E5%8C%96/">SQL优化</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E4%B8%8EMVCC/">事务隔离与MVCC</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/B-Tree%E5%8E%9F%E7%90%86/">B+Tree原理</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/Redo%E6%97%A5%E5%BF%97/">Redo日志</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/%E4%B8%80%E8%87%B4%E6%80%A7Hash%E7%AE%97%E6%B3%95/">一致性Hash算法</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">InnoDB存储引擎</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/exist%E5%92%8Cin%E7%9A%84%E4%BD%BF%E7%94%A8/">exist和in的使用</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/MySQL/sql1992-txt/">sql1992.txt</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Nginx
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Nginx/01-Nginx%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85/">01-Nginx自定义模块安装</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Nginx/02-Nginx%E7%9A%84%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE/">02-Nginx的虚拟主机配置</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Nginx/03-Nginx%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">03-Nginx的反向代理配置</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Nginx/04-Nginx%E5%B8%B8%E7%94%A8%E5%8D%95%E9%A1%B9%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/">04-Nginx常用单项配置解析</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Nginx/05-Nginx%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/">05-Nginx日志相关配置</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Nginx/06-Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">06-Nginx配置文件结构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            RabbitMQ
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/01-RabbitMQ%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/">01-RabbitMQ消息模型</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/02-RabbitMQ%E7%94%9F%E4%BA%A7%E8%80%85%E8%A7%92%E5%BA%A6%E7%89%B9%E6%80%A7/">02-RabbitMQ生产者角度特性</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/03-RabbitMQ%E6%B6%88%E8%B4%B9%E8%80%85%E8%A7%92%E5%BA%A6%E7%89%B9%E6%80%A7/">03-RabbitMQ消费者角度特性</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/04-RabbitMQ%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4%E5%BA%94%E7%94%A8/">04-RabbitMQ过期时间应用</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ/05-Spring-AMQP%E7%9A%84%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B/">05-Spring AMQP的应用示例</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Redis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis-01-%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85/">Redis-01-单机安装</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis-02-%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%E6%BC%94%E5%8F%98/">Redis-02-集群模式演变</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis-03-%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%E5%AE%89%E8%A3%85/">Redis-03-集群模式安装</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis-04-%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8/">Redis-04-持久化存储</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis-05-%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81/">Redis-05-事务支持</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis-06-LRU%E7%AE%97%E6%B3%95%E6%94%AF%E6%8C%81/">Redis-06-LRU算法支持</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis-07-5%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/">Redis-07-5种数据类型命令操作</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/Redis%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">Redis的设计与实现</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            fluentd
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/fluentd/fluentd%E7%AE%80%E4%BB%8B/">fluentd简介</a></li>  <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/fluentd/fluentd%E5%AE%89%E8%A3%85/">fluentd安装</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Tomcat-基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            前端
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Vue
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/01-%E9%80%9A%E8%BF%87vue-cli%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE/">01-通过vue-cli构建项目</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/02-%E6%89%8B%E5%B7%A5%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9D%97%E5%8C%96Vue%E9%A1%B9%E7%9B%AE/">02-手工构建模块化Vue项目</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/03-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E7%A4%BA%E4%BE%8B%E6%B1%87%E6%80%BB/">03-常用指令示例汇总</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/04-%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6/">04-手写一个组件</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/05-%E4%BD%BF%E7%94%A8%E6%96%B9%E9%80%9A%E8%BF%87Prop%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/">05-使用方通过Prop向子组件传递数据</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/06-%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E8%BF%87%E4%BA%8B%E4%BB%B6%E5%90%91%E4%BD%BF%E7%94%A8%E6%96%B9%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE/">06-子组件通过事件向使用方传递数据</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/07-Slot%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/">07-Slot使用示例</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/08-%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/">08-动态组件</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/09-vue-router%E5%85%A5%E9%97%A8/">09-vue-router入门</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/10-vue-router%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/">10-vue-router高级用法</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/11-vue-router%E7%9A%84%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB/">11-vue-router的导航守卫</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Vue/12-vuex%E8%AF%A6%E8%A7%A3/">12-vuex详解</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/JavaScript%E7%89%88%E6%9C%AC%E5%8F%8A%E5%8E%86%E5%8F%B2/">JavaScript版本及历史</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/JavaScript%E6%A8%A1%E5%9D%97%E8%A7%84%E8%8C%83/">JavaScript模块规范</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/JavaScript%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/">JavaScript单线程模型</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Node%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E7%AE%80%E4%BB%8B/">Node.js常用模块简介</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/npm%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">npm相关知识点</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/yarn%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/">yarn相关知识点</a></li>  <li class="file"><a href="/wiki/%E5%89%8D%E7%AB%AF/Node%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Node.js开发环境配置</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            区块链
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DeFi
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/DeFi/DeFi%E7%94%9F%E6%80%81%E5%9C%88/">DeFi生态圈</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/DeFi/Uniswap%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Uniswap基础知识</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/DeFi/Compound%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Compound基础知识</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/DeFi/Dai%E5%92%8CMaker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Dai和Maker基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            EOS
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/EOS/01-EOS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">01-EOS基础知识</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/EOS/02-EOS-IO%E6%8A%80%E6%9C%AF%E7%99%BD%E7%9A%AE%E4%B9%A6/">02-EOS.IO技术白皮书</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IPFS
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/IPFS/01-%E7%AB%99%E5%9C%A8Web3-0%E7%90%86%E8%A7%A3IPFS%E6%98%AF%E4%BB%80%E4%B9%88/">01-站在Web3.0理解IPFS是什么</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/IPFS/02-IPFS-Filecoin-FIL%E6%A6%82%E5%BF%B5/">02-IPFS-Filecoin-FIL概念</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            以太坊
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Dapp
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/Dapp/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%BC%80%E5%8F%91-%E5%AE%A0%E7%89%A9%E5%95%86%E5%BA%97Dapp/">以太坊开发-宠物商店</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/Dapp/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%BC%80%E5%8F%91-Geth%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E9%93%BE/">以太坊开发-Geth搭建私有链</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/Dapp/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%BC%80%E5%8F%91-Geth%E7%9A%84Console%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/">以太坊开发-Geth的Console内置对象</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Solidity语言
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/Solidity%E8%AF%AD%E8%A8%80/%E5%90%88%E7%BA%A6%E7%9A%84%E7%BB%93%E6%9E%84/">合约的结构</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/Solidity%E8%AF%AD%E8%A8%80/%E9%87%8D%E8%A6%81%E7%B1%BB%E5%9E%8B/">重要类型</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/Solidity%E8%AF%AD%E8%A8%80/ABI%E8%AF%B4%E6%98%8E/">ABI说明</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/">以太坊发展历史</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/%E4%BB%A5%E5%A4%AA%E5%9D%8A2.0%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">以太坊2.0相关概念</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%9F%A5%E8%AF%86%E7%82%B9/">以太坊知识点</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%97%A5%E5%BF%97/">以太坊事件与日志</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E4%BA%A4%E6%98%93%E5%9B%9E%E6%89%A7/">以太坊交易回执</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%AE%80%E4%BB%8B/">以太坊虚拟机简介</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全大事件
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%AE%89%E5%85%A8%E5%A4%A7%E4%BA%8B%E4%BB%B6/%E4%BB%A5%E5%A4%AA%E5%9D%8ATheDAO%E6%94%BB%E5%87%BB/">以太坊TheDAO攻击</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%AE%89%E5%85%A8%E5%A4%A7%E4%BA%8B%E4%BB%B6/DeFi%E9%A1%B9%E7%9B%AELendf.Me%E9%81%AD%E9%BB%91%E5%AE%A2%E6%94%BB%E5%87%BB%E5%A4%8D%E7%9B%98%E5%88%86%E6%9E%90/">DeFi项目Lendf.Me遭黑客攻击复盘分析</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%AE%89%E5%85%A8%E5%A4%A7%E4%BA%8B%E4%BB%B6/%E5%8F%8C%E8%8A%B1%E5%92%8C51%E6%94%BB%E5%87%BB/">双花和51%攻击</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            密码学
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%AF%86%E7%A0%81%E5%AD%A6/%E5%88%9D%E8%AF%86%E9%9B%B6%E7%9F%A5%E8%AF%86%E4%B8%8E%E8%AF%81%E6%98%8E/">初识零知识与证明</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%AF%86%E7%A0%81%E5%AD%A6/%E9%9B%B6%E7%9F%A5%E8%AF%86%E8%AF%81%E6%98%8E-%E6%9C%AF%E8%AF%AD%E4%BB%8B%E7%BB%8D/">零知识证明-基本概念</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%AF%86%E7%A0%81%E5%AD%A6/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B8%8E%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/">密码学与安全技术</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            比特币
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E5%AF%86%E7%A0%81%E5%AD%A6-%E5%85%AC%E7%A7%81%E9%92%A5%E5%92%8C%E6%AF%94%E7%89%B9%E5%B8%81%E5%9C%B0%E5%9D%80/">密码学--公私钥和比特币地址</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E4%BA%A4%E6%98%93%E7%BB%93%E6%9E%84/">比特币--交易结构</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E5%8C%BA%E5%9D%97%E7%BB%93%E6%9E%84/">比特币--区块结构</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/">比特币--网络架构</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-Bloom%E8%BF%87%E6%BB%A4%E5%99%A8/">比特币--Bloom过滤器</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E8%AD%A6%E5%91%8A%E6%B6%88%E6%81%AF/">比特币--警告消息</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E4%BA%A4%E6%98%93%E8%84%9A%E6%9C%AC%E5%92%8C%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">比特币--交易脚本和脚本语言</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-Merkle%E6%A0%91/">比特币--Merkle树</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E6%8C%96%E7%9F%BF%E4%B8%8E%E5%85%B1%E8%AF%86/">比特币--挖矿与共识</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E4%BA%A4%E6%98%93%E5%9D%97%E9%BE%84%E5%92%8C%E4%BC%98%E5%85%88%E7%BA%A7/">比特币--交易块龄和优先级</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E6%AF%94%E7%89%B9%E5%B8%81-%E6%8C%96%E7%9F%BF%E9%9A%BE%E5%BA%A6%E8%A1%A8%E7%A4%BA%E5%92%8C%E9%9A%BE%E5%BA%A6%E8%B0%83%E6%95%B4/">比特币--挖矿难度表示和难度调整</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E6%98%AF%E4%BB%80%E4%B9%88/">用大白话解释：闪电网络是什么？</a></li>  <li class="file active"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%98%93%E7%BB%86%E8%8A%82%E6%B5%81%E7%A8%8B/">闪电网络交易细节流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            超级账本
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/fabric%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">fabric基础概念</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/e2e_cli%E6%A1%88%E4%BE%8B%E8%BF%90%E8%A1%8C/">e2e_cli案例运行</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/%E9%93%BE%E7%A0%81%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8/">链码的概念与使用</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/fabric%E5%90%84%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7/">fabric各版本特性</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/%E4%BD%BF%E7%94%A8fabric-sdk-node%E6%93%8D%E4%BD%9Cfabric/">使用fabric-sdk-node操作fabric</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/%E4%BD%BF%E7%94%A8fabric-sdk-go%E6%93%8D%E4%BD%9Cfabric/">使用fabric-sdk-go操作fabric网络</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/%E6%A1%88%E4%BE%8B-%E5%AD%A6%E5%8E%86%E4%BF%A1%E6%81%AF%E5%BE%81%E4%BF%A1%E7%B3%BB%E7%BB%9F/">案例-学历信息征信系统</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/%E7%A7%81%E6%9C%89%E6%95%B0%E6%8D%AE%E7%89%B9%E6%80%A7/">私有数据特性</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B6%85%E7%BA%A7%E8%B4%A6%E6%9C%AC/Hyperledger%E7%94%9F%E6%80%81%E6%A6%82%E8%A7%88/">Hyperledger生态概览</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            跨链
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B7%A8%E9%93%BE/01-%E6%B3%A2%E5%8D%A1-Polkadot-%E7%AE%80%E4%BB%8B/">01-波卡-Polkadot-简介</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B7%A8%E9%93%BE/02-Polkadot%E7%9A%84%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C/">02-Polkadot的测试网络</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B7%A8%E9%93%BE/03-Cosmos%E7%AE%80%E4%BB%8B/">03-Cosmos简介</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B7%A8%E9%93%BE/04-%E8%B7%A8%E9%93%BE%E9%A1%B9%E7%9B%AEPolkadot%E4%B8%8ECosmos%E5%AF%B9%E6%AF%94/">04-跨链项目Polkadot与Cosmos对比</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/Gitcoin%E7%AE%80%E4%BB%8B/">Gitcoin简介</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%A2%84%E8%A8%80%E6%9C%BA%E7%94%9F%E6%80%81%E5%9C%88/">预言机生态圈</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E7%94%9F%E6%80%81%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/">区块链生态资源导航</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/Rollup%E6%98%AF%E4%BB%80%E4%B9%88/">Rollup是什么</a></li>  <li class="file"><a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%95%B0%E6%8D%AE%E5%8F%AF%E5%BE%97%E6%80%A7%E9%97%AE%E9%A2%98/">数据可得性问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            后端
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Dubbo
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-01-%E7%AE%80%E6%98%93RPC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Dubbo-01-简易RPC实现原理</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-02-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E8%AF%A6%E8%A7%A3/">Dubbo-02-架构设计详解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-03-SPI-%E5%8E%9F%E7%90%86%E6%9C%BA%E5%88%B6/">Dubbo-03-SPI-原理机制</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-04-SPI-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Dubbo-04-SPI-源码解析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-05-SPI-Adaptive%E6%B3%A8%E8%A7%A3/">Dubbo-05-SPI-@Adaptive注解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-06-SPI-Activate%E6%B3%A8%E8%A7%A3/">Dubbo-06-SPI-@Activate注解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-07-Spring%E9%9B%86%E6%88%90%E7%82%B9/">Dubbo-07-Spring集成点</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-08-%E4%B8%BB%E8%A6%81%E6%8E%A5%E5%8F%A3%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B/">Dubbo-08-主要接口概念简介</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-09-%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%A7%A3%E6%9E%90/">Dubbo-09-服务发布解析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-10-%E6%9C%8D%E5%8A%A1%E5%8F%91%E5%B8%83%E8%A7%A3%E6%9E%902/">Dubbo-10-服务发布解析2</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-11-%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E8%A7%A3%E6%9E%90/">Dubbo-11-服务引用解析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-12-%E6%9C%8D%E5%8A%A1%E5%BC%95%E7%94%A8%E8%A7%A3%E6%9E%902/">Dubbo-12-服务引用解析2</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-13-%E9%80%9A%E4%BF%A1%E5%B1%821-%E5%B0%81%E8%A3%85%E6%A1%86%E6%9E%B6/">Dubbo-13-通信层1-封装框架</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-14-%E9%80%9A%E4%BF%A1%E5%B1%822-%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0/">Dubbo-14-通信层2-异步请求实现</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Dubbo/Dubbo-15-%E9%80%9A%E4%BF%A1%E5%B1%823-%E4%B8%8A%E5%B1%82%E8%B0%83%E7%94%A8/">Dubbo-15-通信层3-上层调用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Go
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Go/go%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BB%8B%E7%BB%8D/">go语言环境安装与介绍</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Go/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">基础语法</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Go/%E5%B8%B8%E7%94%A8API%E4%BB%8B%E7%BB%8D/">常用API介绍</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Go/%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%90%8C%E6%AD%A5/">并发与同步</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Go/Go%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/">Go发展历程</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Go/%E5%8F%8D%E5%B0%84%E4%B8%8E%E7%BD%91%E7%BB%9C/">反射与网络</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Go/web/">web</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Hystrix
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-01-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">Hystrix-01-应用场景</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-02-%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%96%B9%E5%BC%8F/">Hystrix-02-执行命令方式</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-03-%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7/">Hystrix-03-服务降级</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-04-%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">Hystrix-04-常用配置</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-05-%E8%AF%B7%E6%B1%82%E7%BC%93%E5%AD%98/">Hystrix-05-请求缓存</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-06-%E4%BF%A1%E5%8F%B7%E9%87%8F%E9%9A%94%E7%A6%BB/">Hystrix-06-信号量隔离</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-07-%E9%99%8D%E7%BA%A7%E9%80%BB%E8%BE%91%E5%91%BD%E4%BB%A4%E5%B5%8C%E5%A5%97/">Hystrix-07-降级逻辑命令嵌套</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-08-%E5%91%BD%E4%BB%A4%E8%B0%83%E7%94%A8%E5%90%88%E5%B9%B6/">Hystrix-08-命令调用合并</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-09-Dashboard%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/">Hystrix-09-Dashboard监控平台搭建</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-10-SpringMVC%E6%95%B4%E5%90%88Hystrix%E5%8F%8A%E7%9B%91%E6%8E%A7/">Hystrix-10-SpringMVC整合Hystrix及监控</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-11-%E4%BD%BF%E7%94%A8Turbine%E7%9B%91%E6%8E%A7%E9%9B%86%E7%BE%A4/">Hystrix-11-使用Turbine监控集群</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-12-%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%88%86%E6%9E%90/">Hystrix-12-参数配置与分析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-13-HystrixCommand%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/">Hystrix-13-HystrixCommand执行流程分析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-14-CircuitBreaker%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%8F%8A%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Hystrix-14-CircuitBreaker执行流程及源码分析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-15-HystrixCommand%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8/">Hystrix-15-@HystrixCommand注解使用</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Hystrix/Hystrix-16-%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8/">Hystrix-16-缓存相关注解使用</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JVM
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/JVM/JVM-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">JVM-内存模型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/JVM/JVM-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">JVM-类加载机制</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/JVM/JVM-GC%E6%B5%81%E7%A8%8B/">JVM-GC流程</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/JVM/JVM-%E5%AF%B9%E8%B1%A1%E5%A4%B4%E7%BB%93%E6%9E%84/">JVM-对象头结构</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/JVM/JVM-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Jvm-基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-01-%E9%80%A0%E6%88%90%E7%B1%BB%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%8E%9F%E5%9B%A0/">CP-01-造成类的线程不安全的原因</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-02-%E7%BA%BF%E7%A8%8B%E7%B1%BB%E8%87%AA%E5%B7%B1/">CP-02-线程类自己</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-03-volatile%E7%9A%84%E5%89%8D%E7%94%9F%E4%BB%8A%E4%B8%96/">CP-03-volatile的前生今世</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-04-CAS%E6%B5%85%E6%9E%90/">CP-04-CAS浅析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-05-ThreadLocal%E8%AF%A6%E8%A7%A3/">CP-05-ThreadLocal详解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-06-%E7%BA%BF%E7%A8%8B%E6%9C%AA%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8/">CP-06-线程未捕获异常处理器</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-07-Servlet%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%8D%95%E4%BE%8B%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%E7%9A%84%E7%90%86%E8%A7%A3/">CP-07-Servlet的多线程中单例并发执行的理解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-08-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%8F%8C%E9%87%8D%E6%A3%80%E6%B5%8B/">CP-08-单例模式与双重检测</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-09-%E7%BA%BF%E7%A8%8B-%E6%8C%82%E8%B5%B7-%E9%98%BB%E5%A1%9E-%E4%B8%AD%E6%96%AD/">CP-09-线程-挂起-阻塞-中断</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-10-%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B/">CP-10-并发模型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-11-synchronized%E5%9F%BA%E7%A1%80/">CP-11-synchronized基础</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-12-synchronized%E9%80%9A%E7%9F%A5%E7%AD%89%E5%BE%85%E6%9C%BA%E5%88%B6/">CP-12-synchronized通知等待机制</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-13-synchronized%E5%8E%9F%E7%90%86/">CP-13-synchronized原理</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-14-%E9%80%9A%E8%BF%87ReentrantLock%E6%9D%A5%E7%AA%A5%E6%8E%A2AQS%E5%AE%9E%E7%8E%B0/">CP-14-通过ReentrantLock来窥探AQS实现</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-15-AQS%E7%9A%84Condition%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">CP-15-AQS的Condition使用场景</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-16-%E7%94%A8AQS%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB/">CP-16-用AQS实现的常用并发工具类</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-17-%E9%94%81%E4%BC%98%E5%8C%96%E6%9C%BA%E5%88%B6/">CP-17-锁优化机制</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-18-ThreadPoolExecutor%E5%92%8CExecutors/">CP-18-ThreadPoolExecutor和Executors</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/CP-20-ConcurrentHashMap-78%E5%AE%9E%E7%8E%B0/">CP-20-ConcurrentHashMap-78实现</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Pattern-%E5%88%9B%E5%BB%BA%E5%9E%8B/">设计模式-创建型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Pattern-%E7%BB%93%E6%9E%84%E5%9E%8B/">设计模式-结构型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Pattern-%E8%A1%8C%E4%B8%BA%E5%9E%8B/">设计模式-行为型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/Pattern-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/JavaEE-Servlet-3-0-%E6%96%B0%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/">JavaEE-Servlet-3.0 新特性详解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%AF%B9%E6%B3%A8%E8%A7%A3%E7%9A%84%E6%80%9D%E8%80%83/">对注解的思考</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E4%B8%BB%E6%B5%81JSON%E5%BA%93%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/">主流JSON库使用示例</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%B8%B8%E9%87%8F%E6%B1%A0%E5%92%8C%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95%E9%A2%98/">常量池和相关面试题</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java-%E9%9B%86%E5%90%88%E4%BD%93%E7%B3%BB/">Java-集合体系</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">函数式编程相关概念</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java8-Streams-API/">Java8-Streams-API</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java-%E6%97%A5%E5%BF%97%E4%BD%93%E7%B3%BB%E6%80%BB%E7%BB%93/">Java-日志体系总结</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java%E5%B9%B6%E5%8F%91/">Java并发</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java%E5%B9%B6%E5%8F%91-%E5%8E%9F%E7%90%86/">Java并发-原理</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java%E5%B9%B6%E5%8F%91-%E6%A8%A1%E5%BC%8F/">Java并发-模式</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java%E5%B9%B6%E5%8F%91-%E5%BA%94%E7%94%A8/">Java并发-应用</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/%E4%BB%8EJava%20EE%20%E5%88%B0%20Jakarta%20EE/">从Java EE 到 Jakarta EE</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java%E5%B8%B8%E8%A7%81%E8%A7%84%E8%8C%83/">Java常见规范</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Java/Java-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Java-基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Maven
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Maven/01-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">01-基础知识</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Maven/02-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">02-生命周期</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Maven/03-%E6%8F%92%E4%BB%B6%E6%9C%BA%E5%88%B6/">03-插件机制</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Maven/04-%E5%B1%9E%E6%80%A7%E5%92%8CProfile/">04-属性和Profile</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Maven/05-Maven%E7%A7%81%E6%9C%8D%E4%B9%8BNexus%E6%90%AD%E5%BB%BA/">05-Maven私服之Nexus搭建</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Maven/06-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84pom.xml%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/">06-项目中的pom.xml文件详解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Maven/07-Maven%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6setting-xml%E8%AF%A6%E8%A7%A3/">07-Maven配置文件setting.xml详解</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Mybatis
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Mybatis/Mybatis-01-%E6%8B%A6%E6%88%AA%E5%99%A8%E4%BD%BF%E7%94%A8/">Mybatis拦截器使用</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Mybatis/Mybatis-02-%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Mybatis拦截器实现源码解析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Mybatis/Mybatis-03-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/">Mybatis一级缓存</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Mybatis/Mybatis-04-%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">Mybatis二级缓存</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Mybatis/Mybatis-05-%E8%BF%94%E5%9B%9E%E7%94%9F%E6%88%90%E4%B8%BB%E9%94%AE/">Mybatis返回生成主键</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Mybatis/%E8%87%AA%E5%AE%9A%E4%B9%89BaseTypeHandler/">自定义BaseTypeHandler</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Netty
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-14-Netty%E7%AE%80%E4%BB%8B/">NP-14-Netty简介</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-15-Netty%E5%85%A5%E9%97%A8%E7%A4%BA%E4%BE%8B/">NP-15-Netty入门示例</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-16-Netty%E5%9F%BA%E7%A1%80/">NP-16-Netty基础</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-17-TCP%E7%B2%98%E5%8C%85%E6%8B%86%E5%8C%85/">NP-17-TCP粘包拆包</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-18-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8D%8F%E8%AE%AE/">NP-18-自定义协议</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-19-%E5%AE%9E%E7%8E%B0%E5%BF%83%E8%B7%B3%E6%A3%80%E6%B5%8B/">NP-19-实现心跳检测</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-20-AttributeMap%E9%99%84%E4%BB%B6/">NP-20-AttributeMap附件</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-21-ChannelOption%E9%80%89%E9%A1%B9%E9%85%8D%E7%BD%AE/">NP-21-ChannelOption选项配置</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Netty/NP-24-Netty%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/">NP-24-Netty线程模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Python/python%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">python基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-01-PropertySource-Environment-Profile/">Spring-01-PropertySource-Environment-Profile</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-02-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9C%BA%E5%88%B6/">Spring-02-事件驱动机制</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-03-Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/">Spring-03-Bean的作用域</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-04-Resource%E4%BD%93%E7%B3%BB/">Spring-04-Resource体系</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-05-InitialingBean-DisposableBean/">Spring-05-InitialingBean-DisposableBean</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware/">Spring-06-BeanNameAware-ApplicationContextAware-BeanFactoryAware</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-07-FactoryBean/">Spring-07-FactoryBean</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-08-BeanPostProcessor/">Spring-08-BeanPostProcessor</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-09-BeanFactoryPostProcessor/">Spring-09-BeanFactoryPostProcessor</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-10-InstantiationAwareBeanPostProcessor/">Spring-10-InstantiationAwareBeanPostProcessor</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-11-%E7%BC%93%E5%AD%98%E6%8A%BD%E8%B1%A1/">Spring-11-缓存抽象</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-12-%E7%BC%93%E5%AD%98%E6%B3%A8%E8%A7%A3/">Spring-12-缓存注解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-13-BeanDefinitionRegistry/">Spring-13-BeanDefinitionRegistry</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-14-BeanDefinitionRegistryPostProcessor/">Spring-14-BeanDefinitionRegistryPostProcessor</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-15-BeanDefinitionReader/">Spring-15-BeanDefinitionReader</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-16-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E6%89%AB%E6%8F%8F%E5%99%A8/">Spring-16-自定义类扫描器</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-17-BeanPostProcessor%E6%8E%A5%E5%8F%A3%E6%80%BB%E7%BB%93/">Spring-17-BeanPostProcessor接口总结</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring-18-%E5%86%85%E7%BD%AE%E7%9A%84BeanPostProcessor%E6%80%BB%E7%BB%93/">Spring-18-内置的BeanPostProcessor总结</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3/">循环依赖问题分析与解决</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring/Spring%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">Spring的类加载机制</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-Boot
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-01-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">Spring Boot-01-配置文件</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-02-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/">Spring Boot-02-日志系统实现</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-03-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F-logback%E9%85%8D%E7%BD%AE/">Spring Boot-03-日志系统-logback配置</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-04-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%E8%A7%A3%E6%9E%90/">Spring Boot-04-启动过程解析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-05-%E9%A1%B9%E7%9B%AE%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84/">Spring Boot-05-项目源码结构</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-06-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">Spring Boot-06-单元测试</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-07-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AAStarter/">Spring Boot-07-自定义一个Starter</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-08-%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E6%B5%85%E6%9E%90/">Spring Boot-08-自动配置实现浅析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-09-Actuator%E7%9B%91%E6%8E%A7%E7%AB%AF%E7%82%B9%E8%AF%A6%E8%A7%A3/">Spring Boot-09-Actuator监控端点详解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-10-%E7%AB%AF%E7%82%B9%E9%85%8D%E7%BD%AE/">Spring Boot-10-端点配置</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-11-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%81%A5%E5%BA%B7%E7%9B%91%E6%8E%A7/">Spring Boot-11-自定义健康监控</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-12-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7%E7%AB%AF%E7%82%B9/">Spring Boot-12-自定义监控端点</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-13-%E5%BC%80%E5%8F%91%E7%83%AD%E9%83%A8%E7%BD%B2/">Spring Boot-13-开发热部署</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-14-%E7%BC%93%E5%AD%98%E9%9B%86%E6%88%90/">Spring Boot-14-缓存集成</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-15-%E6%B3%A8%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89Servlet%E7%AD%89%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BA%8C%E7%A7%8D%E6%96%B9%E5%BC%8F/">Spring Boot-15-注入自定义Servlet等组件的二种方式</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-16-docker-maven-plugin%E4%BD%BF%E7%94%A8/">Spring Boot-16-docker-maven-plugin使用</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-17-Win%E4%B8%8B%E6%89%93%E5%8C%85%E9%95%9C%E5%83%8F%E5%88%B0%E8%BF%9C%E7%A8%8BDocker%E6%9C%8D%E5%8A%A1%E5%99%A8/">Spring Boot-17-Win下打包镜像到远程Docker服务器</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-18-AOP%E7%BC%96%E7%A8%8B/">Spring Boot-18-AOP编程</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-19-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%85%8D%E7%BD%AE%E7%9A%84%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%85%B3%E5%8E%9F%E7%90%86/">Spring Boot-19-自动化配置的注解开关原理</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-20-%E6%9D%A1%E4%BB%B6%E6%B3%A8%E8%A7%A3-%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0/">Spring Boot-20-条件注解-源码实现</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Boot/Spring-Boot-21-%E6%9D%A1%E4%BB%B6%E6%B3%A8%E8%A7%A3%E4%B8%80%E8%A7%88/">Spring Boot-21-条件注解一览</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-Cloud
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/02-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83-Eureka/">SpringCloud生态架构</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83-Eureka%20-%20%E5%89%AF%E6%9C%AC/">注册中心-Eureka</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-02-Ribbon/">Spring Cloud-02-Ribbon</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-03-Feign/">Spring Cloud-03-Feign</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-04-Hystrix/">Spring Cloud-04-Hystrix</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-05-Spring-Cloud-Config%EF%BC%88Dalston-SR5%EF%BC%89/">Spring Cloud-05-Spring Cloud Config（Dalston.SR5）</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-06-Zuul/">Spring Cloud-06-Zuul</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-07-Zuul-%E7%86%94%E6%96%AD%E5%9B%9E%E9%80%80/">Spring Cloud-07-Zuul-熔断回退</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-08-Zuul-%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/">Spring Cloud-08-Zuul-路由配置</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-09-Zuul-%E5%A4%9A%E7%BA%AC%E5%BA%A6%E9%99%90%E6%B5%81/">Spring Cloud-09-Zuul-多纬度限流</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/Spring-Cloud-10-%E6%96%AD%E8%B7%AF%E5%99%A8%E8%BF%90%E8%A1%8C%E8%A7%A3%E6%9E%90/">Spring Cloud-10-断路器运行解析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Cloud/01-Spring-Cloud%E6%8A%80%E6%9C%AF%E7%94%9F%E6%80%81%E6%9E%B6%E6%9E%84/">01-Spring Cloud技术生态架构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-MVC
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-MVC/Spring-MVC-01-%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/">Spring MVC-01-各版本新特性</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-MVC/Spring-MVC-02-%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E6%B5%81%E7%A8%8B/">Spring MVC-02-核心架构流程</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-MVC/Spring-MVC-03-DispatcherServlet%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">Spring MVC-03-DispatcherServlet源码分析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-MVC/Spring-MVC-04-%E6%8B%A6%E6%88%AA%E5%99%A8%E5%A4%84%E7%90%86%E5%99%A8-HandlerInterceptor/">Spring MVC-04-拦截器处理器-HandlerInterceptor</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-MVC/Spring-MVC-05-%E5%A4%84%E7%90%86%E5%99%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E6%9E%90%E5%99%A8-HandlerExceptionResolver/">Spring MVC-05-处理器异常解析器-HandlerExceptionResolver</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-MVC/Spring-MVC-06-%E6%8E%A7%E5%88%B6%E5%99%A8%E5%A2%9E%E5%BC%BA-ControllerAdvice/">Spring MVC-06-控制器增强-@ControllerAdvice</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Spring-Security
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/01-%E8%AE%A4%E8%AF%81%E6%9E%B6%E6%9E%84%E6%B5%81%E7%A8%8B/">01-认证架构流程</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/02-%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E7%B1%BB%E8%A7%A3%E8%AF%BB/">02-核心配置类解读</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/03-%E6%A0%B8%E5%BF%83%E8%BF%87%E6%BB%A4%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">03-核心过滤器源码分析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/04-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E9%85%8D%E7%BD%AE-CSRF/">04-跨站请求伪造配置-CSRF</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/05-%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-CORS/">05-跨域资源共享-CORS</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/06-jwt%E5%8E%9F%E7%90%86/">06-jwt原理</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/07-jwt%E4%B8%8Esession%E4%BC%98%E7%BC%BA%E7%82%B9%E5%AF%B9%E6%AF%94/">07-jwt与session优缺点对比</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/08-Http%E5%B8%B8%E8%A7%81%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F/">08-Http常见认证方式</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/09-Oauth2%E6%9C%80%E7%AE%80%E5%90%91%E5%AF%BC/">09-Oauth2最简向导</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/10-Oauth2%E4%BA%A4%E4%BA%92%E6%B5%81%E7%A8%8B%E5%8F%8A%E5%8D%8F%E8%AE%AE/">10-Oauth2交互流程及协议</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/Spring-Security/11-Spring-Security-Oauth2%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B/">11-Spring Security Oauth2认证流程</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据结构与算法
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%A6%82%E8%BF%B0/">概述</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E7%BA%BF%E6%80%A7%E8%A1%A8%E5%92%8C%E7%AC%A6%E5%8F%B7%E8%A1%A8/">线性表和符号表</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%A0%91/">二叉树</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%A0%86/">堆</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">优先队列</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%B9%B3%E8%A1%A1%E6%A0%91/">平衡树</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%9B%BE/">图</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            网络编程
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-01-%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B/">NP-01-网络IO模型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-02-%E5%AF%B9Socket%E7%9A%84%E7%90%86%E8%A7%A3/">NP-02-对Socket的理解</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-03-TCP%E6%8F%A1%E6%89%8B/">NP-03-TCP三次握手</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-04-Actor%E6%A8%A1%E5%9E%8B/">NP-04-Actor模型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-05-CSP%E6%A8%A1%E5%9E%8B/">NP-05-CSP模型</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-06-Actor%E6%A8%A1%E5%9E%8B%E5%92%8CCSP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB/">NP-06-Actor模型和CSP模型的区别</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-07-select-poll-epoll%E6%B5%85%E6%9E%90/">NP-07-select-poll-epoll浅析</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-08-Buffer%E6%93%8D%E4%BD%9C/">NP-08-Buffer操作</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-09-NIO%E5%85%A5%E9%97%A8/">NP-09-NIO入门</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-10-Selector%E5%85%A5%E9%97%A8/">NP-10-Selector入门</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-11-%E9%98%BB%E5%A1%9E%E5%90%8C%E6%AD%A5BIO%E7%A4%BA%E4%BE%8B/">NP-11-阻塞同步BIO示例</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-12-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8NIO%E7%A4%BA%E4%BE%8B/">NP-12-多路复用NIO示例</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-13-%E5%BC%82%E6%AD%A5%E9%80%9A%E7%9F%A5AIO%E7%A4%BA%E4%BE%8B/">NP-13-异步通知AIO示例</a></li>  <li class="file"><a href="/wiki/%E5%90%8E%E7%AB%AF/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/NP-22-Reactor%E6%A8%A1%E5%9E%8B/">NP-22-Reactor模型</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            大数据
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            HBase
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/HBase/HBase-01-%E7%AE%80%E6%98%8E%E5%85%A5%E9%97%A8/">HBase-01-简明入门</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/HBase/HBase-02-Write%E5%85%A8%E6%B5%81%E7%A8%8B/">HBase-02-Write全流程</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/HBase/HBase-03-Flush%E4%B8%8ECompaction/">HBase-03-Flush与Compaction</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/HBase/HBase-04-Read%E5%85%A8%E6%B5%81%E7%A8%8B/">HBase-04-Read全流程</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/HBase/HBase-05-HFile%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">HBase-05-HFile文件结构</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Kafka/01-Kafka%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Kafka基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Zookeeper
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-01-%E5%8D%95%E6%9C%BA%E5%92%8C%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/">Zookeeper-01-单机和集群搭建</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-02-%E4%B8%BB%E8%A6%81%E6%A6%82%E5%BF%B5/">Zookeeper-02-主要概念</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-03-%E5%8E%9F%E7%94%9FAPI%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Zookeeper-03-原生API基本使用</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-04-ZkClient%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Zookeeper-04-ZkClient基本使用</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-05-Curator%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Zookeeper-05-Curator基本使用</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-06-%E5%9B%BE%E5%BD%A2%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/">Zookeeper-06-图形监控工具</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-07-%E4%BA%8B%E5%8A%A1%E6%97%A5%E5%BF%97%E5%92%8C%E5%BF%AB%E7%85%A7%E6%96%87%E4%BB%B6/">Zookeeper-07-事务日志和快照文件</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/Zookeeper/Zookeeper-08-%E8%87%AA%E5%8A%A8%E6%B8%85%E7%90%86%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/">Zookeeper-08-自动清理日志配置</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F/">大数据生态系统</a></li>  <li class="file"><a href="/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E4%B8%80%E4%BD%8D%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E4%B8%A4%E5%B9%B4%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">一位大数据开发工程师的两年工作经验总结</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            投研
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%95%E7%A0%94/%E8%8D%AF%E5%93%81%E9%9B%86%E4%B8%AD%E9%87%87%E8%B4%AD%E7%AE%80%E4%BB%8B/">药品集中采购简介</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            折腾
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            好文
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E5%A5%BD%E6%96%87/%E6%98%9F%E9%99%85%E7%A9%BF%E8%B6%8A%E5%85%A8%E5%89%A7%E6%83%85%E8%A7%A3%E6%9E%90(%E8%BD%AC%E8%B1%86%E7%93%A3)/">星际穿越全剧情解析(转豆瓣)</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E5%A5%BD%E6%96%87/%E8%B0%B7%E6%AD%8C%E8%A2%AB%E5%B0%98%E5%B0%81%E7%9A%84%E8%BF%87%E5%8E%BB/">谷歌，被尘封的过去！</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            装机
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E8%A3%85%E6%9C%BA/%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88/">家庭网络方案</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E8%A3%85%E6%9C%BA/%E5%8F%B0%E5%BC%8F%E6%9C%BA-%E4%B8%BB%E6%9D%BF%E7%AF%87/">台式机-主板篇</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E8%A3%85%E6%9C%BA/%E5%8F%B0%E5%BC%8F%E6%9C%BA-%E5%86%85%E5%AD%98%E7%AF%87/">台式机-内存篇</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E8%A3%85%E6%9C%BA/%E5%8F%B0%E5%BC%8F%E6%9C%BA-%E7%A1%AC%E7%9B%98%E7%AF%87/">台式机-硬盘篇</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E8%A3%85%E6%9C%BA/%E5%8F%B0%E5%BC%8F%E6%9C%BA-%E7%94%B5%E6%BA%90%E7%AF%87/">台式机-电源篇</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            金融
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/%E8%AF%BB%E5%AE%8C%E2%80%9C100%E5%B9%B4%E9%87%91%E8%9E%8D%E6%88%98%E4%BA%89%E2%80%9D%E7%AE%80%E5%8F%B2%EF%BC%8C%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E7%9C%9F%E6%98%AF%E7%BB%86%E6%80%9D%E6%81%90%E6%9E%81(%E8%BD%AC)/">读完“100年金融战争”简史，这个世界真是细思恐极！(转)</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/%E4%B8%96%E7%95%8C%E7%9F%B3%E6%B2%B9%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/">世界石油发展历史</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/%E5%A4%A7%E5%9B%BD%E5%B4%A9%E5%A1%8C%EF%BC%8170%E5%B9%B4%E7%9A%84%E8%B4%A2%E5%AF%8C%E7%9E%AC%E9%97%B4%E8%A2%AB%E6%B4%97%E5%8A%AB%E4%B8%80%E7%A9%BA(%E8%BD%AC)/">大国崩塌！70年的财富瞬间被洗劫一空(转)</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/%E7%BE%8E%E6%97%A5%E9%87%91%E8%9E%8D%E6%88%98%E4%BA%89(%E8%BD%AC)/">美日金融战争(转)</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/%E7%BE%8E%E5%85%83%E9%9C%B8%E6%9D%83%E7%AE%80%E5%8F%B2/">美元霸权简史</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/1992%E5%B9%B4%E7%B4%A2%E7%BD%97%E6%96%AF%E7%8B%99%E5%87%BB%E8%8B%B1%E9%95%91/">1992年索罗斯狙击英镑</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/1997%E5%B9%B4%E7%B4%A2%E7%BD%97%E6%96%AF%E6%98%AF%E6%80%8E%E6%A0%B7%E5%81%9A%E7%A9%BA%E6%B3%B0%E5%9B%BD%E7%9A%84(%E8%BD%AC)/">1997年索罗斯是怎样做空泰国的(转)</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%87%91%E8%9E%8D/1998%E5%B9%B4%E9%A6%99%E6%B8%AF%E8%A1%80%E6%88%98%E7%B4%A2%E7%BD%97%E6%96%AF%E5%85%A8%E6%8F%AD%E7%A7%98(%E8%BD%AC)/">1998年香港血战索罗斯全揭秘(转)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            闲情
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            书法
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E4%B9%A6%E6%B3%95/%E4%B9%A6%E6%B3%95%E4%B9%A6%E7%B1%8D%E6%8E%A8%E8%8D%90/">书法书籍推荐</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E4%B9%A6%E6%B3%95/%E6%AF%9B%E7%AC%94%E9%80%89%E8%B4%AD/">毛笔选购</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            白酒
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E7%99%BD%E9%85%92/%E4%B8%AD%E5%9B%BD%E5%90%8D%E9%85%92%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">中国名酒前世今生</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E7%99%BD%E9%85%92/%E4%B8%AD%E5%9B%BD%E7%99%BD%E9%85%9253%E4%BC%98/">中国白酒53优</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E7%99%BD%E9%85%92/%E8%8C%85%E5%8F%B0%E7%8E%8B%E5%AD%90%E9%85%92%E7%B3%BB%E5%88%97%E5%A4%A7%E5%85%A8/">茅台王子酒系列大全</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E7%99%BD%E9%85%92/%E8%8C%85%E5%8F%B0%E8%BF%8E%E5%AE%BE%E9%85%92%E7%B3%BB%E5%88%97%E5%A4%A7%E5%85%A8/">茅台迎宾酒系列大全</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            篆刻
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E7%AF%86%E5%88%BB/%E7%AF%86%E5%88%BB%E4%B9%A6%E7%B1%8D%E6%8E%A8%E8%8D%90/">篆刻书籍推荐</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            茶识
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            普洱
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E6%99%AE%E6%B4%B1/01-%E4%BB%80%E4%B9%88%E6%98%AF%E6%99%AE%E6%B4%B1%E8%8C%B6/">01-什么是普洱茶</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E6%99%AE%E6%B4%B1/02-%E6%99%AE%E6%B4%B1%E7%94%9F%E8%8C%B6%E7%9A%84%E9%80%89%E8%B4%AD/">02-普洱生茶的选购</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E6%99%AE%E6%B4%B1/03-%E6%99%AE%E6%B4%B1%E7%86%9F%E8%8C%B6%E7%9A%84%E9%80%89%E8%B4%AD/">03-普洱熟茶的选购</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E6%99%AE%E6%B4%B1/04-%E6%99%AE%E6%B4%B1%E8%8C%B6%E7%9A%84%E5%86%B2%E6%B3%A1/">04-普洱茶的冲泡</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E4%B8%AD%E5%9B%BD%E5%85%AD%E5%A4%A7%E8%8C%B6%E7%B3%BB%E7%A7%91%E6%99%AE/">中国六大茶系科普</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E8%8C%B6%E7%B1%BB%E9%80%89%E8%B4%AD%E6%8C%87%E5%8D%97/">茶类选购指南</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E5%AE%89%E5%8C%96%E9%BB%91%E8%8C%B6%E6%B5%85%E8%B0%88/">安化黑茶浅谈</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E6%B1%9D%E7%AA%91%E8%8C%B6%E5%85%B7%E5%BC%80%E7%89%87/">汝窑茶具开片</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E7%B4%AB%E7%A0%82%E5%A3%B6-%E5%B8%B8%E8%A7%81%E5%A3%B6%E5%9E%8B/">紫砂壶-常见壶型</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E5%88%9D%E8%AF%86%E5%BB%BA%E7%9B%8F/">初识建盏</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E6%B1%9D%E7%AA%91%E4%B8%8E%E4%BB%BF%E6%B1%9D%E7%AA%91/">汝窑与仿汝窑</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E7%B4%AB%E7%A0%82%E5%A3%B6-%E6%B3%A5%E6%96%99%E5%88%86%E7%B1%BB/">紫砂壶-泥料分类</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E7%B4%AB%E7%A0%82%E5%A3%B6-%E5%88%B6%E4%BD%9C%E5%B7%A5%E8%89%BA/">紫砂壶-制作工艺</a></li>  <li class="file"><a href="/wiki/%E6%8A%98%E8%85%BE/%E9%97%B2%E6%83%85/%E8%8C%B6%E8%AF%86/%E7%B4%AB%E7%A0%82%E5%A3%B6-%E5%B8%B8%E8%A7%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">紫砂壶-常见注意事项</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            杂谈
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Unix
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/Linux-SystemV%E5%BC%95%E5%AF%BC%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">Linux-SystemV引导启动流程</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/Linux-SystemV%E4%BD%93%E7%B3%BB/">Linux-SystemV体系</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/Linux-Systemd%E4%BD%93%E7%B3%BB/">Linux-Systemd体系</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/Linux-Systemd%E4%B8%8B%E9%85%8D%E7%BD%AEtomcat%E6%9C%8D%E5%8A%A1/">Linux-Systemd下配置tomcat服务</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/Linux-%E5%B8%B8%E7%94%A8%E5%8F%91%E8%A1%8C%E7%89%88/">Linux-常用发行版</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/CentOS-rpm%E5%92%8Cyum%E7%AE%80%E4%BB%8B/">CentOS-rpm和yum简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/CentOS-%E9%98%B2%E7%81%AB%E5%A2%99%E5%92%8CIP%E9%85%8D%E7%BD%AE/">CentOS-防火墙和IP配置</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/CentOS-%E5%AE%89%E8%A3%85Git/">CentOS-安装Git</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Linux-常用命令</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/Unix/Ubuntu-%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/">Ubuntu-常用设置</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F/01-%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/">01-分布式理论</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9B%B8%E5%85%B3%E9%9D%A2%E8%AF%95/">分布式相关面试</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F/03-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">03-分布式事务</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F/02-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式基础
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-02-CAP%E5%8E%9F%E7%90%86/">Distributed-02-CAP原理</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-03-Base%E7%90%86%E8%AE%BA/">Distributed-03-Base理论</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-04-%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/">Distributed-04-分布式一致性</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-05-2PC-and-3PC/">Distributed-05-2PC and 3PC</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-06-Paxos%E8%AF%9E%E7%94%9F/">Distributed-06-Paxos诞生</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-07-Paxos%E5%8D%8F%E8%AE%AE%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B/">Distributed-07-Paxos协议运行过程</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-08-Paxos%E5%8D%8F%E8%AE%AE%E6%8E%A8%E6%BC%94/">Distributed-08-Paxos协议推演</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-09-Raft%E7%AE%97%E6%B3%95/">Distributed-09-Raft算法</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80/Distributed-10-Zab%E5%8D%8F%E8%AE%AE/">Distributed-10-Zab协议</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            容器生态
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Docker
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/%E5%AE%89%E8%A3%85Docker/">安装Docker</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/Dockerfile%E6%8C%87%E4%BB%A4%E8%AF%A6%E8%A7%A3/">Dockerfile指令详解</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/Docker%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/">Docker发展历史</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/Docker%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85%E6%B5%8B%E8%AF%95/">Docker常用服务安装测试</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/Docker%E7%9B%91%E6%8E%A7%E6%96%B9%E6%A1%88%EF%BC%9AinfluxDB-cAdvisor-Grafana/">Docker监控方案：influxDB+cAdvisor+Grafana</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Docker常用命令</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">Docker基础知识</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Docker/Dockerfile%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">Dockerfile最佳实践</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Istio
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            01-概念
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/01-%E6%A6%82%E5%BF%B5/istio%E7%89%B9%E6%80%A7/">istio特性</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/01-%E6%A6%82%E5%BF%B5/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/">流量管理</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/01-%E6%A6%82%E5%BF%B5/%E7%AD%96%E7%95%A5%E4%B8%8E%E5%AE%89%E5%85%A8/">策略与安全</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/01-%E6%A6%82%E5%BF%B5/%E5%8F%AF%E8%A7%82%E5%AF%9F%E6%80%A7/">可观察性</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/01-%E6%A6%82%E5%BF%B5/%E6%80%A7%E8%83%BD%E5%92%8C%E5%8F%AF%E4%BC%B8%E7%BC%A9%E6%80%A7/">性能和可伸缩性</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/01-%E6%A6%82%E5%BF%B5/%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%9E%8B/">部署模型</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            02-安装测试
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/02-%E5%AE%89%E8%A3%85%E6%B5%8B%E8%AF%95/%E5%9C%A8kubernetes-1-5%E4%B8%8A%E9%83%A8%E7%BD%B2istio-1-0/">在kubernetes-1.5上部署istio-1.0</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/02-%E5%AE%89%E8%A3%85%E6%B5%8B%E8%AF%95/%E9%83%A8%E7%BD%B2%E5%AE%98%E6%96%B9%E7%94%A8%E4%BE%8Bbookinfo%E6%B5%8B%E8%AF%95/">01-部署官方用例bookinfo测试</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/02-%E5%AE%89%E8%A3%85%E6%B5%8B%E8%AF%95/%E8%BF%90%E8%A1%8CPod%E5%92%8CService%E7%9A%84%E5%87%86%E5%A4%87/">运行Pod和Service的准备</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            03-任务
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E5%AE%89%E5%85%A8/%E8%AE%A4%E8%AF%81%E7%AD%96%E7%95%A5/">认证策略</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            流量管理
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/01-%E5%85%A5%E5%8F%A3%E7%BD%91%E5%85%B3/">01-入口网关</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/02-%E8%AF%B7%E6%B1%82%E8%B7%AF%E7%94%B1/">02-请求路由</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/03-%E6%95%85%E9%9A%9C%E6%B3%A8%E5%85%A5/">03-故障注入</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/04-%E6%B5%81%E9%87%8F%E8%BD%AC%E7%A7%BB/">04-流量转移</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/05-TCP%E6%B5%81%E9%87%8F%E8%BD%AC%E7%A7%BB/">05-TCP流量转移</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/06-%E8%AF%B7%E6%B1%82%E8%B6%85%E6%97%B6/">06-请求超时</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/07-%E6%96%AD%E8%B7%AF%E5%99%A8/">07-断路器</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E6%B5%81%E9%87%8F%E7%AE%A1%E7%90%86/08-%E6%B5%81%E9%87%8F%E9%95%9C%E5%83%8F/">08-流量镜像</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            遥测
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E9%81%A5%E6%B5%8B/%E9%80%9A%E8%BF%87Kiali%E5%8F%AF%E8%A7%86%E5%8C%96Mesh/">通过Kiali可视化Mesh</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E9%81%A5%E6%B5%8B/%E9%80%9A%E8%BF%87Jaeger%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/">分布式链路追踪</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E9%81%A5%E6%B5%8B/%E9%80%9A%E8%BF%87Grafana%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8C%87%E6%A0%87/">通过Grafana可视化指标</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/03-%E4%BB%BB%E5%8A%A1/%E9%81%A5%E6%B5%8B/%E9%80%9A%E8%BF%87Prometheus%E6%9F%A5%E8%AF%A2%E6%8C%87%E6%A0%87/">通过Prometheus查询指标</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/Service-Mesh%E7%AE%80%E4%BB%8B/">Service Mesh简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/Istio%E7%AE%80%E4%BB%8B/">Istio简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Istio/Istio%E4%B8%AD%E7%9A%84Sidecar%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%B5%81%E9%87%8F%E6%8B%A6%E6%88%AA/">Istio中的Sidecar注入与流量拦截</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kubernetes
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/01-kubernetes%E6%9E%B6%E6%9E%84/">01-kubernetes架构</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/02-%E7%94%A8kubeadm%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AAv1-15%E7%9A%84%E9%9B%86%E7%BE%A4/">02-用kubeadm搭建一个v1-15的集群</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/03-kubectl%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">03-kubectl常用命令</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/04-%E9%9B%86%E7%BE%A4%E7%9B%91%E6%8E%A7%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D/">04-集群监控方案</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/05-API%E7%89%88%E6%9C%AC%E5%92%8C%E8%B5%84%E6%BA%90%E5%AF%B9%E8%B1%A1%E7%AE%80%E4%BB%8B/">05-API版本和资源对象简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/06-%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F%E8%A7%A3%E9%87%8A/">06-资源清单定义格式解释</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/07-Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86/">07-Pod生命周期管理</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/08-Pod%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%9ADeployment%E5%8F%8AReplicaSet/">08-Pod控制器：Deployment及ReplicaSet</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/09-Pod%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%9ADaemonSet/">09-Pod控制器：DaemonSet</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/10-%E5%AD%98%E5%82%A8%E5%8D%B7%EF%BC%9APV%E5%92%8CPVC/">10-存储卷：PV和PVC</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/11-%E5%AD%98%E5%82%A8%E5%8D%B7%EF%BC%9AconfigMap/">11-存储卷：configMap</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/12-%E5%AD%98%E5%82%A8%E5%8D%B7%EF%BC%9ASecret/">12-存储卷：Secret</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/13-Pod%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%9AStatefulSet%E5%8F%8AHeadless%20Service/">13-Pod控制器：StatefulSet及Headless Service</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/14-%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%EF%BC%9AService/">14-暴露服务：Service</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/15-%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%EF%BC%9AIngress%E5%92%8CIngress-Controller-Nginx/">15-暴露服务：Ingress和Ingress-Controller-Nginx</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/16-%E6%9A%B4%E9%9C%B2%E6%9C%8D%E5%8A%A1%EF%BC%9AIngress%E5%92%8CIngress-Controller-Traefik/">16-暴露服务：Ingress和Ingress-Controller-Traefik</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/17-kubernetes%E7%9A%84%E8%AE%A4%E8%AF%81-%E6%8E%88%E6%9D%83-%E5%87%86%E5%85%A5%E6%8E%A7%E5%88%B6/">17-kubernetes的认证-授权-准入控制</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/18-Dashboard%E8%AE%BF%E9%97%AE%E5%92%8Ckubeconfig%E9%85%8D%E7%BD%AE/">18-Dashboard访问和kubeconfig配置</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/19-%E7%A8%8B%E5%BA%8F%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-Helm/">19-程序包管理器-Helm</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/20-%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E5%92%8C%E7%BD%91%E7%BB%9C%E7%AD%96%E7%95%A5/">20-网络模型和网络策略</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/21-kubernetes%E9%9B%86%E7%BE%A4%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%E5%92%8C%E6%A0%B8%E5%BF%83%E9%99%84%E4%BB%B6/">21-kubernetes集群运行原理和核心附件</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/22-Pod%E7%9A%84%E8%B5%84%E6%BA%90%E8%B0%83%E5%BA%A6/">22-Pod的资源调度</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/23-%E9%9B%86%E7%BE%A4%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">23-集群常见问题</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/24-%E4%BB%A5Metrics-Server%E4%B8%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0API%E8%81%9A%E5%90%88%E6%9C%BA%E5%88%B6/">24-以Metrics-Server为例学习API聚合机制</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/25-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90%E5%AE%9A%E4%B9%89CRD/">25-自定义资源CRD</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/26-DNS%E6%9C%8D%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">26-DNS服务解决方案</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/Kubernetes/27-CNI%E5%AE%9E%E7%8E%B0%E4%B9%8BFlannel/">27-CNI实现之Flannel</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3%E8%A7%84%E8%8C%83/">容器相关规范</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/OpenShift%E7%AE%80%E4%BB%8B/">OpenShift简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/OpenShift-v3%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/">OpenShift-v3架构概述</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%AE%B9%E5%99%A8%E7%94%9F%E6%80%81/%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3%E9%A1%B9%E7%9B%AE/">容器相关项目</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            支付风控
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7/Pay-%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7-%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90/">支付风控-场景分析</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7/Pay-%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%BB%BA%E8%AE%BE/">支付风控-数据仓库建设</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7/Pay-%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7-%E6%A8%A1%E5%9E%8B%E5%88%86%E6%9E%90/">支付风控-模型分析</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7/Pay-%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">支付风控-架构设计</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7/Pay-%E6%94%AF%E4%BB%98%E9%A3%8E%E6%8E%A7-%E5%8F%8D%E6%B4%97%E9%92%B1/">支付风控-反洗钱</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            架构
+                        </a>
+                         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DevOps
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/DevOps/%E7%A0%94%E5%8F%91%E5%B9%B3%E5%8F%B0%E8%A7%84%E5%88%92-v1/">研发平台规划-v1</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/DevOps/%E4%B8%80%E4%BA%9B%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%AE%9E%E8%B7%B5%E7%BB%8F%E9%AA%8C-%E8%BD%AC/">一些小团队的自动化运维实践经验(转)</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/DevOps/01-Jenkins-kubernetes%E5%AE%9E%E7%8E%B0CI-CD%EF%BC%9A%E9%83%A8%E7%BD%B2jenkins/">01-Jenkins+kubernetes实现CI/CD：部署jenkins</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/DevOps/02-Jenkins-kubernetes%E5%AE%9E%E7%8E%B0CI-CD%EF%BC%9APipeline%E9%85%8D%E7%BD%AE/">02-Jenkins+kubernetes实现CI/CD：Pipeline配置</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/DevOps/%E4%BB%8EDevOps%E5%88%B0Serverless/">从DevOps到Serverless</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/DevOps/Prometheus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">Prometheus快速入门</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            场景解决方案
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E5%9C%BA%E6%99%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E9%BE%99%E6%9E%9C%E5%AD%A6%E9%99%A2-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">龙果学院-分布式事务解决方案</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E5%9C%BA%E6%99%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E5%88%86%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">缓存和数据库的数据一致性的分析和解决方案</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            技术架构设计
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/01-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">01-分库分表应用场景</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/02-Sharding-JDBC%E7%AE%80%E4%BB%8B/">02-Sharding-JDBC简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/MQ-01-%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%80%89%E5%9E%8B/">MQ-01-消息中间件选型</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/04-%E7%94%9F%E6%80%81%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/">04-生态技术选型</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/05-%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91%E7%BB%9CCDN%E7%AE%80%E4%BB%8B/">05-内容分发网络CDN简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/06-%E4%BC%A0%E7%BB%9F%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">06-分布式事务解决方案现状</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/08-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E8%AE%BE%E8%AE%A1/">08-分库分表设计</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/09-%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%E8%AE%BE%E8%AE%A1/">09-缓存方案设计</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%B8%B8%E8%A7%81%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">常见负载均衡架构</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%9E%B6%E6%9E%84/">秒杀系统设计与架构</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">分布式锁实现及应用场景</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/Restful-API%E8%AE%BE%E8%AE%A1/">Restful API设计</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E5%BC%80%E5%8F%91%E8%80%85%E5%85%8D%E8%B4%B9%E5%8F%AF%E7%94%A8%E5%9C%A8%E7%BA%BF%E6%9C%8D%E5%8A%A1/">开发者免费可用在线服务</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/%E5%AE%89%E8%A3%85OpenLDAP-phpLDAPadmin/">安装OpenLDAP+phpLDAPadmin</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E6%9E%B6%E6%9E%84/Git%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B(%E8%BD%AC)/">Git工作流程(转)</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/SSL%E5%8F%8A%E7%9B%B8%E5%85%B3%E8%AF%81%E4%B9%A6%E7%AE%80%E4%BB%8B/">SSL及相关证书简介</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/SEO%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/">SEO相关知识</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E7%83%AD%E9%97%A8%E7%BD%91%E7%AB%99/">热门网站</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">后端面试题</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%9D%A2%E8%AF%95%E9%A2%98/">中间件面试题</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/%E7%A3%81%E7%9B%98%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">磁盘基础知识</a></li>  <li class="file"><a href="/wiki/%E6%9D%82%E8%B0%88/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">TCP三次握手四次挥手</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-区块链/比特币/闪电网络交易细节流程" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/">比特币</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%98%93%E7%BB%86%E8%8A%82%E6%B5%81%E7%A8%8B/">
+            <time datetime="2019-09-23T09:11:07.000Z" itemprop="datePublished">2019-09-23</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/unknow16/unknow16.github.io/raw/hexo/source/_posts/区块链/比特币/闪电网络交易细节流程.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/unknow16/unknow16.github.io/edit/hexo/source/_posts/区块链/比特币/闪电网络交易细节流程.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/unknow16/unknow16.github.io/commits/hexo/source/_posts/区块链/比特币/闪电网络交易细节流程.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            闪电网络交易细节流程
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E9%87%8D%E7%AD%BE%E5%90%8D%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">多重签名技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E6%97%B6%E9%97%B4%E9%94%81%E5%AE%9A"><span class="toc-number">2.</span> <span class="toc-text">哈希时间锁定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E5%AF%86%E9%92%A5%E9%94%81%E5%AE%9A"><span class="toc-number">3.</span> <span class="toc-text">哈希密钥锁定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%98%93%E8%BF%87%E7%A8%8B%E7%99%BD%E8%AF%9D%E7%89%88"><span class="toc-number">4.</span> <span class="toc-text">闪电网络交易过程白话版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E6%96%B9%E6%94%AF%E4%BB%98%E9%80%9A%E9%81%93%E7%9A%84%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">双方支付通道的技术细节过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%B7%AF%E7%94%B1%E8%8A%82%E7%82%B9%E5%AE%9E%E7%8E%B0%E8%BD%AC%E8%B4%A6"><span class="toc-number">6.</span> <span class="toc-text">通过路由节点实现转账</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            
+        
+        
+            <p>作为铺垫，需要讲解以下三个概念</p>
+<h2 id="多重签名技术"><a href="#多重签名技术" class="headerlink" title="多重签名技术"></a>多重签名技术</h2><p>多重签名技术（multisig）是多个用户同时对一个数字资产进行签名。可以简单地理解为，一个账户多个人拥有签名权和支付权。如果一个地址只能由一个私钥签名和支付，表现形式就是 1/1；而多重签名的表现形式是 m/n，也就是说一共 n 个私钥可以给一个账户签名，而当 m 个地址签名时，就可以支付一笔交易。例如，多重签名 2/3，表示 3 个人拥有签名权，而两个人签名就可以支付这个账户里的比特币；多重签名 1/2，表示 2 个人拥有签名权，谁都可以单独来支配这笔资金。</p>
+<h2 id="哈希时间锁定"><a href="#哈希时间锁定" class="headerlink" title="哈希时间锁定"></a>哈希时间锁定</h2><p>这是在交易脚本里面设置时钟，必须要等设定时间之后，才能用地址的私钥签名解锁地址里的比特币。例如 Alice 收到了一笔 2 BTC 转账，但是对方设定了 1000 个区块之后才能解锁，所以 Alice 必须等待 1000 个区块之后才能用自己的私钥签署交易 , 花费其中的 BTC 转给 Bob。</p>
+<h2 id="哈希密钥锁定"><a href="#哈希密钥锁定" class="headerlink" title="哈希密钥锁定"></a>哈希密钥锁定</h2><p>哈希函数可以把一串输入转换成 256 位固定长度的输出，计算过程称为一次哈希运算，其中输入称为密文，输出称为密文的哈希值。哈希函数具有单向性，即从密文可以算出哈希值，但是从哈希值反向算出密文几乎是不可行的。计算的办法是暴力破解，逐一输入密文进行哈希运算，验证运算结果是否为要求的哈希值。基于这种特性，可以把一个密文的哈希值放入交易的输出当中充当哈希密文锁，也就是必须得输入该哈希值对应的密文才能解锁脚本中的比特币。例如，例如 Alice 收到了一笔 2BTC 转账，但是对方设定了哈希值锁定，所以 Alice 必须得到交易方的密文，同时配合自己的密钥签名才能签署交易，花费其中的 BTC 转给 Bob。</p>
+<p>有了这些工具，让我们看看那群程序员天才们是如何构想出一个程序，使得互不相识的双方能够诚实记账的。</p>
+<h2 id="闪电网络交易过程白话版"><a href="#闪电网络交易过程白话版" class="headerlink" title="闪电网络交易过程白话版"></a>闪电网络交易过程白话版</h2><p>闪电网络想要解决的是比特币扩容、交易即时确认和手续费高的问题。举个例子来说明闪电网络整体思路，设想我们的老朋友 Alice 要给 Bob 转 1 个比特币，她该怎么做呢？</p>
+<p>传统做法是 Alice 可以挑选出其未花费的输出用对应私钥签名，并向比特币网络广播，矿工验证打包，一般来说 6 个区块之后即可确认交易。这个过程很慢，需要等待一个小时左右，并且还要支付给矿工的手续费。于是呢，天才的程序员们碰撞出了闪电网络的解决方案。</p>
+<p>理解闪电网络主要分为两步，一是理解双向支付通道，二是诸多通道扩展成闪电网络。</p>
+<p>操作过程是这样的，Alice 和 Bob 先各自把 5 个 BTC 转给一个由两人共同控制的多重签名地址。这笔交易和比特币网络上其他普通交易没什么太大区别，只是转出的地址是一个多签地址。这个过程称为开启通道。</p>
+<p>开启通道后，这个多签地址里面就拥有 10 个比特币，这是被区块链记录了的，全网承认。接下来就是 Alice 和 Bob 私底下的交易了，不广播，不记在链上，正因如此，交易确认速度快，几乎零手续费（其实可能还有较低的路由费，后文会讲），这个过程称为链外交易，在交易通道（channel）中进行。</p>
+<p>什么是通道？怎么在通道进行交易呢？它安全吗？</p>
+<p>简单来说，Alice 和 Bob 都会在各自的小本本上记账，他们都知道对方怎么记的，且有密码学设计保证谁也不能多记耍赖。这当然也是由闪电协议精巧的设计保证的，后文再讲技术细节。</p>
+<p>那么我们就可以想象出这样一个通道：在这个通道中，一开始 Alice 和 Bob 各有有 5 个，如果第一笔记Alice 有 4 个，Bob 有 6 个，这就相当于 Alice 给 Bob 转了 1 个比特币。如果，过了几天，Alice 又要向 Bob 支付 2 个比特币，那么他俩会再记一次账，这次记Alice 有 2 个，Bob 有 8 个，同时上次记的Alice 有 4 个，Bob 有 6 个在两人共同确认后作废，也就是说，本次记账后，Alice 只有 2 个比特币，她不能再拿出旧账单说Alice 有 4 个，Bob 有 6 个。</p>
+<p>注意，在通道关闭之前，这 10 个比特币只能在 Alice 和 Bob 之间使用。也就是说，在不关闭通道的情况下，主网只知道多签地址有 10 个比特币，并不知道 Bob 已经拥有了其中的 8 个比特币，这就是所谓“双向支付通道”。</p>
+<p>之后 Alice 和 Bob 就可以在通道里过上你来我往的相互转账的愉快生活，远离主链的拥堵与高费用。这就好比俩人结婚了，夫妻们想要私下结算，只要俩人同意，想怎么算就怎么算。</p>
+<p>天有不测风云，突然有一天，Alice 不想和 Bob 这么转来转去了，想取出自己在通道里的钱去外面的花花世界潇洒快活。那么就需要关闭通道了，常有两种方式，一是协议离婚，这种方式很和平，双方共同从最开始的多签地址签名发起一笔交易分别转到两人各自控制的地址对应数额的比特币，同时将之前记在小本本上的所有旧账一笔勾销。二是起诉离婚，Alice 想离而 Bob 不想离，这时 Alice 可以单方面强制关闭通道，将小本本最后一笔交易广播出去，只要矿工验证并打包进区块，这婚也算离了，代价是 Alice 并不能立马得到比特币，需要等待一定时间。</p>
+<p>本着劝和不劝分的原则，闪电协议设置了哈希时间锁定合约，单方面强制离婚（关闭交易通道）会受到延迟收到退款的惩罚，这是为了保证双方交易的稳定。</p>
+<p>以上最后一个过程是通道关闭。注意，不管是协议离婚还是起诉离婚，这都是要法院受理登记的。关闭通道一定要发起交易并广播到主网，最后矿工记录，所以还是要忍耐一定确认时间和支付手续费的，这与闪电网络无关。</p>
+<p>至此我们已经知道了 Alice 和 Bob 链下互相转账的那点事儿了，这就是所谓“双向支付通道”。开启通道需要在主链交易，这是锁定资金，关闭通道也需要在主链交易，这是释放资金。中间可以进行任意多次转账支付，是 0 确认 0 手续费的。</p>
+<p>新问题来了，世界上除了这两位，还有 Carol、Eric、Diana 等等。设想 Alice 想转给 Carol一个 BTC, 她该怎么办呢？自然地，她俩可以再重复上述操作建立一个双向通道。但是，如果我们为了应用闪电网络，需要世界上每两个人之间都建立一条通道，这将是非常大的工作量且不切实际的。为了解决这一问题，我们需要将双向支付通道扩展成闪电网络。</p>
+<p>假如 Bob 和 Carol 之间已经建立了支付通道，而 Alice 和 Bob 之间也有支付通道，那么 Alice 可以先把钱转给 Bob 再由他转给 Carol，即 Bob 充当了支付的中间人，在网络里他就是一个路由节点。</p>
+<p>当很多的节点相互建立通道，最后就会形成闪电网络。</p>
+<h2 id="双方支付通道的技术细节过程"><a href="#双方支付通道的技术细节过程" class="headerlink" title="双方支付通道的技术细节过程"></a>双方支付通道的技术细节过程</h2><p>关于通道的三个步骤：开启通道，通道内交易，关闭通道。</p>
+<p>开启通道较为简单，Alice 和 Bob 分别向多签地址1转入 5 个 BTC。这是一个 2/2 地址，也就是必须两人都签名，此地址的比特币才可以转出去。</p>
+<p>接下来是通道内交易，我们需要讲解 Alice 和 Bob 之间的两次交易才能完全明白双向支付通道的巧妙之处。第一次 Alice 需要向 Bob 支付 1 个 BTC，第二次 Bob 需要向 Alice 支付 1 个比特币。</p>
+<p>Bob 在构建交易时需要通过闪电网络软件的通信模块和 Alice 建立联系，获得 Alice 创建的密文的哈希值，然后把这个哈希值作为哈希锁放在自己构建的交易里。这笔交易 Bob 把 10 个比特币分别转给 Bob 控制的普通地址 6 个和另一个“多签地址 2”4 个 BTC。通俗来讲，就是 A 和 B 的财产放在一起，但是 B 主动从 A 那里要了一把锁把 A 的财产锁住了，没有 A 的钥匙 B 也无法打开。</p>
+<p>多签地址 2 是一个 1/2 地址，也就是两个条件有一个满足即可解锁。具体来说，需要 Bob 用自己的私钥和 Alice 的密文（此时 Bob 只有密文的哈希值，并不知道密文，所以 Bob 是不可能获得这 6 个比特币的）同时来解锁；或者 Alice 等待 1000 个区块后用私钥来解锁。这两个条件是双向支付通道的精髓所在。</p>
+<p>Bob 构建完交易后会签名，然后把这笔未完成的交易以点对点方式发送给 Alice，而不是广播到全网。显然，上述交易是对 Bob 有利的，一旦 Alice 签名并广播，Bob 可以立即获得 6 个比特币，而 Alice 需要等到 1000 个区块之后才能拥有 4 个比特币。</p>
+<p>这也就是上文提到的单方面“起诉离婚”会受到延时惩罚的技术实现细节。然而，这笔对 Bob 有利的交易的主动控制权却掌握在 Alice 手里，因为 Alice 不签名并不广播的话，这笔交易暂时不会生效的。</p>
+<p>在 Bob 创建这笔对自己有利的交易同时，Alice 也创建了类似的一笔对自己有利的交易，两者是一种镜像。</p>
+<p>这个过程相当于是 Alice 帮 Bob 在他的小本本上记了一笔账，这 10 个比特币 Bob 占 6 个，Alice 占 4 个，同理 Bob 也帮 Alice 记账了。具体来说，就是 Alice 电脑里保存着 Bob 创建并签名的未完成交易，Bob 保存着 Alice 创建并签名的未完成交易。两者合在一起，就完成了他们之间第一笔交易的记账过程。</p>
+<p>这个过程并不需要互相信任，只需双方同时在线，建立联系并交换哈希值，再在各自的电脑里创建交易最后发送给对方。整个过程不需要经主链由矿工打包确认，所以非常快速并且没有手续费。也可以看到，任何一方都可以随时强制关闭通道，将自己占主动权的交易签名并广播全网，代价是 1000 区块延时。</p>
+<p>但是这里仍然有一个问题，就是外界无法知道通道内的交易次序，因此无法鉴别通道关闭后广播出去的交易，是否为最终交易。例如，如果双方在这个通道里不断发生交易，最后导致 Alice 手中有 9 个，Bob 手里有 1 个，但假设最后 Bob 强制关闭交易通道，并广播出去 Alice 有 5 个，Bob 有 5 个，Bob 便能凭空赚得 4 个。（虽然这 4 个要等到 1000 个区块后才能获得，但这是值得的。）该怎么解决这个问题呢？</p>
+<p>这次我们就要再次用到上文提到的哈希密钥锁了。</p>
+<p>现在我们考虑过了两天，Bob 要向 Alice 转 1 个 BTC，即双方发生第二笔交易 B。类似他们仿照上述第一笔交易操作进行第二次记账，此时应当是 Alice 5 个，Bob 5 个。</p>
+<p>一个最大的区别是建立第二笔交易 B 之前，两人会相互交换第一笔交易中的密文，即对方第一把锁的钥匙。</p>
+<p>这么做的目的在于作废第一笔交易记录 A，使得两人都只能承认最新的交易记录 B 有效。</p>
+<p>设想 Bob 在第一笔记录中拥有 6 个比特币，而第二笔记录变成了 5 个，那么如果他想作弊去签名并广播第一条记录呢？</p>
+<p>结果是他将失去通道内所有的比特币！</p>
+<p>因为 Bob 签名并广播了下图交易之后，Alice 立马会获得 4 个 BTC，同时 Bob 则必须等待 1000 个区块之后才能解锁 6 个 BTC。然而，由于此时 Alice 已经获得了密文即钥匙 1，所以 Alice 可以赶在 Bob 之前解锁这 6 个 BTC。综合来看，只要 Bob 想要广播旧交易记录，他就会一无所有。</p>
+<p>有了能作废旧账的保证，双方就可以在通道内反复任意多次交易，每次交易之后的状态都是资金池资金的划分比例的最新确认状态。</p>
+<p>最后，关闭通道。如本文第二部分所讲，有两种方式关闭通道，一是单方面强制关闭，即某一方将自己控制的最新交易签名后广播出去即可。二是商议后关闭，此时双方再从最开始的多签地址构建一笔交易。</p>
+<p>至此，我们明白了如何在无信任的条件下如何建立双向支付通道。</p>
+<h2 id="通过路由节点实现转账"><a href="#通过路由节点实现转账" class="headerlink" title="通过路由节点实现转账"></a>通过路由节点实现转账</h2><p>同样的，在建立闪电网络的时候，我们同样会遇到信任问题：Alice 想转给 Carol<br>1 个 BTC，需要经过 Bob，但 Bob 会担心自己给 Carol 转 1BTC 后，Alice 耍赖；同样 Alice 会担心如果先给 Bob 转了 1BTC，Bob 也耍赖不转给 Alice。在传统的金融系统中，是由大型知名金融中介机构的信用提供保证的。但闪电网络中，并没有这样一个独立于交易者的第三方去提供信用担保。</p>
+<p>闪电网络采用了一种 HTLC(哈希时间锁定合约) 完美解决了这个问题。</p>
+<p>过程是这样的，第一，Carol 会选择一个随机密文并运算得到其哈希值，再将此哈希值交给 Alice。第二，Alice 拿到哈希值后，会构建一笔转账给 Bob 的交易。这笔交易需要 Bob 拿到 Carol 的密文才能解锁，如果 Bob 在限定的时间内没有解锁成功，这笔钱则退回给 Alice。第三，Bob 从 Alice 处拿到哈希值（该哈希值就是Carol密文生成的哈希值），他也构建一笔转账给 Carol 的交易。第四， Carol 提供密文给Bob，并从 Bob构造的交易中获得 1 个 BTC，Bob 立马会拿该密文从 Alice 构造的交易中获得 1 个 BTC，这就完成了从 Alice 给 Carol 转账的任务。</p>
+<p>上述过程可以看作一个智能合约。故事类似于这样：A 想经过 B 转账给 C，那么 C 先给 A 一把锁，C 有钥匙 A 有钱。A 跟 B 说，你从 C 那里拿到了钥匙，我的钱就是你的了。B 就拿着锁去找 C，B用自己的钱跟 C 换钥匙，然后拿钥匙去换 A 的钱。如此一来，就实现了钱和锁从 A 到 B 再到 C，钥匙从 C 到 B 再到 A 的一个流转。</p>
+<p>当然，在实际操作过程中，Alice 给 Bob 转账金额需要大于 1 个 BTC，支付必要的路由费以激励 Bob 充当路由节点。其次，要注意两笔交易之间的哈希时间长度设置，第二步时间必须长于第三步时间。如果 Bob 在 Alice 关闭交易之后拿到 Carol 的钥匙，他将无法找 Alice 拿回 1 个 BTC。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<ul>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+</ul>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B7%A8%E9%93%BE/01-%E6%B3%A2%E5%8D%A1-Polkadot-%E7%AE%80%E4%BB%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    01-波卡-Polkadot-简介
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%AF%94%E7%89%B9%E5%B8%81/%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E6%98%AF%E4%BB%80%E4%B9%88/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">用大白话解释：闪电网络是什么？</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            mingfy &copy; 2022 
+            <a rel="external nofollow noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
