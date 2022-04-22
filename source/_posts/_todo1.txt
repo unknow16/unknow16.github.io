@@ -1,5 +1,9 @@
 MongoDB
 
+Reactive ç¼–ç¨‹
+
+å„ç‰ˆæœ¬çš„HTTPåè®®
+
 spring data mongoDB
 
 
@@ -9,7 +13,7 @@ influxDB
 cAdvisor
 Grafana
 
-ÅÀ³æ
+çˆ¬è™«
 
 ldap 
 
@@ -17,7 +21,7 @@ guava
 
 JPA
 
-ÏìÓ¦Ê½±à³Ì
+å“åº”å¼ç¼–ç¨‹
 
     @Bean
     public RestTemplate restTemplate() {

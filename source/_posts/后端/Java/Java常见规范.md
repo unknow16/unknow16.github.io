@@ -64,6 +64,11 @@ JPA全称为Java Persistence API ，Java持久化API是Sun公司在Java EE 5规�
 - Persistence类: 包含获取EntityManagerFactory实例的静态方法
 - Query接口: 获取满足creteria的关系对象
 
+## OGNL
+http://commons.apache.org/proper/commons-ognl/
+
+对象导航图语言（Object Graph Navigation Language），简称OGNL，是应用于Java中的一个开源的表达式语言（Expression Language），它被集成在Struts2等框架中，作用是对数据进行访问，它拥有类型转换、访问对象方法、操作集合对象等功能。
+
 ## 参考资料
 > - []()
 > - []()
