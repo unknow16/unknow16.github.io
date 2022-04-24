@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/wiki/%25E6%258A%2595%25E7%25A0%2594/%25E7%2594%25B3%25E4%25B8%2587%25E8%25A1%258C%25E4%25B8%259A%25E5%2588%2586%25E7%25B1%25BB/</loc>
+    
+    <lastmod>2022-04-24T05:03:23.263Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/%25E6%258A%2598%25E8%2585%25BE/hexo%25E7%259B%25B8%25E5%2585%25B3/</loc>
+    
+    <lastmod>2022-04-24T04:53:15.595Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/wiki/%25E5%2589%258D%25E7%25AB%25AF/Node%25E5%25BC%2580%25E5%258F%2591%25E7%258E%25AF%25E5%25A2%2583%25E9%2585%258D%25E7%25BD%25AE/</loc>
     
     <lastmod>2022-04-22T03:08:17.725Z</lastmod>
@@ -3498,6 +3512,153 @@
     <loc>http://yoursite.com/wiki/%25E6%259D%2582%25E8%25B0%2588/TCP%25E4%25B8%2589%25E6%25AC%25A1%25E6%258F%25A1%25E6%2589%258B%25E5%259B%259B%25E6%25AC%25A1%25E6%258C%25A5%25E6%2589%258B/</loc>
     
     <lastmod>2021-04-16T02:04:47.459Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E8%25AF%2584%25E4%25BC%25B0%25E6%25A8%25A1%25E5%259E%258B/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.411Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%25A6%2582%25E7%258E%2587%25E5%2592%258C%25E7%25BB%259F%25E8%25AE%25A1%25E5%25AD%25A6%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.411Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E7%25BA%25BF%25E6%2580%25A7%25E4%25BB%25A3%25E6%2595%25B0%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.411Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%25B7%25B1%25E5%25BA%25A6%25E5%25AD%25A6%25E4%25B9%25A0%25E6%25A6%2582%25E8%25BF%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.411Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0%25E6%25A6%2582%25E8%25BF%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.395Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/%25E9%2599%258D%25E7%25BB%25B4/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.394Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/%25E9%2580%25BB%25E8%25BE%2591%25E5%259B%259E%25E5%25BD%2592/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.394Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/%25E8%2581%259A%25E7%25B1%25BB/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.392Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/%25E7%25BA%25BF%25E6%2580%25A7%25E5%259B%259E%25E5%25BD%2592/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.392Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/%25E7%25A5%259E%25E7%25BB%258F%25E7%25BD%2591%25E7%25BB%259C/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.392Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E5%25BA%2594%25E7%2594%25A8/%25E6%258E%25A8%25E8%258D%2590%25E7%25B3%25BB%25E7%25BB%259F/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.391Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0/%25E6%259C%25BA%25E5%2599%25A8%25E5%25AD%25A6%25E4%25B9%25A0%25E5%25B8%25B8%25E7%2594%25A8%25E7%25AE%2597%25E6%25B3%2595/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.391Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E5%25BA%2594%25E7%2594%25A8/%25E5%25BC%2582%25E5%25B8%25B8%25E6%25A3%2580%25E6%25B5%258B/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.378Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E5%25B7%25A5%25E5%2585%25B7%25E5%25BA%2593/PyTorch%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.377Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E5%25B7%25A5%25E5%2585%25B7%25E5%25BA%2593/TensorFlow2%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.377Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E5%25B7%25A5%25E5%2585%25B7%25E5%25BA%2593/Pandas%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.377Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E5%25B7%25A5%25E5%2585%25B7%25E5%25BA%2593/Matplotlib%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.376Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E5%25B7%25A5%25E5%2585%25B7%25E5%25BA%2593/Numpy%25E7%25AC%2594%25E8%25AE%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.376Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/CUDA%25E7%25AE%2580%25E4%25BB%258B/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.366Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/%25E4%25BA%25BA%25E5%25B7%25A5%25E6%2599%25BA%25E8%2583%25BD%25E6%25A6%2582%25E8%25BF%25B0/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.366Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/wiki/AI/Anaconda%25E7%25AE%2580%25E4%25BB%258B/</loc>
+    
+    <lastmod>2021-04-16T02:04:47.365Z</lastmod>
     
   </url>
   
