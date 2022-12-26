@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Stay Hungry | Stay Foolish | fymingf</title>
+  <title>Stay Hungry | Stay Foolish</title>
   
   <subtitle>自我管理，知识管理，时间管理，阅读，写作，思维导图，Wiz，TimeMeter</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-05-07T09:11:53.782Z</updated>
+  <updated>2022-12-26T07:57:00.196Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>金融经典书籍</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E7%BB%8F%E5%85%B8%E4%B9%A6%E7%B1%8D/"/>
-    <id>http://yoursite.com/wiki/投研/金融经典书籍/</id>
-    <published>2022-05-07T09:11:53.000Z</published>
-    <updated>2022-05-07T09:11:53.782Z</updated>
+    <title>人工智能概述</title>
+    <link href="http://yoursite.com/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/"/>
+    <id>http://yoursite.com/wiki/AI/人工智能概述/</id>
+    <published>2022-12-26T06:42:52.000Z</published>
+    <updated>2022-12-26T07:57:00.196Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="体验小案例"><a href="#体验小案例" class="headerlink" title="体验小案例"></a>体验小案例</h2><p>涂鸦识别：<a href="https://quickdraw.withgoogle.com/">https://quickdraw.withgoogle.com</a><br>画风迁移：<a href="https://deepdreamgenerator.com/">https://deepdreamgenerator.com/</a></p><h2 id="人工智能发展历程"><a href="#人工智能发展历程" class="headerlink" title="人工智能发展历程"></a>人工智能发展历程</h2><h3 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h3><p>1950年，图灵发表了一篇划时代的论文，文中预言了创造出具有真正智能的机器的可能性。由于注意到“智能”这一概念难以确切定义，他提出了著名的图灵测试：测试者与被测试者（一个人和一台机器）隔开的情况下，通过一些装置（如键盘）向被测试者随意提问。多次测试（一般为5min之内），如果有超过30%的测试者不能确定被测试者是人还是机器，那么这台机器就通过了测试，并被认为具有人类智能。</p><p>达特茅斯会议：1956年8月，在美国汉诺斯小镇宁静的达特茅斯学院中，</p><ul><li>约翰·麦卡锡（John McCarthy）</li><li>马文·闵斯基（Marvin Minsky，人工智能与认知学专家）</li><li>克劳德·香农（Claude Shannon，信息论的创始人）</li><li>艾伦·纽厄尔（Allen Newell，计算机科学家）</li><li>赫伯特·西蒙（Herbert Simon，诺贝尔经济学奖得主）</li></ul><p>等科学家正聚在一起，讨论着一个完全不食人间烟火的主题：用机器来模仿人类学习以及其他方面的智能。会议足足开了两个月的时间，虽然大家没有达成普遍的共识，但是却为会议讨论的内容起了一个名字：人工智能。</p><p>因此，1956年也就成为了人工智能元年。</p><h3 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h3><p>人工智能充满未知的探索道路曲折起伏。如何描述人工智能自1956年以来60余年的发展历程，学术界可谓仁者见仁、智者见智。我们将人工智能的发展历程划分为以下6个阶段：</p><p>第一是起步发展期：1956年—20世纪60年代初。人工智能概念提出后，相继取得了一批令人瞩目的研究成果，如机器定理证明、跳棋程序等，掀起人工智能发展的第一个高潮。</p><p>第二是反思发展期：20世纪60年代—70年代初。人工智能发展初期的突破性进展大大提升了人们对人工智能的期望，人们开始尝试更具挑战性的任务，并提出了一些不切实际的研发目标。然而，接二连三的失败和预期目标的落空（例如，无法用机器证明两个连续函数之和还是连续函数、机器翻译闹出笑话等），使人工智能的发展走入低谷。</p><p>第三是应用发展期：20世纪70年代初—80年代中。20世纪70年代出现的专家系统模拟人类专家的知识和经验解决特定领域的问题，实现了人工智能从理论研究走向实际应用、从一般推理策略探讨转向运用专门知识的重大突破。专家系统在医疗、化学、地质等领域取得成功，推动人工智能走入应用发展的新高潮。</p><p>第四是低迷发展期：20世纪80年代中—90年代中。随着人工智能的应用规模不断扩大，专家系统存在的应用领域狭窄、缺乏常识性知识、知识获取困难、推理方法单一、缺乏分布式功能、难以与现有数据库兼容等问题逐渐暴露出来。</p><p>第五是稳步发展期：20世纪90年代中—2010年。由于网络技术特别是互联网技术的发展，加速了人工智能的创新研究，促使人工智能技术进一步走向实用化。1997年国际商业机器公司（简称IBM）深蓝超级计算机战胜了国际象棋世界冠军卡斯帕罗夫，2008年IBM提出“智慧地球”的概念。以上都是这一时期的标志性事件。</p><p>第六是蓬勃发展期：2011年至今。随着大数据、云计算、互联网、物联网等信息技术的发展，泛在感知数据和图形处理器等计算平台推动以深度神经网络为代表的人工智能技术飞速发展，大幅跨越了科学与应用之间的“技术鸿沟”，诸如图像分类、语音识别、知识问答、人机对弈、无人驾驶等人工智能技术实现了从“不能用、不好用”到“可以用”的技术突破，迎来爆发式增长的新高潮。<br><img src="/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/a7.png"></p><h2 id="人工智能主要分支"><a href="#人工智能主要分支" class="headerlink" title="人工智能主要分支"></a>人工智能主要分支</h2><p>通讯、感知与行动是现代人工智能的三个关键能力，在这里我们将根据这些能力/应用对这三个技术领域进行介绍：</p><ul><li>计算机视觉：全称Computer Vision，简称CV</li><li>自然语言处理：全称Natural Language Processing，简称NLP，包括文本挖掘/分类、机器翻译和语音识别</li><li>机器人</li></ul><h3 id="计算机视觉"><a href="#计算机视觉" class="headerlink" title="计算机视觉"></a>计算机视觉</h3><p>计算机视觉(CV)是指机器感知环境的能力。这一技术类别中的经典任务有图像形成、图像处理、图像提取和图像的三维推理。物体检测和人脸识别是其比较成功的研究领域。</p><p>当前阶段：计算机视觉现已有很多应用，这表明了这类技术的成就，也让我们将其归入到应用阶段。随着深度学习的发展，机器甚至能在特定的案例中实现超越人类的表现。但是，这项技术离社会影响阶段还有一定距离，那要等到机器能在所有场景中都达到人类的同等水平才行(感知其环境的所有相关方面)。</p><p>发展历史：<br><img src="/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/a2.png"></p><h3 id="语音识别"><a href="#语音识别" class="headerlink" title="语音识别"></a>语音识别</h3><p>语音识别是指识别语音(说出的语言)并将其转换成对应文本的技术。相反的任务(文本转语音/TTS)也是这一领域内一个类似的研究主题。</p><p>当前阶段：语音识别已经处于应用阶段很长时间了。最近几年，随着大数据和深度学习技术的发展，语音识别进展颇丰，现在已经非常接近社会影响阶段了。语音识别领域仍然面临着声纹识别和「鸡尾酒会效应」等一些特殊情况的难题。现代语音识别系统严重依赖于云，在离线时可能就无法取得理想的工作效果。</p><p>发展历史：<br><img src="/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/a3.png"></p><h3 id="文本挖掘-分类"><a href="#文本挖掘-分类" class="headerlink" title="文本挖掘/分类"></a>文本挖掘/分类</h3><p>这里的文本挖掘主要是指文本分类，该技术可用于理解、组织和分类结构化或非结构化文本文档。其涵盖的主要任务有句法分析、情绪分析和垃圾信息检测。</p><p>当前阶段：我们将这项技术归类到应用阶段，因为现在有很多应用都已经集成了基于文本挖掘的情绪分析或垃圾信息检测技术。文本挖掘技术也在智能投顾的开发中有所应用，并且提升了用户体验。文本挖掘和分类领域的一个瓶颈出现在歧义和有偏差的数据上。</p><p>发展历史：<br><img src="/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/a4.png"></p><h3 id="机器翻译"><a href="#机器翻译" class="headerlink" title="机器翻译"></a>机器翻译</h3><p>机器翻译(MT)是利用机器的力量自动将一种自然语言(源语言)的文本翻译成另一种语言(目标语言)。</p><p>当前阶段：机器翻译是一个见证了大量发展历程的应用领域。该领域最近由于神经机器翻译而取得了非常显著的进展，但仍然没有全面达到专业译者的水平；但是，我们相信在大数据、云计算和深度学习技术的帮助下，机器翻译很快就将进入社会影响阶段。在某些情况下，俚语和行话等内容的翻译会比较困难(受限词表问题)。专业领域的机器翻译(比如医疗领域)表现通常不好。</p><p>发展历史：<br><img src="/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/a5.png"></p><h3 id="机器人"><a href="#机器人" class="headerlink" title="机器人"></a>机器人</h3><p>机器人学(Robotics)研究的是机器人的设计、制造、运作和应用，以及控制它们的计算机系统、传感反馈和信息处理。</p><p>机器人可以分成两大类: 固定机器人和移动机器人。固定机器人通常被用于工业生产(比如用于装配线)。常见的移动机器人应用有货运机器人、空中机器人和自动载具。机器人需要不同部件和系统的协作才能实现最优的作业。其中在硬件上包含传感器、反应器和控制器；另外还有能够实现感知能力的软件，比如定位、地图测绘和目标识别。</p><p>当前阶段：自上世纪「Robot」一词诞生以来，人们已经为工业制造业设计了很多机器人。工业机器人是增长最快的应用领域，它们在 20 世纪 80 年代将这一领域带入了应用阶段。在安川电机、Fanuc、ABB、库卡等公司的努力下，我们认为进入 21 世纪之后，机器人领域就已经进入了社会影响阶段，此时各种工业机器人已经主宰了装配生产线。此外，软体机器人在很多领域也有广泛的应用，比如在医疗行业协助手术或在金融行业自动执行承销过程。但是，法律法规和「机器人威胁论」可能会妨碍机器人领域的发展。还有设计和制造机器人需要相对较高的投资。</p><p>发展历史：<br><img src="/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/a6.png"></p><h2 id="人工智能、机器学习和深度学习"><a href="#人工智能、机器学习和深度学习" class="headerlink" title="人工智能、机器学习和深度学习"></a>人工智能、机器学习和深度学习</h2><ul><li>机器学习是人工智能的一个实现途径</li><li>深度学习是机器学习的一个方法（神经网络）发展而来</li></ul><p><img src="/wiki/AI/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0/a1.png"></p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;体验小案例&quot;&gt;&lt;a href=&quot;#体验小案例&quot; class=&quot;headerlink&quot; title=&quot;体验小案例&quot;&gt;&lt;/a&gt;体验小案例&lt;/h2&gt;&lt;p&gt;涂鸦识别：&lt;a href=&quot;https://quickdraw.withgoogle.com/&quot;&gt;https://q
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="http://yoursite.com/categories/AI/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>推荐的信息源</title>
+    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84/%E6%8E%A8%E8%8D%90%E7%9A%84%E4%BF%A1%E6%81%AF%E6%BA%90/"/>
+    <id>http://yoursite.com/wiki/投研/价值投资/推荐的信息源/</id>
+    <published>2022-05-12T01:38:42.000Z</published>
+    <updated>2022-05-12T03:30:14.288Z</updated>
+    
+    <content type="html"><![CDATA[<p>投资分为固定资产投资和股权投资，所有的（非涉密）固定资产投资信息都要公开挂网，经常有人留言问我某某项目资料去哪看，去政府公开信息平台就行。</p><ol><li>全国投资项目在线审批监管平台: <a href="http://new.tzxm.gov.cn/">http://new.tzxm.gov.cn/</a></li><li>各省投资项目在线审批监管平台，如湖北省：<a href="http://hbtzls.gov.cn/indexhb.jsp">http://hbtzls.gov.cn/indexhb.jsp</a></li></ol><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;投资分为固定资产投资和股权投资，所有的（非涉密）固定资产投资信息都要公开挂网，经常有人留言问我某某项目资料去哪看，去政府公开信息平台就行。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;全国投资项目在线审批监管平台: &lt;a href=&quot;http://new.tzxm.gov.cn/&quot;&gt;http
+      
+    
+    </summary>
+    
+      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
+    
+      <category term="价值投资" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>常见估值方法</title>
+    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84/%E5%B8%B8%E8%A7%81%E4%BC%B0%E5%80%BC%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/wiki/投研/价值投资/常见估值方法/</id>
+    <published>2022-05-10T10:01:43.000Z</published>
+    <updated>2022-05-10T10:01:43.410Z</updated>
     
     <content type="html"><![CDATA[<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
     
@@ -39,31 +89,61 @@
     
       <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
     
+      <category term="价值投资" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84/"/>
+    
     
   </entry>
   
   <entry>
-    <title>区块链经典书籍</title>
-    <link href="http://yoursite.com/wiki/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E7%BB%8F%E5%85%B8%E4%B9%A6%E7%B1%8D/"/>
-    <id>http://yoursite.com/wiki/区块链/区块链经典书籍/</id>
-    <published>2022-05-07T09:11:24.000Z</published>
-    <updated>2022-05-07T09:11:24.247Z</updated>
+    <title>唐朝估值法简介</title>
+    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84/%E5%94%90%E6%9C%9D%E4%BC%B0%E5%80%BC%E6%B3%95%E7%AE%80%E4%BB%8B/"/>
+    <id>http://yoursite.com/wiki/投研/价值投资/唐朝估值法简介/</id>
+    <published>2022-05-10T09:59:48.000Z</published>
+    <updated>2022-05-11T09:24:50.360Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>三大前提：利润为真；利润可持续；维持当前盈利能力所需新增资本投入很少甚至无需新增资本投入</p><ul><li>买点：三年后合理估值的50%就是理想买点；</li><li>卖点：当年市盈率超过50倍，或市值超过三年后合理估值上限的150%，以先到者为准（孰低原则）；</li></ul><p>三年后合理估值计算：</p><ul><li>以无风险收益率的倒数作为三年后合理估值的市盈率，无风险收益率为3%-4%之间，取值25-30倍市盈率，无风险收益率4-5%之间，取值20-25倍市盈率，依此类推。</li><li>对于部分净利润含现金量低于100%，但其他方面都符合的企业，对净利润予以折扣处理。<br>  体现在速算中就是取稍低的市盈率，即1×80%×25=1×20。</li></ul><p>整个估值体系只有一个未知数：预计该企业三年后的净利润。</p><p>可以描述为一种内心活动：该企业三年后净利润为4元，合理估值为100元，我将其等价于100元现金资产。如果此时该企业售价50元，而我手头刚好有50元类现金资产，我愿意实施交换。</p><h2 id="估值调整时间"><a href="#估值调整时间" class="headerlink" title="估值调整时间"></a>估值调整时间</h2><p>询问应该使用动态、静态还是TTM市盈率的人，张嘴就错了。需要查看各类股票APP上显示的市盈率数据，说明对这家企业的净利润和市值，心中完全没数，根本轮不到讨论估值问题。不管看哪个数据，赚钱都是靠命。 但我们运用自己估算的净利润，也确实涉及到使用哪年净利润的问题。固定在年初和年中调整吧，具体数据采用方式如下： </p><ul><li>2021年元旦，将一年内卖点调整为2021年预计净利润×50（或三年后合理估值上限×150%，二者孰低），到6月30日，如果没有重大变化，上浮10%。 </li><li>2021年元旦，将三年后估值调整为=2023年预计净利润×1/无风险收益率（目前取值25~30倍）。到6月30日，若无重大变化，上浮10%。</li><li>期间，如果有重大影响事件或数据，单独调整。 </li><li>2022年元旦，一年内卖点调整为2022年预计净利润×50……其他同2021年情况类推。 </li></ul><h2 id="关于卖点的150-和50倍数据取值的疑惑"><a href="#关于卖点的150-和50倍数据取值的疑惑" class="headerlink" title="关于卖点的150%和50倍数据取值的疑惑"></a>关于卖点的150%和50倍数据取值的疑惑</h2><p>很多朋友纠结“三年后合理估值上限的150%是怎么定出来的？” ，我认为这些朋友都是自己想的太复杂，把自己绕进去了，其实数据来源很简单。 </p><p>一个估值假设：当无风险收益率上限为4%，永续增长假设为两倍无风险收益率（即8%）时，在这个假设条件下，今年的50倍与三年后合理估值上限的150%基本等价。150%就是这么来的。 </p><p>举例：<br>假设今年净利润为1元，对应50倍市盈率为50元。8%增长假设下，三年后净利润为1×1.08³=1.26元，此时三年后合理估值取25-30倍市盈率，故合理估值为31.5-37.8元。<br>通常我会在表格里写作34.6±10%元，以强调「估值是个区间，而不是一个精确的数值」的概念。</p><p>合理估值上限的150%，就是1.26×30×150%=56.7元，或34.6×110%×150%=57元。<br>按照4%的无风险收益率计算，今天的50元等价于三年后的56.24元，即：今天收到50元去买4%的理财产品，三年后会本息和会变成50×1.04³=56.24元，与三年后合理估值的150%（56.7~57）基本等价。<br>这意味着今天50倍卖出，是提前三年在合理估值的基础上加价50%卖给接盘侠，符合老唐不占便宜不交易的投资原则。 </p><p>关于孰低原则的疑惑：<br>我选择企业，偏重于那些预计增长率会高于8%的企业（看对看错是另一个话题），也就意味着卖点基本上就是当年的50倍。<br>因为上文举例中，8%增长假设下，三年后合理估值的150%（56.7~57），大于当年50倍市盈率的50元。<br>比如预计12%增长的，三年后净利润是1×1.12³=1.4元，合理估值上限是1.4×30=42元，再乘以150%是63元，远高于50元。<br>此时50倍市盈率就是那个“孰低”的“孰”。 </p><h2 id="为什么选50倍卖出"><a href="#为什么选50倍卖出" class="headerlink" title="为什么选50倍卖出"></a>为什么选50倍卖出</h2><p>经验：<br>在人类永远不变的贪婪和恐惧以及资本的逐利天性推动下，股市估值水平通常会在三到五年范围内形成一个起落。<br>在无风险收益率为4%左右的情况下，股权估值达到50倍市盈率后，一般来说，三年内出现估值回落是大概率事件。</p><p>算术：</p><ol><li>我们假设企业未来三年的年化增长率为25%，今年净利润为1元，则三年后净利润为1.95元； </li><li>今天50倍市盈率卖出得款50元，按照4%无风险收益率计算，三年后这笔钱总额为56.2元； </li><li>三年后企业估值水平回落至25倍市盈率，届时股价为25×1.95=48.8元。按照合理水平买回，可以多买回15%股份。 </li></ol><p>即：<br>A.假设股市在卖出后三年内回落至正常估值水平，同时假设企业能保持年化25%增长，50倍市盈率卖出能保证占到傻子便宜；<br>B.如果回落时间短于3年，或者企业年化增长低于25%，则能占到更多便宜；<br>C.反之，如果卖出后持续高估时间长于3年，或者企业年化增长持续高于25%，则卖出也可能吃亏。 </p><p>——上述三种可能性里，经验判断AB的概率非常高，C的概率偏低。</p><p>因此，我给优质企业界定一个很高的卖出标准，目的首先是尽量不卖出，保证自己始终在电梯里坐着。<br>但即便如此，傻子们依然有可能将股价推高到超过该标准的位置，此时我可能被迫卖出。<br>但这个卖出标准，从数学计算上能保证三年内，大概率可以在合理估值水平买回并略有盈余。<br>注意，大概率≠必然。</p><p>股价长期在50倍市盈率以上位置波动的企业很多，我的体系注定会错过他们。<br>即使偶然狗屎运拿到这类企业，我也一定是分分钟被甩下车的命。<br>咱们自己搞清楚自己的定位，不是自己认知水平下的财富，坦然留给别人，不嫉妒不眼红</p><p>那么，既然反正都是50倍市盈率卖出，为什么还要设置个孰低选项呢？<br>主要为了容纳另外两种情况：一种情况是无风险收益率比较高的情况，一种是预计增长率非常低的情况。<br>比如无风险收益率在5%-6%时，我给予三年后合理估值的市盈率倍数只有15-20倍。<br>此时，若今年利润为1，年化增长15%时，三年后合理估值上限的150%为1×1.15³×20×150%=45.6，低于当年的50倍市盈率，提前触发卖出。<br>在无风险收益率比较高的时候，股票的估值中枢本来就应该比较低，提前卖出是我想要的。这是我设定150%规则所意图容纳的第一种情况。<br>第二种情况，有时某些符合三大前提，只是因为预期增长很小、不增长甚至轻微负增长的企业，市场给予它的估值太低。<br>这种企业，我也可能会买入。买入的主要目的是获取估值回归的利润。<br>这种情况下，150%线也会提前于50倍pe线触发。<br>比如：今天利润是1，未来三年预计年化增长1%，三年后的净利润约1.03。<br>则，三年后合理估值上限的150%=1.03×30×150%=46.35，先于当年的50倍触发。<br>对于预计年增长低至1%的企业，市场能给到46倍市盈率时，在我看来，要么是严重高估，要么是我对企业增长的判断可能有问题。<br>无论哪种情况，都不支持继续持有。此时先溜为敬，不需要再等50倍。<br>以上两种情况，就是150%规则的存在价值。<br>多说一句：在低估与成长之间，今日之我更偏向于成长，低估类企业关注的少了。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href="">https://mp.weixin.qq.com/s?__biz=MzI5NzA5MDEzNg==&amp;mid=2649980534&amp;idx=1&amp;sn=c91aa28f933af3059c9dffb7bd1a4795&amp;chksm=f4bdb341c3ca3a5764d16d5d848a28b441b51850a3831c45ccea0381eb3a0c792d3c59da968d&amp;scene=178&amp;cur_album_id=1297219966084775937#rd</a></li><li><a href=""></a></li></ul></blockquote>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;blockquote&gt;
+        &lt;p&gt;三大前提：利润为真；利润可持续；维持当前盈利能力所需新增资本投入很少甚至无需新增资本投入&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/l
+&lt;li&gt;买点：三年后合理估值的50%就是理想买点；&lt;/li&gt;
+&lt;li&gt;卖点：当年市盈率超过50倍，或市值超过三年后合理估值上限的150%，以先到者为准（孰低原则）；&lt;
       
     
     </summary>
     
-      <category term="区块链" scheme="http://yoursite.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
+    
+      <category term="价值投资" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2021锂电池产业链</title>
+    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E6%96%B0%E8%83%BD%E6%BA%90/2021%E9%94%82%E7%94%B5%E6%B1%A0%E4%BA%A7%E4%B8%9A%E9%93%BE/"/>
+    <id>http://yoursite.com/wiki/投研/新能源/2021锂电池产业链/</id>
+    <published>2022-05-09T08:29:15.000Z</published>
+    <updated>2022-05-09T09:16:59.403Z</updated>
+    
+    <content type="html"><![CDATA[<p>锂电池大致可分为两类，锂金属电池和锂离子电池。锂电池在传统领域主要应用于数码产品，在新兴领域主要用于动力电池、储能领域。</p><p>在锂电池制造产业链中，电池包的制造核心部分就是电芯，电芯封装后再集成线束和PVC膜构成电池模组，再加入线束连接器、BMS电路板构成动力电池成品。<br>其中，锂电池电解液是锂离子电池中是作为带动锂离子流动的载体，锂离子电池的工作原理也就是其充放电的过程，就是锂离子在正负极之间的穿梭，而电解液正是锂离子流动的介质。而隔膜的主要作用是把电池的正负极分隔开，防止两极接触而短路，此外还有使电解质离子通过的功能。</p><p>电动汽车中，锂电成本占比最大，接近一半，而锂电成本中，又以正极材料的价值量占比最大。</p><p><img src="/wiki/%E6%8A%95%E7%A0%94/%E6%96%B0%E8%83%BD%E6%BA%90/2021%E9%94%82%E7%94%B5%E6%B1%A0%E4%BA%A7%E4%B8%9A%E9%93%BE/./01-cost.jpg"></p><p>1、宁德时代：动力电池龙头，全球出货量连续4年蝉联<br>2、比亚迪：新能源整车+动力电池龙头，新能源汽车全球销量前四，电池出货量全球前五<br>3、国轩高科：动力电池出货量全球前十<br>4、亿纬锂能：锂亚硫酰氯电池国内第一<br>5、欣旺达：消费电池龙头，智能手机电池全球第一<br>6、派能科技：储能电池龙头，储能产品出货量全球前<br>7、容百科技：高镍正极材料全球第一<br>8、格林美：三元前躯体全球第一<br>9、德方纳米：磷酸铁锂正极材料行业第一<br>10、杉杉股份：负极材料国内第二<br>11、璞泰来：负极材料国内第三<br>12、恩捷股份：隔膜全球第一<br>13、天赐材料：电解液行业第一<br>14、新宙邦：电解液行业第二<br>15、贛锋锂业：国内最大的锂矿生产商<br>16、天齐锂业：国内第二大锂矿生产商<br>16、华友钴业：国内最大钴化学品生产商<br>17、盐湖股份：国内最大盐湖提锂生产商</p><h2 id="上游产业链"><a href="#上游产业链" class="headerlink" title="上游产业链"></a>上游产业链</h2><p>锂电池产业链上游为原材料资源的开采、加工，主要包括钴、锰、镍、锂、石墨材料、碳材料等。据了解，钴酸锂自从锂离子电池商业化以来，一直作为正极材料的主流被应用。因其工作电压较低，进而导致钴酸锂主要运用在小电池，如手机、电脑电池等。磷酸铁锂具有结构稳定性和热稳定性高、常温循环性能优异等特点，是最近几年国内普遍选择磷酸铁锂作为锂离子动力电池的发展方向。</p><p>上游主要包括正极材料（碳酸锂、钴酸锂、锰酸锂、镍酸锂、三元材料）、负极材料（石墨材料、钛酸锂、硅碳负极、碳材料）、电解液（溶剂、添加剂、六氟磷酸锂、新型锂盐）、隔膜、其他辅材（铜箔、铝箔、导电剂、分散剂、铝塑膜、粘结剂）。</p><h3 id="锂资源"><a href="#锂资源" class="headerlink" title="锂资源"></a>锂资源</h3><p>全球锂资源集中度高，前四储量占比96%。据美国地质调查局公布数据显示，2017年全球锂资源储量约为1600万吨，相对2016年增长了150万吨，主要分布在智利、中国、澳大利亚和阿根廷，四个国家占储量总量的96%，集中度较高。</p><p>锂资源呈现寡头垄断特征，CR6占比84%。从全球已探明锂盐竞争格局来看，锂矿具有高度垄断的特征。目前锂资源市场的有效供给主要还是集中在SQM、ALB、FMC、天齐和赣锋等几家龙头企业手中，六家企业占比达到84%，短期内锂资源有效产能仍然来自这几家企业。</p><h3 id="钴资源"><a href="#钴资源" class="headerlink" title="钴资源"></a>钴资源</h3><p>钴资源集中度高，主要分布于刚果和澳大利亚。世界钴资源整体来说较丰富，据美国地质调查局公布数据显示，2017年全球钴资源储量约为710万吨，主要分布在刚果和澳大利亚，分别达到49%和16.8%。</p><p>钴资源呈现寡头垄断，三大公司占有率达40%。全球的钴矿上游资源主要被嘉能可、洛阳钼业、欧亚资源等跨国矿企控制，三家企业钴矿产量占全球比例超过40%。洛阳钼业是龙头，但一来它本身体量较大，二来它的业务结构里，铜钴只占到一半，所以它的弹性并不是最大。</p><p>华友钴业目前公司钴盐（注意是钴盐，而不是钴金属）市占率和销量在国内占35%，全球是18%，世界第一，规模是竞争对手寒锐钴业10倍。</p><h3 id="镍资源"><a href="#镍资源" class="headerlink" title="镍资源"></a>镍资源</h3><p>全球镍资源集中度相对锂、钴较低。全球镍资源整体来说较丰富，2017年全球镍资源储量约为7400万吨，主要分布在澳大利亚、巴西和俄罗斯等地区，其中澳大利亚居世界第一位，储量达到1900万吨，占比达到25.7%。</p><h3 id="正极材料"><a href="#正极材料" class="headerlink" title="正极材料"></a>正极材料</h3><p>正极材料是锂电池最核心，成本最高的部分，占40左右%。</p><p>行业玩家主要有长远锂科（母公司新三板的金瑞科技）、容百科技（科创板、高镍正极材料全球第一），当升科技，振华新材、杉杉股份、厦门钨业，这个行业没有很明显的龙头，前五名都是10%+的市占率。</p><p>全球上看，国外竞争对手主要是韩国企业优美科和L&amp;F，日本企业日亚化学和住友金属，都是三元材料为主。磷酸铁锂中国基本算是垄断地位，三元材料领域日韩之前在技术和份额上均有优势，但随着我国大批企业加入竞争，奋起直追，市场份额迅速向国内转移，目前国产化率非常高。</p><p>正极是技术变化最大的一个领域，磷酸铁锂、锰酸锂到三元材料，殊不知未来会不会又出现新的技术路线，这对此领域的企业挑战不小，若走错技术路线，则万劫不复，分分钟被人弯道超车。</p><h3 id="负极材料"><a href="#负极材料" class="headerlink" title="负极材料"></a>负极材料</h3><p>负极材料在电池中重要性以及成本没有其他三块突出，竞争者也没有正极材料多，技术比较平稳。<br>国际上，负极材料主要是中日竞争，两国公司份额占了全球95%以上，近几年趋势是日本向中国转移。<br>国内主要的玩家有贝特瑞（新三板）、杉杉股份、紫宸科技（母公司是璞泰来），前三家的市场份额合计接近60%。</p><p>负极主要分为天然石墨和人造石墨，从技术路线上来看，天然石墨有被人造石墨替代的趋势，15年天然石墨占比还在55%，到了18年，人造石墨已经占据70%。贝特瑞（控股公司中国宝安）主要是天然石墨和硅基，几近垄断，一旦技术路线发生变化，难以想象。<br>人造石墨领域，杉杉和璞泰来位列前二，市场份额相近，均占到人造石墨的22%左右，加起来大概50%。杉杉股份负极兼顾高中低端产品，主打中低端，璞泰来主要高端负极产品。</p><h2 id="中游产业链"><a href="#中游产业链" class="headerlink" title="中游产业链"></a>中游产业链</h2><p>电芯制造及模组位于锂离子电池产业链的中游，使用上游电池材料企业供应的正极材料、负极材料、电解液、隔膜及其他辅料，生产出不同规格、不同容量的锂离子电芯产品，最后根据下游终端客户的要求选择不同型号的电芯产品、模组及BMS方案。PACK则是指将锂电池电芯组装成组的过程，包含前加工、组装、封装、包装等过程，从而连接上游电芯生产和下游整车应用。<br>随着动力电池市场竞争进一步加剧，龙头企业优势不断放大，行业集中度持续提升。2020年，排名前3家、前5家、前10家动力电池企业动力电池装车量分别为45.4GWh、52.3GWh和58.4GWh，占总装车量比重分别为71%、82%和92%。</p><p>龙头就不用多说了，大家应该都很熟，包括宁德时代、科达利、欣旺达、亿纬锂能、比亚迪、国轩高科等。</p><h2 id="下游产业链"><a href="#下游产业链" class="headerlink" title="下游产业链"></a>下游产业链</h2><p>锂电池产业链的下游包括消费电子领域、动力电池领域、储能领域。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;锂电池大致可分为两类，锂金属电池和锂离子电池。锂电池在传统领域主要应用于数码产品，在新兴领域主要用于动力电池、储能领域。&lt;/p&gt;
+&lt;p&gt;在锂电池制造产业链中，电池包的制造核心部分就是电芯，电芯封装后再集成线束和PVC膜构成电池模组，再加入线束连接器、BMS电路板构成动力电池
+      
+    
+    </summary>
+    
+      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
+    
+      <category term="新能源" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E6%96%B0%E8%83%BD%E6%BA%90/"/>
     
     
   </entry>
@@ -210,34 +290,6 @@
   </entry>
   
   <entry>
-    <title>中国外汇市场简介</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/%E4%B8%AD%E5%9B%BD%E5%A4%96%E6%B1%87%E5%B8%82%E5%9C%BA%E7%AE%80%E4%BB%8B/"/>
-    <id>http://yoursite.com/wiki/投研/金融市场/中国外汇市场简介/</id>
-    <published>2022-04-25T06:47:44.000Z</published>
-    <updated>2022-04-25T06:47:44.103Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/l
-      
-    
-    </summary>
-    
-      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
-    
-      <category term="金融市场" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>医药行业框架</title>
     <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E5%8C%BB%E8%8D%AF/%E5%8C%BB%E8%8D%AF%E8%A1%8C%E4%B8%9A%E6%A1%86%E6%9E%B6/"/>
     <id>http://yoursite.com/wiki/投研/医药/医药行业框架/</id>
@@ -320,34 +372,6 @@
   </entry>
   
   <entry>
-    <title>A股中的国家队</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/A%E8%82%A1%E4%B8%AD%E7%9A%84%E5%9B%BD%E5%AE%B6%E9%98%9F/"/>
-    <id>http://yoursite.com/wiki/投研/金融市场/A股中的国家队/</id>
-    <published>2022-04-25T06:27:32.000Z</published>
-    <updated>2022-04-25T06:27:32.119Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/l
-      
-    
-    </summary>
-    
-      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
-    
-      <category term="金融市场" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>国内药品集中采购的主要模式探析(转)</title>
     <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E5%8C%BB%E8%8D%AF/%E5%9B%BD%E5%86%85%E8%8D%AF%E5%93%81%E9%9B%86%E4%B8%AD%E9%87%87%E8%B4%AD%E7%9A%84%E4%B8%BB%E8%A6%81%E6%A8%A1%E5%BC%8F%E6%8E%A2%E6%9E%90/"/>
     <id>http://yoursite.com/wiki/投研/医药/国内药品集中采购的主要模式探析/</id>
@@ -373,121 +397,13 @@
   </entry>
   
   <entry>
-    <title>2020化工产业链</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E5%8C%96%E5%B7%A5/2020%E5%8C%96%E5%B7%A5%E4%BA%A7%E4%B8%9A%E9%93%BE/"/>
-    <id>http://yoursite.com/wiki/投研/化工/2020化工产业链/</id>
-    <published>2022-04-25T06:21:02.000Z</published>
-    <updated>2022-05-07T08:46:17.118Z</updated>
-    
-    <content type="html"><![CDATA[<div class="row">    <embed src="./国信证券-化工产业链.pdf" width="100%" height="550" type="application/pdf"></div><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        
-
-	&lt;div class=&quot;row&quot;&gt;
-    &lt;embed src=&quot;./国信证券-化工产业链.pdf&quot; width=&quot;100%&quot; height=&quot;550&quot; type=&quot;application/pdf&quot;&gt;
-	&lt;/div&gt;
-
-
-
-
-
-
-&lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href
-      
-    
-    </summary>
-    
-      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
-    
-      <category term="化工" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E5%8C%96%E5%B7%A5/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>2019钢铁产业链</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%92%A2%E9%93%81/2019%E9%92%A2%E9%93%81%E4%BA%A7%E4%B8%9A%E9%93%BE/"/>
-    <id>http://yoursite.com/wiki/投研/钢铁/2019钢铁产业链/</id>
-    <published>2022-04-25T06:19:33.000Z</published>
-    <updated>2022-05-07T08:51:45.493Z</updated>
-    
-    <content type="html"><![CDATA[<div class="row">    <embed src="./兴业研究-钢铁产业链.pdf" width="100%" height="550" type="application/pdf"></div><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        
-
-	&lt;div class=&quot;row&quot;&gt;
-    &lt;embed src=&quot;./兴业研究-钢铁产业链.pdf&quot; width=&quot;100%&quot; height=&quot;550&quot; type=&quot;application/pdf&quot;&gt;
-	&lt;/div&gt;
-
-
-
-
-
-
-&lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href
-      
-    
-    </summary>
-    
-      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
-    
-      <category term="钢铁" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E9%92%A2%E9%93%81/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>中信行业分类</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/%E4%B8%AD%E4%BF%A1%E8%A1%8C%E4%B8%9A%E5%88%86%E7%B1%BB/"/>
-    <id>http://yoursite.com/wiki/投研/金融市场/中信行业分类/</id>
-    <published>2022-04-24T07:58:16.000Z</published>
-    <updated>2022-04-25T06:13:56.917Z</updated>
-    
-    <content type="html"><![CDATA[<div class="row">    <embed src="./zxClass2.pdf" width="100%" height="550" type="application/pdf"></div><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        
-
-	&lt;div class=&quot;row&quot;&gt;
-    &lt;embed src=&quot;./zxClass2.pdf&quot; width=&quot;100%&quot; height=&quot;550&quot; type=&quot;application/pdf&quot;&gt;
-	&lt;/div&gt;
-
-
-
-
-
-
-&lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;
-      
-    
-    </summary>
-    
-      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
-    
-      <category term="金融市场" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>全球知名金融机构简介</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/%E5%85%A8%E7%90%83%E7%9F%A5%E5%90%8D%E9%87%91%E8%9E%8D%E6%9C%BA%E6%9E%84%E7%AE%80%E4%BB%8B/"/>
-    <id>http://yoursite.com/wiki/投研/金融市场/全球知名金融机构简介/</id>
+    <title>全球知名机构简介</title>
+    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/%E5%85%A8%E7%90%83%E7%9F%A5%E5%90%8D%E6%9C%BA%E6%9E%84%E7%AE%80%E4%BB%8B/"/>
+    <id>http://yoursite.com/wiki/投研/金融市场/全球知名机构简介/</id>
     <published>2022-04-24T07:47:56.000Z</published>
-    <updated>2022-04-26T07:09:22.151Z</updated>
+    <updated>2022-05-09T07:42:00.174Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="咨询公司"><a href="#咨询公司" class="headerlink" title="咨询公司"></a>咨询公司</h2><p>MBB： 麦肯锡（McKinsey） ，波士顿咨询 （BCG），贝恩（Bain）</p><ul><li>麦肯锡（McKinsey）：<a href="https://www.mckinsey.com.cn/">https://www.mckinsey.com.cn/</a></li></ul><p>埃森哲</p><h2 id="四大"><a href="#四大" class="headerlink" title="四大"></a>四大</h2><ul><li>PwC普华永道：<a href="https://www.pwccn.com/zh">https://www.pwccn.com/zh</a></li><li>KPMG毕马威：</li><li>Deloitte德勤：</li><li>EY安永：</li></ul><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    <content type="html"><![CDATA[<h2 id="咨询公司"><a href="#咨询公司" class="headerlink" title="咨询公司"></a>咨询公司</h2><p>MBB： 麦肯锡（McKinsey） ，波士顿咨询 （BCG），贝恩（Bain）</p><ul><li>麦肯锡（McKinsey）：<a href="https://www.mckinsey.com.cn/">https://www.mckinsey.com.cn/</a></li><li>埃森哲</li></ul><h2 id="四大"><a href="#四大" class="headerlink" title="四大"></a>四大</h2><ul><li>PwC普华永道：<a href="https://www.pwccn.com/zh">https://www.pwccn.com/zh</a></li><li>KPMG毕马威：</li><li>Deloitte德勤：</li><li>EY安永：</li></ul><h2 id="伍德麦肯兹"><a href="#伍德麦肯兹" class="headerlink" title="伍德麦肯兹"></a>伍德麦肯兹</h2><p>Wood Mackenzie是全球能源和金属行业最权威的资讯来源和专业顾问。</p><p>我们针对能源及资源产业价值链的每个环节——从勘探到下游成品市场及其他——进行深入分析并提供建议，帮助客户制定最优商业决策，把握先机。<br>我们研究和评估全球数千种资产和公司。此外，我们还评估经济指标以及市场供需和价格走势。<br>我们的研究实力深得客户信赖――他们籍此制订策略，识别新机遇，评估其所经营的市场，并提升绩效超越竞争对手。<br>Wood Mackenzie向订阅客户提供在线研究服务，包括书面分析、数据和建模功能。<br>在这一基础上，我们的咨询团队与客户密切合作，提供度身定制的建议和市场研究。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
     
     <summary type="html">
     
@@ -496,57 +412,6 @@
         &lt;h2 id=&quot;咨询公司&quot;&gt;&lt;a href=&quot;#咨询公司&quot; class=&quot;headerlink&quot; title=&quot;咨询公司&quot;&gt;&lt;/a&gt;咨询公司&lt;/h2&gt;&lt;p&gt;MBB： 麦肯锡（McKinsey） ，波士顿咨询 （BCG），贝恩（Bain）&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;麦肯锡（McKi
-      
-    
-    </summary>
-    
-      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
-    
-      <category term="金融市场" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>hexo相关</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%98%E8%85%BE/hexo%E7%9B%B8%E5%85%B3/"/>
-    <id>http://yoursite.com/wiki/折腾/hexo相关/</id>
-    <published>2022-04-24T04:51:23.000Z</published>
-    <updated>2022-04-24T08:09:42.155Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><h2 id="预览pdf"><a href="#预览pdf" class="headerlink" title="预览pdf"></a>预览pdf</h2><ol><li>安装插件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-pdf -S</span><br></pre></td></tr></table></figure></li><li>在md文章中加入下面代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;br&gt;</span><br><span class="line">&#123;% pdf .&#x2F;SwClassCode_2021.pdf %&#125;</span><br><span class="line">&lt;br&gt;</span><br></pre></td></tr></table></figure></li></ol><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;图片&quot;&gt;&lt;a href=&quot;#图片&quot; class=&quot;headerlink&quot; title=&quot;图片&quot;&gt;&lt;/a&gt;图片&lt;/h2&gt;&lt;h2 id=&quot;预览pdf&quot;&gt;&lt;a href=&quot;#预览pdf&quot; class=&quot;headerlink&quot; title=&quot;预览pdf&quot;&gt;&lt;/a&gt;预览pd
-      
-    
-    </summary>
-    
-      <category term="折腾" scheme="http://yoursite.com/categories/%E6%8A%98%E8%85%BE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>申万行业分类</title>
-    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E9%87%91%E8%9E%8D%E5%B8%82%E5%9C%BA/%E7%94%B3%E4%B8%87%E8%A1%8C%E4%B8%9A%E5%88%86%E7%B1%BB/"/>
-    <id>http://yoursite.com/wiki/投研/金融市场/申万行业分类/</id>
-    <published>2022-04-24T04:11:03.000Z</published>
-    <updated>2022-04-25T06:11:54.054Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="申万行业分类标准-2021-版"><a href="#申万行业分类标准-2021-版" class="headerlink" title="申万行业分类标准 2021 版"></a>申万行业分类标准 2021 版</h2><br><div class="row">    <embed src="./SwClassCode_2021.pdf" width="100%" height="550" type="application/pdf"></div><br><h2 id="申万行业分类标准-2021-版说明"><a href="#申万行业分类标准-2021-版说明" class="headerlink" title="申万行业分类标准 2021 版说明"></a>申万行业分类标准 2021 版说明</h2><div class="row">    <embed src="./SwClassStd2021.pdf" width="100%" height="550" type="application/pdf"></div><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;申万行业分类标准-2021-版&quot;&gt;&lt;a href=&quot;#申万行业分类标准-2021-版&quot; class=&quot;headerlink&quot; title=&quot;申万行业分类标准 2021 版&quot;&gt;&lt;/a&gt;申万行业分类标准 2021 版&lt;/h2&gt;&lt;br&gt;
-
-
-	&lt;div class=&quot;r
       
     
     </summary>
@@ -579,6 +444,107 @@
     </summary>
     
       <category term="前端" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>药品集中采购简介</title>
+    <link href="http://yoursite.com/wiki/%E6%8A%95%E7%A0%94/%E5%8C%BB%E8%8D%AF/%E8%8D%AF%E5%93%81%E9%9B%86%E4%B8%AD%E9%87%87%E8%B4%AD%E7%AE%80%E4%BB%8B/"/>
+    <id>http://yoursite.com/wiki/投研/医药/药品集中采购简介/</id>
+    <published>2022-04-20T09:03:45.000Z</published>
+    <updated>2022-04-24T08:08:42.026Z</updated>
+    
+    <content type="html"><![CDATA[<p>简单来说就是：以前各个医疗单位独自采购，采购量小，不具备和厂家的议价能力，同时还有经销商层层加价以及医院收取回扣的现象，因此国家政府部门出面，统一收集各个公立医疗单位医药用品的需求量，然后对各个医院的用量进行整合，最后向企业统一采购药品。</p><p><img src="/wiki/%E6%8A%95%E7%A0%94/%E5%8C%BB%E8%8D%AF/%E8%8D%AF%E5%93%81%E9%9B%86%E4%B8%AD%E9%87%87%E8%B4%AD%E7%AE%80%E4%BB%8B/./ypjc-01.jpg"></p><p>2018年11月，国家组织的药品集中采购和使用试点工作启动，以北京、上海、天津、重庆4个直辖市，沈阳、大连、厦门、广州、深圳、成都、西安等7个城市的公立医疗机构作为集中采购主体，集合他们的需求量，以带量采购的方式向医药生产厂家采购医药用品，以达到降低采购成本，降低患者医药负担的目的。按目前的态势看，集采改革呈现全面推进之势。药品集采不仅将从试点推广到全国，而且政府集中采购的医药目录也将会越来越多，这将显著的改善居民看病成本，同时这也不可避免会对医药企业乃至整个行业发展带来深刻影响。这就是医疗集采的大致背景和目前集采的现状</p><p><img src="/wiki/%E6%8A%95%E7%A0%94/%E5%8C%BB%E8%8D%AF/%E8%8D%AF%E5%93%81%E9%9B%86%E4%B8%AD%E9%87%87%E8%B4%AD%E7%AE%80%E4%BB%8B/ypjc-02.jpg"></p><p>我国的药品集中采购政策是从2000年开始发展起来的，1999年通过的《中华人民共和国招投标法》，正式从法律层面上规定了我国药品集中投标的方式来采购。从2000年起，各个省份到底如何开展和执行中央政策的。我没有做具体的研究，但各个地区在执行上一定遇到很多问题，例如：政策规定药品要集中招投标，那么所有的药品都要招投标吗？招投标是多少年进行一次呢？在这之后的十几年中，因为没有一个政策具体规定集中采购要具体怎么操作，因此各个省市根据当地的特点，发展出了有当地特色的执行政策。</p><p>其中，不是所有的药品都是通过招投标的形式采购的。还有另一个最能体现这个特点的是各种不同的集中采购平台的出现。几乎每个省和直辖市都会有自己的采购平台，比如：上海的阳光医药采购网，四川药械采购监管网等等，同时，还存在GPO（Group purchasing organizations，集团采购组织）平台，上海药品集团采购服务网，深圳的全药网，重庆药交所，三明市的三明联盟，等等。这里我使用平台来表述，很多文章用采购模式来表述，我认为平台在表述上比较清晰，因为可以很清晰的和集中招标，谈判采购，等等采购模式区别开来，避免混淆。</p><ul><li>上海的阳光医药采购网: <a href="http://www.yyzbsw.sh.cn/">http://www.yyzbsw.sh.cn/</a></li><li>四川药械采购监管网: <a href="https://www.scyxzbcg.cn/">https://www.scyxzbcg.cn/</a></li><li>上海药品集团采购服务网: </li><li>深圳的全药网: <a href="https://www.quanyaowang.com/">https://www.quanyaowang.com/</a></li><li>重庆药交所: <a href="http://cq.yjsds.com/">http://cq.yjsds.com/</a></li><li>三明市的三明联盟: <a href="https://www.udplat.com/">https://www.udplat.com/</a></li></ul><p>一直到2015年,国务院办公厅发布了“关于完善公立医院药品集中采购工作的指导意见”从政策层面上总结了各个地区的经验，并指出了药品集中采购的未来发展路径。这也是当前全国执行的药品集中采购的基本政策。其中有几个关键的点：</p><ol><li><p>政府坚持以省为单位在网上进行集中采购，并且鼓励地方结合实际探索创新，目的是提高医院在药品采购中的参与度。因此，才有目前各个不同的，都说自己有多创新的采购平台的出现。</p></li><li><p>针对不同特点的药品，规定了5种采购模式：<br> 1）集中招标采购，针对用量大的药品；<br> 2）谈判采购，针对专利药，独家药；<br> 3）医院直接采购，针对基础，常用的保障性药品；<br> 4）国家定点生产，议价采购，针对用量小，供应少的必须药品；<br> 5）国家管控采购，针对管制类药品，免疫规划和防治床染病等药品。</p></li><li><p>规定在2015年全国开展新一轮的药品采购。自此，每个省份开始了新一轮的药品集中采购。甚至有的省份从2014年就已经开始了。这个政策意味着，每个省份开始重新选择药品的供应商，涉及到上千种药品。这一轮药品集中采购流程大体上有这么几步：</p><ol><li>第一步：每个省份根据自己对药品的使用情况，把所有药品分成5类，每一类对应一种采购模式。哪些药品是招标采购，哪些是谈判，哪些直接采购，可以在药品集采网站上直接看到。</li><li>第二步：各个药厂根据公布的药品分类和对应的采购模式，参与对应的流程。</li><li>第三步：省政府部门筛选药品供应商，最终确定省级别的供应商名录。</li></ol></li></ol><p>在第一步的5种采购模式中，每种模式有不同的操作流程。其中，集中招标采购最复杂。按照政策要求，至少80%的药品要用这种采购模式，意味这上千种药品要招标，竞标，开标。可以想象，当年每个省份的食药监局的工作人员有多忙。但是对于药厂来说，这就是市场的计划呀，也可以想象他们有多么的紧张和兴奋。一旦中标，就开疆拓土，一旦失败，那就失去市场。非常的残酷和现实。</p><p>耐人寻味的是，在2015年政策中，对于集中招标采购，强调了要落实带量采购。实际上，几乎没有省份真正的执行的带量采购，只有上海在完成了新一轮的采购之后，在2016，2017和2018进行了三次实验性的带量采购，涉及的药品一共才20个左右。也许因为上海有过几次带量采购的经验，所以主导了2018年底开始的“4+7”带量采购。回到2015年的集中采购上来，到了2016年，基本上每个省份的集中采购已经结束，该选择的供应商已经确定。医院和供应商之间也就开始正常的采购和供应（其中当然存在因为政策的原因，导致的各种灰色的市场行为，这里我们先不谈）。有意思的是，2015年的政策并没有规定这次采购结果的时效，简单说就是没有具体说明，这次选了供应商以后多久在选择一次。这也意味着，在一个省内，中标的药企可以连续几年给在这个地区的医院供应药品，失败的药企只能在零售药店卖药，没有资格供应医院。因此，集中采购结束，药企在这个市场的竞争大格局也就确定了。</p><p>最后，时间来到2018年11月，国家发布了“4+7城市药品集中采购文件”，选择了11个城市，对31种药品进行了跨城市的试点带量采购。注意的是，这个政策只是针对5种集中采购模式中集中招标采购做的规定，并不针对其他的4种采购模式。这个政策对药企来说有爱有恨，爱的是供应商选择重新开始。恨的是，本地药企和国际药企同台晋级，而且成王败寇，每个企业都压低价格。到目前为止，对政策的效果褒贬不一，但带量采购会成为未来的方向。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href="https://www.zhihu.com/column/c_1173267719310254080">https://www.zhihu.com/column/c_1173267719310254080</a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;简单来说就是：以前各个医疗单位独自采购，采购量小，不具备和厂家的议价能力，同时还有经销商层层加价以及医院收取回扣的现象，因此国家政府部门出面，统一收集各个公立医疗单位医药用品的需求量，然后对各个医院的用量进行整合，最后向企业统一采购药品。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;
+      
+    
+    </summary>
+    
+      <category term="投研" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/"/>
+    
+      <category term="医药" scheme="http://yoursite.com/categories/%E6%8A%95%E7%A0%94/%E5%8C%BB%E8%8D%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Tomcat-基础知识</title>
+    <link href="http://yoursite.com/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/wiki/中间件/Tomcat-基础知识/</id>
+    <published>2021-04-19T06:28:19.000Z</published>
+    <updated>2021-04-21T10:15:28.506Z</updated>
+    
+    <content type="html"><![CDATA[<p>官网：<a href="http://tomcat.apache.org/">http://tomcat.apache.org/</a></p><h2 id="常见web服务器软件"><a href="#常见web服务器软件" class="headerlink" title="常见web服务器软件"></a>常见web服务器软件</h2><ul><li>webLogic：oracle公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。</li><li>webSphere：IBM公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。 </li><li>JBoss：JBOSS公司的，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。 </li><li>Tomcat：Apache基金组织，中小型的JavaEE服务器，仅仅支持少量的JavaEE规范 servlet/jsp。开源的，免费的。</li></ul><h2 id="Tomcat-历史"><a href="#Tomcat-历史" class="headerlink" title="Tomcat 历史"></a>Tomcat 历史</h2><ol><li>Tomcat 最初由Sun公司的软件架构师 James Duncan Davidson 开发，名称为 “JavaWebServer”。 </li><li>1999年，在 Davidson 的帮助下，该项目于1999年他和 apache 软件基金会旗下的 JServ 项目合并，并发布第一个版本（3.x）, 即是现在的Tomcat，该版本实现了 Servlet2.2 和 JSP 1.1 规范 。</li><li>2001年，Tomcat 发布了4.0版本， 作为里程碑式的版本，Tomcat 完全重新设计了 其架构，并实现了 Servlet 2.3 和 JSP1.2规范。 </li><li>目前 Tomcat 已经更新到 9.0.x版本 ， 但是目前企业中的Tomcat服务器， 主流版本还是 7.x 和 8.x ， 所以以下基于 8.5 版本进行讲解。</li></ol><h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p>我们知道如果要设计一个系统，首先是要了解需求，我们已经了解了Tomcat要实现两个 核心功能：</p><ol><li>处理Socket连接，负责网络字节流与Request和Response对象的转化。 </li><li>加载和管理Servlet，以及具体处理Request请求。 </li></ol><p>因此Tomcat设计了两个核心组件连接器（Connector）和容器（Container）来分别做这 两件事情。连接器负责对外交流，容器负责内部处理。</p><h2 id="连接器-Coyote"><a href="#连接器-Coyote" class="headerlink" title="连接器 - Coyote"></a>连接器 - Coyote</h2><h3 id="架构介绍"><a href="#架构介绍" class="headerlink" title="架构介绍"></a>架构介绍</h3><p>Coyote 是Tomcat的连接器框架的名称 , 是Tomcat服务器提供的供客户端访问的外部接口。客户端通过Coyote与服务器建立连接、发送请求并接受响应。<br>Coyote 封装了底层的网络通信（Socket 请求及响应处理），为Catalina 容器提供了统一 的接口，使Catalina 容器与具体的请求协议及IO操作方式完全解耦。Coyote 将Socket 输入转换封装为 Request 对象，交由Catalina 容器进行处理，处理请求完成后, Catalina 通 过Coyote 提供的Response 对象将结果写入输出流。<br>Coyote 作为独立的模块，只负责具体协议和IO的相关操作， 与Servlet 规范实现没有直 接关系，因此即便是 Request 和 Response 对象也并未实现Servlet规范对应的接口， 而 是在Catalina 中将他们进一步封装为ServletRequest 和 ServletResponse 。</p><p><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/01-coyote-catalina.png"></p><h3 id="IO模型与协议"><a href="#IO模型与协议" class="headerlink" title="IO模型与协议"></a>IO模型与协议</h3><p>在Coyote中 ， Tomcat支持的多种I/O模型和应用层协议，Tomcat 支持的IO模型（自8.5/9.0 版本起，Tomcat 移除了 对 BIO 的支持）：</p><ul><li>NIO 非阻塞I/O，采用Java NIO类库实现。 </li><li>NIO2 异步I/O，采用JDK 7最新的NIO2类库实现。 </li><li>APR 采用Apache可移植运行库实现，是C/C++编写的本地库。如果选择该方案，需要单独安装APR库。</li></ul><p>应用层协议如下：</p><ul><li>HTTP/1.1：这是大部分Web应用采用的访问协议。 </li><li>AJP：用于和Web服务器集成（如Apache），以实现对静态资源的优化以及集群部署，当前支持AJP/1.3。 </li><li>HTTP/2：HTTP 2.0大幅度的提升了Web性能。下一代HTTP协议 ， 自8.5以及9.0 版本之后支持。</li></ul><p>在 8.0 之前 ， Tomcat 默认采用的I/O方式为 BIO ， 之后改为 NIO。 无论 NIO、NIO2 还是 APR， 在性能方面均优于以往的BIO。 如果采用APR， 甚至可以达到 Apache HTTP Server 的影响性能。</p><p>Tomcat中的Service概念：Tomcat为了实现支持多种I/O模型和应用层协议，一个容器可能对接多个连接器，就好比 一个房间有多个门。但是单独的连接器或者容器都不能对外提供服务，需要把它们组装 起来才能工作，组装后这个整体叫作Service组件。这里请你注意，Service本身没有做什 么重要的事情，只是在连接器和容器外面多包了一层，把它们组装在一起。Tomcat内可 能有多个Service，这样的设计也是出于灵活性的考虑。通过在Tomcat中配置多个 Service，可以实现通过不同的端口号来访问同一台机器上部署的不同应用。</p><h3 id="连接器组件"><a href="#连接器组件" class="headerlink" title="连接器组件"></a>连接器组件</h3><p><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/02-connector.png"><br>连接器中的各个组件的作用如下： </p><ul><li>EndPoint ： Coyote 通信端点，即通信监听的接口，是具体Socket接收和发送处理器，是对传输层的抽象，因此EndPoint用来实现TCP/IP协议的。Tomcat 并没有EndPoint 接口，而是提供了一个抽象类AbstractEndpoint ， 里面定 义了两个内部类：Acceptor和SocketProcessor。Acceptor用于监听Socket连接请求。 SocketProcessor用于处理接收到的Socket请求，它实现Runnable接口，在Run方法里 调用协议处理组件Processor进行处理。为了提高处理能力，SocketProcessor被提交到 线程池来执行。而这个线程池叫作执行器（Executor)，我在后面的专栏会详细介绍 Tomcat如何扩展原生的Java线程池。 </li><li>Processor ： Coyote 协议处理接口 ，如果说EndPoint是用来实现TCP/IP协议的，那么 Processor用来实现HTTP协议，Processor接收来自EndPoint的Socket，读取字节流解 析成Tomcat Request和Response对象，并通过Adapter将其提交到容器处理， Processor是对应用层协议的抽象。 </li><li>ProtocolHandler： Coyote 协议接口， 通过Endpoint 和 Processor ， 实现针对具体协议的处理能力。Tomcat 按照协议和I/O 提供了6个实现类 ： AjpNioProtocol， AjpNio2Protocol ，AjpAprProtocol， Http11NioProtocol ，Http11Nio2Protocol ， Http11AprProtocol。我们在配置tomcat/conf/server.xml 时 ， 至少要指定具体的 ProtocolHandler , 当然也可以指定协议名称， 如 ： HTTP/1.1 ，如果安装了APR，那么 将使用Http11AprProtocol ， 否则使用 Http11NioProtocol 。</li><li>Adapter:  由于协议不同，客户端发过来的请求信息也不尽相同，Tomcat定义了自己的Request类 来“存放”这些请求信息。ProtocolHandler接口负责解析请求并生成Tomcat Request类。 但是这个Request对象不是标准的ServletRequest，也就意味着，不能用Tomcat Request作为参数来调用容器。Tomcat设计者的解决方案是引入CoyoteAdapter，这是 适配器模式的经典运用，连接器调用CoyoteAdapter的Sevice方法，传入的是Tomcat Request对象，CoyoteAdapter负责将Tomcat Request转成ServletRequest，再调用容 器的Service方法。</li></ul><h2 id="容器-Catalina"><a href="#容器-Catalina" class="headerlink" title="容器 - Catalina"></a>容器 - Catalina</h2><p>Tomcat是一个由一系列可配置的组件构成的Web容器，而Catalina是Tomcat的servlet容器。Catalina 是Servlet 容器实现，包含了之前讲到的所有的容器组件，以及后续章节涉及到的安全、会话、集群、管理等Servlet 容器架构的各个方面。它通过松耦合的方式集成 Coyote，以完成按照请求协议进行数据读写。同时，它还包括我们的启动入口、Shell程序等</p><h3 id="Catalina-地位"><a href="#Catalina-地位" class="headerlink" title="Catalina 地位"></a>Catalina 地位</h3><p>Tomcat 的模块分层结构图， 如下：<br><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/03.png"><br>Tomcat 本质上就是一款 Servlet 容器， 因此Catalina 才是 Tomcat 的核心 ， 其他模块 都是为Catalina 提供支撑的。 比如 ： 通过Coyote 模块提供链接通信，Jasper 模块提供 JSP引擎，Naming 提供JNDI 服务，Juli 提供日志服务。</p><h3 id="Catalina-结构"><a href="#Catalina-结构" class="headerlink" title="Catalina 结构"></a>Catalina 结构</h3><p>Catalina 的主要组件结构如下：<br><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/04.png"></p><p>如上图所示，Catalina负责管理Server，而Server表示着整个服务器。Server下面有多个 服务Service，每个服务都包含着多个连接器组件Connector（Coyote 实现）和一个容器 组件Container。在Tomcat 启动的时候， 会初始化一个Catalina的实例。<br>Catalina 各个组件的职责：</p><ul><li>Catalina： 负责解析Tomcat的配置文件 , 以此来创建服务器Server组件，并根据 命令来对其进行管理 </li><li>Server： 服务器表示整个Catalina Servlet容器以及其它组件，负责组装并启动 Servlet引擎,Tomcat连接器。Server通过实现Lifecycle接口，提供了 一种优雅的启动和关闭整个系统的方式 </li><li>Service： 服务是Server内部的组件，一个Server包含多个Service。它将若干个 Connector组件绑定到一个Container（Engine）上 </li><li>Connector： 连接器，处理与客户端的通信，它负责接收客户请求，然后转给相关 的容器处理，最后向客户返回响应结果 </li><li>Container： 容器，负责处理用户的servlet请求，并返回对象给web用户的模块</li></ul><h3 id="Container-结构"><a href="#Container-结构" class="headerlink" title="Container 结构"></a>Container 结构</h3><p>Tomcat设计了4种容器，分别是Engine、Host、Context和Wrapper。这4种容器不是平 行关系，而是父子关系。， Tomcat通过一种分层的架构，使得Servlet容器具有很好的灵活性。<br><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/05.png"></p><p>各个组件的含义 ：</p><ul><li>Engine： 表示整个Catalina的Servlet引擎，用来管理多个虚拟站点，一个Service 最多只能有一个Engine，但是一个引擎可包含多个Host </li><li>Host： 代表一个虚拟主机，或者说一个站点，可以给Tomcat配置多个虚拟主机地址，而一个虚拟主机下可包含多个Context </li><li>Context： 表示一个Web应用程序， 一个Web应用可包含多个Wrapper </li><li>Wrapper： 表示一个Servlet，Wrapper 作为容器中的最底层，不能包含子容器</li></ul><p>我们也可以再通过Tomcat的server.xml配置文件来加深对Tomcat容器的理解。Tomcat 采用了组件化的设计，它的构成组件都是可配置的，其中最外层的是Server，其他组件 按照一定的格式要求配置在这个顶层容器中。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Server</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Service</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Connector</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Engine</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Host</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">Context</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Engine</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Service</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Server</span>&gt;</span></span><br></pre></td></tr></table></figure><p>那么，Tomcat是怎么管理这些容器的呢？你会发现这些容器具有父子关系，形成一个树 形结构，你可能马上就想到了设计模式中的组合模式。没错，Tomcat就是用组合模式来 管理这些容器的。具体实现方法是，所有容器组件都实现了Container接口，因此组合模 式可以使得用户对单容器对象和组合容器对象的使用具有一致性。这里单容器对象指的 是最底层的Wrapper，组合容器对象指的是上面的Context、Host或者Engine。</p><p><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/06.png"></p><p>Container 接口中提供了addChild()、getParent()等方法，Container接口扩展了LifeCycle接口，LifeCycle接口用来统一管理各组件的生命周期，后面我也用专门的篇幅去详细介绍。</p><h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><p><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/07.png"></p><ol><li>启动tomcat ， 需要调用 bin/startup.bat (在linux 目录下 , 需要调用 bin/startup.sh) ， 在startup.bat 脚本中, 调用了catalina.bat。 </li><li>在catalina.bat 脚本文件中，调用了org.apache.catalina.startup.Bootstrap 中的main方法。 </li><li>在BootStrap 的main 方法中调用了 init 方法 ， 来创建Catalina 及 初始化类加载器。 </li><li>在BootStrap 的main 方法中调用了 load 方法 ， 在其中又调用了Catalina的load方法。</li><li>在Catalina 的load 方法中 , 需要进行一些初始化的工作, 并需要构造Digester 对象, 用 于解析 XML。 </li><li>然后在调用后续组件的初始化操作，加载Tomcat的配置文件，初始化容器组件 ，监听对应的端口号， 准备接受客户端请求</li></ol><h3 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a>Lifecycle</h3><p>由于所有的组件均存在初始化、启动、停止等生命周期方法，拥有生命周期管理的特性， 所以Tomcat在设计的时候， 基于生命周期管理抽象成了一个接口 Lifecycle ，而组 件 Server、Service、Container、Executor、Connector 组件 ， 都实现了一个生命周期 的接口，从而具有了以下生命周期中的核心方法：</p><ul><li>init（）：初始化组件 </li><li>start（）：启动组件 </li><li>stop（）：停止组件 </li><li>destroy（）：销毁组件</li></ul><p>从启动流程图中以及源码中，我们可以看出Tomcat的启动过程非常标准化， 统一按照生 命周期管理接口Lifecycle的定义进行启动。首先调用init() 方法进行组件的逐级初始化操 作，然后再调用start()方法进行启动。 每一级的组件除了完成自身的处理外，还要负责调用子组件响应的生命周期管理方法， 组件与组件之间是松耦合的，因为我们可以很容易的通过配置文件进行修改和替换。</p><h2 id="请求处理流程"><a href="#请求处理流程" class="headerlink" title="请求处理流程"></a>请求处理流程</h2><p>设计了这么多层次的容器，Tomcat是怎么确定每一个请求应该由哪个Wrapper容器里的 Servlet来处理的呢？答案是，Tomcat是用Mapper组件来完成这个任务的。 Mapper组件的功能就是将用户请求的URL定位到一个Servlet，它的工作原理是： Mapper组件里保存了Web应用的配置信息，其实就是容器组件与访问路径的映射关系， 比如Host容器里配置的域名、Context容器里的Web应用路径，以及Wrapper容器里 Servlet映射的路径，你可以想象这些配置信息就是一个多层次的Map。</p><p>当一个请求到来时，Mapper组件通过解析请求URL里的域名和路径，再到自己保存的 Map里去查找，就能定位到一个Servlet。请你注意，一个请求URL最后只会定位到一个 Wrapper容器，也就是一个Servlet。</p><p>上面只是描述了根据请求的URL如何查找到需要执行的Servlet ， 那么下面我们 再来解析一下 ， 从Tomcat的设计架构层面来分析Tomcat的请求处理。</p><p><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/08.png"></p><ol><li>Connector组件Endpoint中的Acceptor监听客户端套接字连接并接收Socket。 </li><li>将连接交给线程池Executor处理，开始执行请求响应任务。 </li><li>Processor组件读取消息报文，解析请求行、请求体、请求头，封装成Request对象。 </li><li>Mapper组件根据请求行的URL值和请求头的Host值匹配由哪个Host容器、Context容器、Wrapper容器处理请求。 </li><li>CoyoteAdaptor组件负责将Connector组件和Engine容器关联起来，把生成的 Request对象和响应对象Response传递到Engine容器中，调用 Pipeline。 </li><li>Engine容器的管道开始处理，管道中包含若干个Valve、每个Valve负责部分处理逻辑。执行完Valve后会执行基础的 Valve–StandardEngineValve，负责调用Host容器的 Pipeline。 </li><li>Host容器的管道开始处理，流程类似，最后执行 Context容器的Pipeline。 </li><li>Context容器的管道开始处理，流程类似，最后执行 Wrapper容器的Pipeline。 </li><li>Wrapper容器的管道开始处理，流程类似，最后执行 Wrapper容器对应的Servlet对象 的 处理方法。</li></ol><p><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/09.png"></p><p>在前面所讲解的Tomcat的整体架构中，我们发现Tomcat中的各个组件各司其职，组件 之间松耦合，确保了整体架构的可伸缩性和可拓展性，那么在组件内部，如何增强组件 的灵活性和拓展性呢？ 在Tomcat中，每个Container组件采用责任链模式来完成具体的 请求处理。 在Tomcat中定义了Pipeline 和 Valve 两个接口，Pipeline 用于构建责任链， 后者代表责 任链上的每个处理器。Pipeline 中维护了一个基础的Valve，它始终位于Pipeline的末端 （最后执行），封装了具体的请求处理和输出响应的过程。当然，我们也可以调用 addValve()方法， 为Pipeline 添加其他的Valve， 后添加的Valve 位于基础的Valve之 前，并按照添加顺序执行。Pipiline通过获得首个Valve来启动整合链条的执行 。</p><h2 id="Jasper"><a href="#Jasper" class="headerlink" title="Jasper"></a>Jasper</h2><h3 id="Jasper-简介"><a href="#Jasper-简介" class="headerlink" title="Jasper 简介"></a>Jasper 简介</h3><p>对于基于JSP 的web应用来说，我们可以直接在JSP页面中编写 Java代码，添加第三方的 标签库，以及使用EL表达式。但是无论经过何种形式的处理，最终输出到客户端的都是 标准的HTML页面（包含js ，css…），并不包含任何的java相关的语法。 也就是说， 我 们可以把jsp看做是一种运行在服务端的脚本。 那么服务器是如何将 JSP页面转换为 HTML页面的呢？ Jasper模块是Tomcat的JSP核心引擎，我们知道JSP本质上是一个Servlet。Tomcat使用 Jasper对JSP语法进行解析，生成Servlet并生成Class字节码，用户在进行访问jsp时，会 访问Servlet，最终将访问的结果直接响应在浏览器端 。另外，在运行的时候，Jasper还 会检测JSP文件是否修改，如果修改，则会重新编译JSP文件。</p><h3 id="运行时编译方式"><a href="#运行时编译方式" class="headerlink" title="运行时编译方式"></a>运行时编译方式</h3><p>Tomcat 并不会在启动Web应用的时候自动编译JSP文件， 而是在客户端第一次请求时， 才编译需要访问的JSP文件。 编译过程如下: </p><p>Tomcat 在默认的web.xml 中配置了一个org.apache.jasper.servlet.JspServlet，用于处 理所有的.jsp 或 .jspx 结尾的请求，该Servlet 实现即是运行时编译的入口。</p><p>JspServlet 处理流程图：<br><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/10.png"></p><p>编译结果:</p><ol><li>如果在 tomcat/conf/web.xml 中配置了参数scratchdir ， 则jsp编译后的结果，就会存储在该目录下 。</li><li>如果没有配置该选项， 则会将编译后的结果，存储在Tomcat安装目录下的 work/Catalina(Engine名称)/localhost(Host名称)/Context名称。 </li></ol><h3 id="预编译方式"><a href="#预编译方式" class="headerlink" title="预编译方式"></a>预编译方式</h3><p>除了运行时编译，我们还可以直接在Web应用启动时， 一次性将Web应用中的所有的JSP 页面一次性编译完成。在这种情况下，Web应用运行过程中，便可以不必再进行实时编 译，而是直接调用JSP页面对应的Servlet 完成请求处理， 从而提升系统性能。 Tomcat 提供了一个Shell程序JspC，用于支持JSP预编译，而且在Tomcat的安装目录下提 供了一个 catalina-tasks.xml 文件声明了Tomcat 支持的Ant任务， 因此，我们很容易使 用 Ant 来执行JSP 预编译 。（要想使用这种方式，必须得确保在此之前已经下载并安装 了Apache Ant）。</p><h3 id="编译后的源码文件"><a href="#编译后的源码文件" class="headerlink" title="编译后的源码文件"></a>编译后的源码文件</h3><p>todo</p><h3 id="编译流程"><a href="#编译流程" class="headerlink" title="编译流程"></a>编译流程</h3><p>JSP 编译过程如下：<br><img src="/wiki/%E4%B8%AD%E9%97%B4%E4%BB%B6/Tomcat-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/11.png"></p><p>Compiler 编译工作主要包含代码生成 和 编译两部分</p><p>代码生成:</p><ol><li>Compiler 通过一个 PageInfo 对象保存JSP 页面编译过程中的各种配置，这些配置可 能来源于 Web 应用初始化参数， 也可能来源于JSP页面的指令配置（如 page ， include）。 </li><li>调用ParserController 解析指令节点， 验证其是否合法，同时将配置信息保存到 PageInfo 中， 用于控制代码生成。 </li><li>调用ParserController 解析整个页面， 由于 JSP 是逐行解析， 所以对于每一行会创建一个具体的Node 对象。如 静态文本（TemplateText）、Java代码（Scriptlet）、定制标签（CustomTag）、Include指令（IncludeDirective）。 </li><li>验证除指令外其他所有节点的合法性， 如 脚本、定制标签、EL表达式等。 </li><li>收集除指令外其他节点的页面配置信息。 </li><li>编译并加载当前 JSP 页面依赖的标签</li><li>对于JSP页面的EL表达式，生成对应的映射函数。 </li><li>生成JSP页面对应的Servlet 类源代码 编译代码生成完成后， Compiler 还会生成 SMAP 信息。 如果配置生成 SMAP 信息， Compiler 则会在编译阶段将SMAP 信息写到class 文件中 。 </li></ol><p>编译阶段: Compiler 的两个实现 AntCompiler 和 JDTCompiler 分别调用相关框架的 API 进行源代码编译。 对于 AntCompiler 来说， 构造一个 Ant 的javac 的任务完成编译。 对于 JDTCompiler 来说， 调用 org.eclipse.jdt.internal.compiler.Compiler 完成编译。</p><h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>Tomcat 服务器的配置主要集中于 tomcat/conf 下的 catalina.policy、 catalina.properties、context.xml、server.xml、tomcat-users.xml、web.xml 文件。 </p><p>tomcat-users.xml 该配置文件中，主要配置的是Tomcat的用户，角色等信息，用来控制Tomcat中 manager， host-manager的访问权限。<br>server.xml 是tomcat 服务器的核心配置文件，包含了Tomcat的 Servlet 容器 （Catalina）的所有配置。由于配置的属性特别多，我们在这里主要讲解其中的一部分重要配置。 </p><h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><p>Server标签是server.xml的根元素，用于创建一个Server实例，默认使用的实现类是 org.apache.catalina.core.StandardServer。<br>它的属性有port : Tomcat 监听的关闭服务器的端口；shutdown： 关闭服务器的指令字符串。<br>Server内嵌的子元素为 Listener、GlobalNamingResources、Service。</p><p>默认配置的5个Listener 的含义：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!‐‐ 用于以日志形式输出服务器 、操作系统、JVM的版本信息 ‐‐&gt; </span><br><span class="line"><span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.startup.VersionLoggerListener&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!‐‐ 用于加载（服务器启动） 和 销毁 （服务器停止） APR。 如果找不到APR库， 则会 输出日志， 并不影响Tomcat启动 ‐‐&gt; </span><br><span class="line"><span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.AprLifecycleListener&quot;</span> <span class="attr">SSLEngine</span>=<span class="string">&quot;on&quot;</span> /&gt;</span> </span><br><span class="line"></span><br><span class="line">&lt;!‐‐ 用于避免JRE内存泄漏问题 ‐‐&gt; </span><br><span class="line"><span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.JreMemoryLeakPreventionListener&quot;</span> /&gt;</span> </span><br><span class="line"></span><br><span class="line">&lt;!‐‐ 用户加载（服务器启动） 和 销毁（服务器停止） 全局命名服务 ‐‐&gt; </span><br><span class="line"><span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.mbeans.GlobalResourcesLifecycleListener&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!‐‐ 用于在Context停止时重建Executor 池中的线程， 以避免ThreadLocal 相关的内 存泄漏 ‐‐&gt; </span><br><span class="line"><span class="tag">&lt;<span class="name">Listener</span> <span class="attr">className</span>=<span class="string">&quot;org.apache.catalina.core.ThreadLocalLeakPreventionListener&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure><p>GlobalNamingResources 中定义了全局命名服务：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!‐‐ Global JNDI resources Documentation at /docs/jndi‐resources‐howto.html ‐‐&gt; </span><br><span class="line"><span class="tag">&lt;<span class="name">GlobalNamingResources</span>&gt;</span> </span><br><span class="line">    &lt;!‐‐ Editable user database that can also be used by UserDatabaseRealm to authenticate users ‐‐&gt; </span><br><span class="line">    <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">&quot;UserDatabase&quot;</span> <span class="attr">auth</span>=<span class="string">&quot;Container&quot;</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.catalina.UserDatabase&quot;</span> </span></span><br><span class="line"><span class="tag">                <span class="attr">description</span>=<span class="string">&quot;User database that can be updated and saved&quot;</span> </span></span><br><span class="line"><span class="tag">                <span class="attr">factory</span>=<span class="string">&quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot;</span> </span></span><br><span class="line"><span class="tag">                <span class="attr">pathname</span>=<span class="string">&quot;conf/tomcat‐users.xml&quot;</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">GlobalNamingResources</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>该元素用于创建 Service 实例，默认使用 org.apache.catalina.core.StandardService。 一个Server服务器，可以包含多个Service。<br>默认情况下，Tomcat 仅指定了Service 的名称， 值为 “Catalina”。<br>Service 可以内嵌的 元素为 ： Listener、Executor、Connector、Engine</p><ul><li>Listener 用于为Service 添加生命周期监听器</li><li>Executor 用于配置Service 共享线程池</li><li>Connector 用于配置 Service 包含的链接器</li><li>Engine 用于配置Service中链接器对应的Servlet 容器引擎</li></ul><h3 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h3><p>该标签用来配置共享线程池。默认情况下，Service 并未添加共享线程池配置。如果不配置共享线程池，那么Catalina 各组件在用到线程池时会独立创建。</p><h3 id="Connector"><a href="#Connector" class="headerlink" title="Connector"></a>Connector</h3><p>Connector 用于创建链接器实例。默认情况下，server.xml 配置了两个链接器，一个支 持HTTP协议，一个支持AJP协议。因此大多数情况下，我们并不需要新增链接器配置， 只是根据需要对已有链接器进行优化。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span> <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span> <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8009&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;AJP/1.3&quot;</span> <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure><p>属性说明：</p><ul><li>port： 端口号，Connector 用于创建服务端Socket 并进行监听， 以等待客户端请求 链接。如果该属性设置为0，Tomcat将会随机选择一个可用的端口号给当前Connector 使用。 </li><li>protocol ： 当前Connector 支持的访问协议。 默认为 HTTP/1.1 ， 并采用自动切换机制选择一个基于 JAVA NIO 的链接器或者基于本地APR的链接器（根据本地是否含有 Tomcat的本地库判定）。 如果不希望采用上述自动切换的机制， 而是明确指定协议， 可以使用以下值。 </li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Http协议：</span><br><span class="line">org.apache.coyote.http11.Http11NioProtocol ， 非阻塞式 Java NIO 链接器 </span><br><span class="line">org.apache.coyote.http11.Http11Nio2Protocol ， 非阻塞式 JAVA NIO2 链接器 </span><br><span class="line">org.apache.coyote.http11.Http11AprProtocol ， APR 链接器</span><br><span class="line"></span><br><span class="line">AJP协议 ：</span><br><span class="line">org.apache.coyote.ajp.AjpNioProtocol ， 非阻塞式 Java NIO 链接器 </span><br><span class="line">org.apache.coyote.ajp.AjpNio2Protocol ，非阻塞式 JAVA NIO2 链接器 </span><br><span class="line">org.apache.coyote.ajp.AjpAprProtocol ， APR 链接器</span><br></pre></td></tr></table></figure><ul><li>connectionTimeOut : Connector 接收链接后的等待超时时间， 单位为 毫秒。 -1 表 示不超时。</li><li>redirectPort：当前Connector 不支持SSL请求， 接收到了一个请求， 并且也符合 security-constraint 约束， 需要SSL传输，Catalina自动将请求重定向到指定的端口。 </li><li>executor ： 指定共享线程池的名称， 也可以通过maxThreads、minSpareThreads 等属性配置内部线程池。 </li><li>URIEncoding : 用于指定编码URI的字符编码， Tomcat8.x版本默认的编码为 UTF-8 , Tomcat7.x版本默认为ISO-8859-1。</li></ul><h3 id="Engine"><a href="#Engine" class="headerlink" title="Engine"></a>Engine</h3><p>Engine 作为Servlet 引擎的顶级元素，内部可以嵌入： Cluster、Listener、Realm、 Valve和Host。<br>属性说明： </p><ul><li>name： 用于指定Engine 的名称， 默认为Catalina 。该名称会影响一部分Tomcat的存储路径（如临时文件）。 </li><li>defaultHost ： 默认使用的虚拟主机名称， 当客户端请求指向的主机无效时， 将交由默认的虚拟主机处理， 默认为localhost。</li></ul><h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>Host 元素用于配置一个虚拟主机， 它支持以下嵌入元素：Alias、Cluster、Listener、 Valve、Realm、Context。如果在Engine下配置Realm， 那么此配置将在当前Engine下 的所有Host中共享。 同样，如果在Host中配置Realm ， 则在当前Host下的所有Context 中共享。Context中的Realm优先级 &gt; Host 的Realm优先级 &gt; Engine中的Realm优先级。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;localhost&quot;</span> <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span> <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br></pre></td></tr></table></figure><p>属性说明： </p><ul><li>name: 当前Host通用的网络名称， 必须与DNS服务器上的注册信息一致。 Engine中 包含的Host必须存在一个名称与Engine的defaultHost设置一致。 </li><li>appBase： 当前Host的应用基础目录， 当前Host上部署的Web应用均在该目录下 （可以是绝对目录，相对路径）。默认为webapps。</li><li>unpackWARs： 设置为true， Host在启动时会将appBase目录下war包解压为目录。设置为false， Host将直接从war文件启动。 </li><li>autoDeploy： 控制tomcat是否在运行时定期检测并自动部署新增或变更的web应用。</li></ul><p>通过给Host添加别名，我们可以实现同一个Host拥有多个网络名称，配置如下：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;www.web1.com&quot;</span> <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span> <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">Alias</span>&gt;</span>www.web2.com<span class="tag">&lt;/<span class="name">Alias</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br></pre></td></tr></table></figure><p>这个时候，我们就可以通过两个域名访问当前Host下的应用（需要确保DNS或hosts中添 加了域名的映射配置）。</p><h3 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h3><p>Context 用于配置一个Web应用信息，一般在web.xml中配置</p><h2 id="Web-应用配置"><a href="#Web-应用配置" class="headerlink" title="Web 应用配置"></a>Web 应用配置</h2><p>web.xml 是web应用的描述文件， 它支持的元素及属性来自于Servlet 规范定义。<br>在 Tomcat 中， Web 应用的描述信息包括 tomcat/conf/web.xml 中默认配置 以及 Web 应用 WEB-INF/web.xml 下的定制配置。</p><h3 id="ServletContext-初始化参数"><a href="#ServletContext-初始化参数" class="headerlink" title="ServletContext 初始化参数"></a>ServletContext 初始化参数</h3><p>我们可以通过 添加ServletContext 初始化参数，它配置了一个键值对，这样我们可以在 应用程序中使用 javax.servlet.ServletContext.getInitParameter()方法获取参数。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;context‐param&gt; </span><br><span class="line">    &lt;param‐name&gt;contextConfigLocation&lt;/param‐name&gt; </span><br><span class="line">    &lt;param‐value&gt;classpath:applicationContext‐*.xml&lt;/param‐value&gt; </span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>Spring Config File Location<span class="tag">&lt;/<span class="name">description</span>&gt;</span> </span><br><span class="line">&lt;/context‐param&gt;</span><br></pre></td></tr></table></figure><h3 id="会话配置"><a href="#会话配置" class="headerlink" title="会话配置"></a>会话配置</h3><p>用于配置Web应用会话，包括 超时时间、Cookie配置以及会话追踪模式。它将覆盖 server.xml 和 context.xml 中的配置。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;session‐config&gt; </span><br><span class="line">    &lt;session‐timeout&gt;30&lt;/session‐timeout&gt; </span><br><span class="line">    &lt;cookie‐config&gt; </span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>JESSIONID<span class="tag">&lt;/<span class="name">name</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">domain</span>&gt;</span>www.itcast.cn<span class="tag">&lt;/<span class="name">domain</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span>&gt;</span>/<span class="tag">&lt;/<span class="name">path</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">comment</span>&gt;</span>Session Cookie<span class="tag">&lt;/<span class="name">comment</span>&gt;</span> </span><br><span class="line">        &lt;http‐only&gt;true&lt;/http‐only&gt;  <span class="comment">&lt;!-- cookie只能通过HTTP方式进行访问，JS无法读取或修改，此项可以增 加网站访问的安全性。 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">secure</span>&gt;</span>false<span class="tag">&lt;/<span class="name">secure</span>&gt;</span>  <span class="comment">&lt;!-- 此cookie只能通过HTTPS连接传递到服务器，而HTTP 连接则不会传递该 信息。注意是从浏览器传递到服务器，服务器端的Cookie对象不受此项影响。 --&gt;</span></span><br><span class="line">        &lt;max‐age&gt;3600&lt;/max‐age&gt; <span class="comment">&lt;!-- 以秒为单位表示cookie的生存期，默认为‐1表示是会话Cookie，浏览器 关闭时就会消失。 --&gt;</span></span><br><span class="line">    &lt;/cookie‐config&gt; </span><br><span class="line">    &lt;tracking‐mode&gt;COOKIE&lt;/tracking‐mode&gt; <span class="comment">&lt;!-- 用于配置会话追踪模式，Servlet3.0版本中支持的追踪模式： COOKIE、URL、SSL --&gt;</span></span><br><span class="line">&lt;/session‐config&gt;</span><br></pre></td></tr></table></figure><p>追踪模式：</p><ul><li>COOKIE : 通过HTTP Cookie 追踪会话是最常用的会话追踪机制， 而且 Servlet规范也要求所有的Servlet规范都需要支持Cookie追踪。 </li><li>URL : URL重写是最基本的会话追踪机制。当客户端不支持Cookie时，可以采 用URL重写的方式。当采用URL追踪模式时，请求路径需要包含会话标识信息，Servlet容器 会根据路径中的会话标识设置请求的会话信息。如： http：//<a href="http://www.myserver.com/user/index.html;jessionid=1234567890%E3%80%82">www.myserver.com/user/index.html;jessionid=1234567890。</a> </li><li>SSL : 对于SSL请求， 通过SSL会话标识确定请求会话标识。</li></ul><h3 id="Servlet配置"><a href="#Servlet配置" class="headerlink" title="Servlet配置"></a>Servlet配置</h3><p>Servlet 的配置主要是两部分， servlet 和 servlet-mapping</p><p>Servlet 中文件上传时的配置：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span> </span><br><span class="line">    &lt;servlet‐name&gt;uploadServlet&lt;/servlet‐name&gt; </span><br><span class="line">    &lt;servlet‐class&gt;cn.xxx.web.UploadServlet&lt;/servlet‐class&gt; </span><br><span class="line">    &lt;multipart‐config&gt; </span><br><span class="line">        <span class="tag">&lt;<span class="name">location</span>&gt;</span>C://path<span class="tag">&lt;/<span class="name">location</span>&gt;</span> </span><br><span class="line">        &lt;max‐file‐size&gt;10485760&lt;/max‐file‐size&gt;  <span class="comment">&lt;!-- 允许上传的文件最大值。 默认值为‐1， 表示没有限制。 --&gt;</span></span><br><span class="line">        &lt;max‐request‐size&gt;10485760&lt;/max‐request‐size&gt;  <span class="comment">&lt;!-- 针对该 multi/form‐data 请求的最大数量，默认值为‐1， 表示 无限制。 --&gt;</span></span><br><span class="line">        &lt;file‐size‐threshold&gt;0&lt;/file‐size‐threshold&gt;  <span class="comment">&lt;!-- 当数量量大于该值时， 内容会被写入文件。 --&gt;</span></span><br><span class="line">    &lt;/multipart‐config&gt; </span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="Listener配置"><a href="#Listener配置" class="headerlink" title="Listener配置"></a>Listener配置</h3><p>Listener用于监听servlet中的事件，例如context、request、session对象的创建、修 改、删除，并触发响应事件。<br>Listener是观察者模式的实现，在servlet中主要用于对 context、request、session对象的生命周期进行监控。<br>在servlet2.5规范中共定义了8中 Listener。在启动时，ServletContextListener 的执行顺序与web.xml 中的配置顺序一 致， 停止时执行顺序相反。</p><h3 id="Filter配置"><a href="#Filter配置" class="headerlink" title="Filter配置"></a>Filter配置</h3><p>filter 用于配置web应用过滤器， 用来过滤资源请求及响应。 经常用于认证、日志、加密、数据转换等操作。</p><h3 id="欢迎页面配置"><a href="#欢迎页面配置" class="headerlink" title="欢迎页面配置"></a>欢迎页面配置</h3><p>welcome-file-list 用于指定web应用的欢迎文件列表。尝试请求的顺序，从上到下。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;welcome‐file‐list&gt; </span><br><span class="line">    &lt;welcome‐file&gt;index.html&lt;/welcome‐file&gt; </span><br><span class="line">    &lt;welcome‐file&gt;index.htm&lt;/welcome‐file&gt; </span><br><span class="line">    &lt;welcome‐file&gt;index.jsp&lt;/welcome‐file&gt; </span><br><span class="line">&lt;/welcome‐file‐list&gt;</span><br></pre></td></tr></table></figure><h3 id="错误页面配置"><a href="#错误页面配置" class="headerlink" title="错误页面配置"></a>错误页面配置</h3><p>error-page 用于配置Web应用访问异常时定向到的页面，支持HTTP响应码和异常类两种 形式。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;error‐page&gt; </span><br><span class="line">    &lt;error‐code&gt;404&lt;/error‐code&gt; </span><br><span class="line">    <span class="tag">&lt;<span class="name">location</span>&gt;</span>/404.html<span class="tag">&lt;/<span class="name">location</span>&gt;</span> </span><br><span class="line">&lt;/error‐page&gt; </span><br><span class="line"></span><br><span class="line">&lt;error‐page&gt; </span><br><span class="line">    &lt;error‐code&gt;500&lt;/error‐code&gt; </span><br><span class="line">    <span class="tag">&lt;<span class="name">location</span>&gt;</span>/500.html<span class="tag">&lt;/<span class="name">location</span>&gt;</span> </span><br><span class="line">&lt;/error‐page&gt; </span><br><span class="line"></span><br><span class="line">&lt;error‐page&gt; </span><br><span class="line">    &lt;exception‐type&gt;java.lang.Exception&lt;/exception‐type&gt; </span><br><span class="line">    <span class="tag">&lt;<span class="name">location</span>&gt;</span>/error.jsp<span class="tag">&lt;/<span class="name">location</span>&gt;</span> </span><br><span class="line">&lt;/error‐page&gt;</span><br></pre></td></tr></table></figure><h2 id="Tomcat-管理配置"><a href="#Tomcat-管理配置" class="headerlink" title="Tomcat 管理配置"></a>Tomcat 管理配置</h2><p>从早期的Tomcat版本开始，就提供了Web版的管理控制台，他们是两个独立的Web应 用，位于webapps目录下。Tomcat 提供的管理应用有用于管理的Host的host-manager 和用于管理Web应用的manager。 </p><h3 id="host-manager"><a href="#host-manager" class="headerlink" title="host-manager"></a>host-manager</h3><p>Tomcat启动之后，可以通过 <a href="http://localhost:8080/host-manager/html">http://localhost:8080/host-manager/html</a> 访问该Web应用。 host-manager 默认添加了访问权限控制，当打开网址时，需要输入用户名和密码 （conf/tomcat-users.xml中配置） 。所以要想访问该页面，需要在conf/tomcat-users.xml 中配置，并分配对应的角色：</p><ul><li>admin-gui：用于控制页面访问权限 </li><li>admin-script：用于控制以简单文本的形式进行访问</li></ul><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;admin‐gui&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;admin‐script&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">&quot;fuyi&quot;</span> <span class="attr">password</span>=<span class="string">&quot;123546&quot;</span> <span class="attr">roles</span>=<span class="string">&quot;admin‐script,admin‐gui&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure><h3 id="web-manager"><a href="#web-manager" class="headerlink" title="web-manager"></a>web-manager</h3><p>manager的访问地址为 <a href="http://localhost:8080/manager%EF%BC%8C">http://localhost:8080/manager，</a> 同样， manager也添加了页面访问控制，因此我们需要为登录用户分配角色为：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;admin-gui&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;admin-script&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;manager-gui&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;manager-script&quot;</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;manager-status&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">&quot;fuyi&quot;</span> <span class="attr">password</span>=<span class="string">&quot;123456&quot;</span> <span class="attr">roles</span>=<span class="string">&quot;admin-script,admin-gui,manager-gui,manager-script,manager-status&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure><h2 id="JVM-配置"><a href="#JVM-配置" class="headerlink" title="JVM 配置"></a>JVM 配置</h2><p>最常见的JVM配置当属内存分配，因为在绝大多数情况下，JVM默认分配的内存可能不能够满足我们的需求，特别是在生产环境，此时需要手动修改Tomcat启动时的内存参数分配。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href="https://www.bilibili.com/video/BV1dJ411N7Um">https://www.bilibili.com/video/BV1dJ411N7Um</a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;官网：&lt;a href=&quot;http://tomcat.apache.org/&quot;&gt;http://tomcat.apache.org/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;常见web服务器软件&quot;&gt;&lt;a href=&quot;#常见web服务器软件&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+      <category term="中间件" scheme="http://yoursite.com/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java-基础知识</title>
+    <link href="http://yoursite.com/wiki/%E5%90%8E%E7%AB%AF/Java/Java-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/wiki/后端/Java/Java-基础知识/</id>
+    <published>2021-04-19T02:01:43.000Z</published>
+    <updated>2021-04-19T07:23:38.588Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="异常体系"><a href="#异常体系" class="headerlink" title="异常体系"></a>异常体系</h2><p>所有异常都是Throwable类的子类，注意Throwable是类不是接口。</p><p>Throwable类包含Exception类和Error类，Exception类又包含检查异常和未检查异常。</p><hr><p>异常定义：程序在运行期间发生的不正常事件，它会打断指令的正常流程，在编译期间产生的叫语法错误。</p><ol><li>程序在运行时产生异常时，JVM会创建一个异常对象，交给运行时系统。</li><li>运行时系统在抛出异常代码附近寻找处理方式。</li><li>两种处理方式：<ul><li>catch: 自己捕获处理</li><li>throws: 抛给调用者</li></ul></li></ol><h3 id="未检查异常-运行时异常（RuntimeException）"><a href="#未检查异常-运行时异常（RuntimeException）" class="headerlink" title="未检查异常/运行时异常（RuntimeException）"></a>未检查异常/运行时异常（RuntimeException）</h3><p>对于该异常，Java编译器不要求你一定要捕获或抛出。</p><p>RuntimeException的子类都是未检查异常，不需处理。如下：</p><ul><li>NullPointerException</li><li>ClassCastException</li><li>ArrayIndexsOutOfBoundsException</li><li>ArithmeticException(算术异常，除0溢出)</li></ul><h3 id="检查异常"><a href="#检查异常" class="headerlink" title="检查异常"></a>检查异常</h3><p>必须要在方法中捕获或抛出。如：IOException属于检查异常，必须要捕获或再次抛出。</p><ul><li>FileNotFoundException</li><li>IOException</li><li>SQLException</li></ul><h2 id="transient关键字"><a href="#transient关键字" class="headerlink" title="transient关键字"></a>transient关键字</h2><h3 id="transient的作用及使用方法"><a href="#transient的作用及使用方法" class="headerlink" title="transient的作用及使用方法"></a>transient的作用及使用方法</h3><p>我们都知道一个对象只要实现了Serilizable接口，这个对象就可以被序列化，java的这种序列化模式为开发者提供了很多便利，我们可以不必关系具体序列化的过程，只要这个类实现了Serilizable接口，这个类的所有属性和方法都会自动序列化。</p><p>然而在实际开发过程中，我们常常会遇到这样的问题，这个类的有些属性需要序列化，而其他属性不需要被序列化，打个比方，如果一个用户有一些敏感信息（如密码，银行卡号等），为了安全起见，不希望在网络操作（主要涉及到序列化操作，本地序列化缓存也适用）中被传输，这些信息对应的变量就可以加上transient关键字。换句话说，这个字段的生命周期仅存于调用者的内存中而不会写到磁盘里持久化。</p><p>总之，java 的transient关键字为我们提供了便利，你只需要实现Serilizable接口，将不需要序列化的属性前添加关键字transient，序列化对象的时候，这个属性就不会序列化到指定的目的地中。</p><p>示例code如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransientTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setUsername(<span class="string">&quot;Alexia&quot;</span>);</span><br><span class="line">        user.setPasswd(<span class="string">&quot;123456&quot;</span>);</span><br><span class="line"></span><br><span class="line">        ObjectOutputStream os = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;C:/user.txt&quot;</span>));</span><br><span class="line">        os.writeObject(user); <span class="comment">// 将User对象写进文件</span></span><br><span class="line">        os.flush();</span><br><span class="line">        os.close();</span><br><span class="line"></span><br><span class="line">        ObjectInputStream is = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;C:/user.txt&quot;</span>));</span><br><span class="line">        user = (User) is.readObject(); <span class="comment">// 从流中读取User的数据</span></span><br><span class="line">        is.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;read after Serializable: &quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;username: &quot;</span> + user.getUsername()); <span class="comment">// Alexia</span></span><br><span class="line">        System.err.println(<span class="string">&quot;password: &quot;</span> + user.getPasswd());  <span class="comment">// output null；说明反序列化时根本没有从文件中获取到信息。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">8294180014912103005L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> String passwd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="transient说明"><a href="#transient说明" class="headerlink" title="transient说明"></a>transient说明</h3><ul><li>一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。</li><li>transient关键字只能修饰变量，而不能修饰方法和类。注意，本地变量是不能被transient关键字修饰的。变量如果是用户自定义类，则该类需要实现Serializable接口。</li><li>transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。</li></ul><p>第三点可能有些人很迷惑，因为发现在User类中的username字段前加上static关键字后，程序运行结果依然不变，即static类型的username也读出来为“Alexia”了，这不与第三点说的矛盾吗？实际上反序列化后类中static型变量username的值为当前JVM中对应static变量的值，这个值是JVM中的不是反序列化得出的。</p><h3 id="transient关键字修饰的变量真的不能被序列化吗？"><a href="#transient关键字修饰的变量真的不能被序列化吗？" class="headerlink" title="transient关键字修饰的变量真的不能被序列化吗？"></a>transient关键字修饰的变量真的不能被序列化吗？</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExternalizableTest</span> <span class="keyword">implements</span> <span class="title">Externalizable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> String content = <span class="string">&quot;是的，我将会被序列化，不管我是否被transient关键字修饰&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeExternal</span><span class="params">(ObjectOutput out)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        out.writeObject(content);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readExternal</span><span class="params">(ObjectInput in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">        content = in.readObject().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ExternalizableTest et = <span class="keyword">new</span> ExternalizableTest();</span><br><span class="line">        ObjectOutputStream out = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;F:/test.txt&quot;</span>));</span><br><span class="line">        out.writeObject(et);</span><br><span class="line"></span><br><span class="line">        ObjectInputStream in = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;F:/test.txt&quot;</span>));</span><br><span class="line">        et = (ExternalizableTest) in.readObject();</span><br><span class="line">        System.out.println(et.content); <span class="comment">// content初始化的内容，而不是null，transient关键字没有起作用</span></span><br><span class="line"></span><br><span class="line">        out.close();</span><br><span class="line">        in.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们知道在Java中，对象的序列化可以通过实现两种接口来实现，若实现的是Serializable接口，则所有的序列化将会自动进行，若实现的是Externalizable接口，则没有任何东西可以自动序列化，需要在writeExternal方法中进行手工指定所要序列化的变量，这与是否被transient修饰无关。因此第二个例子输出的是变量content初始化的内容，而不是null。</p><h3 id="部分序列化的实现方式"><a href="#部分序列化的实现方式" class="headerlink" title="部分序列化的实现方式"></a>部分序列化的实现方式</h3><ul><li>实现Serializable接口，不想序列化的字段使用transient关键字修饰</li><li>实现Serializable接口，添加writeObject和readObject方法，方法签名在Serializable接口注释中有说明</li><li>实现Externalizable接口，重写writeExternal和readExternal方法</li></ul><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;异常体系&quot;&gt;&lt;a href=&quot;#异常体系&quot; class=&quot;headerlink&quot; title=&quot;异常体系&quot;&gt;&lt;/a&gt;异常体系&lt;/h2&gt;&lt;p&gt;所有异常都是Throwable类的子类，注意Throwable是类不是接口。&lt;/p&gt;
+&lt;p&gt;Throwable类包含Exce
+      
+    
+    </summary>
+    
+      <category term="后端" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java常见规范</title>
+    <link href="http://yoursite.com/wiki/%E5%90%8E%E7%AB%AF/Java/Java%E5%B8%B8%E8%A7%81%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/wiki/后端/Java/Java常见规范/</id>
+    <published>2021-04-19T01:36:03.000Z</published>
+    <updated>2021-04-20T03:20:33.039Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Common-Annotations"><a href="#Common-Annotations" class="headerlink" title="Common Annotations"></a>Common Annotations</h2><p>JSR-250: <a href="http://jcp.org/en/jsr/detail?id=250">http://jcp.org/en/jsr/detail?id=250</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.annotation&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javax.annotation-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.3.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure><ul><li>@PostConstruct: 见名知意，被该注解标注的方法在构造方法执行后才执行，一般用来做一些初始化工作，如果该类中有需要依赖注入的成员，则会在依赖注入完成后才执行该方法。它标注的方法签名有一些限制：不能有方法参数、void返回值、不能是static的等，在该注解注释中有说明。</li><li>@PreDestroy：见名知意，被修饰的方法是一个回调通知方法，当该方法所属类的实例从容器中移除时调用的，该方法通常用来释放一些持有的资源。方法签名要求同@PostConstruct。</li></ul><h2 id="bean-validation"><a href="#bean-validation" class="headerlink" title="bean validation"></a>bean validation</h2><ul><li>官网：<a href="https://beanvalidation.org/">https://beanvalidation.org</a></li><li>JSR-308: Bean Validation 2.0      <a href="https://jcp.org/en/jsr/detail?id=380">https://jcp.org/en/jsr/detail?id=380</a></li><li>JSR-349: Bean Validation 1.1      <a href="https://jcp.org/en/jsr/detail?id=349">https://jcp.org/en/jsr/detail?id=349</a></li><li>JSR-303: Bean Validation 1.0      <a href="https://jcp.org/en/jsr/detail?id=303">https://jcp.org/en/jsr/detail?id=303</a></li><li>推荐实现 Hibernate Validator       <a href="http://www.hibernate.org/subprojects/validator.html">http://www.hibernate.org/subprojects/validator.html</a></li></ul><p>Hibernate Validator提供了规范中所有内置 constraint 的实现，除此之外还有一些附加的 constraint。</p><p>一个 constraint就是一个约束，一个 constraint 通常由 annotation 和相应的 constraint validator 组成，它们是一对多的关系。也就是说一个 annotation 可以有多个 constraint validator 对应。在运行时，Bean Validation 框架本身会根据被注释元素的类型来选择合适的 constraint validator 对数据进行验证。</p><p>有些时候，在用户的应用中需要一些更复杂的 constraint。Bean Validation 提供扩展 constraint 的机制。可以通过两种方法去实现，一种是组合现有的 constraint 来生成一个更复杂的 constraint，另外一种是开发一个全新的 constraint。</p><p>PS: 在Spring项目中，在Controller的方法入参中只需要给被校验实体加 @Valid注解方可生效</p><h2 id="JAS-RS"><a href="#JAS-RS" class="headerlink" title="JAS-RS"></a>JAS-RS</h2><p>JAX-RS是JAVA EE6 引入的一个新技术。 JAX-RS即Java API for RESTful Web Service，使用了Java SE5引入的Java注解来简化Web服务的客户端和服务端的开发和部署。</p><p>JAX-RS提供了一些注解将一个资源类，一个POJO Java类，封装为Web资源。包括：</p><ul><li>@Path，标注资源类或者方法的相对路径</li><li>@GET，@PUT，@POST，@DELETE，标注方法是HTTP请求的类型。</li><li>@Produces，标注返回的MIME媒体类型</li><li>@Consumes，标注可接受请求的MIME媒体类型</li><li>@PathParam，@QueryParam，@HeaderParam，@CookieParam，@MatrixParam，@FormParam,分别标注方法的参数来自于HTTP请求的不同位置，例如@PathParam来自于URL的路径，@QueryParam来自于URL的查询参数，@HeaderParam来自于HTTP请求的头信息，@CookieParam来自于HTTP请求的Cookie。</li></ul><p>基于JAX-RS实现的框架有Jersey，RESTEasy等。这两个框架创建的应用可以很方便地部署到Servlet 容器中，比如Tomcat，JBoss等。值得一提的是RESTEasy是由JBoss公司开发的，所以将用RESTEasy框架实现的应用部署到JBoss服务器上，可以实现很多额外的功能。</p><h2 id="JPA"><a href="#JPA" class="headerlink" title="JPA"></a>JPA</h2><p>JPA全称为Java Persistence API ，Java持久化API是Sun公司在Java EE 5规范中提出的Java持久化接口。JPA吸取了目前Java持久化技术的优点，旨在规范、简化Java对象的持久化工作。它只是一套规范API接口，使用JPA持久化对象，并不是依赖于某一个具体框架实现，这保证了基于JPA开发的企业应用能够经过少量的修改就能够在不同的实现下运行。常见JPA实现如下：</p><ul><li>Hibernate</li><li>MyBatis</li><li>Spring Data JPA</li><li>TopLink: Oracle公司的产品，作为一个遵循OTN协议的商业产品，TopLink 在开发过程中可以自由地下载和使用，但是一旦作为商业产品被使用，则需要收取费用。由于这一点，TopLink 的市场占有率不高。</li></ul><p>目前JPA最新版本为2017年发布的JPA 2.2： <a href="https://jcp.org/en/jsr/detail?id=338">https://jcp.org/en/jsr/detail?id=338</a></p><p>核心组件如下：</p><ul><li>EntityManagerFactory接口: 创建和管理多个EntityManager实例</li><li>EntityManager接口：管理对象Entity的CRUD操作(create, update, delete, Query)</li><li>Entity: 对应需要持久化的对象实体</li><li>EntityTransaction接口: 对事务的处理接口，与EntityManager一对一</li><li>Persistence类: 包含获取EntityManagerFactory实例的静态方法</li><li>Query接口: 获取满足creteria的关系对象</li></ul><h2 id="OGNL"><a href="#OGNL" class="headerlink" title="OGNL"></a>OGNL</h2><p><a href="http://commons.apache.org/proper/commons-ognl/">http://commons.apache.org/proper/commons-ognl/</a></p><p>对象导航图语言（Object Graph Navigation Language），简称OGNL，是应用于Java中的一个开源的表达式语言（Expression Language），它被集成在Struts2等框架中，作用是对数据进行访问，它拥有类型转换、访问对象方法、操作集合对象等功能。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote><ul><li><a href=""></a></li><li><a href=""></a></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Common-Annotations&quot;&gt;&lt;a href=&quot;#Common-Annotations&quot; class=&quot;headerlink&quot; title=&quot;Common Annotations&quot;&gt;&lt;/a&gt;Common Annotations&lt;/h2&gt;&lt;p&gt;JSR-25
+      
+    
+    </summary>
+    
+      <category term="后端" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%90%8E%E7%AB%AF/Java/"/>
     
     
   </entry>
